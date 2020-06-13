@@ -1,6 +1,6 @@
 ---
 title: "Obtain metadata from Crossref Dump"
-output: html_notebook
+output: github_document
 ---
 
 ```{r, setup, echo=FALSE}
@@ -63,7 +63,7 @@ els_jns_df %>%
   filter(!issn %in% els_2020_jns$ISSN, oa_type == "Hybrid")
 ```
 
-Possible reason:
+Possible reasons:
 
 a) Journal transfer including metadata ownership. Example: Canadian Association of Radiologists Journal (transferred from Elsevier to SAGE Publications as of 2020)
 
@@ -84,3 +84,75 @@ GROUP BY member, publisher
 ```
 
 b) Journal started in 2020
+
+
+### Create Crossref Elsevier subset in BQ
+
+Upload list of Elsevier hybrid journals to BQ.
+
+```{r}
+els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
+els_jn_hybrid <- els_jns_df %>% 
+  filter(oa_type == "Hybrid")
+bq_els <- bq_table_create(
+  "api-project-764811344545.cr_dump_march_20.elshybrid",
+  fields =  els_jn_hybrid,
+  friendly_name = "Elsevier hybrid journals May 2020",
+  description = "The data was extracted from Elsevier APC pricing list, 
+    downloaded 30 May 2020"
+)
+bq_table_upload(bq_els, els_jn_hybrid)
+```
+
+Create table with Crossref metadata for these journals since 2008.
+
+```{sql, connection=con}
+CREATE OR REPLACE TABLE `api-project-764811344545.cr_dump_march_20.els_hybrid_cr` AS
+SELECT * FROM `api-project-764811344545.cr_dump_march_20.cr_08_20_expanded` as cr
+WHERE EXISTS ( 
+  SELECT 1 FROM `api-project-764811344545.cr_dump_march_20.elshybrid` as els_hybrid 
+  WHERE (cr.issn = els_hybrid.issn)
+  )
+```
+
+Descriptive:
+
+By members
+
+```{sql, connection=con}
+SELECT  member, publisher, COUNT(DISTINCT(doi)) as articles
+FROM `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`
+WHERE issued_year > 2014 and issued_year < 2020
+GROUP BY member, publisher
+ORDER BY articles DESC
+```
+
+License prevalence
+
+```{sql, connection=con}
+SELECT REGEXP_REPLACE(license.URL, "http://|https://", "") as license_url, COUNT(DISTINCT(doi)) as articles
+FROM `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`, unnest(license) as license
+WHERE issued_year > 2014 and issued_year < 2020 AND license.content_version = 'vor'
+GROUP BY license_url
+ORDER BY articles DESC
+```
+
+License prevalence by days with delay 
+
+```{sql, connection=con, output.var="els_license_delay"}
+SELECT 
+  REGEXP_REPLACE(license.URL, "http://|https://", "") as license_url,
+  license.delay_in_days,
+  COUNT(DISTINCT(doi)) as articles
+FROM `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`, unnest(license) as license
+WHERE issued_year > 2014 and issued_year < 2020 AND license.content_version = 'vor'
+GROUP BY license_url, license.delay_in_days
+ORDER BY articles DESC
+```
+
+Immediate Licenses
+
+```{r}
+els_license_delay %>%
+  filter(delay_in_days == 0)
+```
