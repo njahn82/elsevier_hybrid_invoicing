@@ -1,0 +1,43 @@
+---
+title: "003_ftx_mining.Rmd"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Obtain Elsevier ftxt links for OA articles
+
+Libraries
+
+```{r}
+require(jsonlite)
+require(tidyverse)
+require(crminer)
+require(xml2)
+require(here)
+```
+
+Load Elsevier articles:
+
+```{r}
+els_hybrid <- jsonlite::stream_in(file(here::here("data", "els_hybrid_articles.json")))
+```
+
+get tdm links
+
+```{r}
+elsevier_tdm <- els_hybrid %>%
+  select(doi, link) %>%
+  unnest(link) %>%
+  filter(content_type == "text/xml",
+         intended_application == "text-mining",
+         content_version == "vor")
+```
+
+Apply function on every XML full-text link
+
+```{r}
+tt <- purrr::map(sample(elsevier_tdm$URL, 10), .f = purrr::safely(elsevier_parse))
+```

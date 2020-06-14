@@ -94,6 +94,7 @@ Upload list of Elsevier hybrid journals to BQ.
 els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
 els_jn_hybrid <- els_jns_df %>% 
   filter(oa_type == "Hybrid")
+if(!bq_table_exists("api-project-764811344545.cr_dump_march_20.elshybrid")) {
 bq_els <- bq_table_create(
   "api-project-764811344545.cr_dump_march_20.elshybrid",
   fields =  els_jn_hybrid,
@@ -102,6 +103,9 @@ bq_els <- bq_table_create(
     downloaded 30 May 2020"
 )
 bq_table_upload(bq_els, els_jn_hybrid)
+} else {
+  NULL
+}
 ```
 
 Create table with Crossref metadata for these journals since 2008.
@@ -156,3 +160,28 @@ Immediate Licenses
 els_license_delay %>%
   filter(delay_in_days == 0)
 ```
+
+A few records have a date formats without day, which is used for the delayed calculation. We should therefore allow for a delay of up to  30 days.
+
+```{r}
+els_license_delay %>%
+  filter(delay_in_days < 31) 
+```
+
+### Download open access articles in hybrid journals
+
+```{sql, connection=con, output.var="els_hybrid_articles"}
+SELECT *
+FROM `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`, unnest(license) as license
+WHERE (REGEXP_CONTAINS(license.URL, 'creativecommons') AND license.content_version = 'vor') AND 
+  (issued_year BETWEEN 2015 and 2019) AND
+  license.delay_in_days < 31
+```
+
+Backup
+
+```{r}
+require(jsonlite)
+jsonlite::stream_out(els_hybrid_articles, file(here::here("data", "els_hybrid_articles.json")))
+```
+
