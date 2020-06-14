@@ -229,8 +229,8 @@ els_license_delay %>%
 #>  8 creativecommons.org/licenses/by-nc-nd/3.0/igo/                                 0       65
 #>  9 creativecommons.org/licenses/by/3.0/igo/                                       0       59
 #> 10 creativecommons.org/licenses/by-nc-sa/4.0/                                     0       46
-#> 11 www.elsevier.com/open-access/userlicense/1.0/                                  0        2
-#> 12 creativecommons.org/licenses/by-nc/4.0/                                        0        2
+#> 11 creativecommons.org/licenses/by-nc/4.0/                                        0        2
+#> 12 www.elsevier.com/open-access/userlicense/1.0/                                  0        2
 ```
 
 A few records have a date formats without day, which is used for the
@@ -256,20 +256,27 @@ els_license_delay %>%
 #> # … with 116 more rows
 ```
 
+But it seems that also some articles misses months. I will therefore
+obtain all cc tagged articles and validate immediate oa provision via
+the open archive tag
+
 ### Download open access articles in hybrid journals
 
 ``` sql
 SELECT *
 FROM `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`, unnest(license) as license
 WHERE (REGEXP_CONTAINS(license.URL, 'creativecommons') AND license.content_version = 'vor') AND 
-  (issued_year BETWEEN 2015 and 2019) AND
-  license.delay_in_days < 31
+  (issued_year BETWEEN 2015 and 2019) 
 ```
 
-Backup
+Dataset with TDM Links
 
 ``` r
-require(jsonlite)
-jsonlite::stream_out(els_hybrid_articles, file(here::here("data", "els_hybrid_articles.json")))
-#> Processed 500 rows...Processed 1000 rows...Processed 1500 rows...Processed 2000 rows...Processed 2500 rows...Processed 3000 rows...Processed 3500 rows...Processed 4000 rows...Processed 4500 rows...Processed 5000 rows...Processed 5500 rows...Processed 6000 rows...Processed 6500 rows...Processed 7000 rows...Processed 7500 rows...Processed 8000 rows...Processed 8500 rows...Processed 9000 rows...Processed 9500 rows...Processed 10000 rows...Processed 10500 rows...Processed 11000 rows...Processed 11500 rows...Processed 12000 rows...Processed 12500 rows...Processed 13000 rows...Processed 13500 rows...Processed 14000 rows...Processed 14500 rows...Processed 15000 rows...Processed 15500 rows...Processed 16000 rows...Processed 16500 rows...Processed 17000 rows...Processed 17500 rows...Processed 18000 rows...Processed 18500 rows...Processed 19000 rows...Processed 19500 rows...Processed 20000 rows...Processed 20500 rows...Processed 21000 rows...Processed 21500 rows...Processed 22000 rows...Processed 22500 rows...Processed 23000 rows...Processed 23500 rows...Processed 24000 rows...Processed 24500 rows...Processed 25000 rows...Processed 25500 rows...Processed 26000 rows...Processed 26500 rows...Processed 27000 rows...Processed 27500 rows...Processed 28000 rows...Processed 28500 rows...Processed 29000 rows...Processed 29500 rows...Processed 30000 rows...Processed 30500 rows...Processed 31000 rows...Processed 31500 rows...Processed 32000 rows...Processed 32500 rows...Processed 33000 rows...Processed 33500 rows...Processed 34000 rows...Processed 34500 rows...Processed 35000 rows...Processed 35500 rows...Processed 36000 rows...Processed 36500 rows...Processed 37000 rows...Processed 37500 rows...Processed 38000 rows...Processed 38500 rows...Processed 39000 rows...Processed 39500 rows...Processed 40000 rows...Processed 40500 rows...Processed 41000 rows...Processed 41500 rows...Processed 42000 rows...Processed 42500 rows...Processed 43000 rows...Processed 43500 rows...Processed 44000 rows...Processed 44500 rows...Processed 45000 rows...Processed 45500 rows...Processed 46000 rows...Processed 46500 rows...Processed 47000 rows...Processed 47500 rows...Processed 48000 rows...Processed 48500 rows...Processed 49000 rows...Processed 49500 rows...Processed 50000 rows...Processed 50500 rows...Processed 51000 rows...Processed 51500 rows...Processed 52000 rows...Processed 52500 rows...Processed 53000 rows...Processed 53500 rows...Processed 54000 rows...Processed 54500 rows...Processed 55000 rows...Processed 55500 rows...Processed 56000 rows...Processed 56500 rows...Processed 57000 rows...Processed 57500 rows...Processed 58000 rows...Processed 58500 rows...Processed 59000 rows...Processed 59500 rows...Processed 60000 rows...Processed 60500 rows...Processed 61000 rows...Processed 61500 rows...Processed 62000 rows...Processed 62500 rows...Processed 63000 rows...Processed 63500 rows...Processed 64000 rows...Processed 64500 rows...Processed 65000 rows...Processed 65500 rows...Processed 66000 rows...Processed 66500 rows...Processed 67000 rows...Processed 67500 rows...Processed 68000 rows...Processed 68500 rows...Processed 69000 rows...Processed 69500 rows...Complete! Processed total of 69625 rows.
+els_tdm <- els_hybrid_articles %>%
+  select(doi, link) %>%
+  unnest(link) %>%
+  filter(content_type == "text/xml",
+         intended_application == "text-mining",
+         content_version == "vor")
+write_csv(els_tdm, here::here("data", "els_tmd_links.csv"))
 ```

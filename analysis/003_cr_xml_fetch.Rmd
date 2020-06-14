@@ -12,32 +12,19 @@ knitr::opts_chunk$set(echo = TRUE)
 Libraries
 
 ```{r}
-require(jsonlite)
 require(tidyverse)
 require(crminer)
 require(xml2)
 require(here)
+source(here::here("R", "parse_els_xml.R"))
 ```
 
 Load Elsevier articles:
 
 ```{r}
-els_hybrid <- jsonlite::stream_in(file(here::here("data", "els_hybrid_articles.json")))
+els_hybrid <- readr::read_csv(here::here("data", "els_tmd_links.csv"))
 ```
 
-get tdm links
-
 ```{r}
-elsevier_tdm <- els_hybrid %>%
-  select(doi, link) %>%
-  unnest(link) %>%
-  filter(content_type == "text/xml",
-         intended_application == "text-mining",
-         content_version == "vor")
-```
-
-Apply function on every XML full-text link
-
-```{r}
-tt <- purrr::map(sample(elsevier_tdm$URL, 10), .f = purrr::safely(elsevier_parse))
+tt <- plyr::llply(sample(elsevier_tdm$URL, 10), .f = purrr::safely(elsevier_parse), .progress = "text")
 ```

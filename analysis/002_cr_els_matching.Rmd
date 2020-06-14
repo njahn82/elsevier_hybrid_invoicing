@@ -161,12 +161,13 @@ els_license_delay %>%
   filter(delay_in_days == 0)
 ```
 
-A few records have a date formats without day, which is used for the delayed calculation. We should therefore allow for a delay of up to  30 days.
-
+A few records have a date formats without day, which is used for the delayed calculation. We should therefore allow for a delay of up to  30 days. 
 ```{r}
 els_license_delay %>%
   filter(delay_in_days < 31) 
 ```
+
+But it seems that also some articles misses months. I will therefore obtain all cc tagged articles and validate immediate oa provision via the open archive tag
 
 ### Download open access articles in hybrid journals
 
@@ -174,14 +175,17 @@ els_license_delay %>%
 SELECT *
 FROM `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`, unnest(license) as license
 WHERE (REGEXP_CONTAINS(license.URL, 'creativecommons') AND license.content_version = 'vor') AND 
-  (issued_year BETWEEN 2015 and 2019) AND
-  license.delay_in_days < 31
+  (issued_year BETWEEN 2015 and 2019) 
 ```
 
-Backup
+Dataset with TDM Links
 
 ```{r}
-require(jsonlite)
-jsonlite::stream_out(els_hybrid_articles, file(here::here("data", "els_hybrid_articles.json")))
+els_tdm <- els_hybrid_articles %>%
+  select(doi, link) %>%
+  unnest(link) %>%
+  filter(content_type == "text/xml",
+         intended_application == "text-mining",
+         content_version == "vor")
+write_csv(els_tdm, here::here("data", "els_tmd_links.csv"))
 ```
-
