@@ -26,5 +26,7 @@ els_hybrid <- readr::read_csv(here::here("data", "els_tmd_links.csv"))
 ```
 
 ```{r}
-tt <- plyr::llply(sample(elsevier_tdm$URL, 10), .f = purrr::safely(elsevier_parse), .progress = "text")
+tt <- plyr::llply(els_hybrid$URL, .f = purrr::safely(elsevier_parse), .progress = "text")
+tt_df <- purrr::map_df(tt, "result")
+write_csv(tt_df, here::here("data", "invoice_df.csv"))
 ```
