@@ -1,0 +1,51 @@
+---
+title: "EDA Hybrid OA"
+author: "Najko Jahn"
+date: "6/15/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+require(tidyverse)
+require(here)
+els_invoicing <- readr::read_csv(here::here("data", "invoice_df.csv"))
+els_tdm <- readr::read_csv(here::here("data", "els_tmd_links.csv"))
+els_df <- els_tdm %>%
+  select(doi, URL) %>%
+  inner_join(els_invoicing, by = c("URL" = "tdm_url")) %>% 
+  distinct()
+```
+
+### By sponsor type and archive
+
+```{r}
+els_df %>%
+  count(oa_sponsor_type, oa_archive)
+```
+
+### By invoice recipient
+
+```{r}
+els_df %>%
+  count(oa_sponsor_name) %>%
+  arrange(desc(n))
+```
+
+### compare with existing table
+
+```{r}
+library(googlesheets4)
+library(writexl)
+googlesheets4::gs4_deauth()
+gs_df <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1AqjCLn6VNGJpQ6zdmFSwuhFsDBIITSxijA0r0WLJZTQ/")
+miss_funder <- els_df %>%
+  filter(!oa_sponsor_name %in% gs_df$oa_sponsor_name) %>%
+  group_by(oa_sponsor_name) %>%
+  summarise(n = n_distinct(doi))
+
+writexl::write_xlsx(miss_funder, here::here("data", "new_funders.xlsx"))
+```
