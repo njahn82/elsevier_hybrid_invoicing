@@ -189,3 +189,13 @@ els_tdm <- els_hybrid_articles %>%
          content_version == "vor")
 write_csv(els_tdm, here::here("data", "els_tmd_links.csv"))
 ```
+
+dump full dataset
+
+```{r}
+els_hybrid_articles %>%
+  select(-license, -link) %>%
+  write_csv(here::here("data", "hybrid_md.csv"))
+```
+
+
