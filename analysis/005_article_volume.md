@@ -3,6 +3,8 @@ Obtain Article Volume
 Najko Jahn
 7/7/2020
 
+    ## Warning: package 'tibble' was built under R version 4.0.2
+
 ### Connect to database
 
 ``` r
@@ -28,9 +30,10 @@ group by issued_year, issn
 How many articles by year?
 
 ``` r
-article_volume %>%
+els_vol <- article_volume %>%
   group_by(issued_year) %>%
   summarise(n = sum(articles))
+els_vol
 #> # A tibble: 5 x 2
 #>   issued_year      n
 #>         <int>  <int>
@@ -45,6 +48,49 @@ backup
 
 ``` r
 write_csv(article_volume, here::here("data", "article_volume.csv"))
+```
+
+### Article volume excluding paratext
+
+``` sql
+SELECT
+        issued_year,
+        issn,
+        count(distinct(doi)) as articles     
+    FROM
+        `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`      
+    WHERE
+        issued_year > 2014 
+        and issued_year < 2020     
+        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')      
+    GROUP BY
+        issued_year,
+        issn
+```
+
+How many articles by year?
+
+``` r
+article_volume_para %>%
+  group_by(issued_year) %>%
+  summarise(articles = sum(articles)) %>%
+  inner_join(els_vol, by = "issued_year") %>%
+  mutate(para = n - articles) %>%
+  mutate(para / n * 100)
+#> # A tibble: 5 x 5
+#>   issued_year articles      n  para `para/n * 100`
+#>         <int>    <int>  <int> <int>          <dbl>
+#> 1        2015   502886 515003 12117           2.35
+#> 2        2016   528565 541208 12643           2.34
+#> 3        2017   543275 555822 12547           2.26
+#> 4        2018   569447 585562 16115           2.75
+#> 5        2019   604935 621398 16463           2.65
+```
+
+backup
+
+``` r
+write_csv(article_volume_para, here::here("data", "article_volume_para.csv"))
 ```
 
 ### Article volume with at least one reference per journal and year
