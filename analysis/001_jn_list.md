@@ -1,7 +1,9 @@
-Portfolio Overview: Elsevier APC Journal List information
+Elsevier APC Journal List information
 ================
 
-## Load mined data
+## Portfolio overview
+
+### Load mined data
 
 ``` r
 library(tidyverse)
@@ -9,7 +11,7 @@ library(here)
 els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
 ```
 
-## Journals per business model
+### Journals per business model
 
 ``` r
 els_jns_df %>%
@@ -22,7 +24,7 @@ els_jns_df %>%
 #> 2 Open Access   358 0.153
 ```
 
-## List prices per business model
+### List prices per business model
 
 Only journals with APC in USD considered
 
@@ -60,3 +62,26 @@ els_jns_df %>%
 ```
 
 <img src="001_jn_list_files/figure-gfm/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+
+## Comparision with Lisa Matthias list
+
+Are both lists equal in terms of hybrid journals?
+
+``` r
+u <- "https://raw.githubusercontent.com/lmatthia/publisher-oa-portfolios/master/elsevier_oa_and_hybrid.csv"
+l_apc <- readr::read_delim(u, delim = ";")
+l_apc %>%
+  filter(year == 2020) %>%
+  count(oa_model)
+#> # A tibble: 2 x 2
+#>   oa_model        n
+#>   <chr>       <int>
+#> 1 Hybrid       1982
+#> 2 Open Access   358
+els_hybrid <- els_jns_df %>%
+  filter(oa_type == "Hybrid")
+l_hybrid <- l_apc %>%
+  filter(oa_model == "Hybrid", year == 2020)
+base::setequal(els_hybrid$issn, l_hybrid$issn)
+#> [1] TRUE
+```

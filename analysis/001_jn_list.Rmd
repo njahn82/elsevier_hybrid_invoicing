@@ -73,3 +73,20 @@ els_jns_df %>%
        title = "Elsevier APC List Prices by Open Access Business Model",
        caption = "Elsevier: 30 May 2020")
 ```
+
+## Comparision with Lisa Matthias list
+
+Are both lists equal in terms of hybrid journals?
+
+```{r}
+u <- "https://raw.githubusercontent.com/lmatthia/publisher-oa-portfolios/master/elsevier_oa_and_hybrid.csv"
+l_apc <- readr::read_delim(u, delim = ";")
+l_apc %>%
+  filter(year == 2020) %>%
+  count(oa_model)
+els_hybrid <- els_jns_df %>%
+  filter(oa_type == "Hybrid")
+l_hybrid <- l_apc %>%
+  filter(oa_model == "Hybrid", year == 2020)
+base::setequal(els_hybrid$issn, l_hybrid$issn)
+```

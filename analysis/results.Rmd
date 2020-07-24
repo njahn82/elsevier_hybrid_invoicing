@@ -43,10 +43,6 @@ library(cowplot)
 
 ### Uptake
 
-#### How many Elsevier journals supported the hybrid model? How many of them flipped to fully open access? 
-
-Using text-mined data from web-archived Elsevier APC pricing lists  [@Matthias_2020], we were able to determine the evolution of Elsevier's open access journal portfolio including hybrid journals. Figure shows that the majority of journals supported the hybrid model. The year 2016 marked the highest number of journals. After that, the trend reversed. Since 2018, the number of journals stagnated. 
-
 ```{r}
 els_jns <- readr::read_csv(here::here("data", "els_historic_jns.csv")) 
 els_jns_count <- els_jns %>%
@@ -55,6 +51,13 @@ els_jns_count <- els_jns %>%
   group_by(year) %>%
   mutate(prop = n / sum(n)) %>%
   mutate(oa_model_fct = fct_rev(as_factor(oa_model))) 
+```
+
+#### How many Elsevier journals supported the hybrid model?
+
+Using text-mined data from web-archived Elsevier APC pricing lists  [@Matthias_2020], we were able to determine the evolution of Elsevier's open access journal portfolio including hybrid journals. Figure shows that the majority of journals supported the hybrid model. The year 2016 marked the highest number of journals. After that, the trend reversed. Since 2018, the number of journals stagnated. Compared to 2015, the number of hybrid journals grew by  `r (els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$n) - (els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$n)` journals, while its proportion relative to Elsevier's overall journal portfolio slightly decreased from `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$prop, 2) * 100`% to `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$prop, 2) * 100`%. 
+
+```{r}
 ggplot(els_jns_count,
        aes(as.character(year), n,  fill = oa_model_fct, group = oa_model_fct)) +
   geom_area(alpha = 0.8,
@@ -76,7 +79,7 @@ ggplot(els_jns_count,
   guides(fill = guide_legend("OA Business Model"))
 ```
 
-Compared to 2015, the number of hybrid journals grew by  `r (els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$n) - (els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$n)` journals, while its proportion relative to Elsevier's overall journal portfolio slightly decreased from `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$prop, 2) * 100`% to `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$prop, 2) * 100`%. 
+#### How many of hybrid journals flipped to fully open access? 
 
 ```{r}
 flipped_jns <- els_jns %>%
@@ -91,13 +94,11 @@ flipped_jns_ind <- els_jns %>%
   count(oa_model)
 ```
 
-Following the approach of an earlier study [@Matthias_2019], we furthermore used APC pricing list information to determine the number of open access business model flips between 2015-2020. Although the transition from hybrid to a fully open access business model has drawn most attention, also the reverse can be observed. A total number of `r sum(flipped_jns_ind$n)` journals changed the business model under the ownership of Elsevier. Of these, `r filter(flipped_jns_ind, oa_model == "Open Access")$n` journals flipped to fully open access, while `r filter(flipped_jns_ind, oa_model != "Open Access")$n`changed to hybrid open access. Examples include the physical journal *Materials Today* and the life science journal *Meta Gene*.
+Following the approach of an earlier study [@Matthias_2019], we furthermore used APC pricing list information to determine the number of open access business model flips between 2015-2020. Although the transition from hybrid to a fully open access business model has drawn most attention, also the reverse can be observed. A total number of `r sum(flipped_jns_ind$n)` journals changed the business model under the ownership of Elsevier. Of these, `r filter(flipped_jns_ind, oa_model == "Open Access")$n` journals flipped to fully open access, while `r filter(flipped_jns_ind, oa_model != "Open Access")$n`changed to hybrid open access. Examples for such reverse flipped open access journals include the physical journal *Materials Today* and the life science journal *Meta Gene*.
 
 #### What is the uptake of open access in Elsevier's current hybrid journal portfolio?
 
 *Number and percentage of journals with at least one article*
-
-<!-- here, we change to the most current pricing list, which seems to be identical to 31 May-->
 
 ```{r}
 els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
@@ -116,7 +117,11 @@ hybrid_df <- els_tdm %>%
   distinct()
 ```
 
-To determine the number of Elsevier hybrid journals with at least one open access article, we downloaded and parsed the publisher's APC pricing list from 31 May 2020. The list comprised `r length(unique(els_jns_df$issn))` journals, of which `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` supported the hybrid model, representing a share of `r round(els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow() / length(unique(els_jns_df$issn)) * 100, 0)`%. Of those, `r hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow()` hybrid journals published at least one open access article immediately under a Creative Commons license between 2015 and 2019, corresponding to about `r round(hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of journal titles in Elsevier’s hybrid journal portfolio. At the same time, `r 100 - round(hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of hybrid journals did not published an open access article.
+To determine the number of Elsevier hybrid journals with at least one open access article, we, again, started with APC pricing list information form Elsevier [@Matthias_2020], lastly updated on 23 May 2020. We used the Crossref index to determine the overall article volume of Elsevier's hybrid journal portfolio, and to related it to the number of immediate open access articles indicated by Creative Commons licenses. Because DOIs can be also issued to  non-scholarly journal content including table of contents and list of reviewers, we excluded these records using Unpaywall's paratext recognition approach [^1]. They account for about 2.5% of DOIs registered by Crossref.
+
+[^1]: <https://support.unpaywall.org/support/solutions/articles/44001894783-what-does-is-paratext-mean-in-the-api->
+
+Elsevier APC pricing list comprised `r length(unique(els_jns_df$issn))` journals, of which `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` supported the hybrid model, representing a share of `r round(els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow() / length(unique(els_jns_df$issn)) * 100, 0)`%. Of those, `r hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow()` hybrid journals published at least one open access article under a Creative Commons license between 2015 and 2019, corresponding to about `r round(hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of journal titles in Elsevier’s hybrid journal portfolio. At the same time, `r 100 - round(hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of hybrid journals did not published an open access article.
 
 ```{r}
 eligible_jns <- hybrid_df %>% 
@@ -126,7 +131,6 @@ eligible_jns <- hybrid_df %>%
 
 *Number and percentage of open access articles per hybrid journal*
 
-We used the Crossref index to determine the overall article volume of Elsevier's hybrid journal portfolio, and to related it to the number of open access articles. Because DOIs can be also issued to abstracts presented at scientific meetings and non-scholarly journal content including table of contents and list of reviewers, we furthermore distinguished between citing and non-citing articles defined by the number of deposited references in Crossref per article, regardless of whether they are public or not.
 
 Table presents the high-level findings by year of publication. illustrating a growth  
 
