@@ -34,6 +34,7 @@ knitr::knit_hooks$set(
 library(tidyverse)
 library(here)
 library(cowplot)
+library(ggeconodist)
 ```
 
 ## Results
@@ -59,7 +60,7 @@ els_overall <- els_jns %>%
   summarise(n = n_distinct(issn))
 ```
 
-Using text-mined data from web-archived Elsevier APC pricing lists  [@Matthias_2020], we were able to determine the evolution of Elsevier's open access journal portfolio. Figure shows that the majority of journals supported the hybrid model. Overall, Elsevier published `r length(unique(els_jns$issn))` open access journals, of which `r els_jns %>%  filter(oa_model == "Hybrid") %>% distinct(issn) %>% nrow()` supported the hybrid model.
+Using text-mined data from web-archived Elsevier APC pricing lists  [@Matthias_2020], we were able to determine the evolution of Elsevier's open access journal portfolio. Figure shows that the majority of journals were hybrid journals. Overall, Elsevier published `r length(unique(els_jns$issn))` open access journals, of which `r els_jns %>%  filter(oa_model == "Hybrid") %>% distinct(issn) %>% nrow()` supported the hybrid model.
 
 Elsevier's journal portfolio changed over the period of observation. The number of hybrid journals grew by  `r (els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$n) - (els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$n)` journals between 2015 and May 2020, while its proportion relative to Elsevier's overall journal portfolio slightly decreased from `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$prop, 2) * 100`% to `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$prop, 2) * 100`%. The year 2016 marked the highest number of journals. After that, the trend reversed. Since 2018, the number of journals stagnated. On 23 May 2020, Elsevier APC pricing list comprised `r length(unique(els_jns_df$issn))` journals, of which `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` supported the hybrid model, representing a share of `r round(els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow() / length(unique(els_jns_df$issn)) * 100, 0)`%.
 
@@ -128,9 +129,13 @@ hybrid_df <- els_tdm %>%
   distinct() %>%
   filter(!grepl(para, title))
 
-flipped_jns_df <-
-  els_jns %>%
-    filter(issn %in% flipped_jns$issn)
+flipped_jns_df <- els_jns %>%
+  filter(issn %in% flipped_jns$issn) %>%
+  select(oa_model, issn, year)
+
+hybrid_df <- left_join(hybrid_df, flipped_jns_df, by = c("issn", "issued_year" = "year")) %>%
+  filter(!oa_model %in% "Open Access") %>%
+  select(-oa_model)
 ```
 
 To determine the number of Elsevier hybrid journals with at least one open access article, we focused on the most current version of Elsevier's APC pricing list, lastly updated on 23 May 2020 [@Matthias_2020]. We used the Crossref index to determine the overall article volume of Elsevier's hybrid journal portfolio, and related it to the number of open access articles indicated by Creative Commons licenses. We only considered open access articles that were provided without delay, which we determined from mined full-text metadata. Because Elsevier also issued DOIs to non-scholarly journal content including table of contents and list of reviewers, we excluded these records using Unpaywall's paratext recognition approach [^1]. They account for about 2.5% of DOIs registered by Crossref.
@@ -198,6 +203,7 @@ Overall, `r Total[1]` hybrid journals provided immediate open access to `r Total
 uptake_table
 ```
 
+
 ```{r}
 els_jn_pub_volume <- els_pub_volume %>%
   filter(issn %in% eligible_jns$issn) %>%
@@ -210,11 +216,47 @@ hybrid_oa_per_jn <- hybrid_df %>%
   summarise(oa_articles = n())%>%
   inner_join(els_jn_pub_volume, by = c("issued_year", "issn")) %>%
   ungroup() %>%
-  mutate(prop = oa_articles / articles * 100) %>% View()
+  mutate(prop = oa_articles / articles) 
 ```
 
-The open access share varied across Elsevier hybrid journals. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume.
+```{r}
+perc_df <- hybrid_oa_per_jn %>%
+  group_by(issued_year) %>% 
+  summarize(median = median(prop),
+            p_10 = quantile(prop, 0.1),
+            p_90 = quantile(prop, 0.9)) %>%
+  ungroup()
+```
 
+The open access share varies across Elsevier hybrid journals. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. Overall, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume. In 2019, the median open access share per hybrid journal was `r perc_df %>% filter(issued_year == 2019) %>% pull(median) * 100`%. In the same year, 90% of Elsevier hybrid journals had an open access uptake of `r perc_df %>% filter(issued_year == 2019) %>% pull(p_90) * 100`% or less.
+
+```{r, fig.cap='Open access uptake in Elsevier journals per year in percent, visualised as diminutive distribution chart removing outliers. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume.'}
+a_plot <- perc_df %>%
+ggplot() +
+  geom_econodist(aes(x = factor(issued_year), ymin = p_10, median = median, ymax = p_90),
+         stat = "identity", show.legend = TRUE) +
+  scale_y_continuous(position = "right", 
+                     labels = scales::percent_format(accuracy = 1L),
+                    # expand = expansion(mult = c(0, 0.15)), 
+                     limits = c(0,max(perc_df$p_90) + 0.01)) +
+  coord_flip() +
+  labs(
+    x = NULL, y = NULL
+   # title = "What is the uptake of hybrid open access among Elsevier journals?",
+  #  subtitle = "Proportion of immediate open access articles published in subscription-based journals\nJan 2015 to July 2019",
+   # caption = "Data source: Elsevier B.V. / Crossref"
+  ) +
+  theme_minimal(base_family = "Roboto") +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.ticks = element_blank()) +
+  theme(panel.grid.major.y = element_blank()) +
+  theme(panel.border = element_blank()) 
+
+grid.newpage()
+left_align(a_plot, c("subtitle", "title", "caption")) %>% 
+  add_econodist_legend(econodist_legend_grob(family = "Roboto"), below = "subtitle") %>% 
+  grid.draw()  
+```
 
 
 # license

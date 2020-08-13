@@ -8,8 +8,8 @@
 Using text-mined data from web-archived Elsevier APC pricing lists
 (Matthias 2020), we were able to determine the evolution of Elsevier’s
 open access journal portfolio. Figure shows that the majority of
-journals supported the hybrid model. Overall, Elsevier published 2,955
-open access journals, of which 2,238 supported the hybrid model.
+journals were hybrid journals. Overall, Elsevier published 2,955 open
+access journals, of which 2,238 supported the hybrid model.
 
 Elsevier’s journal portfolio changed over the period of observation. The
 number of hybrid journals grew by 255 journals between 2015 and May
@@ -20,7 +20,7 @@ the number of journals stagnated. On 23 May 2020, Elsevier APC pricing
 list comprised 2,339 journals, of which 1,982 supported the hybrid
 model, representing a share of 85%.
 
-<img src="results_files/figure-gfm/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
 
 #### How many of hybrid journals flipped to fully open access?
 
@@ -62,13 +62,13 @@ journals did not published an open access article.
 *Number and percentage of immediate open access articles per hybrid
 journal*
 
-Overall, 1,765 hybrid journals provided immediate open access to 85,830
+Overall, 1,765 hybrid journals provided immediate open access to 85,185
 articles between 2015 and 2019. The total share of hybrid open access in
 the publication volume of Elsevier journals was 3.2%. Table present the
 high-level findings by year, illustrating a moderate growth in hybrid
 open access. Although the number of hybrid journals with at least one
 open access article remained somehow constant, the number of open access
-articles rose substantially from 13,703 (2015) to 21,873 (2019).
+articles rose substantially from 13,308 (2015) to 21,873 (2019).
 However, the overall uptake of open access in Elsevier’s hybrid journal
 portfolio grew slowly from 2.8% (2015) to 3.7% (2019), because the
 number of articles published also increased during this five-years
@@ -78,14 +78,32 @@ period.
 | -------------------------------------------- | -------: | -------: | -----: | -------: | -------: | --------: |
 | Hybrid journals with at least one OA article |   1731.0 |   1747.0 |   1759 |   1758.0 |   1760.0 |    1765.0 |
 | All Articles                                 | 483340.0 | 509038.0 | 523442 | 549062.0 | 583825.0 | 2648707.0 |
-| Hybrid OA Articles                           |  13703.0 |  16566.0 |  15504 |  18184.0 |  21873.0 |   85830.0 |
-| Percentage                                   |      2.8 |      3.3 |      3 |      3.3 |      3.7 |       3.2 |
+| Hybrid OA Articles                           |  13308.0 |  16316.0 |  15504 |  18184.0 |  21873.0 |   85185.0 |
+| Percentage                                   |      2.8 |      3.2 |      3 |      3.3 |      3.7 |       3.2 |
 
-The open access share varied across Elsevier hybrid journals. Since
+The open access share varies across Elsevier hybrid journals. Since
 2015, most hybrid journals have had a slow uptake rate of open access
-articles. In general, open access via the hybrid open access publishing
+articles. Overall, open access via the hybrid open access publishing
 model played a marginal role in the context of Elsevier’s total
-publication volume.
+publication volume. In 2019, the median open access share per hybrid
+journal was 3.5%. In the same year, 90% of Elsevier hybrid journals had
+an open access uptake of 11% or less.
+
+<div class="figure" style="text-align: center">
+
+<img src="results_files/figure-gfm/unnamed-chunk-14-1.png" alt="Open access uptake in Elsevier journals per year in percent, visualised as diminutive distribution chart removing outliers. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume." width="70%" />
+
+<p class="caption">
+
+Open access uptake in Elsevier journals per year in percent, visualised
+as diminutive distribution chart removing outliers. Since 2015, most
+hybrid journals have had a slow uptake rate of open access articles. In
+general, open access via the hybrid open access publishing model played
+a marginal role in the context of Elsevier’s total publication volume.
+
+</p>
+
+</div>
 
 # license
 
