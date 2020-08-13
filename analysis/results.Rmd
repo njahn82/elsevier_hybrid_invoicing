@@ -1,7 +1,4 @@
 ---
-title: "results"
-author: "Najko Jahn"
-date: "7/7/2020"
 bibliography: references.bib
 csl: chicago.csl
 output: github_document
@@ -114,6 +111,11 @@ els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
 ```
 
 ```{r}
+# paratext pattern
+para <- c('^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')
+```
+
+```{r}
 hybrid_md <- readr::read_csv(here::here("data", "hybrid_md.csv"))
 els_tdm <- readr::read_csv(here::here("data", "els_tmd_links.csv"))
 invoice_df <-  readr::read_csv(here::here("data", "invoice_df.csv"))
@@ -123,7 +125,12 @@ hybrid_df <- els_tdm %>%
   inner_join(invoice_df, by = c("URL" = "tdm_url")) %>% 
   select(-URL) %>% 
   inner_join(hybrid_md, by = c("doi")) %>% 
-  distinct()
+  distinct() %>%
+  filter(!grepl(para, title))
+
+flipped_jns_df <-
+  els_jns %>%
+    filter(issn %in% flipped_jns$issn)
 ```
 
 To determine the number of Elsevier hybrid journals with at least one open access article, we focused on the most current version of Elsevier's APC pricing list, lastly updated on 23 May 2020 [@Matthias_2020]. We used the Crossref index to determine the overall article volume of Elsevier's hybrid journal portfolio, and related it to the number of open access articles indicated by Creative Commons licenses. We only considered open access articles that were provided without delay, which we determined from mined full-text metadata. Because Elsevier also issued DOIs to non-scholarly journal content including table of contents and list of reviewers, we excluded these records using Unpaywall's paratext recognition approach [^1]. They account for about 2.5% of DOIs registered by Crossref.

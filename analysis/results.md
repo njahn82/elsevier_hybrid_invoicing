@@ -1,7 +1,3 @@
-results
-================
-Najko Jahn
-7/7/2020
 
 ## Results
 
@@ -24,7 +20,7 @@ the number of journals stagnated. On 23 May 2020, Elsevier APC pricing
 list comprised 2,339 journals, of which 1,982 supported the hybrid
 model, representing a share of 85%.
 
-<img src="results_files/figure-gfm/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
 
 #### How many of hybrid journals flipped to fully open access?
 
@@ -66,13 +62,13 @@ journals did not published an open access article.
 *Number and percentage of immediate open access articles per hybrid
 journal*
 
-Overall, 1,765 hybrid journals provided immediate open access to 85,911
+Overall, 1,765 hybrid journals provided immediate open access to 85,830
 articles between 2015 and 2019. The total share of hybrid open access in
 the publication volume of Elsevier journals was 3.2%. Table present the
 high-level findings by year, illustrating a moderate growth in hybrid
 open access. Although the number of hybrid journals with at least one
 open access article remained somehow constant, the number of open access
-articles rose substantially from 13,732 (2015) to 21,886 (2019).
+articles rose substantially from 13,703 (2015) to 21,873 (2019).
 However, the overall uptake of open access in Elsevier’s hybrid journal
 portfolio grew slowly from 2.8% (2015) to 3.7% (2019), because the
 number of articles published also increased during this five-years
@@ -82,7 +78,7 @@ period.
 | -------------------------------------------- | -------: | -------: | -----: | -------: | -------: | --------: |
 | Hybrid journals with at least one OA article |   1731.0 |   1747.0 |   1759 |   1758.0 |   1760.0 |    1765.0 |
 | All Articles                                 | 483340.0 | 509038.0 | 523442 | 549062.0 | 583825.0 | 2648707.0 |
-| Hybrid OA Articles                           |  13732.0 |  16592.0 |  15510 |  18191.0 |  21886.0 |   85911.0 |
+| Hybrid OA Articles                           |  13703.0 |  16566.0 |  15504 |  18184.0 |  21873.0 |   85830.0 |
 | Percentage                                   |      2.8 |      3.3 |      3 |      3.3 |      3.7 |       3.2 |
 
 The open access share varied across Elsevier hybrid journals. Since
