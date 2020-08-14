@@ -81,31 +81,41 @@ period.
 | Hybrid OA Articles                           |  13308.0 |  16316.0 |  15504 |  18184.0 |  21873.0 |   85185.0 |
 | Percentage                                   |      2.8 |      3.2 |      3 |      3.3 |      3.7 |       3.2 |
 
-The open access share varies across Elsevier hybrid journals. Since
-2015, most hybrid journals have had a slow uptake rate of open access
-articles. Overall, open access via the hybrid open access publishing
-model played a marginal role in the context of Elsevier’s total
-publication volume. In 2019, the median open access share per hybrid
-journal was 3.5%. In the same year, 90% of Elsevier hybrid journals had
-an open access uptake of 11% or less.
+We observed considerable variations across Elsevier hybrid journals
+relative to the share of open access articles published by year. Figure
+shows, in a diminutive chart, the range of open access uptake across
+Elsevier hybrid journals between 2015 and 2019. The dot represents the
+median by year, while the left and the right bars represents to 10th or
+the 90th percentile; the distance between them represent the
+distribution of open access rates of 80% of Elsevier journals, excluding
+extreme outliers at the top or bottom respectively from the visual
+presentation. Notably, uptake among above-average performing journals in
+terms of published open access articles increased over the years.
+Nevertheless, the proportion of open access articles published by
+journals that operate above average can still be described as low; in
+2019, 90% of Elsevier hybrid journals had an open access uptake of 11%
+or less.
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-14-1.png" alt="Open access uptake in Elsevier journals per year in percent, visualised as diminutive distribution chart removing outliers. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-14-1.png" alt="Open access uptake in Elsevier hybrid journals per year in percent, visualised as diminutive distribution chart removing outliers at the top or bottom respectively. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume. However, many journals operating above average in terms of published open access articles were able to increase uptake rates over the years." width="70%" />
 
 <p class="caption">
 
-Open access uptake in Elsevier journals per year in percent, visualised
-as diminutive distribution chart removing outliers. Since 2015, most
-hybrid journals have had a slow uptake rate of open access articles. In
-general, open access via the hybrid open access publishing model played
-a marginal role in the context of Elsevier’s total publication volume.
+Open access uptake in Elsevier hybrid journals per year in percent,
+visualised as diminutive distribution chart removing outliers at the top
+or bottom respectively. Since 2015, most hybrid journals have had a slow
+uptake rate of open access articles. In general, open access via the
+hybrid open access publishing model played a marginal role in the
+context of Elsevier’s total publication volume. However, many journals
+operating above average in terms of published open access articles were
+able to increase uptake rates over the years.
 
 </p>
 
 </div>
 
-# license
+# licenses used
 
 <div id="refs" class="references hanging-indent">
 

@@ -259,7 +259,9 @@ left_align(a_plot, c("subtitle", "title", "caption")) %>%
 ```
 
 
-# license
+# licenses used
+
+
 
 
 
