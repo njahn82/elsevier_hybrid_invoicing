@@ -2,6 +2,7 @@
 bibliography: references.bib
 csl: chicago.csl
 output: github_document
+always_allow_html: true
 ---
 
 ```{r, setup, echo=FALSE}
@@ -35,6 +36,7 @@ library(tidyverse)
 library(here)
 library(cowplot)
 library(ggeconodist)
+library(gt)
 ```
 
 ## Results
@@ -166,43 +168,97 @@ eligible_jns <- hybrid_df %>%
 els_yr <- els_pub_volume %>%
   filter(issn %in% eligible_jns$issn) %>%
   group_by(issued_year) %>%
-  summarise(articles = sum(articles),
-            journals = n_distinct(issn))
+  summarise(journals = n_distinct(issn),
+            articles_n = sum(articles),
+            articles_mean = mean(articles),
+            articles_sd = sd(articles))
 
 # oa
-ind_per_year <- hybrid_df %>%
+oa_per_jn_year <- hybrid_df %>%
   filter(oa_archive == FALSE) %>%
+  group_by(issued_year, issn) %>%
+  summarise(oa = n()) %>%
+  ungroup()
+oa_ind <- oa_per_jn_year %>%
   group_by(issued_year) %>%
-  summarise(oa_articles = n()) %>%
-  inner_join(els_yr, by = "issued_year") %>%
-  ungroup() %>%
-  mutate(prop = oa_articles / articles * 100)
-ind_summary_table <- ind_per_year %>% 
-  pivot_longer(oa_articles:prop, names_to = "indicator", values_to = "count") %>%
-  pivot_wider(names_from = issued_year, values_from = count) %>%
-  mutate(indicator = factor(indicator, levels = c("journals", "articles", "oa_articles", "prop"))) %>%
-  arrange(indicator) %>%
-  mutate(indicator = recode(indicator,
-                            oa_articles = "Hybrid OA Articles", 
-                            articles = "All Articles", 
-                            journals = "Hybrid journals with at least one OA article", 
-                            prop = "Percentage"))
-`Total` <- c(
-  hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow(),
-  sum(ind_summary_table[2,2:6]),
-  sum(ind_summary_table[3,2:6]),
-  sum(ind_per_year$oa_articles) / sum(ind_per_year$articles) * 100)
-uptake_table <- bind_cols(ind_summary_table, Total = `Total`) %>%
-  rename(` ` = indicator) %>%
-  knitr::kable(digits = 1)
+  summarise(oa_n = sum(oa),
+            oa_mean = mean(oa),
+            oa_sd = sd(oa)) 
+# oa uptake 
+oa_uptake_ind <- els_pub_volume %>%
+  filter(issn %in% eligible_jns$issn) %>%
+  inner_join(oa_per_jn_year, by = c("issn", "issued_year")) %>%
+  mutate(prop = oa / articles) %>%
+  group_by(issued_year) %>%
+  summarise(oa_uptake_mean = mean(prop),
+            oa_uptake_sd = sd(prop))
+# oa uptake all 
+oa_uptake_15_19 <- els_pub_volume %>%
+    filter(issn %in% eligible_jns$issn) %>%
+    inner_join(oa_per_jn_year, by = c("issn", "issued_year")) %>%
+    group_by(issn) %>%
+    summarise(oa = sum(oa),
+              articles = sum(articles)) %>%
+    mutate(prop = oa / articles) 
+
+# all 
+total_df <- tibble::tibble(
+  issued_year = "2015-19",
+  journals = hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow(),
+  articles_n = els_pub_volume %>% filter(issn %in% eligible_jns$issn) %>% pull(articles) %>% sum(),
+  articles_mean = els_pub_volume %>% filter(issn %in% eligible_jns$issn) %>% group_by(issn) %>% summarise(n = sum(articles)) %>% pull(n) %>% mean(),
+  articles_sd = els_pub_volume %>% filter(issn %in% eligible_jns$issn) %>% group_by(issn) %>% summarise(n = sum(articles)) %>% pull(n) %>% sd(),
+  oa_n = hybrid_df %>% filter(oa_archive == FALSE) %>% nrow(),
+  oa_mean = hybrid_df %>% filter(oa_archive == FALSE) %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% mean(),
+  oa_sd = hybrid_df %>% filter(oa_archive == FALSE) %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% sd(),
+  oa_uptake = oa_n / articles_n,
+  oa_uptake_mean = mean(oa_uptake_15_19$prop),
+  oa_uptake_sd = sd(oa_uptake_15_19$prop)
+         )
+
+ind_df <- inner_join(els_yr, oa_ind, by = "issued_year") %>%
+  mutate(oa_uptake = oa_n / articles_n) %>%
+  inner_join(oa_uptake_ind, by = "issued_year") %>%
+  mutate(issued_year = as.character(issued_year)) %>%
+  bind_rows(total_df) %>%
+  mutate(oa_uptake = oa_uptake * 100) %>%
+  mutate(oa_uptake_mean = oa_uptake_mean * 100) %>%
+  mutate(oa_uptake_sd = oa_uptake_sd * 100)
+
+ind_summary_table <- ind_df %>% 
+  pivot_longer(journals:oa_uptake_sd, names_to = "indicator", values_to = "count") %>%
+  pivot_wider(names_from = issued_year, values_from = count)
 ```
 
-Overall, `r Total[1]` hybrid journals provided immediate open access to `r Total[3]` articles between 2015 and 2019. The total share of hybrid open access in the publication volume of Elsevier journals was `r Total[4]`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r ind_per_year %>% filter(issued_year == 2015) %>% pull(oa_articles)` (2015) to `r ind_per_year %>% filter(issued_year == 2019) %>% pull(oa_articles)` (2019). However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r ind_per_year %>% filter(issued_year == 2015) %>% pull(prop)`% (2015) to `r ind_per_year %>% filter(issued_year == 2019) %>% pull(prop)`% (2019), because the number of articles published also increased during this five-years period.
+Overall, `r total_df$journals` hybrid journals provided immediate open access to `r total_df$oa_n` articles between 2015 and 2019. The total share of hybrid open access in the publication volume of Elsevier journals was `r total_df$oa_uptake * 100`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r ind_df %>% filter(issued_year == "2015") %>% pull(oa_n)` (2015) to `r ind_df %>% filter(issued_year == "2019") %>% pull(oa_n)` (2019). However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r ind_df %>% filter(issued_year == 2015) %>% pull(oa_uptake)`% (2015) to `r ind_df %>% filter(issued_year == 2019) %>% pull(oa_uptake)`% (2019), because the number of articles published also increased during this five-years period.
 
 ```{r}
-uptake_table
+table_descriptives_ind <- tribble(
+  ~ind_group, ~ind, ~ind_name,
+  "Hybrid Journals with OA articles", "Total", "Total",
+  "Publication Volume", "articles_n", "Articles",
+  "Publication Volume", "articles_mean", "Mean",
+  "Publication Volume", "articles_sd", "SD",
+  "OA Volume", "oa_n", "Total",
+  "OA Volume", "oa_mean", "Mean",
+  "OA Volume", "oa_sd", "SD",
+  "OA Uptake", "oa_uptake", "Overall OA Uptake",
+  "OA Uptake", "oa_uptake_mean", "Mean",
+  "OA Uptake", "oa_uptake_sd", "SD",
+)
+inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
+  dplyr::select(-ind) %>%
+  gt(rowname_col = "ind_name", groupname_col = "ind_group") %>%
+  fmt_number(contains("20")) %>%
+  fmt_number(contains("20"), 
+             rows = c("Articles", "Total"),
+             decimals = 0) %>%
+  tab_style(cell_text(weight = "bold"),
+            locations = cells_row_groups()
+  )
 ```
 
+*variation*
 
 ```{r}
 els_jn_pub_volume <- els_pub_volume %>%
@@ -228,9 +284,9 @@ perc_df <- hybrid_oa_per_jn %>%
   ungroup()
 ```
 
-The open access share varies across Elsevier hybrid journals. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. Overall, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume. In 2019, the median open access share per hybrid journal was `r perc_df %>% filter(issued_year == 2019) %>% pull(median) * 100`%. In the same year, 90% of Elsevier hybrid journals had an open access uptake of `r perc_df %>% filter(issued_year == 2019) %>% pull(p_90) * 100`% or less.
+We observed considerable variations across Elsevier hybrid journals relative to the share of open access articles published by year. Figure shows, in a diminutive chart, the range of open access uptake across Elsevier hybrid journals between 2015 and 2019. The dot represents the median by year, while the left and the right bars represents to 10th or the 90th percentile; the distance between them represent the distribution of open access rates of 80% of Elsevier journals, excluding extreme outliers at the top or bottom respectively from the visual presentation. Notably, uptake among above-average performing journals in terms of published open access articles increased over the years. Nevertheless, the proportion of open access articles published by journals that operate above average can still be described as low; in 2019, 90% of Elsevier hybrid journals had an open access uptake of `r perc_df %>% filter(issued_year == 2019) %>% pull(p_90) * 100`% or less.
 
-```{r, fig.cap='Open access uptake in Elsevier journals per year in percent, visualised as diminutive distribution chart removing outliers. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume.'}
+```{r, fig.cap='Open access uptake in Elsevier hybrid journals per year in percent, visualised as diminutive distribution chart removing outliers at the top or bottom respectively. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume. However, many journals operating above average in terms of published open access articles were able to increase uptake rates over the years.'}
 a_plot <- perc_df %>%
 ggplot() +
   geom_econodist(aes(x = factor(issued_year), ymin = p_10, median = median, ymax = p_90),
@@ -242,9 +298,6 @@ ggplot() +
   coord_flip() +
   labs(
     x = NULL, y = NULL
-   # title = "What is the uptake of hybrid open access among Elsevier journals?",
-  #  subtitle = "Proportion of immediate open access articles published in subscription-based journals\nJan 2015 to July 2019",
-   # caption = "Data source: Elsevier B.V. / Crossref"
   ) +
   theme_minimal(base_family = "Roboto") +
   theme(panel.grid.minor = element_blank()) +
@@ -258,9 +311,15 @@ left_align(a_plot, c("subtitle", "title", "caption")) %>%
   grid.draw()  
 ```
 
+alternative box plot presentation
+
+```{r}
+ggplot(hybrid_oa_per_jn, aes(factor(issued_year), prop)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  coord_cartesian(ylim=c(0,0.15))
 
 # licenses used
-
+```
 
 
 
