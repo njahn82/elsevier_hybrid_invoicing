@@ -1,7 +1,7 @@
 ---
 bibliography: references.bib
 csl: chicago.csl
-output: github_document
+output: html_document
 always_allow_html: true
 ---
 
@@ -165,37 +165,47 @@ eligible_jns <- hybrid_df %>%
   filter(oa_archive == FALSE) %>% 
   distinct(issn)
 # pub volume eligble data
-els_yr <- els_pub_volume %>%
+hybrid_volume <- els_pub_volume %>%
   filter(issn %in% eligible_jns$issn) %>%
+  inner_join(hybrid_df, by = c("issn", "issued_year")) %>%
+  filter(oa_archive == FALSE)
+
+els_articles <- 
+  hybrid_volume %>%
+  distinct(issued_year, issn, articles) %>%
   group_by(issued_year) %>%
-  summarise(journals = n_distinct(issn),
-            articles_n = sum(articles),
+  summarise(
+    articles_n = sum(articles),
             articles_mean = mean(articles),
-            articles_sd = sd(articles))
+            articles_sd = sd(articles)
+    )
+els_yr <- 
+  hybrid_volume %>%
+  group_by(issued_year) %>%
+  summarise(journals = n_distinct(issn)) %>%
+  inner_join(els_articles, by = "issued_year")
 
 # oa
-oa_per_jn_year <- hybrid_df %>%
-  filter(oa_archive == FALSE) %>%
+oa_per_jn_year <- hybrid_volume %>%
   group_by(issued_year, issn) %>%
-  summarise(oa = n()) %>%
-  ungroup()
+  summarise(oa = n(), .groups = "drop")
 oa_ind <- oa_per_jn_year %>%
   group_by(issued_year) %>%
   summarise(oa_n = sum(oa),
             oa_mean = mean(oa),
             oa_sd = sd(oa)) 
 # oa uptake 
-oa_uptake_ind <- els_pub_volume %>%
-  filter(issn %in% eligible_jns$issn) %>%
+oa_uptake_ind <- hybrid_volume %>% 
+  distinct(issued_year, issn, articles) %>%
   inner_join(oa_per_jn_year, by = c("issn", "issued_year")) %>%
   mutate(prop = oa / articles) %>%
   group_by(issued_year) %>%
   summarise(oa_uptake_mean = mean(prop),
             oa_uptake_sd = sd(prop))
 # oa uptake all 
-oa_uptake_15_19 <- els_pub_volume %>%
-    filter(issn %in% eligible_jns$issn) %>%
-    inner_join(oa_per_jn_year, by = c("issn", "issued_year")) %>%
+oa_uptake_15_19 <- hybrid_volume %>% 
+  distinct(issued_year, issn, articles) %>%
+  inner_join(oa_per_jn_year, by = c("issn", "issued_year")) %>%
     group_by(issn) %>%
     summarise(oa = sum(oa),
               articles = sum(articles)) %>%
@@ -204,13 +214,13 @@ oa_uptake_15_19 <- els_pub_volume %>%
 # all 
 total_df <- tibble::tibble(
   issued_year = "2015-19",
-  journals = hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow(),
-  articles_n = els_pub_volume %>% filter(issn %in% eligible_jns$issn) %>% pull(articles) %>% sum(),
-  articles_mean = els_pub_volume %>% filter(issn %in% eligible_jns$issn) %>% group_by(issn) %>% summarise(n = sum(articles)) %>% pull(n) %>% mean(),
-  articles_sd = els_pub_volume %>% filter(issn %in% eligible_jns$issn) %>% group_by(issn) %>% summarise(n = sum(articles)) %>% pull(n) %>% sd(),
-  oa_n = hybrid_df %>% filter(oa_archive == FALSE) %>% nrow(),
-  oa_mean = hybrid_df %>% filter(oa_archive == FALSE) %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% mean(),
-  oa_sd = hybrid_df %>% filter(oa_archive == FALSE) %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% sd(),
+  journals = hybrid_volume %>% distinct(issn) %>% nrow(),
+  articles_n = hybrid_volume %>% distinct(issn, articles, issued_year) %>% pull(articles) %>% sum(),
+  articles_mean = hybrid_volume %>% distinct(issn, articles, issued_year) %>% pull(articles) %>% mean(),
+  articles_sd = hybrid_volume %>% distinct(issn, articles, issued_year) %>% pull(articles) %>% sd(),
+  oa_n = nrow(hybrid_volume),
+  oa_mean = hybrid_volume %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% mean(),
+  oa_sd = hybrid_volume %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% sd(),
   oa_uptake = oa_n / articles_n,
   oa_uptake_mean = mean(oa_uptake_15_19$prop),
   oa_uptake_sd = sd(oa_uptake_15_19$prop)
@@ -235,23 +245,23 @@ Overall, `r total_df$journals` hybrid journals provided immediate open access to
 ```{r}
 table_descriptives_ind <- tribble(
   ~ind_group, ~ind, ~ind_name,
-  "Hybrid Journals with OA articles", "Total", "Total",
+  "Hybrid Journals with OA articles", "journals", "Journals",
   "Publication Volume", "articles_n", "Articles",
   "Publication Volume", "articles_mean", "Mean",
   "Publication Volume", "articles_sd", "SD",
-  "OA Volume", "oa_n", "Total",
-  "OA Volume", "oa_mean", "Mean",
+  "OA Volume", "oa_n", "OA Articles",
+  "OA Volume", "oa_mean", "Mean per Journal",
   "OA Volume", "oa_sd", "SD",
-  "OA Uptake", "oa_uptake", "Overall OA Uptake",
-  "OA Uptake", "oa_uptake_mean", "Mean",
-  "OA Uptake", "oa_uptake_sd", "SD",
+  "OA Uptake (in%)", "oa_uptake", "OA Percentage",
+  "OA Uptake (in%)", "oa_uptake_mean", "Mean per Journal",
+  "OA Uptake (in%)", "oa_uptake_sd", "SD"
 )
 inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
   dplyr::select(-ind) %>%
   gt(rowname_col = "ind_name", groupname_col = "ind_group") %>%
-  fmt_number(contains("20")) %>%
+  fmt_number(contains("20"), decimals = 2) %>%
   fmt_number(contains("20"), 
-             rows = c("Articles", "Total"),
+             rows = c("Journals", "Articles", "OA Articles"),
              decimals = 0) %>%
   tab_style(cell_text(weight = "bold"),
             locations = cells_row_groups()
