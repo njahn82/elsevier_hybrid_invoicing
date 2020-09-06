@@ -169,6 +169,8 @@ hybrid_volume <- els_pub_volume %>%
   filter(issn %in% eligible_jns$issn) %>%
   inner_join(hybrid_df, by = c("issn", "issued_year")) %>%
   filter(oa_archive == FALSE)
+# backup 
+write_csv(hybrid_volume, here::here("data", "hybrid_volume_eligible.csv"))
 
 els_articles <- 
   hybrid_volume %>%
@@ -290,46 +292,66 @@ perc_df <- hybrid_oa_per_jn %>%
   group_by(issued_year) %>% 
   summarize(median = median(prop),
             p_10 = quantile(prop, 0.1),
-            p_90 = quantile(prop, 0.9)) %>%
+            p_95 = quantile(prop, 0.95),
+            iqr = quantile(prop, 3/4) - quantile(prop, 1/4)) %>%
   ungroup()
 ```
 
-We observed considerable variations across Elsevier hybrid journals relative to the share of open access articles published by year. Figure shows, in a diminutive chart, the range of open access uptake across Elsevier hybrid journals between 2015 and 2019. The dot represents the median by year, while the left and the right bars represents to 10th or the 90th percentile; the distance between them represent the distribution of open access rates of 80% of Elsevier journals, excluding extreme outliers at the top or bottom respectively from the visual presentation. Notably, uptake among above-average performing journals in terms of published open access articles increased over the years. Nevertheless, the proportion of open access articles published by journals that operate above average can still be described as low; in 2019, 90% of Elsevier hybrid journals had an open access uptake of `r perc_df %>% filter(issued_year == 2019) %>% pull(p_90) * 100`% or less.
+Figure presents to which extent open access uptake rates varied among Elsevier hybrid journals between 2015 and 2019. The box-and-whiskers plot displays the distribution of the open access percentage per journal broken down by year. It visualizes the median open access proportion in the journal sample, the range of the majority of journals, and individual outliers represented as dots. Notably, upper quartiles and whiskers stretch farther over the years, indicating that the range of uptake among journals with an above-average proportion of open access articles increased over the years. Nevertheless, the prevalence of open access even among these journals can be described as relatively low; in 2019, 95% of Elsevier hybrid journals published `r perc_df %>% filter(issued_year == 2019) %>% pull(p_95) * 100`% or less open access articles. 
 
-```{r, fig.cap='Open access uptake in Elsevier hybrid journals per year in percent, visualised as diminutive distribution chart removing outliers at the top or bottom respectively. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume. However, many journals operating above average in terms of published open access articles were able to increase uptake rates over the years.'}
-a_plot <- perc_df %>%
-ggplot() +
-  geom_econodist(aes(x = factor(issued_year), ymin = p_10, median = median, ymax = p_90),
-         stat = "identity", show.legend = TRUE) +
-  scale_y_continuous(position = "right", 
-                     labels = scales::percent_format(accuracy = 1L),
-                    # expand = expansion(mult = c(0, 0.15)), 
-                     limits = c(0,max(perc_df$p_90) + 0.01)) +
-  coord_flip() +
-  labs(
-    x = NULL, y = NULL
-  ) +
-  theme_minimal(base_family = "Roboto") +
-  theme(panel.grid.minor = element_blank()) +
-  theme(axis.ticks = element_blank()) +
-  theme(panel.grid.major.y = element_blank()) +
-  theme(panel.border = element_blank()) 
-
-grid.newpage()
-left_align(a_plot, c("subtitle", "title", "caption")) %>% 
-  add_econodist_legend(econodist_legend_grob(family = "Roboto"), below = "subtitle") %>% 
-  grid.draw()  
-```
-
-alternative box plot presentation
 
 ```{r}
 ggplot(hybrid_oa_per_jn, aes(factor(issued_year), prop)) + 
-  geom_boxplot(outlier.shape = NA) + 
-  coord_cartesian(ylim=c(0,0.15))
-
+  geom_boxplot() + 
+  coord_cartesian(ylim=c(0,0.18)) +
+  theme_minimal_hgrid() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L),
+      expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "Publication Years",
+       y = "Open Access Uptake")
 # licenses used
 ```
+
+*Licenses used*
+
+```{r}
+# per year
+yrl_volume <- hybrid_oa_per_jn %>% 
+  group_by(issued_year) %>% 
+  summarise(articles = sum(articles))
+
+hybrid_license <- hybrid_volume %>%
+  filter(oa_archive == FALSE) %>%
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
+  group_by(cc_norm, issued_year) %>%
+  summarise(cc_articles = n())
+```
+
+Figure presents a breakdown by Creative Commons license variant used for hybrid open access by year. Elsevier provided commercial (cc-by) and a less permissive non-commercial license (cc-by-nc) for open access publishing in otherwise subscription-based journals. Nearly two-third of open access articles (`r  round(hybrid_license %>% group_by(cc_norm) %>% summarise(n = sum(cc_articles)) %>% mutate(prop = n / sum(n)) %>% filter(cc_norm == "cc-by-nc") %>% pull(prop) * 100,0)`%) can be re-used for non-commercial purposes. This proportion remained the same between 2015-19.
+
+```{r}
+hybrid_license %>%
+  ggplot(aes(factor(issued_year), cc_articles, fill = cc_norm, group = cc_norm)) +
+  geom_area(stat = "identity",
+            color = "white",
+            alpha = 0.8) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.05)),
+    labels = function(x)
+        format(x, big.mark = ",", scientific = FALSE),
+      breaks = scales::pretty_breaks()
+  ) +
+  scale_fill_manual(values = 
+                      c(`cc-by` = "#0093c7",
+  `cc-by-nc` = "#B52141")) +
+  labs(x = "Publication year", y = "Total OA articles") +
+  theme_minimal_hgrid() +
+  theme(legend.position = "top",
+        legend.justification = "right") +
+  guides(fill = guide_legend("Creative Commons license variant"))
+````
+
+*Relationship to full and delayed OA?*
 
 
 
