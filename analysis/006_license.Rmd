@@ -57,30 +57,30 @@ CREATE
 ```
 
 
-```{sql, connection=con}
-CREATE 
-    OR REPLACE TABLE `api-project-764811344545.cr_dump_march_20.els_hybrid_tagged` AS SELECT
-        cr.*,
-        els.oa_type 
-    FROM
-        `api-project-764811344545.cr_dump_march_20.cr_08_20_expanded` as cr 
-    INNER JOIN
-        `api-project-764811344545.cr_dump_march_20.elsevier_apc_list_30_May_20` as els 
-            ON cr.issn = els.issn 
-```
-
 Aggregate 
 
 ```{sql, connection=con, output.var = "license_agg"}
-SELECT 
-  REGEXP_REPLACE(license.URL, "http://|https://", "") as license_url,
-  issued_year,
-   oa_type,
-  COUNT(DISTINCT(doi)) as articles
-FROM `api-project-764811344545.cr_dump_march_20.els_all_may_20`, unnest(license) as license
-WHERE issued_year > 2014 and issued_year < 2020 AND license.content_version = 'vor'
-GROUP BY license_url, issued_year, oa_type
-ORDER BY issued_year DESC
+SELECT
+        REGEXP_REPLACE(license.URL,
+        "http://|https://",
+        "") as license_url,
+        issued_year,
+        oa_type,
+        COUNT(DISTINCT(doi)) as articles 
+    FROM
+        `api-project-764811344545.cr_dump_march_20.els_all_may_20`,
+        unnest(license) as license 
+    WHERE
+        issued_year > 2014 
+        and issued_year < 2020 
+        AND license.content_version = 'vor'         
+        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')       
+    GROUP BY
+        license_url,
+        issued_year,
+        oa_type 
+    ORDER BY
+        issued_year DESC
 ```
 
 ```{r}
@@ -121,8 +121,109 @@ full_oa_df <- license_by_year %>%
   mutate(type = "full_oa") %>%
   rename(articles = n) %>%
   select(-oa_type)
-bind_rows(cc_hybrid, els_user, full_oa_df) %>%
-  ggplot(aes(issued_year, articles, fill = license_code, group = license_code)) +
+license_growth_df <- bind_rows(cc_hybrid, els_user, full_oa_df) 
+
+ggplot(license_growth_df, aes(issued_year, articles, fill = license_code, group = license_code)) +
   geom_area() +
   facet_wrap(~type)
+```
+
+### relative 
+
+overall article volume elsevier
+
+```{sql, connection=con, output.var="els_yearly"}
+SELECT  issued_year,
+        COUNT(DISTINCT(doi)) as all_articles 
+    FROM
+        `api-project-764811344545.cr_dump_march_20.els_all_may_20`
+    WHERE
+        issued_year > 2014 
+        and issued_year < 2020        
+        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')       
+    GROUP BY
+        issued_year
+
+```
+
+```{r}
+year_per_oa_type_and_license <- inner_join(license_growth_df, els_yearly, by = "issued_year") %>%
+  mutate(prop = articles / all_articles) 
+# backup 
+write_csv(year_per_oa_type_and_license, here::here("data", "year_per_oa_type_and_license.csv"))
+```
+
+plots
+
+```{r}
+library(cowplot)
+p_1 <- year_per_oa_type_and_license %>%
+  mutate(type_plot = case_when(
+    type == "full_oa" ~ "Full OA",
+    type == "hybrid_immediate_articles" ~ "Hybrid OA",
+    type == "hybrid_delayed_articles" ~ "Delayed OA"
+  )) %>% 
+  mutate(type_plot = factor(type_plot, levels = c("Hybrid OA", "Full OA", "Delayed OA"))) %>%
+  ggplot(aes(gsub("20", "'", as.character(issued_year)), prop, fill = license_code, group = license_code)) +
+  geom_area(stat = "identity",
+            color = "white",
+            alpha = 0.8,
+            position = position_stack(reverse = T)) +
+  facet_grid(~type_plot) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.0005)),
+    labels = scales::percent_format(accuracy = 1L),
+    breaks = c(0, 0.02, 0.04, 0.06, 0.08)
+  ) +
+  scale_fill_manual(values = 
+                      c(`cc-by` = "#0093c7",
+                        `cc-by-nc` = "#B52141",
+                        `els-user` = "grey80")) +
+  labs(x = "Publication year", y = "OA Percentage") +
+  theme_minimal_hgrid() +
+  theme(legend.position = "top",
+        legend.justification = "right") +
+  guides(fill = guide_legend("Open content license"))
+p_1
+```
+
+overall
+
+```{r}
+p_2 <- year_per_oa_type_and_license %>%
+  mutate(type_plot = case_when(
+    type == "full_oa" ~ "Full OA",
+    type == "hybrid_immediate_articles" ~ "Hybrid OA",
+    type == "hybrid_delayed_articles" ~ "Delayed OA"
+  )) %>% 
+  mutate(type_plot = factor(type_plot, levels = c("Hybrid OA", "Full OA", "Delayed OA"))) %>%
+  group_by(type_plot) %>%
+  summarise(n = sum(articles)) %>%
+  ggplot(aes(x = "", y = n, fill = type_plot)) +
+  geom_bar(width = 1,
+           stat = "identity",
+           position = position_stack(reverse = TRUE),
+           color = "white") +
+  coord_flip() +
+  scale_y_continuous(labels = function(x) format(x, big.mark = ",", scientific = FALSE),
+                     limits = c(0, 400000)) +
+  scale_fill_brewer("OA Type", type = "qual", palette = "Set2") +
+  labs(x = NULL,
+       y = "Total OA Articles") +
+  theme_minimal_grid() +
+  theme(plot.margin = margin(30, 30, 30, 30)) +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.ticks = element_blank()) +
+  theme(panel.grid.major.y = element_blank()) +
+  theme(panel.border = element_blank()) +
+  theme(legend.position = "bottom",
+        legend.justification = "center")
+p_2
+```
+
+```{r fig.width = 6, fig.height = 12}
+cowplot::plot_grid(
+  p_1, p_2,
+  labels = "AUTO", ncol = 1
+)
 ```
