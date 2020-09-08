@@ -242,31 +242,70 @@ ind_summary_table <- ind_df %>%
   pivot_wider(names_from = issued_year, values_from = count)
 ```
 
-Overall, `r total_df$journals` hybrid journals provided immediate open access to `r total_df$oa_n` articles between 2015 and 2019. The total share of hybrid open access in the publication volume of Elsevier journals was `r total_df$oa_uptake * 100`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r ind_df %>% filter(issued_year == "2015") %>% pull(oa_n)` (2015) to `r ind_df %>% filter(issued_year == "2019") %>% pull(oa_n)` (2019). However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r ind_df %>% filter(issued_year == 2015) %>% pull(oa_uptake)`% (2015) to `r ind_df %>% filter(issued_year == 2019) %>% pull(oa_uptake)`% (2019), because the number of articles published also increased during this five-years period.
+Overall, `r total_df$journals` hybrid journals provided immediate open access to `r total_df$oa_n` articles between 2015 and 2019. The total share of hybrid open access in the Articles published of Elsevier journals was `r total_df$oa_uptake * 100`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r ind_df %>% filter(issued_year == "2015") %>% pull(oa_n)` (2015) to `r ind_df %>% filter(issued_year == "2019") %>% pull(oa_n)` (2019). However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r ind_df %>% filter(issued_year == 2015) %>% pull(oa_uptake)`% (2015) to `r ind_df %>% filter(issued_year == 2019) %>% pull(oa_uptake)`% (2019), because the number of articles published also increased during this five-years period.
 
 ```{r}
 table_descriptives_ind <- tribble(
   ~ind_group, ~ind, ~ind_name,
-  "Hybrid Journals with OA articles", "journals", "Journals",
-  "Publication Volume", "articles_n", "Articles",
-  "Publication Volume", "articles_mean", "Mean",
-  "Publication Volume", "articles_sd", "SD",
-  "OA Volume", "oa_n", "OA Articles",
-  "OA Volume", "oa_mean", "Mean per Journal",
-  "OA Volume", "oa_sd", "SD",
-  "OA Uptake (in%)", "oa_uptake", "OA Percentage",
-  "OA Uptake (in%)", "oa_uptake_mean", "Mean per Journal",
+  "Elsevier Hybrid Journals with OA article(s)", "journals", "Journals",
+  "Articles published", "articles_n", "Total",
+  "Articles published", "articles_mean", "Avg.",
+  "Articles published", "articles_sd", "SD",
+  "OA Articles published", "oa_n", "Total OA",
+  "OA Articles published", "oa_mean", "Avg.",
+  "OA Articles published", "oa_sd", "SD",
+  "OA Uptake (in%)", "oa_uptake", "Percentage",
+  "OA Uptake (in%)", "oa_uptake_mean", "Avg.",
   "OA Uptake (in%)", "oa_uptake_sd", "SD"
 )
 inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
   dplyr::select(-ind) %>%
   gt(rowname_col = "ind_name", groupname_col = "ind_group") %>%
-  fmt_number(contains("20"), decimals = 2) %>%
+  fmt_number(contains("20"), decimals = 1) %>%
   fmt_number(contains("20"), 
-             rows = c("Journals", "Articles", "OA Articles"),
+             rows = c("Total", "Total OA", "Journals"),
              decimals = 0) %>%
-  tab_style(cell_text(weight = "bold"),
-            locations = cells_row_groups()
+  tab_style(
+    style = cell_fill(
+      color = "grey90"
+    ),
+    locations = list(
+      cells_body(
+        columns = "2015-19"
+      ),
+      cells_column_labels(
+        columns = "2015-19"
+      )
+    )
+  ) %>%
+  tab_style(
+    style = cell_text(color = "black", weight = "bold"),
+    locations = list(
+      cells_column_labels(everything())
+    )
+  )  %>%
+   tab_style(
+    style = cell_text(color = "black", style = "italic"),
+    locations = list(
+      cells_row_groups())
+    ) %>%
+  cols_width(
+    2 ~ px(125),
+    3:7 ~ px(80),
+    8 ~ px(110)
+  ) %>%
+  tab_options(
+    row_group.border.top.width = px(3),
+    row_group.border.top.color = "white",
+    row_group.border.bottom.color = "black",
+    table_body.hlines.color = "white",
+    table.border.top.color = "white",
+    table.border.top.width = px(3),
+    table.border.bottom.color = "white",
+    table.border.bottom.width = px(3),
+    column_labels.border.bottom.color = "black",
+    column_labels.border.bottom.width = px(2),
+    stub.border.color = "white"
   )
 ```
 
