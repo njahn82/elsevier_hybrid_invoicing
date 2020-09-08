@@ -392,6 +392,19 @@ hybrid_license %>%
 
 *Relationship to full and delayed OA?*
 
+```{r}
+license_df <- readr::read_csv(here::here("data", "year_per_oa_type_and_license.csv"))
+summary_licenses <- 
+  license_df %>% 
+  group_by(type) %>% 
+  summarise(n = sum(articles)) %>%
+  mutate(prop = n / sum(n))
+```
 
+Next, we present a breakdown of open content licensed articles by open access type relative to Elsevier's journal productivity (Figure). In total, Elsevier provided open access to `r sum(summary_licenses$n)` articles at he time of our study, corresponding to an open access share of `r round(sum(summary_licenses$n) / license_df %>% distinct(all_articles) %>% pull(all_articles) %>% sum() * 100, 0)`%. Hybrid open access had the lowest proportion (`r round(filter(summary_licenses, type == "hybrid_immediate_articles") %>% pull(prop) * 100)`), while over half of open access articles were made freely available after an embargo period (`r round(filter(summary_licenses, type == "hybrid_delayed_articles") %>% pull(prop) * 100, 0)`%) (Figure A). `r round(filter(summary_licenses, type == "full_oa") %>% pull(prop) * 100)`% of open access articles appeared in full open access journals.
 
+```{r}
+knitr::include_graphics(here::here("figure", "license_portfolio.png"))
+```
+Figure B presents a breakdown of open content licensed articles by open access type and year relative to the total publication volume published in Elsevier journals between 2015-19. In addition to Creative Commons licenses, Elsevier also published delayed open access under an Elsevier user license (els-user), which prohibits re-use for commercial purposes. The license is mainly used by journals participating in Elsevier's open archive program comprising around 140 journals that make provide free access to published articles after an embargo period ranging between 12 months and 48 months. Figure reveals that about half of open access articles were made available under the Elsevier user license. The minority of open access articles can be re-used for commercial purposes (`r round(license_df %>% group_by(license_code) %>% summarise(n = sum(articles)) %>% mutate(prop = n / sum(n)) %>% filter(license_code == "cc-by") %>% pull(prop) * 100, 0)`% of open access articles under an CC-BY license). Hybrid open access had the highest proportion of openly available articles under a CC-BY licenses. 
 

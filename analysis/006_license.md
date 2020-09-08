@@ -193,17 +193,16 @@ p_2 <- year_per_oa_type_and_license %>%
   theme(panel.grid.major.y = element_blank()) +
   theme(panel.border = element_blank()) +
   theme(legend.position = "bottom",
-        legend.justification = "center")
+        legend.justification = "right")
 p_2
 ```
 
 <img src="006_license_files/figure-gfm/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
 
 ``` r
-cowplot::plot_grid(
+p <- cowplot::plot_grid(
   p_1, p_2,
   labels = "AUTO", ncol = 1
 )
+ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300)
 ```
-
-<img src="006_license_files/figure-gfm/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" />
