@@ -168,7 +168,8 @@ eligible_jns <- hybrid_df %>%
 hybrid_volume <- els_pub_volume %>%
   filter(issn %in% eligible_jns$issn) %>%
   inner_join(hybrid_df, by = c("issn", "issued_year")) %>%
-  filter(oa_archive == FALSE)
+  filter(oa_archive == FALSE) %>%
+  filter(!grepl("^S", page))
 # backup 
 write_csv(hybrid_volume, here::here("data", "hybrid_volume_eligible.csv"))
 
@@ -408,3 +409,38 @@ knitr::include_graphics(here::here("figure", "license_portfolio.png"))
 ```
 Figure B presents a breakdown of open content licensed articles by open access type and year relative to the total publication volume published in Elsevier journals between 2015-19. In addition to Creative Commons licenses, Elsevier also published delayed open access under an Elsevier user license (els-user), which prohibits re-use for commercial purposes. The license is mainly used by journals participating in Elsevier's open archive program comprising around 140 journals that make provide free access to published articles after an embargo period ranging between 12 months and 48 months. Figure reveals that about half of open access articles were made available under the Elsevier user license. The minority of open access articles can be re-used for commercial purposes (`r round(license_df %>% group_by(license_code) %>% summarise(n = sum(articles)) %>% mutate(prop = n / sum(n)) %>% filter(license_code == "cc-by") %>% pull(prop) * 100, 0)`% of open access articles under an CC-BY license). Hybrid open access had the highest proportion of openly available articles under a CC-BY licenses. 
 
+
+## invoicing
+
+```{r}
+sponsored_articles <- hybrid_volume %>%
+  mutate(oa_sponsor_type = ifelse(is.na(oa_sponsor_type), "unknown", oa_sponsor_type)) %>%
+  mutate(oa_sponsor_type = recode(oa_sponsor_type, 
+                                  `FundingBody` = "Agreement",
+                                  `ElsevierWaived` = "Fee Waived")) %>%
+  mutate(fct_source = fct_infreq(oa_sponsor_type)) %>%
+  mutate(fct_source = fct_lump(fct_source, prop = 0.05)) %>%
+  count(issued_year, fct_source)
+all_articles <- hybrid_df %>%
+  group_by(issued_year) %>%
+  summarise(n = n())
+
+ggplot(sponsored_articles, aes(x = gsub("20", "", issued_year), y = n)) +
+  geom_bar(
+    data = all_articles,
+    aes(fill = "All hybrid open access articles"),
+    color = "transparent",
+    stat = "identity"
+  ) +
+  geom_bar(aes(fill = "by invoicing type"), color = "transparent", stat = "identity") +
+  facet_wrap( ~ fct_source, nrow = 1) +
+  scale_fill_manual(values = c("#b3b3b3a0", "#56B4E9"), name = "") +
+  labs(x = NULL, y = NULL) + 
+  scale_y_continuous(labels = scales::number_format(big.mark = " ")) +
+  theme_minimal(base_family="Roboto", base_size = 12) +
+  theme(panel.grid.minor=element_blank()) +
+  theme(axis.ticks=element_blank()) +
+  theme(panel.grid.major.x=element_blank()) +
+  theme(panel.border=element_blank()) +
+  theme(legend.position="top", legend.justification = "right")
+```

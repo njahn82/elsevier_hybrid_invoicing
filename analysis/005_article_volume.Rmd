@@ -103,6 +103,39 @@ backup
 write_csv(article_volume_para, here::here("data", "article_volume_para.csv"))
 ```
 
+### Article volume regular issues excluding paratext 
+
+```{sql, connection = "con", output.var = "article_volume_regular"}
+    SELECT
+        issued_year,
+        issn,
+        count(distinct(doi)) as articles          
+    FROM
+        `api-project-764811344545.cr_dump_march_20.els_hybrid_cr`           
+    WHERE
+        issued_year > 2014          
+        and issued_year < 2020              
+        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')          
+        AND NOT regexp_contains(page, '^S')     
+    GROUP BY
+        issued_year,
+        issn
+```
+
+How many articles by year?
+
+```{r}
+article_volume_regular %>%
+  group_by(issued_year) %>%
+  summarise(articles = sum(articles)) 
+```
+
+backup
+
+```{r}
+write_csv(article_volume_para, here::here("data", "article_volume_para_regular.csv"))
+```
+
 ### Article volume with at least one reference per journal and year
 
 ```{sql, connection = "con", output.var = "ref_article_volume"}
