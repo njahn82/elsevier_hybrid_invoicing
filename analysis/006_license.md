@@ -184,7 +184,7 @@ p_2 <- year_per_oa_type_and_license %>%
            color = "white") +
   coord_flip() +
   scale_y_continuous(labels = function(x) format(x, big.mark = ",", scientific = FALSE),
-                     limits = c(0, 400000)) +
+                     limits = c(0, 350000)) +
   scale_fill_brewer("OA Type", type = "qual", palette = "Set2") +
   labs(x = NULL,
        y = "Total OA Articles") +
@@ -206,5 +206,5 @@ p <- cowplot::plot_grid(
   p_1, p_2,
   labels = "AUTO", ncol = 1
 )
-ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300)
+ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300, width = 6, height = 6)
 ```
