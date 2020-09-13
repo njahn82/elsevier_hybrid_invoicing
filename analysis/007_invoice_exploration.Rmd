@@ -1,6 +1,6 @@
 ---
 title: "invoice analysis"
-output: github_document
+output: html_document
 ---
 
 ```{r, setup, echo=FALSE}
@@ -55,9 +55,8 @@ all_articles <- hybrid_volume %>%
   summarise(n = n())
 ```
 
-In most cases, Elsevier sent invoices for hybrid open access publication fees to individual authors (`r round(hybrid_volume %>% filter(oa_sponsor_type == "Author") %>% nrow() / nrow(hybrid_volume) * 100, 0)`%). For around `r round(hybrid_volume %>% filter(oa_sponsor_type == "FundingBody") %>% nrow() / nrow(hybrid_volume) * 100, 0)`% of articles, the publisher directly billed funders and research organisations. The proportion of open access articles where Elsevier granted publication fee waivers was `r round(hybrid_volume %>% filter(oa_sponsor_type == "ElsevierWaived") %>% nrow() / nrow(hybrid_volume) * 100, 0)`%.
+To examine the funding structure for open access articles, we text-mined spending metadata from open access full-texts. Figure @ref(fig:invoiceoverview) shows the annual development per invoicing type. Each type is visualised separately as parts of the total. The grey areas show the overall yearly distribution of open access articles in hybrid journals, and the proportion of each invoicing type is highlighted in blue. The figure illustrates a general growth of open access articles in hybrid journals. This development was mainly driven by billing individual authors, while central invoicing stagnated. Also, the number of fee-waived articles remained more or less constant from 2015 to date. In most cases, Elsevier charged individual authors (`r round(hybrid_volume %>% filter(oa_sponsor_type == "Author") %>% nrow() / nrow(hybrid_volume) * 100, 0)`%). Invoices addressed to funders and research organizations accounted for `r round(hybrid_volume %>% filter(oa_sponsor_type == "FundingBody") %>% nrow() / nrow(hybrid_volume) * 100, 0)`% of articles. The proportion of open access articles with publication fee waivers was `r round(hybrid_volume %>% filter(oa_sponsor_type == "ElsevierWaived") %>% nrow() / nrow(hybrid_volume) * 100, 0)`%.
 
-Figure \@ref(fig:invoiceoverview) shows the annual development per invoicing type. Each type is visualised separately as parts of the total. The grey areas show the overall yearly distribution of open access articles in hybrid journals, and the proportion of each invoicing type is highlighted in blue, The figure reveals a general growth of open access articles in hybrid journals. It illustrates that this development was mainly driven by billing individual authors, while central invoicing stagnated. Also, the amount of fee-waived articles remained more or less constant from 2015 to date.
 
 ```{r invoiceoverview, fig.cap="Development of fee-based open access publishing in Elsevier hybrid journals by invoicing type. Colored bars represent the invoice recipient, or whether the fee was waived. Grey bars show the total number of hybrid open access articles published in Elsevier journals from 2015 to date."}
 # plot
@@ -77,12 +76,47 @@ ggplot(sponsored_articles, aes(x = gsub("20", "'", issued_year), y = n)) +
   theme(legend.position="top", legend.justification = "right")
 ```
 
+```{r}
+# invoicing analysis
+library(googlesheets4)
+tt <- read_sheet("https://docs.google.com/spreadsheets/d/1AqjCLn6VNGJpQ6zdmFSwuhFsDBIITSxijA0r0WLJZTQ/", sheet = 2)
+```
+
+```{r}
+hybrid_invoice <- hybrid_volume %>%
+  filter(oa_sponsor_type == "FundingBody") %>%
+  rename(yrl_volume = articles) %>%
+  left_join(tt, by = c("oa_sponsor_name")) %>%
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc"))
+
+sponsor_country <- hybrid_invoice %>%
+  mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
+  mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
+  group_by(country_factor) %>%
+  summarise(n = n_distinct(doi)) %>%
+  mutate(prop = n / sum(n))
+```
+
+Figure presents a breakdown by country, highlighting the dominating role of a few countries. Not surprisingly, mostly British funders paid for hybrid open access in Elsevier hybrid journals (`r round(sponsor_country %>% filter(country_factor == "United Kingdom") %>% pull(prop) * 100, 0)`%), followed by funding bodies from the European Commission (`r round(sponsor_country %>% filter(country_factor == "Multinational") %>% pull(prop) * 100, 0)`%) and the Netherlands (`r round(sponsor_country %>% filter(country_factor == "The Netherlands") %>% pull(prop) * 100, 0)`%). In the latter case, invoices for individual open access articles were not send to research funders, but to the Dutch VSNU, a consortium  of Universities in the Netherlands that has negotiated agreements with Elsevier since 2016. The prominent role of Norway can be also explained by a national deal, which started in 2019. US-based open access sponsors originated mainly from the Bill & Melinda Gates Foundation (n = `r hybrid_invoice %>% filter(oa_sponsor_name == "Bill & Melinda Gates Foundation") %>% distinct(doi) %>% nrow()`).
+
+```{r}
+sponsor_country %>%
+  mutate(country_factor = fct_reorder(country_factor, n)) %>%
+  mutate(country_factor = forcats::fct_relevel(country_factor, "Other", after = 0L)
+) %>%
+  ggplot(aes(country_factor, n)) +
+  geom_bar(stat = "identity", fill = "#56B4E9") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(y = "Number of invoiced OA articles", x = NULL)
+```
 
 
 ```{r}
 cc_invoice <- hybrid_volume %>%
   mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
-   mutate(oa_sponsor_type = ifelse(is.na(oa_sponsor_type), "unknown", oa_sponsor_type)) %>%
+  mutate(oa_sponsor_type = ifelse(is.na(oa_sponsor_type), "unknown", oa_sponsor_type)) %>%
   mutate(oa_sponsor_type = recode(oa_sponsor_type, 
                                   `FundingBody` = "Agreement",
                                   `ElsevierWaived` = "Fee Waived")) %>%
@@ -105,7 +139,7 @@ license_count <- inner_join(cc_invoice_type, cc_norm_all, by =  "cc_norm") %>% m
 license_summary_count <- inner_join(cc_invoice_type, cc_type_all, by =  "fct_source") %>% mutate(prop = n / all)
 ```
 
-In terms of re-use, the type of invoicing is strongly related to whether the open content license permits commercial adaption or not (see figure). Although most open access articles published in Elsevier's hybrid journals were billed to authors directly, centrally invoiced articles accounted for the largest share of articles under an CC BY licenses (`r round(filter(license_count, fct_source == "Agreement", cc_norm == "cc-by") %>% pull(prop) * 100, 0)`%). Consequently, `r round(filter(license_summary_count, fct_source == "Agreement", cc_norm == "cc-by") %>% pull(prop) * 100, 0)`% of centrally invoiced articles permits commercial adaption.
+In terms of licensing, the type of invoicing is strongly related to whether the open content license permits commercial adaption or not (see figure). Although most open access articles published in Elsevier's hybrid journals were billed to authors directly, centrally invoiced articles accounted for the largest share of articles under an CC BY licenses (`r round(filter(license_count, fct_source == "Agreement", cc_norm == "cc-by") %>% pull(prop) * 100, 0)`%). 
 
 ```{r}
 ggplot(cc_invoice, aes(factor(issued_year), n, fill = fct_source, group = fct_source)) +
@@ -129,39 +163,142 @@ ggplot(cc_invoice, aes(factor(issued_year), n, fill = fct_source, group = fct_so
 ```
 
 
+Examining funders and research organisations that were invoiced directly by  Elsevier, strongly suggests that a few funders with a strict CC-BY policy have contributed to the dominance of CC-BY license. Table presents the Top 10 out of `r length(unique(hybrid_invoice$oa_sponsor_name))` sponsoring bodies in terms of funded open access articles between 2015.19. Together, these funders accounted for around 80% of central payments. The table furthermore shows the number of distinct journals and the share of CC-BY licensed articles. Notably, UK-based research funders and the Bill & Melinda Gates Foundation sponsored mainly articles that were published under a CC-BY license. On the contrary, articles funded by the Dutch VSNU, the European Research Council and Norway Institutes had a much lower proportion. In fact, the Dutch and Norwegian agreements allowed authors to decide whether to publish under an CC-BY or CC-BY-ND license, while the UK-based funders had a CC-BY licensing policy.
+
+
+```{r opapc}
+# openapc
+u <-
+  "https://raw.githubusercontent.com/OpenAPC/openapc-de/master/data/apc_de.csv"
+o_apc <- readr::read_csv(u)
+#'
+#' We also would like to add data from transformative aggrements, which is also
+#' collected by the Open APC Initiative.
+#' The transformative agreements data-set does not include pricing information.
+#'
+oa_trans <-
+  readr::read_csv(
+    "https://raw.githubusercontent.com/OpenAPC/openapc-de/master/data/transformative_agreements/transformative_agreements.csv"
+  )
+oapc <- oa_trans %>%
+  bind_rows(o_apc) 
+hybrid_invoice <- hybrid_invoice %>%
+  mutate(in_open_apc = tolower(doi) %in% tolower(o_apc$doi))
+  
+```
+
 
 ```{r}
-# invoicing analysis
-library(googlesheets4)
-tt <- read_sheet("https://docs.google.com/spreadsheets/d/1AqjCLn6VNGJpQ6zdmFSwuhFsDBIITSxijA0r0WLJZTQ/", sheet = 2)
+hybrid_invoice_tt <- hybrid_invoice %>%
+  mutate(oa_sponsor = ifelse(is.na(oa_sponsor_name), "Other", oa_sponsor_name)) %>%
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
+  mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
+  mutate(in_open_apc = tolower(doi) %in% tolower(o_apc$doi))
+hybrid_invoice_agg_general <- hybrid_invoice_tt %>%
+ group_by(oa_sponsor) %>%
+  summarise(journals = n_distinct(issn),
+            articles = n_distinct(doi)) %>%
+  mutate(prop = articles / sum(articles))
+hybrid_invoice_agg_cc <- hybrid_invoice_tt %>%
+  ungroup() %>%
+  filter(cc_norm == "cc-by") %>%
+  group_by(oa_sponsor) %>%
+  summarise(cc_by = n_distinct(doi)) 
+hybrid_invoice_agg_oapc <- hybrid_invoice_tt %>%
+  filter(in_open_apc == TRUE) %>%
+  group_by(oa_sponsor) %>%
+  summarise(in_open_apc =  n_distinct(doi))
+ind_sponsor_df <- left_join(hybrid_invoice_agg_general, hybrid_invoice_agg_cc, by = "oa_sponsor") %>%
+  left_join(hybrid_invoice_agg_oapc, by = "oa_sponsor") %>%
+  mutate(cc_by = cc_by / articles,
+         in_open_apc = ifelse(is.na(in_open_apc), 0, in_open_apc),
+         in_open_apc = in_open_apc / articles) %>% 
+  mutate(oa_sponsor = fct_reorder(oa_sponsor, articles)) %>%
+  mutate(oa_sponsor = forcats::fct_relevel(oa_sponsor, "Other", after = 0L)) %>% arrange(desc(oa_sponsor))
+# overall
+overall_ind_sponsor_df <- tibble(oa_sponsor = "All", journals = length(unique(hybrid_invoice$issn)), articles = length(unique(hybrid_invoice$doi)), prop = 1, cc_by = filter(hybrid_invoice, cc_norm == "cc-by") %>% nrow() / length(unique(hybrid_invoice$doi)), in_open_apc = filter(hybrid_invoice, in_open_apc == TRUE) %>% nrow() / length(unique(hybrid_invoice$doi)))
+
+
+ind_sponsor_df %>%
+  bind_rows(overall_ind_sponsor_df) %>%
+  gt::gt() %>%
+  gt::cols_label(oa_sponsor = "OA Sponsor",
+    journals = "Journals",
+    articles = "Articles",
+    prop = "%",
+    cc_by = "CC-BY",
+    in_open_apc = "OAPC") %>%
+  tab_footnote(
+     cells_body(
+     columns = vars(oa_sponsor),
+     rows = oa_sponsor %in% c("VSNU", "Norway Institutes")
+     ),
+    footnote = "Transformative Agreements") %>%
+  tab_style(
+    style = cell_text(color = "black", weight = "bold"),
+    locations = list(
+      cells_column_labels(everything())
+    )) %>%
+  fmt_number(
+    columns = vars(journals, articles),
+    decimals = 0
+  ) %>%
+  fmt_percent(
+    columns = vars(prop, cc_by, in_open_apc),
+    decimals = 0)  %>%
+  cols_width(
+    2:6 ~ px(80)) %>%
+    gt::cols_align(
+    align = "right",
+    columns = 2:6
+  ) %>%
+    gt::cols_align(
+    align = "left",
+    columns = 1
+  ) %>%
+  data_color(
+    columns =5:6,
+    colors = scales::col_numeric(
+      # custom defined values - notice that order matters!
+      palette = c("#fcde9c","#faa476","#f0746e","#e34f6f","#dc3977","#b9257a","#7c1d6f"),
+      domain = NULL
+    )
+  ) %>%
+  tab_spanner(
+    label = md("**Compliance**"),
+    columns = 5:6
+  ) %>% 
+  tab_style(
+    style = cell_borders(
+      sides = "top",
+      color = "black",
+      weight = px(2)
+    ),
+    locations = cells_body(
+      columns = everything(),
+      rows = oa_sponsor == "All"
+    )
+  ) %>%
+   tab_options(
+    column_labels.border.top.color = "white",
+    column_labels.border.top.width = px(3),
+    column_labels.border.bottom.color = "black",
+    table_body.hlines.color = "white",
+    table.border.bottom.color = "white",
+    table.border.bottom.width = px(3)
+      )
 ```
 
 ```{r}
-hybrid_invoice <- hybrid_volume %>%
-  filter(oa_sponsor_type == "FundingBody") %>%
-  rename(yrl_volume = articles) %>%
-  left_join(tt, by = c("oa_sponsor_name"))
-
-sponsor_country <- hybrid_invoice %>%
-  mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
-  mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
-  group_by(country_factor) %>%
-  summarise(n = n_distinct(doi)) %>%
-  mutate(prop = n / sum(n))
+o_apc_ind <- hybrid_volume %>% 
+  filter(oa_sponsor_type != "FundingBody") %>%
+   mutate(in_open_apc = tolower(doi) %in% tolower(o_apc$doi)) %>%
+  group_by(in_open_apc) %>%
+  summarise(n = n_distinct(doi))
 ```
+  
+As another variable, the table highlights the proportion of public disclosure of funding through the Open APC initiative. The Open APC Initiative disclosed more than one-third of centrally invoiced articles (`r round( filter(hybrid_invoice, in_open_apc == TRUE) %>% nrow() / length(unique(hybrid_invoice$doi)) * 100, 0)`%), but also publication fees that were billed to authors directly (n = `r filter(o_apc_ind, in_open_apc == TRUE) %>% pull(n)`). This indicates that authors were able to make use of other types of institutional support structures for publication fees such as publication funds.
 
-Next, we examined funders and research organisations that were invoiced directly by Elsevier. In total, we were able to identify `r length(unique(hybrid_invoice$oa_sponsor_name))` sponsoring bodies. Figure presents a breakdown by country, highlighting the dominating role of a few countries. Not surprisingly, mostly British funders paid for hybrid open access in Elsevier hybrid journals (`r round(sponsor_country %>% filter(country_factor == "United Kingdom") %>% pull(prop) * 100, 0)`%), followed by funding bodies from the European Commission (`r round(sponsor_country %>% filter(country_factor == "Multinational") %>% pull(prop) * 100, 0)`%) and the Netherlands (`r round(sponsor_country %>% filter(country_factor == "The Netherlands") %>% pull(prop) * 100, 0)`%). In the latter case, invoices for individual open access articles were not send to research funders, but to the Dutch VSNU, a consortium  of Universities in the Netherlands that has negotiated agreements with Elsevier since 2016. The prominent role of Norway can be also explained by a national deal, which started in 2019. US-based open access sponsors originated mainly from the Bill & Melinda Gates Foundation (n = `r hybrid_invoice %>% filter(oa_sponsor_name == "Bill & Melinda Gates Foundation") %>% distinct(doi) %>% nrow()`).
 
-```{r}
-sponsor_country %>%
-  mutate(country_factor = fct_reorder(country_factor, n)) %>%
-  mutate(country_factor = forcats::fct_relevel(country_factor, "Other", after = 0L)
-) %>%
-  ggplot(aes(country_factor, n)) +
-  geom_bar(stat = "identity", fill = "#56B4E9") +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
-  coord_flip() +
-  theme_minimal_vgrid() +
-  labs(y = "Number of invoiced OA articles", x = NULL)
-```
+x
 
