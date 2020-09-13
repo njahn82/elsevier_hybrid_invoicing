@@ -1,18 +1,16 @@
 
-## Results
-
 ### Uptake
 
-#### How many Elsevier journals supported the hybrid model?
+#### Elseviers open access journal portfolio
 
-Using text-mined data from web-archived Elsevier APC pricing lists
-(Matthias 2020), we were able to determine the evolution of Elsevier’s
-open access journal portfolio. Figure shows that the majority of
-journals were hybrid journals. Overall, Elsevier published 2,955 open
-access journals, of which 2,238 supported the hybrid model.
+*How many Elsevier journals supported the hybrid model?*
 
-Elsevier’s journal portfolio changed over the period of observation. The
-number of hybrid journals grew by 255 journals between 2015 and May
+Drawing on web-archived Elsevier APC pricing lists (Matthias 2020), we
+determined the evolution of Elsevier’s open access journal portfolio.
+Figure shows that the majority of journals were hybrid journals:
+Elsevier published a total of 2,955 open access journals, of which 2,238
+supported the hybrid model. Elsevier’s journal portfolio hardly changed.
+The number of hybrid journals grew by 255 journals between 2015 and May
 2020, while its proportion relative to Elsevier’s overall journal
 portfolio slightly decreased from 86% to 85%. The year 2016 marked the
 highest number of journals. After that, the trend reversed. Since 2018,
@@ -20,24 +18,39 @@ the number of journals stagnated. On 23 May 2020, Elsevier APC pricing
 list comprised 2,339 journals, of which 1,982 supported the hybrid
 model, representing a share of 85%.
 
-<img src="results_files/figure-gfm/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
 
-#### How many of hybrid journals flipped to fully open access?
+<img src="results_files/figure-gfm/unnamed-chunk-4-1.png" alt="Longitudinal development of Elsevier's journal portfolio by open access business model. The figure distinguishes between fully open access journals that provide immediate open access to all articles and the hybrid model. Data obtained from Elsevier APC pricing lists (Matthias 2020)." width="70%" />
+
+<p class="caption">
+
+Longitudinal development of Elsevier’s journal portfolio by open access
+business model. The figure distinguishes between fully open access
+journals that provide immediate open access to all articles and the
+hybrid model. Data obtained from Elsevier APC pricing lists (Matthias
+2020).
+
+</p>
+
+</div>
+
+*How many of hybrid journals flipped to fully open access?*
 
 Following the approach of our earlier study (Matthias, Jahn, and Laakso
-2019), we started with APC pricing list information to determine the
-number of open access business model flips between 2015-2020. Although
-the transition from hybrid to a fully open access business model has
-drawn most attention, also the reverse can be observed. A total number
-of 50 journals changed the business model under the ownership of
-Elsevier. Of these, 38 journals flipped to fully open access, while 12
-changed to hybrid open access. Examples for such reverse flipped open
-access journals include the physical journal *Materials Today* and the
-life science journal *Meta Gene*.
+2019), we draw on historic APC pricing lists to determine the number of
+open access business model flips since 2015. Although the transition
+from hybrid to a fully open access business model has drawn most
+attention, also the reverse can be observed. A total number of 50
+journals changed the business model under the ownership of Elsevier. Of
+these, 38 journals flipped to fully open access, while 12 changed to
+hybrid open access. Examples for such reverse flipped open access
+journals include the physical journal *Materials Today* and the life
+science journal *Meta Gene*.
 
-#### What is the uptake of open access in Elsevier’s current hybrid journal portfolio?
+#### Open Access Uptake
 
-*Number and percentage of journals with at least one article*
+*What is the uptake of open access in Elsevier’s current hybrid journal
+portfolio?*
 
 To determine the number of Elsevier hybrid journals with at least one
 open access article, we focused on the most current version of
@@ -50,29 +63,23 @@ delay, which we determined from mined full-text metadata. Because
 Elsevier also issued DOIs to non-scholarly journal content including
 table of contents and list of reviewers, we excluded these records using
 Unpaywall’s paratext recognition approach.\[1\] They account for about
-2.5% of DOIs registered by Crossref.
+2.5% of DOIs registered by Crossref. Moreover, we focused on articles
+published in regular issues.
 
 On 23 May 2020, Elsevier APC pricing list comprised 1,982 journals that
 supported the hybrid model. Of those, 1,765 hybrid journals published at
 least one open access article under a Creative Commons license between
 2015 and 2019, corresponding to about 89% of journal titles in
-Elsevier’s hybrid journal portfolio. At the same time, 11% of hybrid
-journals did not published an open access article.
-
-*Number and percentage of immediate open access articles per hybrid
-journal*
-
-Overall, 1,765 hybrid journals provided immediate open access to 85,185
-articles between 2015 and 2019. The total share of hybrid open access in
-the publication volume of Elsevier journals was 3.2%. Table present the
-high-level findings by year, illustrating a moderate growth in hybrid
-open access. Although the number of hybrid journals with at least one
-open access article remained somehow constant, the number of open access
-articles rose substantially from 13,308 (2015) to 21,873 (2019).
-However, the overall uptake of open access in Elsevier’s hybrid journal
-portfolio grew slowly from 2.8% (2015) to 3.7% (2019), because the
-number of articles published also increased during this five-years
-period.
+Elsevier’s hybrid journal portfolio. These journals published a total
+of 71,930 immediate open access articles between 2015 and 2019,
+corresponding to a share of 2.9%. Table present the high-level findings
+by year, illustrating a moderate growth in hybrid open access. Although
+the number of hybrid journals with at least one open access article
+remained somehow constant, the number of open access articles rose
+substantially from 10,678 in 2015 to 19,345 in 2019. However, the
+overall uptake of open access in Elsevier’s hybrid journal portfolio
+grew slowly from 2.4% to 3.4%, because the number of articles published
+also increased during this five-years period.
 
 <!--html_preserve-->
 
@@ -80,7 +87,7 @@ period.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qoiyrsakbs .gt_table {
+#ludtkpulia .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -92,20 +99,20 @@ period.
   background-color: #FFFFFF;
   width: auto;
   border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
+  border-top-width: 3px;
+  border-top-color: white;
   border-right-style: none;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
   border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
+  border-bottom-width: 3px;
+  border-bottom-color: white;
   border-left-style: none;
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_heading {
+#ludtkpulia .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -117,7 +124,7 @@ period.
   border-right-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_title {
+#ludtkpulia .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -127,7 +134,7 @@ period.
   border-bottom-width: 0;
 }
 
-#qoiyrsakbs .gt_subtitle {
+#ludtkpulia .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -137,19 +144,19 @@ period.
   border-top-width: 0;
 }
 
-#qoiyrsakbs .gt_bottom_border {
+#ludtkpulia .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_col_headings {
+#ludtkpulia .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: black;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -158,7 +165,7 @@ period.
   border-right-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_col_heading {
+#ludtkpulia .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -178,7 +185,7 @@ period.
   overflow-x: hidden;
 }
 
-#qoiyrsakbs .gt_column_spanner_outer {
+#ludtkpulia .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -190,18 +197,18 @@ period.
   padding-right: 4px;
 }
 
-#qoiyrsakbs .gt_column_spanner_outer:first-child {
+#ludtkpulia .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qoiyrsakbs .gt_column_spanner_outer:last-child {
+#ludtkpulia .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qoiyrsakbs .gt_column_spanner {
+#ludtkpulia .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: black;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 6px;
@@ -210,7 +217,1116 @@ period.
   width: 100%;
 }
 
-#qoiyrsakbs .gt_group_heading {
+#ludtkpulia .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ludtkpulia .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  vertical-align: middle;
+}
+
+#ludtkpulia .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ludtkpulia .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ludtkpulia .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: white;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ludtkpulia .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: white;
+  padding-left: 12px;
+}
+
+#ludtkpulia .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ludtkpulia .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ludtkpulia .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ludtkpulia .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ludtkpulia .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ludtkpulia .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ludtkpulia .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ludtkpulia .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ludtkpulia .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ludtkpulia .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ludtkpulia .gt_left {
+  text-align: left;
+}
+
+#ludtkpulia .gt_center {
+  text-align: center;
+}
+
+#ludtkpulia .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ludtkpulia .gt_font_normal {
+  font-weight: normal;
+}
+
+#ludtkpulia .gt_font_bold {
+  font-weight: bold;
+}
+
+#ludtkpulia .gt_font_italic {
+  font-style: italic;
+}
+
+#ludtkpulia .gt_super {
+  font-size: 65%;
+}
+
+#ludtkpulia .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+
+<div id="ludtkpulia" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+
+<table class="gt_table" style="table-layout: fixed;; width: 0px">
+
+<colgroup>
+
+<col style="width:125px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:110px;"/>
+
+</colgroup>
+
+<thead class="gt_col_headings">
+
+<tr>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">
+
+</th>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: black; font-weight: bold;">
+
+2015
+
+</th>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: black; font-weight: bold;">
+
+2016
+
+</th>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: black; font-weight: bold;">
+
+2017
+
+</th>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: black; font-weight: bold;">
+
+2018
+
+</th>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: black; font-weight: bold;">
+
+2019
+
+</th>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="background-color: #E5E5E5; color: black; font-weight: bold;">
+
+2015-19
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody class="gt_table_body">
+
+<tr class="gt_group_heading_row">
+
+<td colspan="7" class="gt_group_heading" style="color: black; font-style: italic;">
+
+Elsevier Hybrid Journals with OA article(s)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Journals
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,317
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,371
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,410
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,507
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,607
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+1,765
+
+</td>
+
+</tr>
+
+<tr class="gt_group_heading_row">
+
+<td colspan="7" class="gt_group_heading" style="color: black; font-style: italic;">
+
+Articles published
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Total
+
+</td>
+
+<td class="gt_row gt_right">
+
+440,019
+
+</td>
+
+<td class="gt_row gt_right">
+
+463,369
+
+</td>
+
+<td class="gt_row gt_right">
+
+480,365
+
+</td>
+
+<td class="gt_row gt_right">
+
+517,727
+
+</td>
+
+<td class="gt_row gt_right">
+
+567,670
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+2,469,150
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Avg.
+
+</td>
+
+<td class="gt_row gt_right">
+
+334.1
+
+</td>
+
+<td class="gt_row gt_right">
+
+338.0
+
+</td>
+
+<td class="gt_row gt_right">
+
+340.7
+
+</td>
+
+<td class="gt_row gt_right">
+
+343.5
+
+</td>
+
+<td class="gt_row gt_right">
+
+353.2
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+342.4
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+SD
+
+</td>
+
+<td class="gt_row gt_right">
+
+448.8
+
+</td>
+
+<td class="gt_row gt_right">
+
+471.7
+
+</td>
+
+<td class="gt_row gt_right">
+
+487.2
+
+</td>
+
+<td class="gt_row gt_right">
+
+508.9
+
+</td>
+
+<td class="gt_row gt_right">
+
+540.0
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+494.4
+
+</td>
+
+</tr>
+
+<tr class="gt_group_heading_row">
+
+<td colspan="7" class="gt_group_heading" style="color: black; font-style: italic;">
+
+OA Articles published
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Total OA
+
+</td>
+
+<td class="gt_row gt_right">
+
+10,678
+
+</td>
+
+<td class="gt_row gt_right">
+
+12,829
+
+</td>
+
+<td class="gt_row gt_right">
+
+13,434
+
+</td>
+
+<td class="gt_row gt_right">
+
+15,644
+
+</td>
+
+<td class="gt_row gt_right">
+
+19,345
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+71,930
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Avg.
+
+</td>
+
+<td class="gt_row gt_right">
+
+8.1
+
+</td>
+
+<td class="gt_row gt_right">
+
+9.4
+
+</td>
+
+<td class="gt_row gt_right">
+
+9.5
+
+</td>
+
+<td class="gt_row gt_right">
+
+10.4
+
+</td>
+
+<td class="gt_row gt_right">
+
+12.0
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+40.8
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+SD
+
+</td>
+
+<td class="gt_row gt_right">
+
+13.0
+
+</td>
+
+<td class="gt_row gt_right">
+
+19.7
+
+</td>
+
+<td class="gt_row gt_right">
+
+15.6
+
+</td>
+
+<td class="gt_row gt_right">
+
+16.3
+
+</td>
+
+<td class="gt_row gt_right">
+
+20.0
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+68.8
+
+</td>
+
+</tr>
+
+<tr class="gt_group_heading_row">
+
+<td colspan="7" class="gt_group_heading" style="color: black; font-style: italic;">
+
+OA Uptake (in%)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Percentage
+
+</td>
+
+<td class="gt_row gt_right">
+
+2.4
+
+</td>
+
+<td class="gt_row gt_right">
+
+2.8
+
+</td>
+
+<td class="gt_row gt_right">
+
+2.8
+
+</td>
+
+<td class="gt_row gt_right">
+
+3.0
+
+</td>
+
+<td class="gt_row gt_right">
+
+3.4
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+2.9
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Avg.
+
+</td>
+
+<td class="gt_row gt_right">
+
+3.6
+
+</td>
+
+<td class="gt_row gt_right">
+
+4.3
+
+</td>
+
+<td class="gt_row gt_right">
+
+4.3
+
+</td>
+
+<td class="gt_row gt_right">
+
+4.6
+
+</td>
+
+<td class="gt_row gt_right">
+
+5.2
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+4.2
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+SD
+
+</td>
+
+<td class="gt_row gt_right">
+
+4.5
+
+</td>
+
+<td class="gt_row gt_right">
+
+6.6
+
+</td>
+
+<td class="gt_row gt_right">
+
+5.1
+
+</td>
+
+<td class="gt_row gt_right">
+
+4.9
+
+</td>
+
+<td class="gt_row gt_right">
+
+5.6
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+4.6
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!--/html_preserve-->
+
+Figure presents to which extent the open access uptake rates varied
+among Elsevier hybrid journals between 2015 and 2019. The
+box-and-whiskers plot displays the distribution of the open access
+percentage per journal broken down by year. It visualizes the median
+open access proportion in the journal sample, the range of the majority
+of journals, and individual outliers represented as dots. Notably, upper
+quartiles and whiskers stretch farther over the years, indicating that
+the range of uptake among journals with an above-average proportion of
+open access articles increased over the years. Nevertheless, the
+prevalence of open access even among these journals can be described as
+relatively low; in 2019, 95% of Elsevier hybrid journals published 15%
+or less open access articles.
+
+<div class="figure" style="text-align: center">
+
+<img src="results_files/figure-gfm/unnamed-chunk-14-1.png" alt="Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 18%." width="70%" />
+
+<p class="caption">
+
+Open access uptake per Elsevier hybrid journal in percent by year,
+visualized as box-and-whiskers plot. The Y-axis is limited to an open
+access share of 18%.
+
+</p>
+
+</div>
+
+*Under which open content licenses are the open access articles
+distributed?*
+
+Figure presents a breakdown by Creative Commons license variant used for
+hybrid open access by year. Elsevier provided commercial (cc-by) and a
+less permissive non-commercial license (cc-by-nc) for open access
+publishing in otherwise subscription-based journals. 59 percent of open
+access articles can be re-used for non-commercial purposes. This
+proportion remained the same between 2015-19.
+
+<div class="figure" style="text-align: center">
+
+<img src="results_files/figure-gfm/unnamed-chunk-16-1.png" alt="Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND license." width="70%" />
+
+<p class="caption">
+
+Immediate open access articles in hybrid journals by open content
+license and year. The blue area represent articles permitting commercial
+adaption under a Creative Commons CC-BY license, while the purple area
+displays articles under a less permissive Commons CC-BY-ND license.
+
+</p>
+
+</div>
+
+*How does hybrid open access compare to full and delayed open access?*
+
+Next, we present a breakdown of open content licensed articles by open
+access type relative to Elsevier’s journal productivity (ses Figure). In
+total, Elsevier provided open access to 327,625 articles at he time of
+our study, corresponding to an open access share of 12%. Hybrid open
+access had the lowest proportion ( 22), while over half of open access
+articles were made freely available after an embargo period ( 50%)
+(Figure A). 28% of open access articles appeared in full open access
+journals.
+
+<div class="figure" style="text-align: center">
+
+<img src="/Users/najkojahn/Documents/papers/elsevier_hybrid_invoicing/figure/license_portfolio.png" alt="Open Access in Elsevier journals in terms of article volume between 2015-2019, showing a breakdown by business type, distinguishing between immediate open access provision in otherwise subscription-based journals (&quot;Hybrid OA&quot;), articles in fully open access journals and delayed open access under the Elsevier Open Archive program. Figure A presents a breakdown by open content license. Y-Axis represents the proportion of articles relative to the overall article output in percent. Figure B presents the number of articles for each opena ccess types across the five-years period 2015-19." width="70%" />
+
+<p class="caption">
+
+Open Access in Elsevier journals in terms of article volume between
+2015-2019, showing a breakdown by business type, distinguishing between
+immediate open access provision in otherwise subscription-based journals
+(“Hybrid OA”), articles in fully open access journals and delayed open
+access under the Elsevier Open Archive program. Figure A presents a
+breakdown by open content license. Y-Axis represents the proportion of
+articles relative to the overall article output in percent. Figure B
+presents the number of articles for each opena ccess types across the
+five-years period 2015-19.
+
+</p>
+
+</div>
+
+Figure B presents a breakdown of open content licensed articles by open
+access type and year relative to the total publication volume published
+in Elsevier journals between 2015-19. In addition to Creative Commons
+licenses, Elsevier also published delayed open access under an Elsevier
+user license (els-user), which prohibits re-use for commercial purposes.
+The license is mainly used by journals participating in Elsevier’s open
+archive program comprising around 140 journals, providing free access to
+scholarly articles after an embargo period that range between 12 months
+and 48 months. Figure reveals that about half of open access articles
+were made available under the Elsevier user license. The minority of
+open access articles can be re-used for commercial purposes ( 15% of
+open access articles under an CC-BY license). Hybrid open access had the
+highest proportion of openly available articles under a CC-BY licenses.
+
+### Invoicing
+
+To examine the funding structure for open access articles, we text-mined
+spending metadata from open access full-texts. Figure
+(<span class="citeproc-not-found" data-reference-id="ref">**???**</span>)(fig:invoiceoverview)
+shows the annual development per invoicing type. Each type is visualised
+separately as parts of the total. The grey areas show the overall yearly
+distribution of open access articles in hybrid journals, and the
+proportion of each invoicing type is highlighted in blue. The figure
+illustrates a general growth of open access articles in hybrid journals.
+This development was mainly driven by billing authors individually
+(“Author”), while central invoicing (“Agreement”) stagnated. Also, the
+number of fee-waived articles (“Fee Waived”) somehow constant from 2015
+to date. In most cases, Elsevier charged individual authors ( 58%.
+Invoices addressed to funders and research organizations accounted for
+34% of articles. The proportion of open access articles with publication
+fee waivers was 6%.
+
+<div class="figure" style="text-align: center">
+
+<img src="results_files/figure-gfm/invoiceoverview-1.png" alt="Development of fee-based open access publishing in Elsevier hybrid journals by invoicing type. Colored bars represent the invoice recipient, or whether the fee was waived. Grey bars show the total number of hybrid open access articles published in Elsevier journals from 2015 to date." width="70%" />
+
+<p class="caption">
+
+Development of fee-based open access publishing in Elsevier hybrid
+journals by invoicing type. Colored bars represent the invoice
+recipient, or whether the fee was waived. Grey bars show the total
+number of hybrid open access articles published in Elsevier journals
+from 2015 to date.
+
+</p>
+
+</div>
+
+Figure presents a breakdown by country, highlighting the dominating role
+of a few countries. Not surprisingly, mostly British funders paid for
+hybrid open access in Elsevier hybrid journals ( 59%), followed by
+funding bodies from the European Commission ( 13%) and the Netherlands (
+12%). In the latter case, invoices for individual open access articles
+were not send to research funders, but to the Dutch VSNU, a consortium
+of Universities in the Netherlands that has negotiated agreements with
+Elsevier since 2016. The prominent role of Norway can be also explained
+by a national deal, which started in 2019. US-based open access sponsors
+originated mainly from the Bill & Melinda Gates Foundation (n = 1,031).
+
+<div class="figure" style="text-align: center">
+
+<img src="results_files/figure-gfm/unnamed-chunk-22-1.png" alt="Invoiced sponsors of open access articles in Elsevier hybrid journals by country (2015-19)" width="70%" />
+
+<p class="caption">
+
+Invoiced sponsors of open access articles in Elsevier hybrid journals by
+country (2015-19)
+
+</p>
+
+</div>
+
+In terms of licensing, the type of invoicing is strongly related to
+whether the open content license permits commercial adaption or not (see
+figure). Although most open access articles published in Elsevier’s
+hybrid journals were billed to authors directly, centrally invoiced
+articles accounted for the largest share of articles under an CC BY
+licenses ( 62%).
+
+<div class="figure" style="text-align: center">
+
+<img src="results_files/figure-gfm/unnamed-chunk-24-1.png" alt="Invoicing for open access articles in hybrid journals by open content license, 2015-2019." width="70%" />
+
+<p class="caption">
+
+Invoicing for open access articles in hybrid journals by open content
+license, 2015-2019.
+
+</p>
+
+</div>
+
+Examining funders and research organisations that were invoiced directly
+by Elsevier, strongly suggests that a few funders with a strict CC-BY
+policy have contributed to the dominance of CC-BY license. Table
+presents the Top 10 out of 70 sponsoring bodies in terms of funded open
+access articles between 2015-19. Together, these funders accounted for
+around 80% of central payments. The table furthermore shows the number
+of distinct journals and the share of CC-BY licensed articles. Notably,
+UK-based research funders and the Bill & Melinda Gates Foundation
+sponsored mainly articles that were published under a CC-BY license. On
+the contrary, articles funded by the Dutch VSNU, the European Research
+Council and Norway Institutes had a much lower proportion. In fact, the
+Dutch and Norwegian agreements allowed authors to decide whether to
+publish under an CC-BY or CC-BY-ND license, while the UK-based funders
+had a CC-BY licensing policy.
+
+<!--html_preserve-->
+
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#oidosgqmgd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: white;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#oidosgqmgd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oidosgqmgd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#oidosgqmgd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#oidosgqmgd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oidosgqmgd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oidosgqmgd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#oidosgqmgd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#oidosgqmgd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#oidosgqmgd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#oidosgqmgd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#oidosgqmgd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -232,7 +1348,7 @@ period.
   vertical-align: middle;
 }
 
-#qoiyrsakbs .gt_empty_group_heading {
+#oidosgqmgd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -247,15 +1363,15 @@ period.
   vertical-align: middle;
 }
 
-#qoiyrsakbs .gt_from_md > :first-child {
+#oidosgqmgd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qoiyrsakbs .gt_from_md > :last-child {
+#oidosgqmgd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qoiyrsakbs .gt_row {
+#oidosgqmgd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -263,7 +1379,7 @@ period.
   margin: 10px;
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #D3D3D3;
+  border-top-color: white;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -274,7 +1390,7 @@ period.
   overflow-x: hidden;
 }
 
-#qoiyrsakbs .gt_stub {
+#oidosgqmgd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -286,7 +1402,7 @@ period.
   padding-left: 12px;
 }
 
-#qoiyrsakbs .gt_summary_row {
+#oidosgqmgd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -296,7 +1412,7 @@ period.
   padding-right: 5px;
 }
 
-#qoiyrsakbs .gt_first_summary_row {
+#oidosgqmgd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -306,7 +1422,7 @@ period.
   border-top-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_grand_summary_row {
+#oidosgqmgd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -316,7 +1432,7 @@ period.
   padding-right: 5px;
 }
 
-#qoiyrsakbs .gt_first_grand_summary_row {
+#oidosgqmgd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -326,11 +1442,11 @@ period.
   border-top-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_striped {
+#oidosgqmgd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qoiyrsakbs .gt_table_body {
+#oidosgqmgd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -339,7 +1455,7 @@ period.
   border-bottom-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_footnotes {
+#oidosgqmgd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -353,13 +1469,13 @@ period.
   border-right-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_footnote {
+#oidosgqmgd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qoiyrsakbs .gt_sourcenotes {
+#oidosgqmgd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -373,91 +1489,113 @@ period.
   border-right-color: #D3D3D3;
 }
 
-#qoiyrsakbs .gt_sourcenote {
+#oidosgqmgd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qoiyrsakbs .gt_left {
+#oidosgqmgd .gt_left {
   text-align: left;
 }
 
-#qoiyrsakbs .gt_center {
+#oidosgqmgd .gt_center {
   text-align: center;
 }
 
-#qoiyrsakbs .gt_right {
+#oidosgqmgd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qoiyrsakbs .gt_font_normal {
+#oidosgqmgd .gt_font_normal {
   font-weight: normal;
 }
 
-#qoiyrsakbs .gt_font_bold {
+#oidosgqmgd .gt_font_bold {
   font-weight: bold;
 }
 
-#qoiyrsakbs .gt_font_italic {
+#oidosgqmgd .gt_font_italic {
   font-style: italic;
 }
 
-#qoiyrsakbs .gt_super {
+#oidosgqmgd .gt_super {
   font-size: 65%;
 }
 
-#qoiyrsakbs .gt_footnote_marks {
+#oidosgqmgd .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="qoiyrsakbs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oidosgqmgd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
-<table class="gt_table">
+<table class="gt_table" style="table-layout: fixed;">
+
+<colgroup>
+
+<col/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+<col style="width:80px;"/>
+
+</colgroup>
 
 <thead class="gt_col_headings">
 
 <tr>
 
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">
+<th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1" style="color: black; font-weight: bold;">
+
+OA Sponsor
 
 </th>
 
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">
+<th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1" style="color: black; font-weight: bold;">
 
-2015
-
-</th>
-
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">
-
-2016
+Journals
 
 </th>
 
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">
+<th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1" style="color: black; font-weight: bold;">
 
-2017
-
-</th>
-
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">
-
-2018
+Articles
 
 </th>
 
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">
+<th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1" style="color: black; font-weight: bold;">
 
-2019
+%
 
 </th>
 
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">
+<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2">
 
-2015-19
+<span class="gt_column_spanner"><strong>Compliance</strong></span>
+
+</th>
+
+</tr>
+
+<tr>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: black; font-weight: bold;">
+
+CC-BY
+
+</th>
+
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: black; font-weight: bold;">
+
+OAPC
 
 </th>
 
@@ -467,11 +1605,41 @@ period.
 
 <tbody class="gt_table_body">
 
-<tr class="gt_group_heading_row">
+<tr>
 
-<td colspan="7" class="gt_group_heading" style="font-weight: bold;">
+<td class="gt_row gt_left">
 
-Publication Volume
+Engineering and Physical Sciences Research Council
+
+</td>
+
+<td class="gt_row gt_right">
+
+622
+
+</td>
+
+<td class="gt_row gt_right">
+
+4,666
+
+</td>
+
+<td class="gt_row gt_right">
+
+19%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #891F71; color: #FFFFFF;">
+
+97%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #BE287A; color: #FFFFFF;">
+
+55%
 
 </td>
 
@@ -479,45 +1647,39 @@ Publication Volume
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-Articles
-
-</td>
-
-<td class="gt_row gt_right">
-
-483,340
+VSNU<sup class="gt_footnote_marks">1</sup>
 
 </td>
 
 <td class="gt_row gt_right">
 
-509,038
+358
 
 </td>
 
 <td class="gt_row gt_right">
 
-523,442
+2,836
 
 </td>
 
 <td class="gt_row gt_right">
 
-549,062
+12%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #F38070; color: #000000;">
 
-583,825
+52%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #FCDE9C; color: #000000;">
 
-2,648,707
+0%
 
 </td>
 
@@ -525,45 +1687,39 @@ Articles
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-Mean
-
-</td>
-
-<td class="gt_row gt_right">
-
-279.23
+Wellcome Trust
 
 </td>
 
 <td class="gt_row gt_right">
 
-291.38
+446
 
 </td>
 
 <td class="gt_row gt_right">
 
-297.58
+2,471
 
 </td>
 
 <td class="gt_row gt_right">
 
-312.32
+10%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #881F71; color: #FFFFFF;">
 
-331.72
+98%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #881F71; color: #FFFFFF;">
 
-1,500.68
+66%
 
 </td>
 
@@ -571,55 +1727,39 @@ Mean
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-SD
-
-</td>
-
-<td class="gt_row gt_right">
-
-407.65
+European Research Council
 
 </td>
 
 <td class="gt_row gt_right">
 
-432.13
+543
 
 </td>
 
 <td class="gt_row gt_right">
 
-449.96
+1,990
 
 </td>
 
 <td class="gt_row gt_right">
 
-480.36
+8%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #FCDE9C; color: #000000;">
 
-522.18
-
-</td>
-
-<td class="gt_row gt_right">
-
-2,200.69
+32%
 
 </td>
 
-</tr>
+<td class="gt_row gt_right" style="background-color: #FBB480; color: #000000;">
 
-<tr class="gt_group_heading_row">
-
-<td colspan="7" class="gt_group_heading" style="font-weight: bold;">
-
-OA Volume
+8%
 
 </td>
 
@@ -627,45 +1767,39 @@ OA Volume
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-Total
-
-</td>
-
-<td class="gt_row gt_right">
-
-13,308
+Medical Research Council
 
 </td>
 
 <td class="gt_row gt_right">
 
-16,316
+384
 
 </td>
 
 <td class="gt_row gt_right">
 
-15,504
+1,922
 
 </td>
 
 <td class="gt_row gt_right">
 
-18,184
+8%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #942073; color: #FFFFFF;">
 
-21,873
+95%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #CD3078; color: #FFFFFF;">
 
-85,185
+51%
 
 </td>
 
@@ -673,45 +1807,39 @@ Total
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-Mean
-
-</td>
-
-<td class="gt_row gt_right">
-
-10.10
+Natural Environment Research Council
 
 </td>
 
 <td class="gt_row gt_right">
 
-11.89
+203
 
 </td>
 
 <td class="gt_row gt_right">
 
-11.00
+1,357
 
 </td>
 
 <td class="gt_row gt_right">
 
-12.07
+6%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #8C1F72; color: #FFFFFF;">
 
-13.60
+97%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #DD3B76; color: #FFFFFF;">
 
-48.26
+45%
 
 </td>
 
@@ -719,55 +1847,39 @@ Mean
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-SD
-
-</td>
-
-<td class="gt_row gt_right">
-
-52.27
+Biotechnology and Biological Sciences Research Council
 
 </td>
 
 <td class="gt_row gt_right">
 
-75.50
+309
 
 </td>
 
 <td class="gt_row gt_right">
 
-52.47
+1,169
 
 </td>
 
 <td class="gt_row gt_right">
 
-64.53
+5%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #9F2275; color: #FFFFFF;">
 
-69.52
-
-</td>
-
-<td class="gt_row gt_right">
-
-280.37
+93%
 
 </td>
 
-</tr>
+<td class="gt_row gt_right" style="background-color: #DF4174; color: #FFFFFF;">
 
-<tr class="gt_group_heading_row">
-
-<td colspan="7" class="gt_group_heading" style="font-weight: bold;">
-
-OA Uptake
+41%
 
 </td>
 
@@ -775,45 +1887,39 @@ OA Uptake
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-Overall OA Uptake
-
-</td>
-
-<td class="gt_row gt_right">
-
-2.75
+Bill & Melinda Gates Foundation
 
 </td>
 
 <td class="gt_row gt_right">
 
-3.21
+255
 
 </td>
 
 <td class="gt_row gt_right">
 
-2.96
+1,031
 
 </td>
 
 <td class="gt_row gt_right">
 
-3.31
+4%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #7C1D6F; color: #FFFFFF;">
 
-3.75
+100%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #7C1D6F; color: #FFFFFF;">
 
-3.22
+68%
 
 </td>
 
@@ -821,45 +1927,39 @@ Overall OA Uptake
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-Mean
-
-</td>
-
-<td class="gt_row gt_right">
-
-3.78
+Economic and Social Research Council
 
 </td>
 
 <td class="gt_row gt_right">
 
-4.46
+245
 
 </td>
 
 <td class="gt_row gt_right">
 
-4.35
+922
 
 </td>
 
 <td class="gt_row gt_right">
 
-4.68
+4%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #922073; color: #FFFFFF;">
 
-5.24
+96%
 
 </td>
 
-<td class="gt_row gt_right">
+<td class="gt_row gt_right" style="background-color: #D53578; color: #FFFFFF;">
 
-4.33
+48%
 
 </td>
 
@@ -867,45 +1967,119 @@ Mean
 
 <tr>
 
-<td class="gt_row gt_left gt_stub">
+<td class="gt_row gt_left">
 
-SD
-
-</td>
-
-<td class="gt_row gt_right">
-
-5.15
+Norway Institutes<sup class="gt_footnote_marks">1</sup>
 
 </td>
 
 <td class="gt_row gt_right">
 
-7.08
+374
 
 </td>
 
 <td class="gt_row gt_right">
 
-5.52
+694
 
 </td>
 
 <td class="gt_row gt_right">
 
-5.38
+3%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #FBB07E; color: #000000;">
+
+41%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #FCDE9C; color: #000000;">
+
+0%
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left">
+
+Other
 
 </td>
 
 <td class="gt_row gt_right">
 
-5.95
+1,019
 
 </td>
 
 <td class="gt_row gt_right">
 
-5.01
+5,219
+
+</td>
+
+<td class="gt_row gt_right">
+
+21%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #F0756E; color: #000000;">
+
+54%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #F1796F; color: #000000;">
+
+22%
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left" style="border-top-width: 2px; border-top-style: solid; border-top-color: black;">
+
+All
+
+</td>
+
+<td class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: black;">
+
+1,429
+
+</td>
+
+<td class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: black;">
+
+24,277
+
+</td>
+
+<td class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: black;">
+
+100%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #DD3D76; color: #FFFFFF; border-top-width: 2px; border-top-style: solid; border-top-color: black;">
+
+76%
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E24C70; color: #000000; border-top-width: 2px; border-top-style: solid; border-top-color: black;">
+
+36%
 
 </td>
 
@@ -913,51 +2087,39 @@ SD
 
 </tbody>
 
+<tfoot>
+
+<tr class="gt_footnotes">
+
+<td colspan="6">
+
+<p class="gt_footnote">
+
+<sup class="gt_footnote_marks"> <em>1</em> </sup>
+
+Transformative Agreements <br />
+
+</p>
+
+</td>
+
+</tr>
+
+</tfoot>
+
 </table>
 
 </div>
 
 <!--/html_preserve-->
 
-*variation*
-
-We observed considerable variations across Elsevier hybrid journals
-relative to the share of open access articles published by year. Figure
-shows, in a diminutive chart, the range of open access uptake across
-Elsevier hybrid journals between 2015 and 2019. The dot represents the
-median by year, while the left and the right bars represents to 10th or
-the 90th percentile; the distance between them represent the
-distribution of open access rates of 80% of Elsevier journals, excluding
-extreme outliers at the top or bottom respectively from the visual
-presentation. Notably, uptake among above-average performing journals in
-terms of published open access articles increased over the years.
-Nevertheless, the proportion of open access articles published by
-journals that operate above average can still be described as low; in
-2019, 90% of Elsevier hybrid journals had an open access uptake of 11%
-or less.
-
-<div class="figure" style="text-align: center">
-
-<img src="results_files/figure-gfm/unnamed-chunk-14-1.png" alt="Open access uptake in Elsevier hybrid journals per year in percent, visualised as diminutive distribution chart removing outliers at the top or bottom respectively. Since 2015, most hybrid journals have had a slow uptake rate of open access articles. In general, open access via the hybrid open access publishing model played a marginal role in the context of Elsevier’s total publication volume. However, many journals operating above average in terms of published open access articles were able to increase uptake rates over the years." width="70%" />
-
-<p class="caption">
-
-Open access uptake in Elsevier hybrid journals per year in percent,
-visualised as diminutive distribution chart removing outliers at the top
-or bottom respectively. Since 2015, most hybrid journals have had a slow
-uptake rate of open access articles. In general, open access via the
-hybrid open access publishing model played a marginal role in the
-context of Elsevier’s total publication volume. However, many journals
-operating above average in terms of published open access articles were
-able to increase uptake rates over the years.
-
-</p>
-
-</div>
-
-alternative box plot presentation
-
-<img src="results_files/figure-gfm/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
+As another variable, the table highlights the proportion of public
+disclosure of funding through the Open APC initiative. The Open APC
+Initiative disclosed more than one-third of centrally invoiced articles
+( 36%), but also publication fees that were billed to authors directly
+(n = 2,343). This indicates that authors were able to make use of other
+types of institutional support structures for publication fees such as
+publication funds.
 
 <div id="refs" class="references hanging-indent">
 

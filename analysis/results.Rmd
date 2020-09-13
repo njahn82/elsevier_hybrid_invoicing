@@ -1,7 +1,7 @@
 ---
 bibliography: references.bib
 csl: chicago.csl
-output: html_document
+output: github_document
 always_allow_html: true
 ---
 
