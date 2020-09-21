@@ -1,0 +1,28 @@
+description,subject_area,top_level_code
+Multidisciplinary,Multidisciplinary,10
+Agricultural and Biological Sciences,Life Sciences,11
+Arts and Humanities,Social Sciences,12
+"Biochemistry, Genetics and Molecular Biology",Life Sciences,13
+"Business, Management and Accounting",Social Sciences,14
+Chemical Engineering,Physical Sciences,15
+Chemistry,Physical Sciences,16
+Computer Science,Physical Sciences,17
+Decision Sciences,Social Sciences,18
+Earth and Planetary Sciences,Physical Sciences,19
+"Economics, Econometrics and Finance",Social Sciences,20
+Energy,Physical Sciences,21
+Engineering,Physical Sciences,22
+Environmental Science,Physical Sciences,23
+Immunology and Microbiology,Life Sciences,24
+Materials Science,Physical Sciences,25
+Mathematics,Physical Sciences,26
+Medicine,Health Sciences,27
+Neuroscience,Life Sciences,28
+Nursing,Health Sciences,29
+"Pharmacology, Toxicology and Pharmaceutics",Life Sciences,30
+Physics and Astronomy,Physical Sciences,31
+Psychology,Social Sciences,32
+Social Sciences,Social Sciences,33
+Veterinary,Health Sciences,34
+Dentistry,Health Sciences,35
+Health Professions,Health Sciences,36
