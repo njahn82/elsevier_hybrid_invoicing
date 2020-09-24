@@ -1,33 +1,5 @@
----
-output: github_document
----
 
-```{r, setup, echo=FALSE}
-knitr::opts_chunk$set(
-  comment = "#>",
-  collapse = TRUE,
-  warning = FALSE,
-  message = FALSE,
-  echo = TRUE,
-  fig.width = 6,
-  fig.asp = 0.618,
-  out.width = "70%",
-  fig.align = "center",
-  dpi = 300
-)
-options(scipen = 999, digits = 4)
-knitr::knit_hooks$set(
-  inline = function(x) {
-    if (is.numeric(x)) {
-      return(formatC(x, big.mark = ",", format = "fg", digits = 2))
-    } else{
-      return(x)
-    }
-  }
-)
-```
-
-```{r}
+``` r
 # libraries
 library(tidyverse)
 library(here)
@@ -36,11 +8,11 @@ library(gt)
 library(janitor)
 ```
 
-```{r}
+``` r
 hybrid_volume <- readr::read_csv(here::here("data", "hybrid_volume_eligible.csv"))
 ```
 
-```{r}
+``` r
 ind_per_jn <- hybrid_volume %>%
   group_by(issn, container_title, articles, issued_year) %>%
   summarise(n = n_distinct(doi)) %>%
@@ -49,14 +21,14 @@ ind_per_jn <- hybrid_volume %>%
 
 read in scopus journal indicators
 
-```{r}
+``` r
 scopus_19 <- readxl::read_excel(here::here("data", "scopus_jn.xlsx"), sheet = 2,
                                 .name_repair = make_clean_names)
 ```
 
 normalize scopus jn indicators
 
-```{r}
+``` r
 scopus_norm <- scopus_19 %>%
   gather(print_issn, e_issn, key = "issn_tpye", value = "issn") %>%
   # trailing zero's missing in Excel spreadsheet
@@ -70,21 +42,35 @@ scopus_norm <- scopus_19 %>%
 
 missing journals (needs to be validated)
 
-```{r}
+``` r
 hybrid_volume %>% 
   filter(!issn %in% scopus_norm$issn) %>% 
   distinct(issn, container_title)
+#> # A tibble: 22 x 2
+#>    issn      container_title                                       
+#>    <chr>     <chr>                                                 
+#>  1 0045-7825 Computer Methods in Applied Mechanics and Engineering 
+#>  2 0094-114X Mechanism and Machine Theory                          
+#>  3 0304-4165 Biochimica et Biophysica Acta (BBA) - General Subjects
+#>  4 0301-7516 International Journal of Mineral Processing           
+#>  5 0300-9440 Progress in Organic Coatings                          
+#>  6 1878-786X Journal de Chirurgie Viscérale                        
+#>  7 1359-5113 Process Biochemistry                                  
+#>  8 2387-0206 Medicina Clínica (English Edition)                    
+#>  9 0020-7063 The International Journal of Accounting               
+#> 10 0968-0004 Trends in Biochemical Sciences                        
+#> # … with 12 more rows
 ```
 
 backup
 
-```{r}
+``` r
 cite_score_19 <- scopus_norm %>% 
   select(issn, contains("subject"), percentile, snip, sjr)
 write_csv(cite_score_19, here::here("data", "cite_score_19.csv"))
 ```
 
-```{r}
+``` r
 ajsc_mapped <- read_csv(here::here("data", "asjc_mapped.csv")) %>%
   mutate(top_level_code = as.character(top_level_code))
 hybrid_subject <- left_join(ind_per_jn, cite_score_19, by = c("issn" = "issn")) %>%
@@ -99,7 +85,7 @@ hybrid_subject %>%
 
 ### Correlation test
 
-```{r}
+``` r
 hybrid_subject_19 <- hybrid_subject %>% 
   filter(issued_year == "2019", !is.na(percentile)
          #, prop > 0.01 & prop < 0.15) 
@@ -109,19 +95,33 @@ hybrid_subject_19 <- hybrid_subject %>%
 
 spearman
 
-```{r}
+``` r
 cor.test(hybrid_subject_19$prop, hybrid_subject_19$percentile, method = "spearman")
+#> 
+#>  Spearman's rank correlation rho
+#> 
+#> data:  hybrid_subject_19$prop and hybrid_subject_19$percentile
+#> S = 7583619905, p-value <0.0000000000000002
+#> alternative hypothesis: true rho is not equal to 0
+#> sample estimates:
+#>    rho 
+#> 0.1734
 ```
 
 plot
-```{r}
+
+``` r
 ggplot(hybrid_subject_19, aes(prop, percentile)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
   coord_cartesian(xlim = c(0.01, 0.5), ylim = c(0,100))
 ```
 
-- cell system, global food security
+<img src="008_subject_exploration_files/figure-gfm/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" />
 
-```{r}
+  - cell system, global food security
+
+<!-- end list -->
+
+``` r
 hybrid_subject %>%
   filter(issued_year == "2019", !is.na(percentile)) %>% 
   ggplot(aes(prop, percentile)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
@@ -129,9 +129,11 @@ hybrid_subject %>%
   coord_cartesian(xlim = c(0.01, 0.5), ylim = c(0,100))
 ```
 
+<img src="008_subject_exploration_files/figure-gfm/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" />
+
 ## OA proportion per subject
 
-```{r}
+``` r
 # sort by median per asjc subject group
 subject_all_years <- hybrid_subject %>% 
   ungroup() %>% 
@@ -156,11 +158,14 @@ ggplot(subject_all_years, aes(fct_reorder(description, n / n_oa, .fun = median, 
   theme(legend.position = "top")
 ```
 
-- Comptes Rendus https://www.library.illinois.edu/mtx/2020/05/01/comptes-rendus-de-lacademie-des-sciences-important-publishing-and-access-changes/
+<img src="008_subject_exploration_files/figure-gfm/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" />
+
+  - Comptes Rendus
+    <https://www.library.illinois.edu/mtx/2020/05/01/comptes-rendus-de-lacademie-des-sciences-important-publishing-and-access-changes/>
 
 ### by funder
 
-```{r}
+``` r
 jn_subjects <- read_csv(here::here("data", "jn_subjects.csv"))
 
 hybrid_volume_subjects <- hybrid_volume %>%
@@ -179,6 +184,20 @@ hybrid_volume_subjects %>%
             n = sum(articles), .groups = "drop") %>%
   mutate(prop = n_oa / n) %>%
   arrange(desc(prop))
+#> # A tibble: 28 x 4
+#>    top_level                                     n_oa      n   prop
+#>    <chr>                                        <int>  <dbl>  <dbl>
+#>  1 Veterinary                                    2091  25292 0.0827
+#>  2 Social Sciences                               6317  80535 0.0784
+#>  3 Arts and Humanities                           1565  23795 0.0658
+#>  4 Immunology and Microbiology                   5530  87145 0.0635
+#>  5 Earth and Planetary Sciences                  4545  94792 0.0479
+#>  6 Psychology                                    3052  64691 0.0472
+#>  7 Agricultural and Biological Sciences          8044 175069 0.0459
+#>  8 Biochemistry, Genetics and Molecular Biology 15881 349356 0.0455
+#>  9 Economics, Econometrics and Finance           2071  46940 0.0441
+#> 10 Neuroscience                                  5846 132617 0.0441
+#> # … with 18 more rows
   
 
 # hybrid_volume %>%
