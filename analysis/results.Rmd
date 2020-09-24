@@ -1,7 +1,7 @@
 ---
 bibliography: references.bib
 csl: chicago.csl
-output: github_document
+output: html_document
 always_allow_html: true
 ---
 
@@ -161,7 +161,7 @@ els_pub_volume <- readr::read_csv(
 eligible_jns <- hybrid_df %>% 
   filter(oa_archive == FALSE) %>% 
   distinct(issn)
-# pub volume eligble data
+# pub volume eligible data
 hybrid_volume <- els_pub_volume %>%
   filter(issn %in% eligible_jns$issn) %>%
   inner_join(hybrid_df, by = c("issn", "issued_year")) %>%
@@ -210,14 +210,22 @@ oa_uptake_15_19 <- hybrid_volume %>%
     summarise(oa = sum(oa),
               articles = sum(articles)) %>%
     mutate(prop = oa / articles) 
+# article volume 2015-19
+volume_15_19 <- els_pub_volume %>%
+  # elgible journals
+  filter(issn %in% eligible_jns$issn) %>%
+  summarise(n = sum(articles),
+            mean_articles = mean(articles),
+            sd = sd(articles))
+  
 
 # all 
 total_df <- tibble::tibble(
   issued_year = "2015-19",
   journals = hybrid_volume %>% distinct(issn) %>% nrow(),
-  articles_n = hybrid_volume %>% distinct(issn, articles, issued_year) %>% pull(articles) %>% sum(),
-  articles_mean = hybrid_volume %>% distinct(issn, articles, issued_year) %>% pull(articles) %>% mean(),
-  articles_sd = hybrid_volume %>% distinct(issn, articles, issued_year) %>% pull(articles) %>% sd(),
+  articles_n = volume_15_19$n,
+  articles_mean = volume_15_19$mean_articles,
+  articles_sd = volume_15_19$sd,
   oa_n = nrow(hybrid_volume),
   oa_mean = hybrid_volume %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% mean(),
   oa_sd = hybrid_volume %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% sd(),
@@ -256,7 +264,7 @@ table_descriptives_ind <- tribble(
   "OA Uptake (in%)", "oa_uptake_mean", "Avg.",
   "OA Uptake (in%)", "oa_uptake_sd", "SD"
 )
-inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
+gt_1 <- inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
   dplyr::select(-ind) %>%
   gt(rowname_col = "ind_name", groupname_col = "ind_group") %>%
   fmt_number(contains("20"), decimals = 1) %>%
@@ -305,7 +313,10 @@ inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator"
     column_labels.border.bottom.width = px(2),
     stub.border.color = "white"
   )
+gt_1
+#gt::gtsave(gt_1, here::here("figure", "gt_overview.png"), dpi = 300)
 ```
+
 
 ```{r}
 els_jn_pub_volume <- els_pub_volume %>%
