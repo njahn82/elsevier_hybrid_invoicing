@@ -90,6 +90,8 @@ ajsc_mapped <- read_csv(here::here("data", "asjc_mapped.csv")) %>%
 hybrid_subject <- left_join(ind_per_jn, cite_score_19, by = c("issn" = "issn")) %>%
   mutate(top_level_code = substr(as.character(scopus_asjc_code_sub_subject_area), 1, 2)) %>%
   inner_join(ajsc_mapped, by = "top_level_code")
+# back up ind
+ write_csv(hybrid_subject, here::here("data", "jn_scopus_ind_subjects.csv"))
 # backup subject liste
 hybrid_subject %>% 
   ungroup() %>% 
@@ -110,23 +112,26 @@ hybrid_subject_19 <- hybrid_subject %>%
 spearman
 
 ```{r}
-cor.test(hybrid_subject_19$prop, hybrid_subject_19$percentile, method = "spearman")
+cor.test(hybrid_subject_19$prop, hybrid_subject_19$snip, method = "spearman")
 ```
 
 plot
 ```{r}
-ggplot(hybrid_subject_19, aes(prop, percentile)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
-  coord_cartesian(xlim = c(0.01, 0.5), ylim = c(0,100))
+ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
+  coord_cartesian(xlim = c(0., 0.7), ylim = c(0.5, 6)) +
+  labs(x = "OA Uptake Rate", y = "SNIP") +
+  theme_cowplot()
 ```
+
 
 - cell system, global food security
 
 ```{r}
 hybrid_subject %>%
   filter(issued_year == "2019", !is.na(percentile)) %>% 
-  ggplot(aes(prop, percentile)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
-  facet_wrap(~top_level_code) +
-  coord_cartesian(xlim = c(0.01, 0.5), ylim = c(0,100))
+  ggplot(aes(prop, snip)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
+  facet_wrap(~top_level_code, scales = "free") +
+  theme_minimal()
 ```
 
 ## OA proportion per subject
@@ -142,18 +147,27 @@ subject_all_years <- hybrid_subject %>%
   group_by(description) %>%
   filter(subject_area != "Multidisciplinary")
 
+median_all <- subject_all_years %>% 
+  ungroup() %>% 
+  distinct(issn, .keep_all = TRUE) %>% 
+  mutate(prop = n_oa /n) %>% 
+  .$prop %>% 
+  median()
+
 ggplot(subject_all_years, aes(fct_reorder(description, n / n_oa, .fun = median, .desc = TRUE), n_oa / n)) + 
   geom_boxplot(aes(color = subject_area)) +
-  geom_jitter(alpha = .05, aes(color = subject_area)) +
-  coord_flip() +
-  scale_colour_manual(values = c("#7F3C8D", "#11A579", "#3969AC", "#F2B701")) +
+  geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
+  geom_hline(yintercept = median_all,  colour = "red", linetype ="dashed", size = 1) +
+  scale_colour_manual(NULL, values = c("#7F3C8D", "#11A579", "#3969AC", "#F2B701")) +
   scale_y_continuous(
     labels = scales::percent_format(accuracy = 5L),
     expand = expansion(mult = c(0, 0.05))
   ) +
+  coord_flip(ylim=c(0,0.2)) +
   labs(x = NULL, y = "Five-Years OA Uptake Rate per Journal") +
-  theme_minimal() +
-  theme(legend.position = "top")
+  theme_minimal_vgrid(font_size = 10) +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 2))
 ```
 
 - Comptes Rendus https://www.library.illinois.edu/mtx/2020/05/01/comptes-rendus-de-lacademie-des-sciences-important-publishing-and-access-changes/
@@ -179,7 +193,7 @@ hybrid_volume_subjects %>%
             n = sum(articles), .groups = "drop") %>%
   mutate(prop = n_oa / n) %>%
   arrange(desc(prop))
-  
+
 
 # hybrid_volume %>%
 #   left_join(jn_subjects, by = "issn") %>%
@@ -201,4 +215,190 @@ hybrid_volume_subjects %>%
 #   summarise(n_oa = n_distinct(doi)) %>%
 #   group_by(issued_year, top_level) %>%
 #   summarise(nn = sum(n_oa))
+```
+
+```{r}
+hybrid_volume_jn <- hybrid_volume %>%
+  group_by(issn) %>%
+  summarise(n_oa = n_distinct(doi))
+
+share_per_invoicing_type <- hybrid_volume %>%
+  group_by(oa_sponsor_type, issn) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  left_join(hybrid_volume_jn, by = "issn") %>%
+  mutate(prop = n_oa_type / n_oa) %>%
+  left_join(jn_subjects, by = "issn") %>%
+  ungroup()
+share_per_invoicing_type %>%
+  filter(oa_sponsor_type == c("FundingBody")) %>%
+  ggplot(aes(fct_reorder(top_level, prop, .fun = median, .desc = TRUE), prop)) +
+  geom_boxplot() +
+  coord_flip()
+```
+
+
+
+```{r}
+funder_shares <- hybrid_volume %>%
+   mutate(oa_sponsor_type = ifelse(!oa_sponsor_type %in% c("FundingBody", "Author", "ElsevierWaived"), "Other", oa_sponsor_type)) %>%
+  mutate(oa_sponsor_type = recode(oa_sponsor_type, 
+                                  `FundingBody` = "Agreement",
+                                  `ElsevierWaived` = "Fee Waived")) %>%
+  group_by(oa_sponsor_type, issn) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  left_join(hybrid_volume_jn, by = "issn") %>%
+  mutate(prop = n_oa_type / n_oa) %>%
+  left_join(jn_subjects, by = "issn") %>%
+  ungroup() %>%
+  group_by(top_level, oa_sponsor_type) %>%
+  summarise(oa_type = sum(n_oa_type)) %>%
+  mutate(prop = oa_type / sum(oa_type))
+# overall props
+oa_sponsor_type_all <- hybrid_volume %>% 
+  #exclude multidisciplinary
+  filter(issn != "2095-9273") %>%
+  count(oa_sponsor_type) %>% 
+  mutate(prop = n / sum(n))
+
+funder_shares %>% 
+  filter(oa_sponsor_type %in% c("Author", "Agreement"), top_level != "Multidisciplinary") %>%
+  pivot_wider(id_cols = top_level, names_from = oa_sponsor_type, values_from = prop) %>%
+  filter(!is.na(top_level)) %>%
+  ggplot() +
+   ggalt::geom_dumbbell(
+    aes(y = reorder(top_level, Author), x = Agreement, xend = Author),
+    colour = "grey20",
+    colour_xend = "#EDAE49",
+    colour_x = "#30638E",
+    size_x = 1.5,
+    alpha = 0.9,
+    size_xend = 1.5,
+    show.legend = TRUE
+   ) +
+  geom_vline(xintercept = oa_sponsor_type_all %>% filter(oa_sponsor_type == "Author") %>% .$prop,  colour = "#EDAE49", linetype ="dashed", size = 1) +
+    geom_vline(xintercept = oa_sponsor_type_all %>% filter(oa_sponsor_type == "FundingBody") %>% .$prop,  colour = "#30638E", linetype ="dashed", size = 1) +
+  scale_x_continuous(
+    labels = scales::percent_format(accuracy = 5L),
+    expand = expansion(mult = c(0, 0.05)),
+    limits = c(0,1)
+  ) +
+  labs(y = NULL, x = "Percentage Invoicing Type") +
+  theme_minimal_vgrid(font_size = 10)
+```
+
+issues:
+
+- high share of elseveir waived articles due to ome issue published in Nuclear and Particle Physics Proceedings: "37th International Conference on High Energy Physics (ICHEP)
+(ICHEP 2014)2-9 July 2014, Valencia, Spain" Do we want to exclude this journal?
+
+table representation
+
+```{r}
+subject_all <- funder_shares %>%
+  group_by(top_level) %>%
+  summarise(oa = sum(oa_type))
+funder_overview_subject <- left_join(funder_shares, subject_all, by = "top_level")
+# gt
+funder_overview_subject %>%
+  pivot_wider(id_cols = c("top_level", "oa"), names_from = oa_sponsor_type, values_from = prop) %>%
+  ungroup() %>% 
+  # remove na and multidisciplinary 
+  filter(!is.na(top_level), top_level != "Multidisciplinary") %>%
+  relocate(Agreement, .after = Author) %>%
+  arrange(desc(Author)) %>%
+  gt::gt(rowname_col = "top_level") %>%
+  gt::cols_label(oa = "OA Articles") %>%
+  fmt_percent(
+    columns = vars(Author, Agreement, `Fee Waived`, Other),
+    decimals = 0) %>%
+  cols_width(
+    2:6 ~ px(80)) %>%
+  cols_align(
+    align = "right",
+    columns = 2:6
+  ) %>%
+  cols_width(
+    2 ~ px(120)
+  ) %>%
+    gt::cols_align(
+    align = "left",
+    columns = 1
+  ) %>%
+  fmt_number(
+    columns = vars(oa),
+    decimals = 0
+  ) %>%
+  data_color(
+    columns =3:6,
+    colors = scales::col_numeric(
+      # custom defined values - notice that order matters!
+      palette = c("white", "#fcde9c","#faa476","#f0746e","#e34f6f","#dc3977","#b9257a","#7c1d6f"),
+      domain = NULL
+    )
+  ) %>%
+  tab_spanner(
+    label = md("**OA Sponsor Type**"),
+    columns = 3:6
+  ) %>%
+    tab_style(
+    style = cell_text(color = "black", weight = "bold"),
+    locations = list(
+      cells_column_labels(everything())
+    )) %>%
+   tab_options(
+    column_labels.border.top.color = "white",
+    column_labels.border.top.width = px(3),
+    column_labels.border.bottom.color = "black",
+    table_body.hlines.color = "white",
+    table.border.bottom.color = "white",
+    table.border.bottom.width = px(3)
+      )
+```
+ correlation funder / oa share
+
+```{r}
+funder_jn_volume <- hybrid_volume %>%
+  group_by(oa_sponsor_type, issn) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  left_join(hybrid_volume_jn, by = "issn") %>%
+  mutate(prop = n_oa_type / n_oa) %>%
+ # left_join(jn_subjects, by = "issn") %>%
+  ungroup() %>%
+  filter(oa_sponsor_type == "FundingBody")
+hybrid_funder_shares <- hybrid_volume %>%
+  group_by(issn) %>%
+  summarise(all = sum(articles)) %>%
+  inner_join(funder_jn_volume, by = "issn") %>%
+  mutate(oa_prop = n_oa / all)
+
+  ggplot(hybrid_funder_shares, aes(oa_prop, prop)) +
+  geom_point(alpha = .3) + 
+  geom_smooth(method = "lm") +
+  theme_cowplot()
+```
+
+```{r}
+cor.test(hybrid_funder_shares$prop, hybrid_funder_shares$oa_prop, method = "spearman")
+```
+
+oa sponsor name subject
+
+```{r}
+test_a <- hybrid_volume %>%
+  filter(oa_sponsor_type == "FundingBody") %>%
+  group_by(oa_sponsor_name, issn) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  left_join(hybrid_volume_jn, by = "issn") %>%
+  mutate(prop = n_oa_type / n_oa) %>%
+  left_join(jn_subjects, by = "issn") %>%
+  ungroup()  %>%
+  group_by(top_level, oa_sponsor_name) %>%
+  summarise(oa = sum(n_oa_type))
+```
+
+
+```{r}
+tt <- test_a %>%
+  pivot_wider(names_from = "oa_sponsor_name", values_from = "oa")
+wilcox.test(tt$`Bill & Melinda Gates Foundation`, tt$VSNU, paired = TRUE)
 ```
