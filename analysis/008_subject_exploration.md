@@ -155,7 +155,7 @@ median_all <- subject_all_years %>%
   .$prop %>% 
   median()
 
-ggplot(subject_all_years, aes(fct_reorder(description, n / n_oa, .fun = median, .desc = TRUE), n_oa / n)) + 
+ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median), n_oa / n)) + 
   geom_boxplot(aes(color = subject_area)) +
   geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
   geom_hline(yintercept = median_all,  colour = "red", linetype ="dashed", size = 1) +
@@ -383,7 +383,7 @@ funder_overview_subject %>%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qarqbhbwcf .gt_table {
+#uvheltmgoi .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -408,7 +408,7 @@ funder_overview_subject %>%
   border-left-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_heading {
+#uvheltmgoi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -420,7 +420,7 @@ funder_overview_subject %>%
   border-right-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_title {
+#uvheltmgoi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -430,7 +430,7 @@ funder_overview_subject %>%
   border-bottom-width: 0;
 }
 
-#qarqbhbwcf .gt_subtitle {
+#uvheltmgoi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -440,13 +440,13 @@ funder_overview_subject %>%
   border-top-width: 0;
 }
 
-#qarqbhbwcf .gt_bottom_border {
+#uvheltmgoi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_col_headings {
+#uvheltmgoi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -461,7 +461,7 @@ funder_overview_subject %>%
   border-right-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_col_heading {
+#uvheltmgoi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -481,7 +481,7 @@ funder_overview_subject %>%
   overflow-x: hidden;
 }
 
-#qarqbhbwcf .gt_column_spanner_outer {
+#uvheltmgoi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -493,15 +493,15 @@ funder_overview_subject %>%
   padding-right: 4px;
 }
 
-#qarqbhbwcf .gt_column_spanner_outer:first-child {
+#uvheltmgoi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qarqbhbwcf .gt_column_spanner_outer:last-child {
+#uvheltmgoi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qarqbhbwcf .gt_column_spanner {
+#uvheltmgoi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -513,7 +513,7 @@ funder_overview_subject %>%
   width: 100%;
 }
 
-#qarqbhbwcf .gt_group_heading {
+#uvheltmgoi .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -535,7 +535,7 @@ funder_overview_subject %>%
   vertical-align: middle;
 }
 
-#qarqbhbwcf .gt_empty_group_heading {
+#uvheltmgoi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -550,15 +550,15 @@ funder_overview_subject %>%
   vertical-align: middle;
 }
 
-#qarqbhbwcf .gt_from_md > :first-child {
+#uvheltmgoi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qarqbhbwcf .gt_from_md > :last-child {
+#uvheltmgoi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qarqbhbwcf .gt_row {
+#uvheltmgoi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -577,7 +577,7 @@ funder_overview_subject %>%
   overflow-x: hidden;
 }
 
-#qarqbhbwcf .gt_stub {
+#uvheltmgoi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -589,7 +589,7 @@ funder_overview_subject %>%
   padding-left: 12px;
 }
 
-#qarqbhbwcf .gt_summary_row {
+#uvheltmgoi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -599,7 +599,7 @@ funder_overview_subject %>%
   padding-right: 5px;
 }
 
-#qarqbhbwcf .gt_first_summary_row {
+#uvheltmgoi .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -609,7 +609,7 @@ funder_overview_subject %>%
   border-top-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_grand_summary_row {
+#uvheltmgoi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -619,7 +619,7 @@ funder_overview_subject %>%
   padding-right: 5px;
 }
 
-#qarqbhbwcf .gt_first_grand_summary_row {
+#uvheltmgoi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -629,11 +629,11 @@ funder_overview_subject %>%
   border-top-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_striped {
+#uvheltmgoi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qarqbhbwcf .gt_table_body {
+#uvheltmgoi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -642,7 +642,7 @@ funder_overview_subject %>%
   border-bottom-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_footnotes {
+#uvheltmgoi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -656,13 +656,13 @@ funder_overview_subject %>%
   border-right-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_footnote {
+#uvheltmgoi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qarqbhbwcf .gt_sourcenotes {
+#uvheltmgoi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -676,47 +676,47 @@ funder_overview_subject %>%
   border-right-color: #D3D3D3;
 }
 
-#qarqbhbwcf .gt_sourcenote {
+#uvheltmgoi .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qarqbhbwcf .gt_left {
+#uvheltmgoi .gt_left {
   text-align: left;
 }
 
-#qarqbhbwcf .gt_center {
+#uvheltmgoi .gt_center {
   text-align: center;
 }
 
-#qarqbhbwcf .gt_right {
+#uvheltmgoi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qarqbhbwcf .gt_font_normal {
+#uvheltmgoi .gt_font_normal {
   font-weight: normal;
 }
 
-#qarqbhbwcf .gt_font_bold {
+#uvheltmgoi .gt_font_bold {
   font-weight: bold;
 }
 
-#qarqbhbwcf .gt_font_italic {
+#uvheltmgoi .gt_font_italic {
   font-style: italic;
 }
 
-#qarqbhbwcf .gt_super {
+#uvheltmgoi .gt_super {
   font-size: 65%;
 }
 
-#qarqbhbwcf .gt_footnote_marks {
+#uvheltmgoi .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="qarqbhbwcf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uvheltmgoi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -1838,6 +1838,40 @@ Physics and Astronomy
 
 <!--/html_preserve-->
 
+## fields per funder
+
+``` r
+field_funder <- hybrid_volume %>%
+  filter(oa_sponsor_type == "FundingBody") %>% 
+  mutate(oa_sponsor = ifelse(is.na(oa_sponsor_name), "Other", oa_sponsor_name)) %>%
+   mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
+  mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
+  left_join(jn_subjects, by = "issn") %>%
+  filter(!is.na(top_level), top_level != "Multidisciplinary") %>%
+  group_by(oa_sponsor, top_level) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  mutate(prop = n_oa_type / sum(n_oa_type)) %>%
+  mutate(oa_sponsor = fct_reorder(oa_sponsor, n_oa_type))
+ggplot(field_funder, aes(x = oa_sponsor, 
+                         y = reorder(top_level, desc(top_level)), 
+                         colour = prop, size = n_oa_type)) + 
+  geom_point() +
+  scale_color_viridis_c(labels = scales::percent_format(accuracy = 5L),
+                      option = "magma",
+                      name = "Percentage per funder",
+                      breaks =  scales::extended_breaks()) +
+  scale_x_discrete(position = "top") +
+  labs(x = NULL, y = NULL) +
+  theme_minimal_grid() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank()) +
+  theme(legend.position = "top", legend.justification = "right") +
+  theme(legend.direction = "horizontal", legend.box = "vertical") +
+  theme(strip.text = element_text(face="bold"))
+```
+
+<img src="008_subject_exploration_files/figure-gfm/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
+
 correlation funder / oa share
 
 ``` r
@@ -1861,7 +1895,7 @@ hybrid_funder_shares <- hybrid_volume %>%
   theme_cowplot()
 ```
 
-<img src="008_subject_exploration_files/figure-gfm/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="008_subject_exploration_files/figure-gfm/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" />
 
 ``` r
 cor.test(hybrid_funder_shares$prop, hybrid_funder_shares$oa_prop, method = "spearman")

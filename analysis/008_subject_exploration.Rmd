@@ -154,7 +154,7 @@ median_all <- subject_all_years %>%
   .$prop %>% 
   median()
 
-ggplot(subject_all_years, aes(fct_reorder(description, n / n_oa, .fun = median, .desc = TRUE), n_oa / n)) + 
+ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median), n_oa / n)) + 
   geom_boxplot(aes(color = subject_area)) +
   geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
   geom_hline(yintercept = median_all,  colour = "red", linetype ="dashed", size = 1) +
@@ -354,6 +354,42 @@ funder_overview_subject %>%
     table.border.bottom.width = px(3)
       )
 ```
+
+## fields per funder
+
+```{r}
+field_funder <- hybrid_volume %>%
+  filter(oa_sponsor_type == "FundingBody") %>% 
+  mutate(oa_sponsor = ifelse(is.na(oa_sponsor_name), "Other", oa_sponsor_name)) %>%
+   mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
+  mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
+  left_join(jn_subjects, by = "issn") %>%
+  filter(!is.na(top_level), top_level != "Multidisciplinary") %>%
+  group_by(oa_sponsor, top_level) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  mutate(prop = n_oa_type / sum(n_oa_type)) %>%
+  mutate(oa_sponsor = fct_reorder(oa_sponsor, n_oa_type))
+ggplot(field_funder, aes(x = oa_sponsor, 
+                         y = reorder(top_level, desc(top_level)), 
+                         colour = prop, size = n_oa_type)) + 
+  geom_point() +
+  scale_color_viridis_c(labels = scales::percent_format(accuracy = 5L),
+                      option = "magma",
+                      name = "Percentage per funder",
+                      breaks =  scales::extended_breaks()) +
+  scale_x_discrete(position = "top") +
+  labs(x = NULL, y = NULL) +
+  theme_minimal_grid() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank()) +
+  theme(legend.position = "top", legend.justification = "right") +
+  theme(legend.direction = "horizontal", legend.box = "vertical") +
+  theme(strip.text = element_text(face="bold"))
+```
+
+
+
+
  correlation funder / oa share
 
 ```{r}
