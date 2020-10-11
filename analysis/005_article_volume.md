@@ -3,7 +3,8 @@ Obtain Article Volume
 Najko Jahn
 7/7/2020
 
-    ## Warning: package 'tibble' was built under R version 4.0.2
+    ## Warning: replacing previous import 'vctrs::data_frame' by 'tibble::data_frame'
+    ## when loading 'dplyr'
 
 ### Connect to database
 
@@ -62,7 +63,7 @@ SELECT
     WHERE
         issued_year > 2014 
         and issued_year < 2020     
-        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')      
+    AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')    
     GROUP BY
         issued_year,
         issn
@@ -80,11 +81,11 @@ article_volume_para %>%
 #> # A tibble: 5 x 5
 #>   issued_year articles      n  para `para/n * 100`
 #>         <int>    <int>  <int> <int>          <dbl>
-#> 1        2015   502886 515003 12117           2.35
-#> 2        2016   528565 541208 12643           2.34
-#> 3        2017   543275 555822 12547           2.26
-#> 4        2018   569447 585562 16115           2.75
-#> 5        2019   604935 621398 16463           2.65
+#> 1        2015   502570 515003 12433           2.41
+#> 2        2016   528229 541208 12979           2.40
+#> 3        2017   542935 555822 12887           2.32
+#> 4        2018   569043 585562 16519           2.82
+#> 5        2019   604692 621398 16706           2.69
 ```
 
 backup
@@ -105,8 +106,8 @@ write_csv(article_volume_para, here::here("data", "article_volume_para.csv"))
     WHERE
         issued_year > 2014          
         and issued_year < 2020              
-        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')          
-        AND NOT regexp_contains(page, '^S')     
+        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')          
+         AND (NOT regexp_contains(page, '^S') OR page is NULL)
     GROUP BY
         issued_year,
         issn
@@ -121,17 +122,17 @@ article_volume_regular %>%
 #> # A tibble: 5 x 2
 #>   issued_year articles
 #>         <int>    <int>
-#> 1        2015   466349
-#> 2        2016   484644
-#> 3        2017   496451
-#> 4        2018   517529
-#> 5        2019   538794
+#> 1        2015   466350
+#> 2        2016   484718
+#> 3        2017   496729
+#> 4        2018   518653
+#> 5        2019   554542
 ```
 
 backup
 
 ``` r
-write_csv(article_volume_para, here::here("data", "article_volume_para_regular.csv"))
+write_csv(article_volume_regular, here::here("data", "article_volume_para_regular.csv"))
 ```
 
 ### Article volume with at least one reference per journal and year

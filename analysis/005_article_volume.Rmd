@@ -81,7 +81,7 @@ SELECT
     WHERE
         issued_year > 2014 
         and issued_year < 2020     
-        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')      
+    AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')    
     GROUP BY
         issued_year,
         issn
@@ -115,8 +115,8 @@ write_csv(article_volume_para, here::here("data", "article_volume_para.csv"))
     WHERE
         issued_year > 2014          
         and issued_year < 2020              
-        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')          
-        AND NOT regexp_contains(page, '^S')     
+        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')          
+         AND (NOT regexp_contains(page, '^S') OR page is NULL)
     GROUP BY
         issued_year,
         issn
@@ -133,7 +133,7 @@ article_volume_regular %>%
 backup
 
 ```{r}
-write_csv(article_volume_para, here::here("data", "article_volume_para_regular.csv"))
+write_csv(article_volume_regular, here::here("data", "article_volume_para_regular.csv"))
 ```
 
 ### Article volume with at least one reference per journal and year

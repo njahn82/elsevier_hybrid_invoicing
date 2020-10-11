@@ -44,7 +44,7 @@ invoice_df <-  readr::read_csv(here::here("data", "invoice_df.csv"))
 #' matching table between Crossref and invoicing metadata
 els_tdm <- readr::read_csv(here::here("data", "els_tmd_links.csv"))
 #' patterns used to exclude paratext
-para <- c('^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')
+para <- c('^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')
 #'
 #' join tables
 hybrid_df <- els_tdm %>% 
