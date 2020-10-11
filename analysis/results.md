@@ -67,19 +67,19 @@ Unpaywall’s paratext recognition approach.\[1\] They account for about
 published in regular issues.
 
 On 23 May 2020, Elsevier APC pricing list comprised 1,982 journals that
-supported the hybrid model. Of those, 1,765 hybrid journals published at
+supported the hybrid model. Of those, 1,755 hybrid journals published at
 least one open access article under a Creative Commons license between
 2015 and 2019, corresponding to about 89% of journal titles in
 Elsevier’s hybrid journal portfolio. These journals published a total
-of 71,930 immediate open access articles between 2015 and 2019,
-corresponding to a share of 2.9%. Table present the high-level findings
-by year, illustrating a moderate growth in hybrid open access. Although
-the number of hybrid journals with at least one open access article
-remained somehow constant, the number of open access articles rose
-substantially from 10,678 in 2015 to 19,345 in 2019. However, the
-overall uptake of open access in Elsevier’s hybrid journal portfolio
-grew slowly from 2.4% to 3.4%, because the number of articles published
-also increased during this five-years period.
+of 71,643 immediate open access articles between 2015 and 2019,
+corresponding to a share of 3%. Table present the high-level findings by
+year, illustrating a moderate growth in hybrid open access. Although the
+number of hybrid journals with at least one open access article remained
+somehow constant, the number of open access articles rose substantially
+from 10,672 in 2015 to 19,311 in 2019. However, the overall uptake of
+open access in Elsevier’s hybrid journal portfolio grew slowly from 2.6%
+to 3.7%, because the number of articles published also increased during
+this five-years period.
 
 <!--html_preserve-->
 
@@ -87,7 +87,7 @@ also increased during this five-years period.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ludtkpulia .gt_table {
+#dvafmnqdia .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -112,7 +112,7 @@ also increased during this five-years period.
   border-left-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_heading {
+#dvafmnqdia .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -124,7 +124,7 @@ also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_title {
+#dvafmnqdia .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -134,7 +134,7 @@ also increased during this five-years period.
   border-bottom-width: 0;
 }
 
-#ludtkpulia .gt_subtitle {
+#dvafmnqdia .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -144,13 +144,13 @@ also increased during this five-years period.
   border-top-width: 0;
 }
 
-#ludtkpulia .gt_bottom_border {
+#dvafmnqdia .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_col_headings {
+#dvafmnqdia .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -165,7 +165,7 @@ also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_col_heading {
+#dvafmnqdia .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -185,7 +185,7 @@ also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#ludtkpulia .gt_column_spanner_outer {
+#dvafmnqdia .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -197,15 +197,15 @@ also increased during this five-years period.
   padding-right: 4px;
 }
 
-#ludtkpulia .gt_column_spanner_outer:first-child {
+#dvafmnqdia .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ludtkpulia .gt_column_spanner_outer:last-child {
+#dvafmnqdia .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ludtkpulia .gt_column_spanner {
+#dvafmnqdia .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -217,7 +217,7 @@ also increased during this five-years period.
   width: 100%;
 }
 
-#ludtkpulia .gt_group_heading {
+#dvafmnqdia .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -239,7 +239,7 @@ also increased during this five-years period.
   vertical-align: middle;
 }
 
-#ludtkpulia .gt_empty_group_heading {
+#dvafmnqdia .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -254,15 +254,15 @@ also increased during this five-years period.
   vertical-align: middle;
 }
 
-#ludtkpulia .gt_from_md > :first-child {
+#dvafmnqdia .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ludtkpulia .gt_from_md > :last-child {
+#dvafmnqdia .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ludtkpulia .gt_row {
+#dvafmnqdia .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -281,7 +281,7 @@ also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#ludtkpulia .gt_stub {
+#dvafmnqdia .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -293,7 +293,7 @@ also increased during this five-years period.
   padding-left: 12px;
 }
 
-#ludtkpulia .gt_summary_row {
+#dvafmnqdia .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -303,7 +303,7 @@ also increased during this five-years period.
   padding-right: 5px;
 }
 
-#ludtkpulia .gt_first_summary_row {
+#dvafmnqdia .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -313,7 +313,7 @@ also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_grand_summary_row {
+#dvafmnqdia .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -323,7 +323,7 @@ also increased during this five-years period.
   padding-right: 5px;
 }
 
-#ludtkpulia .gt_first_grand_summary_row {
+#dvafmnqdia .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -333,11 +333,11 @@ also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_striped {
+#dvafmnqdia .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ludtkpulia .gt_table_body {
+#dvafmnqdia .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -346,7 +346,7 @@ also increased during this five-years period.
   border-bottom-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_footnotes {
+#dvafmnqdia .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -360,13 +360,13 @@ also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_footnote {
+#dvafmnqdia .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ludtkpulia .gt_sourcenotes {
+#dvafmnqdia .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -380,47 +380,47 @@ also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#ludtkpulia .gt_sourcenote {
+#dvafmnqdia .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ludtkpulia .gt_left {
+#dvafmnqdia .gt_left {
   text-align: left;
 }
 
-#ludtkpulia .gt_center {
+#dvafmnqdia .gt_center {
   text-align: center;
 }
 
-#ludtkpulia .gt_right {
+#dvafmnqdia .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ludtkpulia .gt_font_normal {
+#dvafmnqdia .gt_font_normal {
   font-weight: normal;
 }
 
-#ludtkpulia .gt_font_bold {
+#dvafmnqdia .gt_font_bold {
   font-weight: bold;
 }
 
-#ludtkpulia .gt_font_italic {
+#dvafmnqdia .gt_font_italic {
   font-style: italic;
 }
 
-#ludtkpulia .gt_super {
+#dvafmnqdia .gt_super {
   font-size: 65%;
 }
 
-#ludtkpulia .gt_footnote_marks {
+#dvafmnqdia .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="ludtkpulia" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dvafmnqdia" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;; width: 0px">
 
@@ -518,31 +518,31 @@ Journals
 
 <td class="gt_row gt_right">
 
-1,371
+1,364
 
 </td>
 
 <td class="gt_row gt_right">
 
-1,410
+1,401
 
 </td>
 
 <td class="gt_row gt_right">
 
-1,507
+1,501
 
 </td>
 
 <td class="gt_row gt_right">
 
-1,607
+1,600
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-1,765
+1,755
 
 </td>
 
@@ -568,37 +568,37 @@ Total
 
 <td class="gt_row gt_right">
 
-440,019
+406,701
 
 </td>
 
 <td class="gt_row gt_right">
 
-463,369
+422,423
 
 </td>
 
 <td class="gt_row gt_right">
 
-480,365
+436,418
 
 </td>
 
 <td class="gt_row gt_right">
 
-517,727
+468,952
 
 </td>
 
 <td class="gt_row gt_right">
 
-567,670
+518,062
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-2,469,150
+2,422,087
 
 </td>
 
@@ -614,37 +614,37 @@ Avg.
 
 <td class="gt_row gt_right">
 
-334.1
+308.8
 
 </td>
 
 <td class="gt_row gt_right">
 
-338.0
+309.7
 
 </td>
 
 <td class="gt_row gt_right">
 
-340.7
+311.5
 
 </td>
 
 <td class="gt_row gt_right">
 
-343.5
+312.4
 
 </td>
 
 <td class="gt_row gt_right">
 
-353.2
+323.8
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-342.4
+1,380.1
 
 </td>
 
@@ -660,37 +660,37 @@ SD
 
 <td class="gt_row gt_right">
 
-448.8
+401.1
 
 </td>
 
 <td class="gt_row gt_right">
 
-471.7
+419.6
 
 </td>
 
 <td class="gt_row gt_right">
 
-487.2
+427.5
 
 </td>
 
 <td class="gt_row gt_right">
 
-508.9
+445.6
 
 </td>
 
 <td class="gt_row gt_right">
 
-540.0
+479.9
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-494.4
+1,937.5
 
 </td>
 
@@ -716,37 +716,37 @@ Total OA
 
 <td class="gt_row gt_right">
 
-10,678
+10,672
 
 </td>
 
 <td class="gt_row gt_right">
 
-12,829
+12,729
 
 </td>
 
 <td class="gt_row gt_right">
 
-13,434
+13,361
 
 </td>
 
 <td class="gt_row gt_right">
 
-15,644
+15,570
 
 </td>
 
 <td class="gt_row gt_right">
 
-19,345
+19,311
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-71,930
+71,643
 
 </td>
 
@@ -768,7 +768,7 @@ Avg.
 
 <td class="gt_row gt_right">
 
-9.4
+9.3
 
 </td>
 
@@ -786,7 +786,7 @@ Avg.
 
 <td class="gt_row gt_right">
 
-12.0
+12.1
 
 </td>
 
@@ -808,7 +808,7 @@ SD
 
 <td class="gt_row gt_right">
 
-13.0
+12.9
 
 </td>
 
@@ -826,19 +826,19 @@ SD
 
 <td class="gt_row gt_right">
 
-16.3
+16.2
 
 </td>
 
 <td class="gt_row gt_right">
 
-20.0
+20.1
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-68.8
+68.9
 
 </td>
 
@@ -864,19 +864,7 @@ Percentage
 
 <td class="gt_row gt_right">
 
-2.4
-
-</td>
-
-<td class="gt_row gt_right">
-
-2.8
-
-</td>
-
-<td class="gt_row gt_right">
-
-2.8
+2.6
 
 </td>
 
@@ -888,13 +876,25 @@ Percentage
 
 <td class="gt_row gt_right">
 
-3.4
+3.1
+
+</td>
+
+<td class="gt_row gt_right">
+
+3.3
+
+</td>
+
+<td class="gt_row gt_right">
+
+3.7
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-2.9
+3.0
 
 </td>
 
@@ -910,7 +910,7 @@ Avg.
 
 <td class="gt_row gt_right">
 
-3.6
+3.7
 
 </td>
 
@@ -922,25 +922,25 @@ Avg.
 
 <td class="gt_row gt_right">
 
-4.3
+4.4
 
 </td>
 
 <td class="gt_row gt_right">
 
-4.6
+4.7
 
 </td>
 
 <td class="gt_row gt_right">
 
-5.2
+5.4
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-4.2
+3.8
 
 </td>
 
@@ -962,7 +962,7 @@ SD
 
 <td class="gt_row gt_right">
 
-6.6
+5.9
 
 </td>
 
@@ -980,13 +980,13 @@ SD
 
 <td class="gt_row gt_right">
 
-5.6
+5.7
 
 </td>
 
 <td class="gt_row gt_right" style="background-color: #E5E5E5;">
 
-4.6
+4.1
 
 </td>
 
@@ -1010,12 +1010,12 @@ quartiles and whiskers stretch farther over the years, indicating that
 the range of uptake among journals with an above-average proportion of
 open access articles increased over the years. Nevertheless, the
 prevalence of open access even among these journals can be described as
-relatively low; in 2019, 95% of Elsevier hybrid journals published 15%
+relatively low; in 2019, 95% of Elsevier hybrid journals published 16%
 or less open access articles.
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-14-1.png" alt="Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 18%." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-8-1.png" alt="Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 18%." width="70%" />
 
 <p class="caption">
 
@@ -1033,20 +1033,20 @@ distributed?*
 Figure presents a breakdown by Creative Commons license variant used for
 hybrid open access by year. Elsevier provided commercial (cc-by) and a
 less permissive non-commercial license (cc-by-nc) for open access
-publishing in otherwise subscription-based journals. 59 percent of open
+publishing in otherwise subscription-based journals. 58 percent of open
 access articles can be re-used for non-commercial purposes. This
 proportion remained the same between 2015-19.
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-16-1.png" alt="Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND license." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-10-1.png" alt="Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND-NC license." width="70%" />
 
 <p class="caption">
 
 Immediate open access articles in hybrid journals by open content
 license and year. The blue area represent articles permitting commercial
 adaption under a Creative Commons CC-BY license, while the purple area
-displays articles under a less permissive Commons CC-BY-ND license.
+displays articles under a less permissive Commons CC-BY-ND-NC license.
 
 </p>
 
@@ -1056,7 +1056,7 @@ displays articles under a less permissive Commons CC-BY-ND license.
 
 Next, we present a breakdown of open content licensed articles by open
 access type relative to Elsevier’s journal productivity (ses Figure). In
-total, Elsevier provided open access to 327,625 articles at he time of
+total, Elsevier provided open access to 328,601 articles at he time of
 our study, corresponding to an open access share of 12%. Hybrid open
 access had the lowest proportion ( 22), while over half of open access
 articles were made freely available after an embargo period ( 50%)
@@ -1133,18 +1133,18 @@ from 2015 to date.
 
 Figure presents a breakdown by country, highlighting the dominating role
 of a few countries. Not surprisingly, mostly British funders paid for
-hybrid open access in Elsevier hybrid journals ( 59%), followed by
-funding bodies from the European Commission ( 13%) and the Netherlands (
+hybrid open access in Elsevier hybrid journals ( 49%), followed by
+funding bodies from the European Commission ( 24%) and the Netherlands (
 12%). In the latter case, invoices for individual open access articles
 were not send to research funders, but to the Dutch VSNU, a consortium
 of Universities in the Netherlands that has negotiated agreements with
 Elsevier since 2016. The prominent role of Norway can be also explained
 by a national deal, which started in 2019. US-based open access sponsors
-originated mainly from the Bill & Melinda Gates Foundation (n = 1,031).
+originated mainly from the Bill & Melinda Gates Foundation (n = 1,030).
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-22-1.png" alt="Invoiced sponsors of open access articles in Elsevier hybrid journals by country (2015-19)" width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-16-1.png" alt="Invoiced sponsors of open access articles in Elsevier hybrid journals by country (2015-19)" width="70%" />
 
 <p class="caption">
 
@@ -1164,7 +1164,7 @@ licenses ( 62%).
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-24-1.png" alt="Invoicing for open access articles in hybrid journals by open content license, 2015-2019." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-18-1.png" alt="Invoicing for open access articles in hybrid journals by open content license, 2015-2019." width="70%" />
 
 <p class="caption">
 
@@ -1178,7 +1178,7 @@ license, 2015-2019.
 Examining funders and research organisations that were invoiced directly
 by Elsevier, strongly suggests that a few funders with a strict CC-BY
 policy have contributed to the dominance of CC-BY license. Table
-presents the Top 10 out of 70 sponsoring bodies in terms of funded open
+presents the Top 10 out of 69 sponsoring bodies in terms of funded open
 access articles between 2015-19. Together, these funders accounted for
 around 80% of central payments. The table furthermore shows the number
 of distinct journals and the share of CC-BY licensed articles. Notably,
@@ -1196,7 +1196,7 @@ had a CC-BY licensing policy.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#oidosgqmgd .gt_table {
+#zetmidwpin .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1221,7 +1221,7 @@ had a CC-BY licensing policy.
   border-left-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_heading {
+#zetmidwpin .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1233,7 +1233,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_title {
+#zetmidwpin .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1243,7 +1243,7 @@ had a CC-BY licensing policy.
   border-bottom-width: 0;
 }
 
-#oidosgqmgd .gt_subtitle {
+#zetmidwpin .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1253,13 +1253,13 @@ had a CC-BY licensing policy.
   border-top-width: 0;
 }
 
-#oidosgqmgd .gt_bottom_border {
+#zetmidwpin .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_col_headings {
+#zetmidwpin .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -1274,7 +1274,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_col_heading {
+#zetmidwpin .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1294,7 +1294,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#oidosgqmgd .gt_column_spanner_outer {
+#zetmidwpin .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1306,15 +1306,15 @@ had a CC-BY licensing policy.
   padding-right: 4px;
 }
 
-#oidosgqmgd .gt_column_spanner_outer:first-child {
+#zetmidwpin .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oidosgqmgd .gt_column_spanner_outer:last-child {
+#zetmidwpin .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oidosgqmgd .gt_column_spanner {
+#zetmidwpin .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -1326,7 +1326,7 @@ had a CC-BY licensing policy.
   width: 100%;
 }
 
-#oidosgqmgd .gt_group_heading {
+#zetmidwpin .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1348,7 +1348,7 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#oidosgqmgd .gt_empty_group_heading {
+#zetmidwpin .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1363,15 +1363,15 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#oidosgqmgd .gt_from_md > :first-child {
+#zetmidwpin .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oidosgqmgd .gt_from_md > :last-child {
+#zetmidwpin .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oidosgqmgd .gt_row {
+#zetmidwpin .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1390,7 +1390,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#oidosgqmgd .gt_stub {
+#zetmidwpin .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1402,7 +1402,7 @@ had a CC-BY licensing policy.
   padding-left: 12px;
 }
 
-#oidosgqmgd .gt_summary_row {
+#zetmidwpin .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1412,7 +1412,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#oidosgqmgd .gt_first_summary_row {
+#zetmidwpin .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1422,7 +1422,7 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_grand_summary_row {
+#zetmidwpin .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1432,7 +1432,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#oidosgqmgd .gt_first_grand_summary_row {
+#zetmidwpin .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1442,11 +1442,11 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_striped {
+#zetmidwpin .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oidosgqmgd .gt_table_body {
+#zetmidwpin .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1455,7 +1455,7 @@ had a CC-BY licensing policy.
   border-bottom-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_footnotes {
+#zetmidwpin .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1469,13 +1469,13 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_footnote {
+#zetmidwpin .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#oidosgqmgd .gt_sourcenotes {
+#zetmidwpin .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1489,47 +1489,47 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#oidosgqmgd .gt_sourcenote {
+#zetmidwpin .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#oidosgqmgd .gt_left {
+#zetmidwpin .gt_left {
   text-align: left;
 }
 
-#oidosgqmgd .gt_center {
+#zetmidwpin .gt_center {
   text-align: center;
 }
 
-#oidosgqmgd .gt_right {
+#zetmidwpin .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oidosgqmgd .gt_font_normal {
+#zetmidwpin .gt_font_normal {
   font-weight: normal;
 }
 
-#oidosgqmgd .gt_font_bold {
+#zetmidwpin .gt_font_bold {
   font-weight: bold;
 }
 
-#oidosgqmgd .gt_font_italic {
+#zetmidwpin .gt_font_italic {
   font-style: italic;
 }
 
-#oidosgqmgd .gt_super {
+#zetmidwpin .gt_super {
   font-size: 65%;
 }
 
-#oidosgqmgd .gt_footnote_marks {
+#zetmidwpin .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="oidosgqmgd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zetmidwpin" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -1615,13 +1615,13 @@ Engineering and Physical Sciences Research Council
 
 <td class="gt_row gt_right">
 
-622
+619
 
 </td>
 
 <td class="gt_row gt_right">
 
-4,666
+4,663
 
 </td>
 
@@ -1655,13 +1655,13 @@ VSNU<sup class="gt_footnote_marks">1</sup>
 
 <td class="gt_row gt_right">
 
-358
+357
 
 </td>
 
 <td class="gt_row gt_right">
 
-2,836
+2,835
 
 </td>
 
@@ -1735,13 +1735,13 @@ European Research Council
 
 <td class="gt_row gt_right">
 
-543
+541
 
 </td>
 
 <td class="gt_row gt_right">
 
-1,990
+1,986
 
 </td>
 
@@ -1757,9 +1757,9 @@ European Research Council
 
 </td>
 
-<td class="gt_row gt_right" style="background-color: #FBB480; color: #000000;">
+<td class="gt_row gt_right" style="background-color: #FBB37F; color: #000000;">
 
-8%
+9%
 
 </td>
 
@@ -1797,7 +1797,7 @@ Medical Research Council
 
 </td>
 
-<td class="gt_row gt_right" style="background-color: #CD3078; color: #FFFFFF;">
+<td class="gt_row gt_right" style="background-color: #CC3078; color: #FFFFFF;">
 
 51%
 
@@ -1895,13 +1895,13 @@ Bill & Melinda Gates Foundation
 
 <td class="gt_row gt_right">
 
-255
+254
 
 </td>
 
 <td class="gt_row gt_right">
 
-1,031
+1,030
 
 </td>
 
@@ -2015,13 +2015,13 @@ Other
 
 <td class="gt_row gt_right">
 
-1,019
+1,013
 
 </td>
 
 <td class="gt_row gt_right">
 
-5,219
+5,201
 
 </td>
 
@@ -2033,7 +2033,7 @@ Other
 
 <td class="gt_row gt_right" style="background-color: #F0756E; color: #000000;">
 
-54%
+55%
 
 </td>
 
@@ -2055,13 +2055,13 @@ All
 
 <td class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: black;">
 
-1,429
+1,423
 
 </td>
 
 <td class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: black;">
 
-24,277
+24,250
 
 </td>
 
@@ -2117,7 +2117,7 @@ As another variable, the table highlights the proportion of public
 disclosure of funding through the Open APC initiative. The Open APC
 Initiative disclosed more than one-third of centrally invoiced articles
 ( 36%), but also publication fees that were billed to authors directly
-(n = 2,343). This indicates that authors were able to make use of other
+(n = 2,356). This indicates that authors were able to make use of other
 types of institutional support structures for publication fees such as
 publication funds.
 

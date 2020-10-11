@@ -35,7 +35,6 @@ knitr::knit_hooks$set(
 library(tidyverse)
 library(here)
 library(cowplot)
-library(ggeconodist)
 library(gt)
 ```
 
@@ -108,152 +107,105 @@ Following the approach of our earlier study [@Matthias_2019], we draw on histori
 
 *What is the uptake of open access in Elsevier's current hybrid journal portfolio?*
 
-```{r}
-els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
-```
-
-```{r}
-# paratext pattern
-para <- c('^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')
-```
-
-```{r}
-hybrid_md <- readr::read_csv(here::here("data", "hybrid_md.csv"))
-els_tdm <- readr::read_csv(here::here("data", "els_tmd_links.csv"))
-invoice_df <-  readr::read_csv(here::here("data", "invoice_df.csv"))
-
-hybrid_df <- els_tdm %>% 
-  select(doi, URL) %>% 
-  inner_join(invoice_df, by = c("URL" = "tdm_url")) %>% 
-  select(-URL) %>% 
-  inner_join(hybrid_md, by = c("doi")) %>% 
-  distinct() %>%
-  filter(!grepl(para, title))
-
-flipped_jns_df <- els_jns %>%
-  filter(issn %in% flipped_jns$issn) %>%
-  select(oa_model, issn, year)
-
-hybrid_df <- left_join(hybrid_df, flipped_jns_df, by = c("issn", "issued_year" = "year")) %>%
-  filter(!oa_model %in% "Open Access") %>%
-  select(-oa_model)
-```
-
 To determine the number of Elsevier hybrid journals with at least one open access article, we focused on the most current version of Elsevier's APC pricing list, lastly updated on 23 May 2020 [@Matthias_2020]. We used the Crossref index to determine the overall article volume of Elsevier's hybrid journal portfolio, and related it to the number of open access articles indicated by Creative Commons licenses. We only considered open access articles that were provided without delay, which we determined from mined full-text metadata. Because Elsevier also issued DOIs to non-scholarly journal content including table of contents and list of reviewers, we excluded these records using Unpaywall's paratext recognition approach [^1]. They account for about 2.5% of DOIs registered by Crossref. Moreover, we focused on articles published in regular issues.
 
 [^1]: <https://support.unpaywall.org/support/solutions/articles/44001894783-what-does-is-paratext-mean-in-the-api->
 
 
-```{r}
-eligible_jns <- hybrid_df %>% 
-  filter(oa_archive == FALSE) %>% 
-  distinct(issn)
-```
 
-
-```{r}
-# required data spreadsheets
-# pub volume
-els_pub_volume <- readr::read_csv(
-  here::here("data", "article_volume_para.csv")
-  ) 
-# eligble journals 
-eligible_jns <- hybrid_df %>% 
-  filter(oa_archive == FALSE) %>% 
-  distinct(issn)
-# pub volume eligible data
-hybrid_volume <- els_pub_volume %>%
-  filter(issn %in% eligible_jns$issn) %>%
-  inner_join(hybrid_df, by = c("issn", "issued_year")) %>%
-  filter(oa_archive == FALSE) %>%
-  filter(!grepl("^S", page))
-# backup 
-write_csv(hybrid_volume, here::here("data", "hybrid_volume_eligible.csv"))
-
-els_articles <- 
-  hybrid_volume %>%
-  distinct(issued_year, issn, articles) %>%
+```{r summary_statistics_per_year}
+hybrid_oa_volume <- readr::read_csv(here::here("data", "hybrid_oa_volume.csv"))
+# journal and article metrics **per year**
+hybrid_oa_per_year <- hybrid_oa_volume %>%
   group_by(issued_year) %>%
+  # distinct jns with at least one article per year
+  filter(oa > 0) %>%
   summarise(
+      # distinct jns with at least one article per year
+    n_journals = n(),
+    # article metrics
     articles_n = sum(articles),
-            articles_mean = mean(articles),
-            articles_sd = sd(articles)
-    )
-els_yr <- 
-  hybrid_volume %>%
-  group_by(issued_year) %>%
-  summarise(journals = n_distinct(issn)) %>%
-  inner_join(els_articles, by = "issued_year")
-
-# oa
-oa_per_jn_year <- hybrid_volume %>%
-  group_by(issued_year, issn) %>%
-  summarise(oa = n(), .groups = "drop")
-oa_ind <- oa_per_jn_year %>%
-  group_by(issued_year) %>%
-  summarise(oa_n = sum(oa),
-            oa_mean = mean(oa),
-            oa_sd = sd(oa)) 
-# oa uptake 
-oa_uptake_ind <- hybrid_volume %>% 
-  distinct(issued_year, issn, articles) %>%
-  inner_join(oa_per_jn_year, by = c("issn", "issued_year")) %>%
+    articles_mean = mean(articles),
+    articles_sd = sd(articles),
+    # oa articles metrics
+    oa_n = sum(oa),
+    oa_mean = mean(oa),
+    oa_sd = sd(oa)
+    ) %>%
+  mutate(oa_uptake = oa_n / articles_n)
+# oa uptake per year
+oa_uptake_per_year <- hybrid_oa_volume %>% 
+  filter(oa > 0) %>%
   mutate(prop = oa / articles) %>%
   group_by(issued_year) %>%
   summarise(oa_uptake_mean = mean(prop),
             oa_uptake_sd = sd(prop))
-# oa uptake all 
-oa_uptake_15_19 <- hybrid_volume %>% 
-  distinct(issued_year, issn, articles) %>%
-  inner_join(oa_per_jn_year, by = c("issn", "issued_year")) %>%
-    group_by(issn) %>%
-    summarise(oa = sum(oa),
-              articles = sum(articles)) %>%
-    mutate(prop = oa / articles) 
-# article volume 2015-19
-volume_15_19 <- els_pub_volume %>%
-  # elgible journals
-  filter(issn %in% eligible_jns$issn) %>%
-  summarise(n = sum(articles),
-            mean_articles = mean(articles),
-            sd = sd(articles))
-  
+# merge indicators
+ind_per_year <- inner_join(hybrid_oa_per_year, oa_uptake_per_year, by = "issued_year")
+```
 
-# all 
-total_df <- tibble::tibble(
-  issued_year = "2015-19",
-  journals = hybrid_volume %>% distinct(issn) %>% nrow(),
-  articles_n = volume_15_19$n,
-  articles_mean = volume_15_19$mean_articles,
-  articles_sd = volume_15_19$sd,
-  oa_n = nrow(hybrid_volume),
-  oa_mean = hybrid_volume %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% mean(),
-  oa_sd = hybrid_volume %>% group_by(issn) %>% summarise(oa = n()) %>% pull(oa) %>% sd(),
-  oa_uptake = oa_n / articles_n,
-  oa_uptake_mean = mean(oa_uptake_15_19$prop),
-  oa_uptake_sd = sd(oa_uptake_15_19$prop)
-         )
 
-ind_df <- inner_join(els_yr, oa_ind, by = "issued_year") %>%
-  mutate(oa_uptake = oa_n / articles_n) %>%
-  inner_join(oa_uptake_ind, by = "issued_year") %>%
-  mutate(issued_year = as.character(issued_year)) %>%
-  bind_rows(total_df) %>%
-  mutate(oa_uptake = oa_uptake * 100) %>%
-  mutate(oa_uptake_mean = oa_uptake_mean * 100) %>%
-  mutate(oa_uptake_sd = oa_uptake_sd * 100)
+```{r summary_statistics_2015_19}
+# five-years article volume
+all_jn_articles <- hybrid_oa_volume %>%
+  group_by(issn) %>%
+  summarise(
+    # articles
+    articles_p_jn = sum(articles)
+    ) %>%
+  ungroup() %>%
+  summarise(
+    n_journals = n(),
+    articles_n = sum(articles_p_jn),
+    articles_mean = mean(articles_p_jn),
+    articles_sd = sd(articles_p_jn)
+  )
+# five-years OA article volume
+all_oa_articles <- 
+  hybrid_oa_volume %>%
+  group_by(issn) %>%
+  summarise(
+    # articles
+    oa_p_jn = sum(oa)
+    ) %>%
+  ungroup() %>%
+  summarise(
+    oa_n = sum(oa_p_jn),
+    oa_mean = mean(oa_p_jn),
+    oa_sd = sd(oa_p_jn)
+  )
+# five-years OA uptake rate
+oa_uptake <- 
+  hybrid_oa_volume %>%
+  group_by(issn) %>%
+  summarise(
+    # articles
+    articles_p_jn = sum(articles),
+    oa_p_jn = sum(oa)
+    ) %>%
+  mutate(prop = oa_p_jn / articles_p_jn) %>%
+  ungroup() %>%
+  summarise(oa_uptake = sum(oa_p_jn) / sum(articles_p_jn),
+            oa_uptake_mean = mean(prop),
+            oa_uptake_sd = sd(prop)
+  )
+# bringing it all together
+five_years_ind <- bind_cols(issued_year = "2015-19", all_jn_articles, all_oa_articles, oa_uptake)
 
-ind_summary_table <- ind_df %>% 
-  pivot_longer(journals:oa_uptake_sd, names_to = "indicator", values_to = "count") %>%
+ind_summary_table <- ind_per_year %>%
+  mutate(issued_year = as.character(issued_year)) %>% 
+  bind_rows(five_years_ind) %>%
+  mutate(across(contains("uptake")) * 100) %>%
+  pivot_longer(n_journals:oa_uptake_sd, names_to = "indicator", values_to = "count") %>%
   pivot_wider(names_from = issued_year, values_from = count)
 ```
 
-On 23 May 2020, Elsevier APC pricing list comprised `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` journals that supported the hybrid model. Of those, `r hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow()` hybrid journals published at least one open access article under a Creative Commons license between 2015 and 2019, corresponding to about `r round(hybrid_df %>% filter(oa_archive == FALSE) %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of journal titles in Elsevier’s hybrid journal portfolio. These journals published a total of `r total_df$oa_n` immediate open access articles between 2015 and 2019, corresponding to a share of `r total_df$oa_uptake * 100`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r ind_df %>% filter(issued_year == "2015") %>% pull(oa_n)` in 2015 to `r ind_df %>% filter(issued_year == "2019") %>% pull(oa_n)` in 2019. However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r ind_df %>% filter(issued_year == 2015) %>% pull(oa_uptake)`% to `r ind_df %>% filter(issued_year == 2019) %>% pull(oa_uptake)`%, because the number of articles published also increased during this five-years period.
+On 23 May 2020, Elsevier APC pricing list comprised `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` journals that supported the hybrid model. Of those, `r hybrid_oa_volume %>% distinct(issn) %>% nrow()` hybrid journals published at least one open access article under a Creative Commons license between 2015 and 2019, corresponding to about `r round(hybrid_oa_volume %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of journal titles in Elsevier’s hybrid journal portfolio. These journals published a total of `r sum(hybrid_oa_volume$oa)` immediate open access articles between 2015 and 2019, corresponding to a share of `r round(sum(hybrid_oa_volume$oa) / sum(hybrid_oa_volume$articles) * 100, 1)`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r hybrid_oa_volume %>% filter(issued_year == "2015") %>% pull(oa) %>% sum()` in 2015 to `r hybrid_oa_volume %>% filter(issued_year == "2019") %>% pull(oa) %>% sum()` in 2019. However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r round(ind_per_year %>% filter(issued_year == 2015) %>% pull(oa_uptake) * 100, 1)`% to `r round(ind_per_year %>% filter(issued_year == 2019) %>% pull(oa_uptake) *100, 1)`%, because the number of articles published also increased during this five-years period.
 
 ```{r}
 table_descriptives_ind <- tribble(
   ~ind_group, ~ind, ~ind_name,
-  "Elsevier Hybrid Journals with OA article(s)", "journals", "Journals",
+  "Elsevier Hybrid Journals with OA article(s)", "n_journals", "Journals",
   "Articles published", "articles_n", "Total",
   "Articles published", "articles_mean", "Avg.",
   "Articles published", "articles_sd", "SD",
@@ -314,26 +266,14 @@ gt_1 <- inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "in
     stub.border.color = "white"
   )
 gt_1
-#gt::gtsave(gt_1, here::here("figure", "gt_overview.png"), dpi = 300)
 ```
 
 
-```{r}
-els_jn_pub_volume <- els_pub_volume %>%
-  filter(issn %in% eligible_jns$issn) %>%
-  group_by(issued_year, issn) %>%
-  summarise(articles = sum(articles),
-            journals = n_distinct(issn))
-hybrid_oa_per_jn <- hybrid_volume %>%
-  group_by(issued_year, issn) %>%
-  summarise(oa_articles = n())%>%
-  inner_join(els_jn_pub_volume, by = c("issued_year", "issn")) %>%
-  ungroup() %>%
-  mutate(prop = oa_articles / articles) 
-```
 
 ```{r}
-perc_df <- hybrid_oa_per_jn %>%
+perc_df <- hybrid_oa_volume %>%
+  mutate(prop = oa / articles) %>%
+  filter(oa > 0) %>%
   group_by(issued_year) %>% 
   summarize(median = median(prop),
             p_10 = quantile(prop, 0.1),
@@ -346,35 +286,34 @@ Figure presents to which extent the open access uptake rates varied among Elsevi
 
 
 ```{r, fig.cap = "Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 18%."}
-ggplot(hybrid_oa_per_jn, aes(factor(issued_year), prop)) + 
+hybrid_oa_volume %>%
+  mutate(prop = oa / articles) %>%
+  filter(oa > 0) %>%
+ggplot(aes(factor(issued_year), prop)) + 
   geom_boxplot(outlier.size = 1, outlier.alpha = .5) + 
-  coord_cartesian(ylim=c(0,0.18)) +
+  coord_cartesian(ylim=c(0,0.2)) +
   theme_minimal_hgrid() +
   scale_y_continuous(labels = scales::percent_format(accuracy = 5L),
       expand = expansion(mult = c(0, 0.05))) +
   labs(x = "Publication Years",
        y = "Open Access Uptake")
-# licenses used
 ```
 
 ```{r}
 # per year
-yrl_volume <- hybrid_oa_per_jn %>% 
-  group_by(issued_year) %>% 
-  summarise(articles = sum(articles))
+hybrid_articles <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
 
-hybrid_license <- hybrid_volume %>%
-  filter(oa_archive == FALSE) %>%
-  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
+hybrid_license <- hybrid_articles %>%
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd")) %>%
   group_by(cc_norm, issued_year) %>%
   summarise(cc_articles = n())
 ```
 
 *Under which open content licenses are the open access articles distributed?*
 
-Figure presents a breakdown by Creative Commons license variant used for hybrid open access by year. Elsevier provided commercial (cc-by) and a less permissive non-commercial license (cc-by-nc) for open access publishing in otherwise subscription-based journals. `r  round(hybrid_license %>% group_by(cc_norm) %>% summarise(n = sum(cc_articles)) %>% mutate(prop = n / sum(n)) %>% filter(cc_norm == "cc-by-nc") %>% pull(prop) * 100,0)` percent of open access articles can be re-used for non-commercial purposes. This proportion remained the same between 2015-19.
+Figure presents a breakdown by Creative Commons license variant used for hybrid open access by year. Elsevier provided commercial (cc-by) and a less permissive non-commercial license (cc-by-nc) for open access publishing in otherwise subscription-based journals. `r  round(hybrid_license %>% group_by(cc_norm) %>% summarise(n = sum(cc_articles)) %>% mutate(prop = n / sum(n)) %>% filter(cc_norm == "cc-by-nc-nd") %>% pull(prop) * 100,0)` percent of open access articles can be re-used for non-commercial purposes. This proportion remained the same between 2015-19.
 
-```{r, fig.cap = "Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND license."}
+```{r, fig.cap = "Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND-NC license."}
 hybrid_license %>%
   ggplot(aes(factor(issued_year), cc_articles, fill = cc_norm, group = cc_norm)) +
   geom_area(stat = "identity",
@@ -388,8 +327,8 @@ hybrid_license %>%
       breaks = scales::pretty_breaks()
   ) +
   scale_fill_manual(values = 
-                      c(`cc-by` = "#0093c7",
-  `cc-by-nc` = "#B52141")) +
+                      c(`cc-by` = "#B52141",
+                        `cc-by-nc-nd` = "#0093c7")) +
   labs(x = "Publication year", y = "Total OA articles") +
   theme_minimal_hgrid() +
   theme(legend.position = "top",
@@ -421,7 +360,7 @@ Figure B presents a breakdown of open content licensed articles by open access t
 
 ```{r}
 # load eligible oa articles
-hybrid_volume <- readr::read_csv(here::here("data", "hybrid_volume_eligible.csv"))
+hybrid_volume <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
 
 # aggregate data
 sponsored_articles <- hybrid_volume %>%
@@ -467,9 +406,9 @@ tt <- read_sheet("https://docs.google.com/spreadsheets/d/1AqjCLn6VNGJpQ6zdmFSwuh
 ```{r}
 hybrid_invoice <- hybrid_volume %>%
   filter(oa_sponsor_type == "FundingBody") %>%
-  rename(yrl_volume = articles) %>%
+ # rename(yrl_volume = articles) %>%
   left_join(tt, by = c("oa_sponsor_name")) %>%
-  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc"))
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd"))
 
 sponsor_country <- hybrid_invoice %>%
   mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
@@ -490,7 +429,7 @@ sponsor_country %>%
 ) %>%
   ggplot(aes(country_factor, n)) +
   geom_bar(stat = "identity", fill = "#56B4E9") +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05)), labels = scales::number_format(big.mark = " ")) +
   coord_flip() +
   theme_minimal_vgrid() +
   labs(y = "Number of invoiced OA articles", x = NULL)
@@ -575,7 +514,7 @@ hybrid_invoice <- hybrid_invoice %>%
 ```{r}
 hybrid_invoice_tt <- hybrid_invoice %>%
   mutate(oa_sponsor = ifelse(is.na(oa_sponsor_name), "Other", oa_sponsor_name)) %>%
-  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd")) %>%
   mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
   mutate(in_open_apc = tolower(doi) %in% tolower(o_apc$doi))
 hybrid_invoice_agg_general <- hybrid_invoice_tt %>%
