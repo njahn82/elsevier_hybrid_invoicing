@@ -29,6 +29,10 @@ CREATE
             ON cr.issn = els.issn 
 ```
 
+``` r
+hybrid_articles <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
+```
+
 Aggregate
 
 ``` sql
@@ -46,8 +50,8 @@ SELECT
         issued_year > 2014 
         and issued_year < 2020 
         AND license.content_version = 'vor'         
-        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page')
-        AND NOT regexp_contains(page, '^S')
+        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')
+        AND (NOT regexp_contains(page, '^S') OR page is NULL)
     GROUP BY
         license_url,
         issued_year,
@@ -61,7 +65,7 @@ license_by_year <- license_agg %>%
   mutate(license_code =
            case_when(
              grepl("/by/", license_url) ~ "cc-by",
-             grepl("/by-nc", license_url) ~ "cc-by-nc",
+             grepl("/by-nc", license_url) ~ "cc-by-nc-nd",
              grepl("userlicense", license_url) ~ "els-user")
   ) %>%
   group_by(license_code, oa_type, issued_year) %>%
@@ -71,9 +75,10 @@ license_by_year <- license_agg %>%
 just immediate hybrid
 
 ``` r
-im_hybrid <- readr::read_csv(here::here("data", "hybrid_volume_eligible.csv"))
+im_hybrid <- hybrid_articles <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
+
 cc_hybrid <- im_hybrid %>%
-  mutate(license_code = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
+  mutate(license_code = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd")) %>%
   group_by(license_code, issued_year) %>%
   summarise(hybrid_immediate_articles = n()) %>%
   mutate(immediate = "immediate",
@@ -102,7 +107,7 @@ ggplot(license_growth_df, aes(issued_year, articles, fill = license_code, group 
   facet_wrap(~type)
 ```
 
-<img src="006_license_files/figure-gfm/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="006_license_files/figure-gfm/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### relative
 
@@ -116,8 +121,8 @@ SELECT  issued_year,
     WHERE
         issued_year > 2014 
         and issued_year < 2020        
-        AND NOT     regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page') 
-        AND NOT regexp_contains(page, '^S') 
+        and not    regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')
+        and (not regexp_contains(page, '^S') or page is NULL)
     GROUP BY
         issued_year
 ```
@@ -152,8 +157,8 @@ p_1 <- year_per_oa_type_and_license %>%
     breaks = c(0, 0.02, 0.04, 0.06, 0.08)
   ) +
   scale_fill_manual(values = 
-                      c(`cc-by` = "#0093c7",
-                        `cc-by-nc` = "#B52141",
+                      c(`cc-by` = "#B52141",
+                        `cc-by-nc-nd` = "#0093c7",
                         `els-user` = "grey80")) +
   labs(x = "Publication year", y = "OA Percentage") +
   theme_minimal_hgrid() +
@@ -163,7 +168,7 @@ p_1 <- year_per_oa_type_and_license %>%
 p_1
 ```
 
-<img src="006_license_files/figure-gfm/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="006_license_files/figure-gfm/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
 
 overall
 
@@ -199,7 +204,7 @@ p_2 <- year_per_oa_type_and_license %>%
 p_2
 ```
 
-<img src="006_license_files/figure-gfm/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="006_license_files/figure-gfm/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" />
 
 ``` r
 p <- cowplot::plot_grid(
