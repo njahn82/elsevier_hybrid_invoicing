@@ -37,15 +37,9 @@ library(janitor)
 ```
 
 ```{r}
-hybrid_volume <- readr::read_csv(here::here("data", "hybrid_volume_eligible.csv"))
+hybrid_oa_volume <- readr::read_csv(here::here("data", "hybrid_oa_volume.csv"))
 ```
 
-```{r}
-ind_per_jn <- hybrid_volume %>%
-  group_by(issn, container_title, articles, issued_year) %>%
-  summarise(n = n_distinct(doi)) %>%
-  mutate(prop = n / articles)
-```
 
 read in scopus journal indicators
 
@@ -71,9 +65,9 @@ scopus_norm <- scopus_19 %>%
 missing journals (needs to be validated)
 
 ```{r}
-hybrid_volume %>% 
+hybrid_oa_volume %>% 
   filter(!issn %in% scopus_norm$issn) %>% 
-  distinct(issn, container_title)
+  distinct(issn)
 ```
 
 backup
@@ -87,7 +81,7 @@ write_csv(cite_score_19, here::here("data", "cite_score_19.csv"))
 ```{r}
 ajsc_mapped <- read_csv(here::here("data", "asjc_mapped.csv")) %>%
   mutate(top_level_code = as.character(top_level_code))
-hybrid_subject <- left_join(ind_per_jn, cite_score_19, by = c("issn" = "issn")) %>%
+hybrid_subject <- left_join(hybrid_oa_volume, cite_score_19, by = c("issn" = "issn")) %>%
   mutate(top_level_code = substr(as.character(scopus_asjc_code_sub_subject_area), 1, 2)) %>%
   inner_join(ajsc_mapped, by = "top_level_code")
 # back up ind
@@ -95,7 +89,7 @@ hybrid_subject <- left_join(ind_per_jn, cite_score_19, by = c("issn" = "issn")) 
 # backup subject liste
 hybrid_subject %>% 
   ungroup() %>% 
-  distinct(issn, container_title, subject_area, top_level = description) %>%
+  distinct(issn, subject_area, top_level = description) %>%
   write_csv(here::here("data", "jn_subjects.csv"))
 ```
 
@@ -103,6 +97,7 @@ hybrid_subject %>%
 
 ```{r}
 hybrid_subject_19 <- hybrid_subject %>% 
+  mutate(prop = oa /articles) %>%
   filter(issued_year == "2019", !is.na(percentile)
          #, prop > 0.01 & prop < 0.15) 
          )%>%
@@ -128,6 +123,7 @@ ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = .3) + geom_smoot
 
 ```{r}
 hybrid_subject %>%
+  mutate(prop = oa /articles) %>%
   filter(issued_year == "2019", !is.na(percentile)) %>% 
   ggplot(aes(prop, snip)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
   facet_wrap(~top_level_code, scales = "free") +
@@ -141,7 +137,7 @@ hybrid_subject %>%
 subject_all_years <- hybrid_subject %>% 
   ungroup() %>% 
   group_by(issn, description, subject_area) %>% 
-  summarise(n_oa = sum(n),
+  summarise(n_oa = sum(oa),
             n = sum(articles)) %>%
   ungroup() %>%
   group_by(description) %>%
@@ -239,14 +235,20 @@ share_per_invoicing_type %>%
 
 
 ```{r}
-funder_shares <- hybrid_volume %>%
+hybrid_jn_volume <- hybrid_oa_volume %>%
+  group_by(issn) %>% 
+  summarise(n_oa = sum(oa))
+  
+  
+hybrid_df <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
+funder_shares <- hybrid_df %>%
    mutate(oa_sponsor_type = ifelse(!oa_sponsor_type %in% c("FundingBody", "Author", "ElsevierWaived"), "Other", oa_sponsor_type)) %>%
   mutate(oa_sponsor_type = recode(oa_sponsor_type, 
                                   `FundingBody` = "Agreement",
                                   `ElsevierWaived` = "Fee Waived")) %>%
   group_by(oa_sponsor_type, issn) %>%
   summarise(n_oa_type = n_distinct(doi)) %>%
-  left_join(hybrid_volume_jn, by = "issn") %>%
+  left_join(hybrid_jn_volume, by = "issn") %>%
   mutate(prop = n_oa_type / n_oa) %>%
   left_join(jn_subjects, by = "issn") %>%
   ungroup() %>%
@@ -254,7 +256,7 @@ funder_shares <- hybrid_volume %>%
   summarise(oa_type = sum(n_oa_type)) %>%
   mutate(prop = oa_type / sum(oa_type))
 # overall props
-oa_sponsor_type_all <- hybrid_volume %>% 
+oa_sponsor_type_all <- hybrid_df %>% 
   #exclude multidisciplinary
   filter(issn != "2095-9273") %>%
   count(oa_sponsor_type) %>% 
@@ -358,7 +360,7 @@ funder_overview_subject %>%
 ## fields per funder
 
 ```{r}
-field_funder <- hybrid_volume %>%
+field_funder <- hybrid_df %>%
   filter(oa_sponsor_type == "FundingBody") %>% 
   mutate(oa_sponsor = ifelse(is.na(oa_sponsor_name), "Other", oa_sponsor_name)) %>%
    mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
@@ -377,14 +379,13 @@ ggplot(field_funder, aes(x = oa_sponsor,
                       option = "magma",
                       name = "Percentage per funder",
                       breaks =  scales::extended_breaks()) +
-  scale_x_discrete(position = "top") +
+  scale_x_discrete(labels = function(x) str_wrap(x, width = 6), position = "top") +
   labs(x = NULL, y = NULL) +
-  theme_minimal_grid() +
+  theme_minimal_grid(font_size = 10) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank()) +
   theme(legend.position = "top", legend.justification = "right") +
-  theme(legend.direction = "horizontal", legend.box = "vertical") +
-  theme(strip.text = element_text(face="bold"))
+  theme(legend.direction = "horizontal", legend.box = "vertical") 
 ```
 
 
