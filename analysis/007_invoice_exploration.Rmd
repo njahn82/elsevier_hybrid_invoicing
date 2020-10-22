@@ -39,7 +39,7 @@ library(gt)
 
 ```{r}
 # load eligible oa articles
-hybrid_volume <- readr::read_csv(here::here("data", "hybrid_volume_eligible.csv"))
+hybrid_volume <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
 
 # aggregate data
 sponsored_articles <- hybrid_volume %>%
@@ -49,7 +49,8 @@ sponsored_articles <- hybrid_volume %>%
                                   `ElsevierWaived` = "Fee Waived")) %>%
   mutate(fct_source = fct_infreq(oa_sponsor_type)) %>%
   mutate(fct_source = fct_lump(fct_source, prop = 0.05)) %>%
-  count(issued_year, fct_source)
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd")) %>%
+  count(issued_year, fct_source, cc_norm)
 all_articles <- hybrid_volume %>%
   group_by(issued_year) %>%
   summarise(n = n())
@@ -60,16 +61,20 @@ To examine the funding structure for open access articles, we text-mined spendin
 
 ```{r invoiceoverview, fig.cap="Development of fee-based open access publishing in Elsevier hybrid journals by invoicing type. Colored bars represent the invoice recipient, or whether the fee was waived. Grey bars show the total number of hybrid open access articles published in Elsevier journals from 2015 to date."}
 # plot
-ggplot(sponsored_articles, aes(x = gsub("20", "'", issued_year), y = n)) +
+ggplot(sponsored_articles, aes(x = gsub("20", "'", issued_year), y = n), alpha = 0.8) +
   geom_bar(
     data = all_articles,
-    aes(fill = "All hybrid OA"),
     color = "transparent",
-    stat = "identity"
+    stat = "identity",
+    fill = "#b3b3b3a0"
   ) +
-  geom_bar(aes(fill = "by invoicing type"), color = "transparent", stat = "identity") +
+  geom_bar(aes(fill = cc_norm), color = "white", stat = "identity", alpha = 0.8, size = 0.25,
+           position = position_stack(reverse = T)) +
   facet_wrap( ~ fct_source, nrow = 1) +
-  scale_fill_manual(values = c("#b3b3b3a0", "#56B4E9"), name = "") +
+  scale_fill_manual(values = 
+                      c(`cc-by` = "#B52141",
+                        `cc-by-nc-nd` = "#0093c7"),
+                    name = "CC license variant") +
   labs(x = NULL, y = NULL) + 
   scale_y_continuous(labels = scales::number_format(big.mark = " "),
                       expand = expansion(mult = c(0, 0.05))) + theme_minimal_hgrid() +
