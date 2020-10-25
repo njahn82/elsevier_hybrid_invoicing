@@ -1,0 +1,56 @@
+---
+title: "pricing differences"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(here)
+```
+
+read invoicing data
+
+```{r}
+hybrid_df <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
+```
+
+apc price list
+
+```{r}
+els_jn <- readr::read_csv(here::here("data", "els_historic_jns.csv"))
+```
+
+APC development hybrid oa portflio 
+
+```{r}
+els_jn %>%
+  filter(oa_model == "Hybrid") %>%
+  ggplot(aes(year, apc, group = year)) +
+  geom_boxplot()
+```
+
+By invoicing 
+
+```{r}
+my_df <- left_join(hybrid_df, els_jn, by = c("issn", "issued_year" = "year")) %>%
+    mutate(oa_sponsor_type = recode(oa_sponsor_type, 
+                                  `FundingBody` = "Agreement",
+                                  `ElsevierWaived` = "Fee Waived")) %>%
+  mutate(fct_source = fct_infreq(oa_sponsor_type)) %>%
+  mutate(fct_source = fct_lump(fct_source, prop = 0.05)) %>%
+  filter(!fct_source %in% c("Other", NA))
+
+```
+
+
+```{r}
+ggplot(my_df, aes(factor(issued_year), apc,  color = fct_source)) +
+  geom_boxplot()
+```
+
+All
+
+```{r}
+ggplot(my_df, aes(factor(fct_source), apc)) +
+  geom_boxplot()
+```
