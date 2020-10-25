@@ -75,3 +75,14 @@ ggplot(my_df, aes(factor(issued_year), apc,  color = fct_source)) +
     ## Warning: Removed 1507 rows containing non-finite values (stat_boxplot).
 
 ![](009_pricing_exploration_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+All
+
+``` r
+ggplot(my_df, aes(factor(fct_source), apc)) +
+  geom_boxplot()
+```
+
+    ## Warning: Removed 1507 rows containing non-finite values (stat_boxplot).
+
+![](009_pricing_exploration_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
