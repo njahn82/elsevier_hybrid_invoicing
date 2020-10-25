@@ -171,25 +171,25 @@ ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median),
 ### by funder
 
 ```{r}
-jn_subjects <- read_csv(here::here("data", "jn_subjects.csv"))
-
-hybrid_volume_subjects <- hybrid_volume %>%
-  group_by(oa_sponsor_type, articles, issued_year, issn) %>% 
-  summarise(n_oa = n_distinct(doi)) %>% 
-  left_join(jn_subjects, by = "issn") %>%
-  ungroup()
-
-hybrid_volume_subjects %>%
- # filter(container_title == "Journal of the American College of Cardiology") %>%
-  group_by(top_level, articles, issued_year) %>%
-  summarise(n_oa = sum(n_oa)) %>%
-  ungroup() %>%
-  group_by(top_level) %>%
-  summarise(n_oa = sum(n_oa),
-            n = sum(articles), .groups = "drop") %>%
-  mutate(prop = n_oa / n) %>%
-  arrange(desc(prop))
-
+# jn_subjects <- read_csv(here::here("data", "jn_subjects.csv"))
+# 
+# hybrid_volume_subjects <- hybrid_volume %>%
+#   group_by(oa_sponsor_type, articles, issued_year, issn) %>% 
+#   summarise(n_oa = n_distinct(doi)) %>% 
+#   left_join(jn_subjects, by = "issn") %>%
+#   ungroup()
+# 
+# hybrid_volume_subjects %>%
+#  # filter(container_title == "Journal of the American College of Cardiology") %>%
+#   group_by(top_level, articles, issued_year) %>%
+#   summarise(n_oa = sum(n_oa)) %>%
+#   ungroup() %>%
+#   group_by(top_level) %>%
+#   summarise(n_oa = sum(n_oa),
+#             n = sum(articles), .groups = "drop") %>%
+#   mutate(prop = n_oa / n) %>%
+#   arrange(desc(prop))
+# 
 
 # hybrid_volume %>%
 #   left_join(jn_subjects, by = "issn") %>%
@@ -291,7 +291,7 @@ funder_shares %>%
 issues:
 
 - high share of elseveir waived articles due to ome issue published in Nuclear and Particle Physics Proceedings: "37th International Conference on High Energy Physics (ICHEP)
-(ICHEP 2014)2-9 July 2014, Valencia, Spain" Do we want to exclude this journal?
+(ICHEP 2014) 2-9 July 2014, Valencia, Spain" Do we want to exclude this journal?
 
 table representation
 
@@ -357,21 +357,41 @@ funder_overview_subject %>%
       )
 ```
 
+
+
 ## fields per funder
+
+```{r}
+#short funder labels
+funder_codes <- tribble(
+  ~oa_sponsor, ~oa_sponsor_short,
+  "Engineering and Physical Sciences Research Council", "EPSRC",
+  "VSNU", "VSNU",
+  "Wellcome Trust", "Wellcome",
+  "European Research Council", "ERC",
+  "Medical Research Council", "MRC",
+  "Natural Environment Research Council", "NERC",
+  "Biotechnology and Biological Sciences Research Council", "BBSRC",
+  "Bill & Melinda Gates Foundation", "Gates",
+  "Economic and Social Research Council", "ESRC",
+  "Norway Institutes", "NO",
+  "Other", "Other")
+```
 
 ```{r}
 field_funder <- hybrid_df %>%
   filter(oa_sponsor_type == "FundingBody") %>% 
-  mutate(oa_sponsor = ifelse(is.na(oa_sponsor_name), "Other", oa_sponsor_name)) %>%
-   mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
+  left_join(funder_codes, by = c("oa_sponsor_name"="oa_sponsor")) %>% 
+  mutate(oa_sponsor = ifelse(is.na(oa_sponsor_short), "Other", oa_sponsor_short)) %>%
+  mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
   mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
   left_join(jn_subjects, by = "issn") %>%
   filter(!is.na(top_level), top_level != "Multidisciplinary") %>%
   group_by(oa_sponsor, top_level) %>%
   summarise(n_oa_type = n_distinct(doi)) %>%
   mutate(prop = n_oa_type / sum(n_oa_type)) %>%
-  mutate(oa_sponsor = fct_reorder(oa_sponsor, n_oa_type))
-ggplot(field_funder, aes(x = oa_sponsor, 
+  mutate(oa_sponsor = fct_relevel(oa_sponsor, "Other", after = Inf))
+ggplot(field_funder, aes(x = factor(oa_sponsor), 
                          y = reorder(top_level, desc(top_level)), 
                          colour = prop, size = n_oa_type)) + 
   geom_point() +

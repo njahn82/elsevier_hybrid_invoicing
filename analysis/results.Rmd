@@ -201,7 +201,7 @@ ind_summary_table <- ind_per_year %>%
   pivot_wider(names_from = issued_year, values_from = count)
 ```
 
-On 23 May 2020, Elsevier APC pricing list comprised `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` journals that supported the hybrid model. Of those, `r hybrid_oa_volume %>% distinct(issn) %>% nrow()` hybrid journals published at least one open access article under a Creative Commons license between 2015 and 2019, corresponding to about `r round(hybrid_oa_volume %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of journal titles in Elsevier’s hybrid journal portfolio. These journals published a total of `r sum(hybrid_oa_volume$oa)` immediate open access articles between 2015 and 2019, corresponding to a share of `r round(sum(hybrid_oa_volume$oa) / sum(hybrid_oa_volume$articles) * 100, 1)`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r hybrid_oa_volume %>% filter(issued_year == "2015") %>% pull(oa) %>% sum()` in 2015 to `r hybrid_oa_volume %>% filter(issued_year == "2019") %>% pull(oa) %>% sum()` in 2019. However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r round(ind_per_year %>% filter(issued_year == 2015) %>% pull(oa_uptake) * 100, 1)`% to `r round(ind_per_year %>% filter(issued_year == 2019) %>% pull(oa_uptake) *100, 1)`%, because the number of articles published also increased during this five-years period.
+On 23 May 2020, Elsevier APC pricing list comprised `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` journals that supported the hybrid model, without reverse-flips: `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow() - filter(flipped_jns_ind, oa_model != "Open Access")$n`.  Of those, `r hybrid_oa_volume %>% distinct(issn) %>% nrow()` hybrid journals published at least one open access article under a Creative Commons license between 2015 and 2019, corresponding to about `r round(hybrid_oa_volume %>% distinct(issn) %>% nrow() / els_jns_df %>% filter(oa_type == "Hybrid") %>% nrow() * 100, 0)`% of journal titles in Elsevier’s hybrid journal portfolio. These journals published a total of `r sum(hybrid_oa_volume$oa)` immediate open access articles between 2015 and 2019, corresponding to a share of `r round(sum(hybrid_oa_volume$oa) / sum(hybrid_oa_volume$articles) * 100, 1)`%. Table present the high-level findings by year, illustrating a moderate growth in hybrid open access. Although the number of hybrid journals with at least one open access article remained somehow constant, the number of open access articles rose substantially from `r hybrid_oa_volume %>% filter(issued_year == "2015") %>% pull(oa) %>% sum()` in 2015 to `r hybrid_oa_volume %>% filter(issued_year == "2019") %>% pull(oa) %>% sum()` in 2019. However, the overall uptake of open access in Elsevier's hybrid journal portfolio grew slowly from `r round(ind_per_year %>% filter(issued_year == 2015) %>% pull(oa_uptake) * 100, 1)`% to `r round(ind_per_year %>% filter(issued_year == 2019) %>% pull(oa_uptake) *100, 1)`%, because the number of articles published also increased during this five-years period.
 
 ```{r}
 table_descriptives_ind <- tribble(
@@ -628,3 +628,221 @@ o_apc_ind <- hybrid_volume %>%
   
 As another variable, the table highlights the proportion of public disclosure of funding through the Open APC initiative. The Open APC Initiative disclosed more than one-third of centrally invoiced articles (`r round( filter(hybrid_invoice, in_open_apc == TRUE) %>% nrow() / length(unique(hybrid_invoice$doi)) * 100, 0)`%), but also publication fees that were billed to authors directly (n = `r filter(o_apc_ind, in_open_apc == TRUE) %>% pull(n)`). This indicates that authors were able to make use of other types of institutional support structures for publication fees such as publication funds.
 
+### Field cultures
+
+```{r}
+hybrid_subject <- readr::read_csv(here::here("data", "jn_scopus_ind_subjects.csv"))
+```
+
+```{r}
+subject_all_years <- hybrid_subject %>% 
+  ungroup() %>% 
+  group_by(issn, description, subject_area) %>% 
+  summarise(n_oa = sum(oa),
+            n = sum(articles)) %>%
+  ungroup() %>%
+  group_by(description) %>%
+  filter(subject_area != "Multidisciplinary")
+
+median_all <- subject_all_years %>% 
+  ungroup() %>% 
+  distinct(issn, .keep_all = TRUE) %>% 
+  mutate(prop = n_oa /n) %>% 
+  .$prop %>% 
+  median()
+# rank
+oa_per_subject_rank <- hybrid_subject %>% 
+  ungroup() %>% 
+  group_by(issn, description, subject_area) %>% 
+  summarise(n_oa = sum(oa),
+            n = sum(articles)) %>%
+  mutate(prop = n_oa / n) %>%
+  ungroup() %>% 
+  group_by(description) %>%
+  summarise(median_prop = median(prop)) %>%
+  arrange(desc(median_prop))
+
+ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median), n_oa / n)) + 
+  geom_boxplot(aes(color = subject_area)) +
+  geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
+  geom_hline(yintercept = median_all,  colour = "red", linetype ="dashed", size = 1) +
+  scale_colour_manual(NULL, values = c("#7F3C8D", "#11A579", "#3969AC", "#F2B701")) +
+  scale_y_continuous(
+    labels = scales::percent_format(accuracy = 5L),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  coord_flip(ylim=c(0,0.2)) +
+  labs(x = NULL, y = "Five-Years OA Uptake Rate per Journal") +
+  theme_minimal_vgrid(font_size = 10) +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 2))
+```
+
+We used the Scopus’ All Sciences Journal Classification (ASJC) to examine if and to what extent open access uptake rates varied by subject. Figure presents the distribution of the journal’s five-years open access uptake rates by subject fields in comparison to the overall average (Mdn = `r round(median_all * 100, 1)`. The box plot reveals large variations between 27 journal subject fields (excluding one journal belonging to the area Multidisciplinary), with the highest OA rates in Immunology and Microbiology (Mdn = `r round(filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop) * 100,1)`), Environmental Science (Mdn = `r round(filter(oa_per_subject_rank, description == "Environmental Science") %>% pull(median_prop) * 100,1)`) and Neuroscience  (Mdn = `r round(filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop) * 100,1)`), Environmental Science (Mdn = `r round(filter(oa_per_subject_rank, description == "Neuroscience") %>% pull(median_prop) * 100,1)`) , and the lowest in Chemistry (Mdn = `r round(filter(oa_per_subject_rank, description == "Chemistry") %>% pull(median_prop) * 100,1)`), Materials Science (Mdn = `r round(filter(oa_per_subject_rank, description == "Materials Science") %>% pull(median_prop) * 100,1)`) and Dentistry (Mdn = `r round(filter(oa_per_subject_rank, description == "Dentistry") %>% pull(median_prop) * 100,1)`). Figure also highlights variations across subject areas. Notably, fields belonging to the subject areas Health Sciences and Physical Sciences show a lower median proportion of open access articles, whereas most Life Sciences and Social Sciences fields ranked above average. 
+
+```{r}
+hybrid_jn_volume <- hybrid_oa_volume %>%
+  group_by(issn) %>% 
+  summarise(n_oa = sum(oa))
+
+jn_subjects <- read_csv(here::here("data", "jn_subjects.csv"))
+
+  
+hybrid_df <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
+funder_shares <- hybrid_df %>%
+   mutate(oa_sponsor_type = ifelse(!oa_sponsor_type %in% c("FundingBody", "Author", "ElsevierWaived"), "Other", oa_sponsor_type)) %>%
+  mutate(oa_sponsor_type = recode(oa_sponsor_type, 
+                                  `FundingBody` = "Agreement",
+                                  `ElsevierWaived` = "Fee Waived")) %>%
+  group_by(oa_sponsor_type, issn) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  left_join(hybrid_jn_volume, by = "issn") %>%
+  mutate(prop = n_oa_type / n_oa) %>%
+  left_join(jn_subjects, by = "issn") %>%
+  ungroup() %>%
+  group_by(top_level, oa_sponsor_type) %>%
+  summarise(oa_type = sum(n_oa_type)) %>%
+  mutate(prop = oa_type / sum(oa_type))
+# overall props
+oa_sponsor_type_all <- hybrid_df %>% 
+  #exclude multidisciplinary
+  filter(issn != "2095-9273") %>%
+  count(oa_sponsor_type) %>% 
+  mutate(prop = n / sum(n))
+
+funder_shares %>% 
+  filter(oa_sponsor_type %in% c("Author", "Agreement"), top_level != "Multidisciplinary") %>%
+  pivot_wider(id_cols = top_level, names_from = oa_sponsor_type, values_from = prop) %>%
+  filter(!is.na(top_level)) %>%
+  ggplot() +
+   ggalt::geom_dumbbell(
+    aes(y = reorder(top_level, Author), x = Agreement, xend = Author),
+    colour = "grey20",
+    colour_xend = "#EDAE49",
+    colour_x = "#30638E",
+    size_x = 1.5,
+    alpha = 0.9,
+    size_xend = 1.5,
+    show.legend = TRUE
+   ) +
+  geom_vline(xintercept = oa_sponsor_type_all %>% filter(oa_sponsor_type == "Author") %>% .$prop,  colour = "#EDAE49", linetype ="dashed", size = 1) +
+    geom_vline(xintercept = oa_sponsor_type_all %>% filter(oa_sponsor_type == "FundingBody") %>% .$prop,  colour = "#30638E", linetype ="dashed", size = 1) +
+  scale_x_continuous(
+    labels = scales::percent_format(accuracy = 5L),
+    expand = expansion(mult = c(0, 0.05)),
+    limits = c(0,1)
+  ) +
+  labs(y = NULL, x = "Percentage Invoicing Type") +
+  theme_minimal_vgrid(font_size = 10)
+```
+
+```{r}
+subject_all <- funder_shares %>%
+  group_by(top_level) %>%
+  summarise(oa = sum(oa_type))
+funder_overview_subject <- left_join(funder_shares, subject_all, by = "top_level")
+# gt
+funder_overview_subject %>%
+  pivot_wider(id_cols = c("top_level", "oa"), names_from = oa_sponsor_type, values_from = prop) %>%
+  ungroup() %>% 
+  # remove na and multidisciplinary 
+  filter(!is.na(top_level), top_level != "Multidisciplinary") %>%
+  relocate(Agreement, .after = Author) %>%
+  arrange(desc(Author)) %>%
+  gt::gt(rowname_col = "top_level") %>%
+  gt::cols_label(oa = "OA Articles") %>%
+  fmt_percent(
+    columns = vars(Author, Agreement, `Fee Waived`, Other),
+    decimals = 0) %>%
+  cols_width(
+    2:6 ~ px(80)) %>%
+  cols_align(
+    align = "right",
+    columns = 2:6
+  ) %>%
+  cols_width(
+    2 ~ px(120)
+  ) %>%
+    gt::cols_align(
+    align = "left",
+    columns = 1
+  ) %>%
+  fmt_number(
+    columns = vars(oa),
+    decimals = 0
+  ) %>%
+  data_color(
+    columns =3:6,
+    colors = scales::col_numeric(
+      # custom defined values - notice that order matters!
+      palette = c("white", "#fcde9c","#faa476","#f0746e","#e34f6f","#dc3977","#b9257a","#7c1d6f"),
+      domain = NULL
+    )
+  ) %>%
+  tab_spanner(
+    label = md("**OA Sponsor Type**"),
+    columns = 3:6
+  ) %>%
+    tab_style(
+    style = cell_text(color = "black", weight = "bold"),
+    locations = list(
+      cells_column_labels(everything())
+    )) %>%
+   tab_options(
+    column_labels.border.top.color = "white",
+    column_labels.border.top.width = px(3),
+    column_labels.border.bottom.color = "black",
+    table_body.hlines.color = "white",
+    table.border.bottom.color = "white",
+    table.border.bottom.width = px(3)
+      )
+```
+
+funder by subject
+
+```{r}
+#short funder labels
+funder_codes <- tribble(
+  ~oa_sponsor, ~oa_sponsor_short,
+  "Engineering and Physical Sciences Research Council", "EPSRC",
+  "VSNU", "VSNU",
+  "Wellcome Trust", "Wellcome",
+  "European Research Council", "ERC",
+  "Medical Research Council", "MRC",
+  "Natural Environment Research Council", "NERC",
+  "Biotechnology and Biological Sciences Research Council", "BBSRC",
+  "Bill & Melinda Gates Foundation", "Gates",
+  "Economic and Social Research Council", "ESRC",
+  "Norway Institutes", "NO",
+  "Other", "Other")
+```
+
+```{r}
+field_funder <- hybrid_df %>%
+  filter(oa_sponsor_type == "FundingBody") %>% 
+  left_join(funder_codes, by = c("oa_sponsor_name"="oa_sponsor")) %>% 
+  mutate(oa_sponsor = ifelse(is.na(oa_sponsor_short), "Other", oa_sponsor_short)) %>%
+  mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
+  mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
+  left_join(jn_subjects, by = "issn") %>%
+  filter(!is.na(top_level), top_level != "Multidisciplinary") %>%
+  group_by(oa_sponsor, top_level) %>%
+  summarise(n_oa_type = n_distinct(doi)) %>%
+  mutate(prop = n_oa_type / sum(n_oa_type)) %>%
+  mutate(oa_sponsor = fct_relevel(oa_sponsor, "Other", after = Inf))
+ggplot(field_funder, aes(x = factor(oa_sponsor), 
+                         y = reorder(top_level, desc(top_level)), 
+                         colour = prop, size = n_oa_type)) + 
+  geom_point() +
+  scale_color_viridis_c(labels = scales::percent_format(accuracy = 5L),
+                      option = "magma",
+                      name = "Percentage per funder",
+                      breaks =  scales::extended_breaks()) +
+  scale_x_discrete(labels = function(x) str_wrap(x, width = 6), position = "top") +
+  labs(x = NULL, y = NULL) +
+  theme_minimal_grid(font_size = 10) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank()) +
+  theme(legend.position = "top", legend.justification = "right") +
+  theme(legend.direction = "horizontal", legend.box = "vertical") 
+```
