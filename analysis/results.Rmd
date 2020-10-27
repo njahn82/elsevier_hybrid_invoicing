@@ -678,6 +678,25 @@ ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median),
   guides(color = guide_legend(ncol = 2))
 ```
 
+```{r}
+p_subject <- ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median), n_oa / n)) + 
+  geom_boxplot(aes(color = subject_area)) +
+  geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
+  facet_wrap(~subject_area, scales = "free_y") +
+  geom_hline(yintercept = median_all,  colour = "red", linetype ="dashed", size = 1) +
+  scale_colour_manual(NULL, values = c("#7F3C8D", "#11A579", "#3969AC", "#F2B701"),
+                      guide=FALSE) +
+  scale_y_continuous(
+    labels = scales::percent_format(accuracy = 5L),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  coord_flip(ylim=c(0,0.2)) +
+  labs(x = NULL, y = "Five-Years OA Uptake Rate per Journal") +
+  theme_minimal_vgrid(font_size = 10) 
+ggsave(here::here("figure", "subject_by_area.png"), p_subject, dpi = 300, width = 8, height = 6)
+p_subject
+```
+
 We used the Scopus’ All Sciences Journal Classification (ASJC) to examine if and to what extent open access uptake rates varied by subject. Figure presents the distribution of the journal’s five-years open access uptake rates by subject fields in comparison to the overall average (Mdn = `r round(median_all * 100, 1)`. The box plot reveals large variations between 27 journal subject fields (excluding one journal belonging to the area Multidisciplinary), with the highest OA rates in Immunology and Microbiology (Mdn = `r round(filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop) * 100,1)`), Environmental Science (Mdn = `r round(filter(oa_per_subject_rank, description == "Environmental Science") %>% pull(median_prop) * 100,1)`) and Neuroscience  (Mdn = `r round(filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop) * 100,1)`), Environmental Science (Mdn = `r round(filter(oa_per_subject_rank, description == "Neuroscience") %>% pull(median_prop) * 100,1)`) , and the lowest in Chemistry (Mdn = `r round(filter(oa_per_subject_rank, description == "Chemistry") %>% pull(median_prop) * 100,1)`), Materials Science (Mdn = `r round(filter(oa_per_subject_rank, description == "Materials Science") %>% pull(median_prop) * 100,1)`) and Dentistry (Mdn = `r round(filter(oa_per_subject_rank, description == "Dentistry") %>% pull(median_prop) * 100,1)`). Figure also highlights variations across subject areas. Notably, fields belonging to the subject areas Health Sciences and Physical Sciences show a lower median proportion of open access articles, whereas most Life Sciences and Social Sciences fields ranked above average. 
 
 ```{r}
@@ -819,8 +838,8 @@ funder_codes <- tribble(
 
 ```{r}
 field_funder <- hybrid_df %>%
-  filter(oa_sponsor_type == "FundingBody") %>% 
-  left_join(funder_codes, by = c("oa_sponsor_name"="oa_sponsor")) %>% 
+  filter(oa_sponsor_type == "FundingBody") %>%
+  left_join(funder_codes, by = c("oa_sponsor_name" = "oa_sponsor")) %>%
   mutate(oa_sponsor = ifelse(is.na(oa_sponsor_short), "Other", oa_sponsor_short)) %>%
   mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
   mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
@@ -830,19 +849,33 @@ field_funder <- hybrid_df %>%
   summarise(n_oa_type = n_distinct(doi)) %>%
   mutate(prop = n_oa_type / sum(n_oa_type)) %>%
   mutate(oa_sponsor = fct_relevel(oa_sponsor, "Other", after = Inf))
-ggplot(field_funder, aes(x = factor(oa_sponsor), 
-                         y = reorder(top_level, desc(top_level)), 
-                         colour = prop, size = n_oa_type)) + 
+# plot
+pp <- ggplot(field_funder,
+       aes(
+         x = factor(oa_sponsor),
+         y = reorder(top_level, desc(top_level)),
+         colour = prop,
+         size = n_oa_type
+       )) +
   geom_point() +
-  scale_color_viridis_c(labels = scales::percent_format(accuracy = 5L),
-                      option = "magma",
-                      name = "Percentage per funder",
-                      breaks =  scales::extended_breaks()) +
-  scale_x_discrete(labels = function(x) str_wrap(x, width = 6), position = "top") +
+  scale_color_viridis_c(
+    labels = scales::percent_format(accuracy = 5L),
+    option = "magma",
+    name = "Percentage per funder",
+    breaks =  scales::extended_breaks(),
+    begin = 0.15,
+    end = 0.85
+  ) +
+  scale_size("OA Articles") +
+  scale_x_discrete(position = "top") +
   labs(x = NULL, y = NULL) +
   theme_minimal_grid(font_size = 10) +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank()) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank()
+  ) +
   theme(legend.position = "top", legend.justification = "right") +
   theme(legend.direction = "horizontal", legend.box = "vertical") 
+ggsave(here::here("figure", "funder_subject.png"), pp, dpi = 300, width = 8, height = 6)
 ```

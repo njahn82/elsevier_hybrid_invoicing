@@ -87,7 +87,7 @@ published also increased during this five-years period.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xowndymkgd .gt_table {
+#wqacsjlgly .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -112,7 +112,7 @@ published also increased during this five-years period.
   border-left-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_heading {
+#wqacsjlgly .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -124,7 +124,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_title {
+#wqacsjlgly .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -134,7 +134,7 @@ published also increased during this five-years period.
   border-bottom-width: 0;
 }
 
-#xowndymkgd .gt_subtitle {
+#wqacsjlgly .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -144,13 +144,13 @@ published also increased during this five-years period.
   border-top-width: 0;
 }
 
-#xowndymkgd .gt_bottom_border {
+#wqacsjlgly .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_col_headings {
+#wqacsjlgly .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -165,7 +165,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_col_heading {
+#wqacsjlgly .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -185,7 +185,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#xowndymkgd .gt_column_spanner_outer {
+#wqacsjlgly .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -197,15 +197,15 @@ published also increased during this five-years period.
   padding-right: 4px;
 }
 
-#xowndymkgd .gt_column_spanner_outer:first-child {
+#wqacsjlgly .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xowndymkgd .gt_column_spanner_outer:last-child {
+#wqacsjlgly .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xowndymkgd .gt_column_spanner {
+#wqacsjlgly .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -217,7 +217,7 @@ published also increased during this five-years period.
   width: 100%;
 }
 
-#xowndymkgd .gt_group_heading {
+#wqacsjlgly .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -239,7 +239,7 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#xowndymkgd .gt_empty_group_heading {
+#wqacsjlgly .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -254,15 +254,15 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#xowndymkgd .gt_from_md > :first-child {
+#wqacsjlgly .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xowndymkgd .gt_from_md > :last-child {
+#wqacsjlgly .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xowndymkgd .gt_row {
+#wqacsjlgly .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -281,7 +281,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#xowndymkgd .gt_stub {
+#wqacsjlgly .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -293,7 +293,7 @@ published also increased during this five-years period.
   padding-left: 12px;
 }
 
-#xowndymkgd .gt_summary_row {
+#wqacsjlgly .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -303,7 +303,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#xowndymkgd .gt_first_summary_row {
+#wqacsjlgly .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -313,7 +313,7 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_grand_summary_row {
+#wqacsjlgly .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -323,7 +323,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#xowndymkgd .gt_first_grand_summary_row {
+#wqacsjlgly .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -333,11 +333,11 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_striped {
+#wqacsjlgly .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xowndymkgd .gt_table_body {
+#wqacsjlgly .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -346,7 +346,7 @@ published also increased during this five-years period.
   border-bottom-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_footnotes {
+#wqacsjlgly .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -360,13 +360,13 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_footnote {
+#wqacsjlgly .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#xowndymkgd .gt_sourcenotes {
+#wqacsjlgly .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -380,47 +380,47 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#xowndymkgd .gt_sourcenote {
+#wqacsjlgly .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#xowndymkgd .gt_left {
+#wqacsjlgly .gt_left {
   text-align: left;
 }
 
-#xowndymkgd .gt_center {
+#wqacsjlgly .gt_center {
   text-align: center;
 }
 
-#xowndymkgd .gt_right {
+#wqacsjlgly .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xowndymkgd .gt_font_normal {
+#wqacsjlgly .gt_font_normal {
   font-weight: normal;
 }
 
-#xowndymkgd .gt_font_bold {
+#wqacsjlgly .gt_font_bold {
   font-weight: bold;
 }
 
-#xowndymkgd .gt_font_italic {
+#wqacsjlgly .gt_font_italic {
   font-style: italic;
 }
 
-#xowndymkgd .gt_super {
+#wqacsjlgly .gt_super {
   font-size: 65%;
 }
 
-#xowndymkgd .gt_footnote_marks {
+#wqacsjlgly .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="xowndymkgd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wqacsjlgly" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;; width: 0px">
 
@@ -1133,8 +1133,8 @@ from 2015 to date.
 
 Figure presents a breakdown by country, highlighting the dominating role
 of a few countries. Not surprisingly, mostly British funders paid for
-hybrid open access in Elsevier hybrid journals ( 49%), followed by
-funding bodies from the European Commission ( 24%) and the Netherlands (
+hybrid open access in Elsevier hybrid journals ( 59%), followed by
+funding bodies from the European Commission ( 14%) and the Netherlands (
 12%). In the latter case, invoices for individual open access articles
 were not send to research funders, but to the Dutch VSNU, a consortium
 of Universities in the Netherlands that has negotiated agreements with
@@ -1196,7 +1196,7 @@ had a CC-BY licensing policy.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#hdggckrrmr .gt_table {
+#yuepetfaua .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1221,7 +1221,7 @@ had a CC-BY licensing policy.
   border-left-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_heading {
+#yuepetfaua .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1233,7 +1233,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_title {
+#yuepetfaua .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1243,7 +1243,7 @@ had a CC-BY licensing policy.
   border-bottom-width: 0;
 }
 
-#hdggckrrmr .gt_subtitle {
+#yuepetfaua .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1253,13 +1253,13 @@ had a CC-BY licensing policy.
   border-top-width: 0;
 }
 
-#hdggckrrmr .gt_bottom_border {
+#yuepetfaua .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_col_headings {
+#yuepetfaua .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -1274,7 +1274,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_col_heading {
+#yuepetfaua .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1294,7 +1294,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#hdggckrrmr .gt_column_spanner_outer {
+#yuepetfaua .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1306,15 +1306,15 @@ had a CC-BY licensing policy.
   padding-right: 4px;
 }
 
-#hdggckrrmr .gt_column_spanner_outer:first-child {
+#yuepetfaua .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hdggckrrmr .gt_column_spanner_outer:last-child {
+#yuepetfaua .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hdggckrrmr .gt_column_spanner {
+#yuepetfaua .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -1326,7 +1326,7 @@ had a CC-BY licensing policy.
   width: 100%;
 }
 
-#hdggckrrmr .gt_group_heading {
+#yuepetfaua .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1348,7 +1348,7 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#hdggckrrmr .gt_empty_group_heading {
+#yuepetfaua .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1363,15 +1363,15 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#hdggckrrmr .gt_from_md > :first-child {
+#yuepetfaua .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hdggckrrmr .gt_from_md > :last-child {
+#yuepetfaua .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hdggckrrmr .gt_row {
+#yuepetfaua .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1390,7 +1390,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#hdggckrrmr .gt_stub {
+#yuepetfaua .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1402,7 +1402,7 @@ had a CC-BY licensing policy.
   padding-left: 12px;
 }
 
-#hdggckrrmr .gt_summary_row {
+#yuepetfaua .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1412,7 +1412,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#hdggckrrmr .gt_first_summary_row {
+#yuepetfaua .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1422,7 +1422,7 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_grand_summary_row {
+#yuepetfaua .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1432,7 +1432,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#hdggckrrmr .gt_first_grand_summary_row {
+#yuepetfaua .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1442,11 +1442,11 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_striped {
+#yuepetfaua .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hdggckrrmr .gt_table_body {
+#yuepetfaua .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1455,7 +1455,7 @@ had a CC-BY licensing policy.
   border-bottom-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_footnotes {
+#yuepetfaua .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1469,13 +1469,13 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_footnote {
+#yuepetfaua .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#hdggckrrmr .gt_sourcenotes {
+#yuepetfaua .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1489,47 +1489,47 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#hdggckrrmr .gt_sourcenote {
+#yuepetfaua .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#hdggckrrmr .gt_left {
+#yuepetfaua .gt_left {
   text-align: left;
 }
 
-#hdggckrrmr .gt_center {
+#yuepetfaua .gt_center {
   text-align: center;
 }
 
-#hdggckrrmr .gt_right {
+#yuepetfaua .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hdggckrrmr .gt_font_normal {
+#yuepetfaua .gt_font_normal {
   font-weight: normal;
 }
 
-#hdggckrrmr .gt_font_bold {
+#yuepetfaua .gt_font_bold {
   font-weight: bold;
 }
 
-#hdggckrrmr .gt_font_italic {
+#yuepetfaua .gt_font_italic {
   font-style: italic;
 }
 
-#hdggckrrmr .gt_super {
+#yuepetfaua .gt_super {
   font-size: 65%;
 }
 
-#hdggckrrmr .gt_footnote_marks {
+#yuepetfaua .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="hdggckrrmr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yuepetfaua" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -2125,6 +2125,8 @@ publication funds.
 
 <img src="results_files/figure-gfm/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
 
+<img src="results_files/figure-gfm/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+
 We used the Scopus’ All Sciences Journal Classification (ASJC) to
 examine if and to what extent open access uptake rates varied by
 subject. Figure presents the distribution of the journal’s five-years
@@ -2141,7 +2143,7 @@ and Physical Sciences show a lower median proportion of open access
 articles, whereas most Life Sciences and Social Sciences fields ranked
 above average.
 
-<img src="results_files/figure-gfm/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
 
 <!--html_preserve-->
 
@@ -2149,7 +2151,7 @@ above average.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mznhcexpel .gt_table {
+#blehxyziwm .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2174,7 +2176,7 @@ above average.
   border-left-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_heading {
+#blehxyziwm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2186,7 +2188,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_title {
+#blehxyziwm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2196,7 +2198,7 @@ above average.
   border-bottom-width: 0;
 }
 
-#mznhcexpel .gt_subtitle {
+#blehxyziwm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2206,13 +2208,13 @@ above average.
   border-top-width: 0;
 }
 
-#mznhcexpel .gt_bottom_border {
+#blehxyziwm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_col_headings {
+#blehxyziwm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -2227,7 +2229,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_col_heading {
+#blehxyziwm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2247,7 +2249,7 @@ above average.
   overflow-x: hidden;
 }
 
-#mznhcexpel .gt_column_spanner_outer {
+#blehxyziwm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2259,15 +2261,15 @@ above average.
   padding-right: 4px;
 }
 
-#mznhcexpel .gt_column_spanner_outer:first-child {
+#blehxyziwm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mznhcexpel .gt_column_spanner_outer:last-child {
+#blehxyziwm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mznhcexpel .gt_column_spanner {
+#blehxyziwm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -2279,7 +2281,7 @@ above average.
   width: 100%;
 }
 
-#mznhcexpel .gt_group_heading {
+#blehxyziwm .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2301,7 +2303,7 @@ above average.
   vertical-align: middle;
 }
 
-#mznhcexpel .gt_empty_group_heading {
+#blehxyziwm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2316,15 +2318,15 @@ above average.
   vertical-align: middle;
 }
 
-#mznhcexpel .gt_from_md > :first-child {
+#blehxyziwm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mznhcexpel .gt_from_md > :last-child {
+#blehxyziwm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mznhcexpel .gt_row {
+#blehxyziwm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2343,7 +2345,7 @@ above average.
   overflow-x: hidden;
 }
 
-#mznhcexpel .gt_stub {
+#blehxyziwm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2355,7 +2357,7 @@ above average.
   padding-left: 12px;
 }
 
-#mznhcexpel .gt_summary_row {
+#blehxyziwm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2365,7 +2367,7 @@ above average.
   padding-right: 5px;
 }
 
-#mznhcexpel .gt_first_summary_row {
+#blehxyziwm .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2375,7 +2377,7 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_grand_summary_row {
+#blehxyziwm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2385,7 +2387,7 @@ above average.
   padding-right: 5px;
 }
 
-#mznhcexpel .gt_first_grand_summary_row {
+#blehxyziwm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2395,11 +2397,11 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_striped {
+#blehxyziwm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mznhcexpel .gt_table_body {
+#blehxyziwm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2408,7 +2410,7 @@ above average.
   border-bottom-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_footnotes {
+#blehxyziwm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2422,13 +2424,13 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_footnote {
+#blehxyziwm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#mznhcexpel .gt_sourcenotes {
+#blehxyziwm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2442,47 +2444,47 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#mznhcexpel .gt_sourcenote {
+#blehxyziwm .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#mznhcexpel .gt_left {
+#blehxyziwm .gt_left {
   text-align: left;
 }
 
-#mznhcexpel .gt_center {
+#blehxyziwm .gt_center {
   text-align: center;
 }
 
-#mznhcexpel .gt_right {
+#blehxyziwm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mznhcexpel .gt_font_normal {
+#blehxyziwm .gt_font_normal {
   font-weight: normal;
 }
 
-#mznhcexpel .gt_font_bold {
+#blehxyziwm .gt_font_bold {
   font-weight: bold;
 }
 
-#mznhcexpel .gt_font_italic {
+#blehxyziwm .gt_font_italic {
   font-style: italic;
 }
 
-#mznhcexpel .gt_super {
+#blehxyziwm .gt_super {
   font-size: 65%;
 }
 
-#mznhcexpel .gt_footnote_marks {
+#blehxyziwm .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="mznhcexpel" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="blehxyziwm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -3605,8 +3607,6 @@ Physics and Astronomy
 <!--/html_preserve-->
 
 funder by subject
-
-<img src="results_files/figure-gfm/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
 
 <div id="refs" class="references hanging-indent">
 
