@@ -87,7 +87,7 @@ published also increased during this five-years period.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#wqacsjlgly .gt_table {
+#ugyiepwssb .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -112,7 +112,7 @@ published also increased during this five-years period.
   border-left-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_heading {
+#ugyiepwssb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -124,7 +124,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_title {
+#ugyiepwssb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -134,7 +134,7 @@ published also increased during this five-years period.
   border-bottom-width: 0;
 }
 
-#wqacsjlgly .gt_subtitle {
+#ugyiepwssb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -144,13 +144,13 @@ published also increased during this five-years period.
   border-top-width: 0;
 }
 
-#wqacsjlgly .gt_bottom_border {
+#ugyiepwssb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_col_headings {
+#ugyiepwssb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -165,7 +165,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_col_heading {
+#ugyiepwssb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -185,7 +185,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#wqacsjlgly .gt_column_spanner_outer {
+#ugyiepwssb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -197,15 +197,15 @@ published also increased during this five-years period.
   padding-right: 4px;
 }
 
-#wqacsjlgly .gt_column_spanner_outer:first-child {
+#ugyiepwssb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wqacsjlgly .gt_column_spanner_outer:last-child {
+#ugyiepwssb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wqacsjlgly .gt_column_spanner {
+#ugyiepwssb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -217,7 +217,7 @@ published also increased during this five-years period.
   width: 100%;
 }
 
-#wqacsjlgly .gt_group_heading {
+#ugyiepwssb .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -239,7 +239,7 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#wqacsjlgly .gt_empty_group_heading {
+#ugyiepwssb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -254,15 +254,15 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#wqacsjlgly .gt_from_md > :first-child {
+#ugyiepwssb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wqacsjlgly .gt_from_md > :last-child {
+#ugyiepwssb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wqacsjlgly .gt_row {
+#ugyiepwssb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -281,7 +281,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#wqacsjlgly .gt_stub {
+#ugyiepwssb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -293,7 +293,7 @@ published also increased during this five-years period.
   padding-left: 12px;
 }
 
-#wqacsjlgly .gt_summary_row {
+#ugyiepwssb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -303,7 +303,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#wqacsjlgly .gt_first_summary_row {
+#ugyiepwssb .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -313,7 +313,7 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_grand_summary_row {
+#ugyiepwssb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -323,7 +323,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#wqacsjlgly .gt_first_grand_summary_row {
+#ugyiepwssb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -333,11 +333,11 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_striped {
+#ugyiepwssb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wqacsjlgly .gt_table_body {
+#ugyiepwssb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -346,7 +346,7 @@ published also increased during this five-years period.
   border-bottom-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_footnotes {
+#ugyiepwssb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -360,13 +360,13 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_footnote {
+#ugyiepwssb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#wqacsjlgly .gt_sourcenotes {
+#ugyiepwssb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -380,47 +380,47 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#wqacsjlgly .gt_sourcenote {
+#ugyiepwssb .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#wqacsjlgly .gt_left {
+#ugyiepwssb .gt_left {
   text-align: left;
 }
 
-#wqacsjlgly .gt_center {
+#ugyiepwssb .gt_center {
   text-align: center;
 }
 
-#wqacsjlgly .gt_right {
+#ugyiepwssb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wqacsjlgly .gt_font_normal {
+#ugyiepwssb .gt_font_normal {
   font-weight: normal;
 }
 
-#wqacsjlgly .gt_font_bold {
+#ugyiepwssb .gt_font_bold {
   font-weight: bold;
 }
 
-#wqacsjlgly .gt_font_italic {
+#ugyiepwssb .gt_font_italic {
   font-style: italic;
 }
 
-#wqacsjlgly .gt_super {
+#ugyiepwssb .gt_super {
   font-size: 65%;
 }
 
-#wqacsjlgly .gt_footnote_marks {
+#ugyiepwssb .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="wqacsjlgly" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ugyiepwssb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;; width: 0px">
 
@@ -1131,29 +1131,27 @@ from 2015 to date.
 
 </div>
 
+| Country/Subject Area | Health Science | Life Sciences | Physical Sciences |  SSH | Broad |   NA | Total |
+| :------------------- | -------------: | ------------: | ----------------: | ---: | ----: | ---: | ----: |
+| United Kingdom       |           0.24 |           0.1 |              0.20 | 0.05 |    NA |   NA |  0.59 |
+| The Netherlands      |             NA |            NA |                NA |   NA |  0.12 |   NA |  0.12 |
+| EU                   |           0.00 |           0.0 |              0.01 |   NA |  0.08 |   NA |  0.09 |
+| United States        |           0.05 |           0.0 |                NA |   NA |  0.01 |   NA |  0.06 |
+| Norway               |             NA |            NA |                NA |   NA |  0.03 |   NA |  0.03 |
+| Other                |           0.01 |           0.0 |              0.01 | 0.00 |  0.07 | 0.02 |  0.11 |
+| Total                |           0.30 |           0.1 |              0.22 | 0.05 |  0.31 | 0.02 |  1.00 |
+
 Figure presents a breakdown by country, highlighting the dominating role
 of a few countries. Not surprisingly, mostly British funders paid for
-hybrid open access in Elsevier hybrid journals ( 59%), followed by
-funding bodies from the European Commission ( 14%) and the Netherlands (
-12%). In the latter case, invoices for individual open access articles
-were not send to research funders, but to the Dutch VSNU, a consortium
-of Universities in the Netherlands that has negotiated agreements with
-Elsevier since 2016. The prominent role of Norway can be also explained
-by a national deal, which started in 2019. US-based open access sponsors
-originated mainly from the Bill & Melinda Gates Foundation (n = 1,030).
-
-<div class="figure" style="text-align: center">
-
-<img src="results_files/figure-gfm/unnamed-chunk-16-1.png" alt="Invoiced sponsors of open access articles in Elsevier hybrid journals by country (2015-19)" width="70%" />
-
-<p class="caption">
-
-Invoiced sponsors of open access articles in Elsevier hybrid journals by
-country (2015-19)
-
-</p>
-
-</div>
+hybrid open access in Elsevier hybrid journals ( 24 10 20 5%), followed
+by funding bodies from the European Commission ( 800 1%) and the
+Netherlands ( 12%). In the latter case, invoices for individual open
+access articles were not send to research funders, but to the Dutch
+VSNU, a consortium of Universities in the Netherlands that has
+negotiated agreements with Elsevier since 2016. The prominent role of
+Norway can be also explained by a national deal, which started in 2019.
+US-based open access sponsors originated mainly from the Bill & Melinda
+Gates Foundation (n = 1,030).
 
 In terms of licensing, the type of invoicing is strongly related to
 whether the open content license permits commercial adaption or not (see
@@ -1196,7 +1194,7 @@ had a CC-BY licensing policy.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#yuepetfaua .gt_table {
+#gtcuspvfob .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1221,7 +1219,7 @@ had a CC-BY licensing policy.
   border-left-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_heading {
+#gtcuspvfob .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1233,7 +1231,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_title {
+#gtcuspvfob .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1243,7 +1241,7 @@ had a CC-BY licensing policy.
   border-bottom-width: 0;
 }
 
-#yuepetfaua .gt_subtitle {
+#gtcuspvfob .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1253,13 +1251,13 @@ had a CC-BY licensing policy.
   border-top-width: 0;
 }
 
-#yuepetfaua .gt_bottom_border {
+#gtcuspvfob .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_col_headings {
+#gtcuspvfob .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -1274,7 +1272,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_col_heading {
+#gtcuspvfob .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1294,7 +1292,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#yuepetfaua .gt_column_spanner_outer {
+#gtcuspvfob .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1306,15 +1304,15 @@ had a CC-BY licensing policy.
   padding-right: 4px;
 }
 
-#yuepetfaua .gt_column_spanner_outer:first-child {
+#gtcuspvfob .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yuepetfaua .gt_column_spanner_outer:last-child {
+#gtcuspvfob .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yuepetfaua .gt_column_spanner {
+#gtcuspvfob .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -1326,7 +1324,7 @@ had a CC-BY licensing policy.
   width: 100%;
 }
 
-#yuepetfaua .gt_group_heading {
+#gtcuspvfob .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1348,7 +1346,7 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#yuepetfaua .gt_empty_group_heading {
+#gtcuspvfob .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1363,15 +1361,15 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#yuepetfaua .gt_from_md > :first-child {
+#gtcuspvfob .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yuepetfaua .gt_from_md > :last-child {
+#gtcuspvfob .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yuepetfaua .gt_row {
+#gtcuspvfob .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1390,7 +1388,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#yuepetfaua .gt_stub {
+#gtcuspvfob .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1402,7 +1400,7 @@ had a CC-BY licensing policy.
   padding-left: 12px;
 }
 
-#yuepetfaua .gt_summary_row {
+#gtcuspvfob .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1412,7 +1410,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#yuepetfaua .gt_first_summary_row {
+#gtcuspvfob .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1422,7 +1420,7 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_grand_summary_row {
+#gtcuspvfob .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1432,7 +1430,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#yuepetfaua .gt_first_grand_summary_row {
+#gtcuspvfob .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1442,11 +1440,11 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_striped {
+#gtcuspvfob .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yuepetfaua .gt_table_body {
+#gtcuspvfob .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1455,7 +1453,7 @@ had a CC-BY licensing policy.
   border-bottom-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_footnotes {
+#gtcuspvfob .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1469,13 +1467,13 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_footnote {
+#gtcuspvfob .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#yuepetfaua .gt_sourcenotes {
+#gtcuspvfob .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1489,47 +1487,47 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#yuepetfaua .gt_sourcenote {
+#gtcuspvfob .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#yuepetfaua .gt_left {
+#gtcuspvfob .gt_left {
   text-align: left;
 }
 
-#yuepetfaua .gt_center {
+#gtcuspvfob .gt_center {
   text-align: center;
 }
 
-#yuepetfaua .gt_right {
+#gtcuspvfob .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yuepetfaua .gt_font_normal {
+#gtcuspvfob .gt_font_normal {
   font-weight: normal;
 }
 
-#yuepetfaua .gt_font_bold {
+#gtcuspvfob .gt_font_bold {
   font-weight: bold;
 }
 
-#yuepetfaua .gt_font_italic {
+#gtcuspvfob .gt_font_italic {
   font-style: italic;
 }
 
-#yuepetfaua .gt_super {
+#gtcuspvfob .gt_super {
   font-size: 65%;
 }
 
-#yuepetfaua .gt_footnote_marks {
+#gtcuspvfob .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="yuepetfaua" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gtcuspvfob" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -2151,7 +2149,7 @@ above average.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#blehxyziwm .gt_table {
+#usihbnxzqv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2176,7 +2174,7 @@ above average.
   border-left-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_heading {
+#usihbnxzqv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2188,7 +2186,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_title {
+#usihbnxzqv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2198,7 +2196,7 @@ above average.
   border-bottom-width: 0;
 }
 
-#blehxyziwm .gt_subtitle {
+#usihbnxzqv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2208,13 +2206,13 @@ above average.
   border-top-width: 0;
 }
 
-#blehxyziwm .gt_bottom_border {
+#usihbnxzqv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_col_headings {
+#usihbnxzqv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -2229,7 +2227,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_col_heading {
+#usihbnxzqv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2249,7 +2247,7 @@ above average.
   overflow-x: hidden;
 }
 
-#blehxyziwm .gt_column_spanner_outer {
+#usihbnxzqv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2261,15 +2259,15 @@ above average.
   padding-right: 4px;
 }
 
-#blehxyziwm .gt_column_spanner_outer:first-child {
+#usihbnxzqv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#blehxyziwm .gt_column_spanner_outer:last-child {
+#usihbnxzqv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#blehxyziwm .gt_column_spanner {
+#usihbnxzqv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -2281,7 +2279,7 @@ above average.
   width: 100%;
 }
 
-#blehxyziwm .gt_group_heading {
+#usihbnxzqv .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2303,7 +2301,7 @@ above average.
   vertical-align: middle;
 }
 
-#blehxyziwm .gt_empty_group_heading {
+#usihbnxzqv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2318,15 +2316,15 @@ above average.
   vertical-align: middle;
 }
 
-#blehxyziwm .gt_from_md > :first-child {
+#usihbnxzqv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#blehxyziwm .gt_from_md > :last-child {
+#usihbnxzqv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#blehxyziwm .gt_row {
+#usihbnxzqv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2345,7 +2343,7 @@ above average.
   overflow-x: hidden;
 }
 
-#blehxyziwm .gt_stub {
+#usihbnxzqv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2357,7 +2355,7 @@ above average.
   padding-left: 12px;
 }
 
-#blehxyziwm .gt_summary_row {
+#usihbnxzqv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2367,7 +2365,7 @@ above average.
   padding-right: 5px;
 }
 
-#blehxyziwm .gt_first_summary_row {
+#usihbnxzqv .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2377,7 +2375,7 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_grand_summary_row {
+#usihbnxzqv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2387,7 +2385,7 @@ above average.
   padding-right: 5px;
 }
 
-#blehxyziwm .gt_first_grand_summary_row {
+#usihbnxzqv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2397,11 +2395,11 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_striped {
+#usihbnxzqv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#blehxyziwm .gt_table_body {
+#usihbnxzqv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2410,7 +2408,7 @@ above average.
   border-bottom-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_footnotes {
+#usihbnxzqv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2424,13 +2422,13 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_footnote {
+#usihbnxzqv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#blehxyziwm .gt_sourcenotes {
+#usihbnxzqv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2444,47 +2442,47 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#blehxyziwm .gt_sourcenote {
+#usihbnxzqv .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#blehxyziwm .gt_left {
+#usihbnxzqv .gt_left {
   text-align: left;
 }
 
-#blehxyziwm .gt_center {
+#usihbnxzqv .gt_center {
   text-align: center;
 }
 
-#blehxyziwm .gt_right {
+#usihbnxzqv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#blehxyziwm .gt_font_normal {
+#usihbnxzqv .gt_font_normal {
   font-weight: normal;
 }
 
-#blehxyziwm .gt_font_bold {
+#usihbnxzqv .gt_font_bold {
   font-weight: bold;
 }
 
-#blehxyziwm .gt_font_italic {
+#usihbnxzqv .gt_font_italic {
   font-style: italic;
 }
 
-#blehxyziwm .gt_super {
+#usihbnxzqv .gt_super {
   font-size: 65%;
 }
 
-#blehxyziwm .gt_footnote_marks {
+#usihbnxzqv .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="blehxyziwm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="usihbnxzqv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 

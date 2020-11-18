@@ -37,6 +37,7 @@ library(tidyverse)
 library(here)
 library(cowplot)
 library(gt)
+library(janitor)
 ```
 
 ### Uptake
@@ -417,18 +418,31 @@ hybrid_invoice <- hybrid_volume %>%
   mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd"))
 
 sponsor_country <- hybrid_invoice %>%
+  # manual changes
+  mutate(Country = ifelse(grepl("European|CERN", oa_sponsor_name), "EU", Country)) %>%
+  mutate(Country = ifelse(Country == "Multinational", "Other", Country)) %>%
   mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
   mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
-  group_by(country_factor) %>%
+  mutate(country_factor = fct_infreq(country_factor)) %>%
+  mutate(country_factor = fct_relevel(country_factor, "Other", after = Inf)) %>%
+  group_by(country_factor, `Primary research focus`) %>%
   summarise(n = n_distinct(doi)) %>%
-  mutate(prop = n / sum(n))
+  ungroup() %>%
+  mutate(prop = round(n / sum(n), 2))
+
+sponsor_country %>% 
+  ungroup() %>%
+  pivot_wider(id_cols = c("country_factor"), names_from = `Primary research focus`, values_from = prop) %>%
+  janitor::adorn_totals(c("col", "row")) %>%
+  rename(`Country/Subject Area` = country_factor) %>%
+  knitr::kable()
 ```
 
 
 
-Figure presents a breakdown by country, highlighting the dominating role of a few countries. Not surprisingly, mostly British funders paid for hybrid open access in Elsevier hybrid journals (`r round(sponsor_country %>% filter(country_factor == "United Kingdom") %>% pull(prop) * 100, 0)`%), followed by funding bodies from the European Commission (`r round(sponsor_country %>% filter(country_factor == "Multinational") %>% pull(prop) * 100, 0)`%) and the Netherlands (`r round(sponsor_country %>% filter(country_factor == "The Netherlands") %>% pull(prop) * 100, 0)`%). In the latter case, invoices for individual open access articles were not send to research funders, but to the Dutch VSNU, a consortium  of Universities in the Netherlands that has negotiated agreements with Elsevier since 2016. The prominent role of Norway can be also explained by a national deal, which started in 2019. US-based open access sponsors originated mainly from the Bill & Melinda Gates Foundation (n = `r hybrid_invoice %>% filter(oa_sponsor_name == "Bill & Melinda Gates Foundation") %>% distinct(doi) %>% nrow()`).
+Figure presents a breakdown by country, highlighting the dominating role of a few countries. Not surprisingly, mostly British funders paid for hybrid open access in Elsevier hybrid journals (`r round(sponsor_country %>% filter(country_factor == "United Kingdom") %>% pull(prop) * 100, 0)`%), followed by funding bodies from the European Commission (`r round(sponsor_country %>% filter(country_factor == "EU") %>% pull(prop) * 100, 0)`%) and the Netherlands (`r round(sponsor_country %>% filter(country_factor == "The Netherlands") %>% pull(prop) * 100, 0)`%). In the latter case, invoices for individual open access articles were not send to research funders, but to the Dutch VSNU, a consortium  of Universities in the Netherlands that has negotiated agreements with Elsevier since 2016. The prominent role of Norway can be also explained by a national deal, which started in 2019. US-based open access sponsors originated mainly from the Bill & Melinda Gates Foundation (n = `r hybrid_invoice %>% filter(oa_sponsor_name == "Bill & Melinda Gates Foundation") %>% distinct(doi) %>% nrow()`).
 
-```{r fig.cap  = 'Invoiced sponsors of open access articles in Elsevier hybrid journals by country (2015-19)'}
+```{r fig.cap  = 'Invoiced sponsors of open access articles in Elsevier hybrid journals by country (2015-19)', eval = FALSE}
 sponsor_country %>%
   mutate(country_factor = fct_reorder(country_factor, n)) %>%
   mutate(country_factor = forcats::fct_relevel(country_factor, "Other", after = 0L)
