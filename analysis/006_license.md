@@ -239,15 +239,16 @@ els_yearly_mirror
 #>   issued_year container_title    all_articles
 #>         <int> <chr>                     <int>
 #> 1        2019 Toxicon: X                   17
-#> 2        2019 Vaccine: X                   40
+#> 2        2019 Contraception: X             13
 #> 3        2019 Gene: X                      19
-#> 4        2019 Contraception: X             13
-#> 5        2019 Cytokine: X                  10
-#> 6        2019 Nutrition: X                  4
-#> 7        2019 Atherosclerosis: X            7
+#> 4        2019 Vaccine: X                   40
+#> 5        2019 Atherosclerosis: X            7
+#> 6        2019 Cytokine: X                  10
+#> 7        2019 Nutrition: X                  4
 ```
 
 ``` r
 sum(els_yearly_mirror$all_articles)
 #> [1] 110
+write_csv(els_yearly_mirror, here::here("data", "x_journals_volume.csv"))
 ```

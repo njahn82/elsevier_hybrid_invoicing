@@ -265,4 +265,6 @@ els_yearly_mirror
 
 ```{r}
 sum(els_yearly_mirror$all_articles)
+write_csv(els_yearly_mirror, here::here("data", "x_journals_volume.csv"))
 ```
+
