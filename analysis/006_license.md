@@ -213,3 +213,41 @@ p <- cowplot::plot_grid(
 )
 ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300, width = 6, height = 6)
 ```
+
+### License for Mirror journals
+
+``` sql
+SELECT  issued_year,
+        container_title,
+        COUNT(DISTINCT(doi)) as all_articles 
+    FROM
+        `api-project-764811344545.cr_dump_march_20.els_all_may_20`
+    WHERE
+        issued_year > 2014 
+        and issued_year < 2020        
+        and not    regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')
+        and (not regexp_contains(page, '^S') or page is NULL)
+        and regexp_contains(container_title, '^[a-z|A-Z|0-9]+[^I]\\s? X{1}$')
+    GROUP BY
+        issued_year,
+        container_title
+```
+
+``` r
+els_yearly_mirror
+#> # A tibble: 7 x 3
+#>   issued_year container_title    all_articles
+#>         <int> <chr>                     <int>
+#> 1        2019 Toxicon: X                   17
+#> 2        2019 Vaccine: X                   40
+#> 3        2019 Gene: X                      19
+#> 4        2019 Contraception: X             13
+#> 5        2019 Cytokine: X                  10
+#> 6        2019 Nutrition: X                  4
+#> 7        2019 Atherosclerosis: X            7
+```
+
+``` r
+sum(els_yearly_mirror$all_articles)
+#> [1] 110
+```
