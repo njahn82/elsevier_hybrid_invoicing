@@ -227,7 +227,7 @@ SELECT  issued_year,
         and issued_year < 2020        
         and not    regexp_contains(title,'^Author Index$|^Back Cover|^Contents$|^Contents:|^Cover Image|^Cover Picture|^Editorial Board|^Front Cover|^Frontispiece|^Inside Back Cover|^Inside Cover|^Inside Front Cover|^Issue Information|^List of contents|^Masthead|^Title page|^Correction$|^Corrections to|^Corrections$|^Withdrawn')
         and (not regexp_contains(page, '^S') or page is NULL)
-        and regexp_contains(container_title, '^[a-z|A-Z|0-9]+[^I]\\s? X{1}$')
+        and regexp_contains(container_title, ' X$')
     GROUP BY
         issued_year,
         container_title
@@ -235,20 +235,26 @@ SELECT  issued_year,
 
 ``` r
 els_yearly_mirror
-#> # A tibble: 7 x 3
-#>   issued_year container_title    all_articles
-#>         <int> <chr>                     <int>
-#> 1        2019 Toxicon: X                   17
-#> 2        2019 Contraception: X             13
-#> 3        2019 Gene: X                      19
-#> 4        2019 Vaccine: X                   40
-#> 5        2019 Atherosclerosis: X            7
-#> 6        2019 Cytokine: X                  10
-#> 7        2019 Nutrition: X                  4
+#> # A tibble: 40 x 3
+#>    issued_year container_title                                      all_articles
+#>          <int> <chr>                                                       <int>
+#>  1        2019 Journal of Hydrology X                                         33
+#>  2        2019 Atmospheric Environment: X                                     50
+#>  3        2019 Contraception: X                                               13
+#>  4        2019 Journal of Structural Biology: X                               10
+#>  5        2019 Optical Materials: X                                           34
+#>  6        2019 Toxicon: X                                                     17
+#>  7        2019 European Journal of Obstetrics & Gynecology and Rep…           80
+#>  8        2019 Journal of Computational Physics: X                            33
+#>  9        2019 Energy Conversion and Management: X                            14
+#> 10        2019 Water Research X                                               20
+#> # … with 30 more rows
 ```
 
 ``` r
 sum(els_yearly_mirror$all_articles)
-#> [1] 110
+#> [1] 817
+length(unique(els_yearly_mirror$container_title))
+#> [1] 38
 write_csv(els_yearly_mirror, here::here("data", "x_journals_volume.csv"))
 ```
