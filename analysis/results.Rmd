@@ -65,7 +65,7 @@ els_overall <- els_jns %>%
 
 Drawing on web-archived Elsevier APC pricing lists  [@Matthias_2020], we determined the evolution of Elsevier's open access journal portfolio. Figure shows that the majority of journals were hybrid journals: Elsevier published a total of `r length(unique(els_jns$issn))` open access journals, of which `r els_jns %>%  filter(oa_model == "Hybrid") %>% distinct(issn) %>% nrow()` supported the hybrid model. Elsevier's journal portfolio  hardly changed. The number of hybrid journals grew by  `r (els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$n) - (els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$n)` journals between 2015 and May 2020, while its proportion relative to Elsevier's overall journal portfolio slightly decreased from `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% .$prop, 2) * 100`% to `r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% .$prop, 2) * 100`%. The year 2016 marked the highest number of journals. After that, the trend reversed. Since 2018, the number of journals stagnated. On 23 May 2020, Elsevier APC pricing list comprised `r length(unique(els_jns_df$issn))` journals, of which `r els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow()` supported the hybrid model, representing a share of `r round(els_jns_df %>% filter(oa_type == "Hybrid") %>% distinct(issn) %>% nrow() / length(unique(els_jns_df$issn)) * 100, 0)`%.
 
-```{r fig.cap = "Longitudinal development of Elsevier's journal portfolio by open access business model. The figure distinguishes between fully open access journals that provide immediate open access to all articles and the hybrid model. Data obtained from Elsevier APC pricing lists (Matthias 2020)."}
+```{r number_of_els_journals, fig.cap = "Longitudinal development of Elsevier's journal portfolio by open access business model. The figure distinguishes between fully open access journals that provide immediate open access to all articles and the hybrid model. Data obtained from Elsevier APC pricing lists (Matthias 2020)."}
 ggplot(els_jns_count,
        aes(as.character(year), n,  fill = oa_model_fct, group = oa_model_fct)) +
   geom_area(alpha = 0.8,
@@ -73,9 +73,9 @@ ggplot(els_jns_count,
   scale_fill_manual(
     values = c("#cccccca0", "#56b4e9"),
     name = NULL,
-    labels = c("Fully", "Hybrid")
+    labels = c("Fully OA", "Hybrid OA")
   ) +
-  labs(x = "Year", y = "Elsevier Journals") +
+  labs(x = "Year", y = "Number of Elsevier Journals") +
   scale_y_continuous(
     labels = scales::number_format(big.mark = ","),
     expand = expansion(mult = c(0, 0.05)),
@@ -84,7 +84,7 @@ ggplot(els_jns_count,
   theme_minimal_hgrid() +
   theme(legend.position = "top",
         legend.justification = "right") +
-  guides(fill = guide_legend("OA Business Model"))
+  guides(fill = guide_legend("Business Model"))
 ```
 
 *How many of hybrid journals flipped to fully open access?*
@@ -207,23 +207,23 @@ On 23 May 2020, Elsevier APC pricing list comprised `r els_jns_df %>% filter(oa_
 ```{r}
 table_descriptives_ind <- tribble(
   ~ind_group, ~ind, ~ind_name,
-  "Elsevier Hybrid Journals with OA article(s)", "n_journals", "Journals",
   "Articles published", "articles_n", "Total",
   "Articles published", "articles_mean", "Avg.",
   "Articles published", "articles_sd", "SD",
-  "OA Articles published", "oa_n", "Total OA",
-  "OA Articles published", "oa_mean", "Avg.",
-  "OA Articles published", "oa_sd", "SD",
+  "of which OA", "oa_n", "Total ",
+  "of which OA", "oa_mean", "Avg.",
+  "of which OA", "oa_sd", "SD",
   "OA Uptake (in%)", "oa_uptake", "Percentage",
   "OA Uptake (in%)", "oa_uptake_mean", "Avg.",
-  "OA Uptake (in%)", "oa_uptake_sd", "SD"
+  "OA Uptake (in%)", "oa_uptake_sd", "SD",
+  "Elsevier Hybrid Journals with OA article(s)", "n_journals", "Journals"
 )
 gt_1 <- inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
   dplyr::select(-ind) %>%
   gt(rowname_col = "ind_name", groupname_col = "ind_group") %>%
   fmt_number(contains("20"), decimals = 1) %>%
   fmt_number(contains("20"), 
-             rows = c("Total", "Total OA", "Journals"),
+             rows = c("Total", "Total ", "Journals"),
              decimals = 0) %>%
   tab_style(
     style = cell_fill(
@@ -308,12 +308,16 @@ hybrid_articles <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
 hybrid_license <- hybrid_articles %>%
   mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd")) %>%
   group_by(cc_norm, issued_year) %>%
-  summarise(cc_articles = n())
+  summarise(cc_articles = n()) %>%
+  ungroup() %>%
+  group_by(issued_year) %>%
+  mutate(prop = cc_articles /sum(cc_articles))
+hybrid_license
 ```
 
 *Under which open content licenses are the open access articles distributed?*
 
-Figure presents a breakdown by Creative Commons license variant used for hybrid open access by year. Elsevier provided commercial (cc-by) and a less permissive non-commercial license (cc-by-nc) for open access publishing in otherwise subscription-based journals. `r  round(hybrid_license %>% group_by(cc_norm) %>% summarise(n = sum(cc_articles)) %>% mutate(prop = n / sum(n)) %>% filter(cc_norm == "cc-by-nc-nd") %>% pull(prop) * 100,0)` percent of open access articles can be re-used for non-commercial purposes. This proportion remained the same between 2015-19.
+Figure presents a breakdown by Creative Commons license variant used for hybrid open access by year. Elsevier provided commercial (cc-by) and a less permissive non-commercial license (cc-by-nc) for open access publishing in otherwise subscription-based journals. `r  round(hybrid_license %>% group_by(cc_norm) %>% summarise(n = sum(cc_articles)) %>% mutate(prop = n / sum(n)) %>% filter(cc_norm == "cc-by-nc-nd") %>% pull(prop) * 100,0)` percent of open access articles can be re-used for non-commercial purposes (n = `r hybrid_license %>% filter(cc_norm == "cc-by-nc-nd") %>% pull(cc_articles) %>% sum()`). This proportion remained the same between 2015-19.
 
 ```{r, fig.cap = "Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND-NC license."}
 hybrid_license %>%
@@ -347,9 +351,21 @@ summary_licenses <-
   group_by(type) %>% 
   summarise(n = sum(articles)) %>%
   mutate(prop = n / sum(n))
+summary_licenses
+
+license_df %>%
+  group_by(type, license_code) %>%
+  summarise(n = sum(articles)) %>%
+  mutate(prop = n / sum(n))
 ```
 
-Next, we present a breakdown of open content licensed articles by open access type relative to Elsevier's journal productivity (ses Figure). In total, Elsevier provided open access to `r sum(summary_licenses$n)` articles at he time of our study, corresponding to an open access share of `r round(sum(summary_licenses$n) / license_df %>% distinct(all_articles) %>% pull(all_articles) %>% sum() * 100, 0)`%. Hybrid open access had the lowest proportion (`r round(filter(summary_licenses, type == "hybrid_immediate_articles") %>% pull(prop) * 100)`), while over half of open access articles were made freely available after an embargo period (`r round(filter(summary_licenses, type == "hybrid_delayed_articles") %>% pull(prop) * 100, 0)`%) (Figure A). `r round(filter(summary_licenses, type == "full_oa") %>% pull(prop) * 100)`% of open access articles appeared in full open access journals.
+```{r mirror}
+mirror_jn <- readr::read_csv(here::here("data", "x_journals_volume.csv"))
+```
+
+Next, we present a breakdown of open content licensed articles by open access type relative to Elsevier's journal productivity (ses Figure). In total, Elsevier provided open access to `r sum(summary_licenses$n)` articles at he time of our study, corresponding to an open access share of `r round(sum(summary_licenses$n) / license_df %>% distinct(all_articles) %>% pull(all_articles) %>% sum() * 100, 0)`%. Hybrid open access had the lowest proportion (`r round(filter(summary_licenses, type == "hybrid_immediate_articles") %>% pull(prop) * 100)`), while over half of open access articles were made freely available after an embargo period (`r round(filter(summary_licenses, type == "hybrid_delayed_articles") %>% pull(prop) * 100, 0)`%) (Figure A). `r round(filter(summary_licenses, type == "full_oa") %>% pull(prop) * 100)`% of open access articles appeared in full open access journals. 
+
+Of those, 
 
 ```{r, fig.cap='Open Access in Elsevier journals in terms of article volume between 2015-2019, showing a breakdown by business type, distinguishing between immediate open access provision in otherwise subscription-based journals ("Hybrid OA"), articles in fully open access journals and delayed open access under the Elsevier Open Archive program. Figure A presents a breakdown by open content license. Y-Axis represents the proportion of articles relative to the overall article output in percent. Figure B presents the number of articles for each opena ccess types across the five-years period 2015-19.'}
 
@@ -455,7 +471,14 @@ sponsor_country %>%
   labs(y = "Number of invoiced OA articles", x = NULL)
 ```
 
+### wavied
 
+```{r}
+hybrid_volume %>% 
+  filter(oa_sponsor_type == "ElsevierWaived") %>%
+  count(oa_sponsor_name, sort = TRUE) %>%
+  mutate(prop = n / sum(n))
+```
 ```{r}
 cc_invoice <- hybrid_volume %>%
   mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
@@ -482,7 +505,23 @@ license_count <- inner_join(cc_invoice_type, cc_norm_all, by =  "cc_norm") %>% m
 license_summary_count <- inner_join(cc_invoice_type, cc_type_all, by =  "fct_source") %>% mutate(prop = n / all)
 ```
 
-In terms of licensing, the type of invoicing is strongly related to whether the open content license permits commercial adaption or not (see figure). Although most open access articles published in Elsevier's hybrid journals were billed to authors directly, centrally invoiced articles accounted for the largest share of articles under an CC BY licenses (`r round(filter(license_count, fct_source == "Agreement", cc_norm == "cc-by") %>% pull(prop) * 100, 0)`%). 
+```{r}
+cc_invoice %>%
+  group_by(fct_source) %>%
+  summarise(nn = sum(n)) %>%
+  mutate(prop = nn / sum(nn))
+```
+In terms of licensing, the type of invoicing is strongly related to whether the open content license permits commercial adaption or not (see figure). Although most open access articles published in Elsevier's hybrid journals were billed to authors directly, centrally invoiced articles accounted for the largest share of articles under an CC BY licenses. 
+
+```{r}
+cc_invoice %>%
+  filter(fct_source == "Agreement") %>%
+  group_by(cc_norm) %>%
+  summarise(nn = sum(n)) %>%
+  mutate(prop = nn / sum(nn))
+```
+
+
 
 ```{r, fig.cap  = 'Invoicing for open access articles in hybrid journals by open content license, 2015-2019.'}
 ggplot(cc_invoice, aes(factor(issued_year), n, fill = fct_source, group = fct_source)) +
@@ -562,10 +601,10 @@ ind_sponsor_df <- left_join(hybrid_invoice_agg_general, hybrid_invoice_agg_cc, b
 overall_ind_sponsor_df <- tibble(oa_sponsor = "All", journals = length(unique(hybrid_invoice$issn)), articles = length(unique(hybrid_invoice$doi)), prop = 1, cc_by = filter(hybrid_invoice, cc_norm == "cc-by") %>% nrow() / length(unique(hybrid_invoice$doi)), in_open_apc = filter(hybrid_invoice, in_open_apc == TRUE) %>% nrow() / length(unique(hybrid_invoice$doi)))
 
 
-ind_sponsor_df %>%
+gt_sponsor <-ind_sponsor_df %>%
   bind_rows(overall_ind_sponsor_df) %>%
   gt::gt() %>%
-  gt::cols_label(oa_sponsor = "OA Sponsor",
+  gt::cols_label(oa_sponsor = "Hybrid OA Sponsor",
     journals = "Journals",
     articles = "Articles",
     prop = "%",
@@ -630,6 +669,8 @@ ind_sponsor_df %>%
     table.border.bottom.color = "white",
     table.border.bottom.width = px(3)
       )
+gt_sponsor
+gt::gtsave(gt_sponsor, here::here("figure","gt_sponsor.png"))
 ```
 
 ```{r}
@@ -775,7 +816,7 @@ subject_all <- funder_shares %>%
   summarise(oa = sum(oa_type))
 funder_overview_subject <- left_join(funder_shares, subject_all, by = "top_level")
 # gt
-funder_overview_subject %>%
+gt_subject_all <- funder_overview_subject %>%
   pivot_wider(id_cols = c("top_level", "oa"), names_from = oa_sponsor_type, values_from = prop) %>%
   ungroup() %>% 
   # remove na and multidisciplinary 
@@ -783,7 +824,7 @@ funder_overview_subject %>%
   relocate(Agreement, .after = Author) %>%
   arrange(desc(Author)) %>%
   gt::gt(rowname_col = "top_level") %>%
-  gt::cols_label(oa = "OA Articles") %>%
+  gt::cols_label(oa = "Hybrid OA Articles") %>%
   fmt_percent(
     columns = vars(Author, Agreement, `Fee Waived`, Other),
     decimals = 0) %>%
@@ -813,7 +854,7 @@ funder_overview_subject %>%
     )
   ) %>%
   tab_spanner(
-    label = md("**OA Sponsor Type**"),
+    label = md("**Hybrid OA Sponsor Type**"),
     columns = 3:6
   ) %>%
     tab_style(
@@ -829,6 +870,8 @@ funder_overview_subject %>%
     table.border.bottom.color = "white",
     table.border.bottom.width = px(3)
       )
+gt::gtsave(gt_subject_all, here::here("figure","gt_subject_all.png"))
+gt_subject_all
 ```
 
 funder by subject

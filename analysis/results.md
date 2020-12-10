@@ -20,7 +20,7 @@ model, representing a share of 85%.
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-4-1.png" alt="Longitudinal development of Elsevier's journal portfolio by open access business model. The figure distinguishes between fully open access journals that provide immediate open access to all articles and the hybrid model. Data obtained from Elsevier APC pricing lists (Matthias 2020)." width="70%" />
+<img src="results_files/figure-gfm/number_of_els_journals-1.png" alt="Longitudinal development of Elsevier's journal portfolio by open access business model. The figure distinguishes between fully open access journals that provide immediate open access to all articles and the hybrid model. Data obtained from Elsevier APC pricing lists (Matthias 2020)." width="70%" />
 
 <p class="caption">
 
@@ -87,7 +87,7 @@ published also increased during this five-years period.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jobcxezkxl .gt_table {
+#pwftpyjiua .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -112,7 +112,7 @@ published also increased during this five-years period.
   border-left-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_heading {
+#pwftpyjiua .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -124,7 +124,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_title {
+#pwftpyjiua .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -134,7 +134,7 @@ published also increased during this five-years period.
   border-bottom-width: 0;
 }
 
-#jobcxezkxl .gt_subtitle {
+#pwftpyjiua .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -144,13 +144,13 @@ published also increased during this five-years period.
   border-top-width: 0;
 }
 
-#jobcxezkxl .gt_bottom_border {
+#pwftpyjiua .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_col_headings {
+#pwftpyjiua .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -165,7 +165,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_col_heading {
+#pwftpyjiua .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -185,7 +185,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#jobcxezkxl .gt_column_spanner_outer {
+#pwftpyjiua .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -197,15 +197,15 @@ published also increased during this five-years period.
   padding-right: 4px;
 }
 
-#jobcxezkxl .gt_column_spanner_outer:first-child {
+#pwftpyjiua .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jobcxezkxl .gt_column_spanner_outer:last-child {
+#pwftpyjiua .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jobcxezkxl .gt_column_spanner {
+#pwftpyjiua .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -217,7 +217,7 @@ published also increased during this five-years period.
   width: 100%;
 }
 
-#jobcxezkxl .gt_group_heading {
+#pwftpyjiua .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -239,7 +239,7 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#jobcxezkxl .gt_empty_group_heading {
+#pwftpyjiua .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -254,15 +254,15 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#jobcxezkxl .gt_from_md > :first-child {
+#pwftpyjiua .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jobcxezkxl .gt_from_md > :last-child {
+#pwftpyjiua .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jobcxezkxl .gt_row {
+#pwftpyjiua .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -281,7 +281,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#jobcxezkxl .gt_stub {
+#pwftpyjiua .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -293,7 +293,7 @@ published also increased during this five-years period.
   padding-left: 12px;
 }
 
-#jobcxezkxl .gt_summary_row {
+#pwftpyjiua .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -303,7 +303,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#jobcxezkxl .gt_first_summary_row {
+#pwftpyjiua .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -313,7 +313,7 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_grand_summary_row {
+#pwftpyjiua .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -323,7 +323,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#jobcxezkxl .gt_first_grand_summary_row {
+#pwftpyjiua .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -333,11 +333,11 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_striped {
+#pwftpyjiua .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jobcxezkxl .gt_table_body {
+#pwftpyjiua .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -346,7 +346,7 @@ published also increased during this five-years period.
   border-bottom-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_footnotes {
+#pwftpyjiua .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -360,13 +360,13 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_footnote {
+#pwftpyjiua .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#jobcxezkxl .gt_sourcenotes {
+#pwftpyjiua .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -380,47 +380,47 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#jobcxezkxl .gt_sourcenote {
+#pwftpyjiua .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#jobcxezkxl .gt_left {
+#pwftpyjiua .gt_left {
   text-align: left;
 }
 
-#jobcxezkxl .gt_center {
+#pwftpyjiua .gt_center {
   text-align: center;
 }
 
-#jobcxezkxl .gt_right {
+#pwftpyjiua .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jobcxezkxl .gt_font_normal {
+#pwftpyjiua .gt_font_normal {
   font-weight: normal;
 }
 
-#jobcxezkxl .gt_font_bold {
+#pwftpyjiua .gt_font_bold {
   font-weight: bold;
 }
 
-#jobcxezkxl .gt_font_italic {
+#pwftpyjiua .gt_font_italic {
   font-style: italic;
 }
 
-#jobcxezkxl .gt_super {
+#pwftpyjiua .gt_super {
   font-size: 65%;
 }
 
-#jobcxezkxl .gt_footnote_marks {
+#pwftpyjiua .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="jobcxezkxl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pwftpyjiua" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;; width: 0px">
 
@@ -491,62 +491,6 @@ published also increased during this five-years period.
 </thead>
 
 <tbody class="gt_table_body">
-
-<tr class="gt_group_heading_row">
-
-<td colspan="7" class="gt_group_heading" style="color: black; font-style: italic;">
-
-Elsevier Hybrid Journals with OA article(s)
-
-</td>
-
-</tr>
-
-<tr>
-
-<td class="gt_row gt_left gt_stub">
-
-Journals
-
-</td>
-
-<td class="gt_row gt_right">
-
-1,317
-
-</td>
-
-<td class="gt_row gt_right">
-
-1,364
-
-</td>
-
-<td class="gt_row gt_right">
-
-1,401
-
-</td>
-
-<td class="gt_row gt_right">
-
-1,501
-
-</td>
-
-<td class="gt_row gt_right">
-
-1,600
-
-</td>
-
-<td class="gt_row gt_right" style="background-color: #E5E5E5;">
-
-1,755
-
-</td>
-
-</tr>
 
 <tr class="gt_group_heading_row">
 
@@ -700,7 +644,7 @@ SD
 
 <td colspan="7" class="gt_group_heading" style="color: black; font-style: italic;">
 
-OA Articles published
+of which OA
 
 </td>
 
@@ -710,7 +654,7 @@ OA Articles published
 
 <td class="gt_row gt_left gt_stub">
 
-Total OA
+Total
 
 </td>
 
@@ -992,6 +936,62 @@ SD
 
 </tr>
 
+<tr class="gt_group_heading_row">
+
+<td colspan="7" class="gt_group_heading" style="color: black; font-style: italic;">
+
+Elsevier Hybrid Journals with OA article(s)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="gt_row gt_left gt_stub">
+
+Journals
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,317
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,364
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,401
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,501
+
+</td>
+
+<td class="gt_row gt_right">
+
+1,600
+
+</td>
+
+<td class="gt_row gt_right" style="background-color: #E5E5E5;">
+
+1,755
+
+</td>
+
+</tr>
+
 </tbody>
 
 </table>
@@ -1015,7 +1015,7 @@ or less open access articles.
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-8-1.png" alt="Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 18%." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-7-1.png" alt="Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 18%." width="70%" />
 
 <p class="caption">
 
@@ -1027,6 +1027,21 @@ access share of 18%.
 
 </div>
 
+    #> # A tibble: 10 x 4
+    #> # Groups:   issued_year [5]
+    #>    cc_norm     issued_year cc_articles  prop
+    #>    <chr>             <dbl>       <int> <dbl>
+    #>  1 cc-by              2015        4004 0.375
+    #>  2 cc-by              2016        5790 0.455
+    #>  3 cc-by              2017        6037 0.452
+    #>  4 cc-by              2018        6544 0.420
+    #>  5 cc-by              2019        7377 0.382
+    #>  6 cc-by-nc-nd        2015        6668 0.625
+    #>  7 cc-by-nc-nd        2016        6939 0.545
+    #>  8 cc-by-nc-nd        2017        7324 0.548
+    #>  9 cc-by-nc-nd        2018        9026 0.580
+    #> 10 cc-by-nc-nd        2019       11934 0.618
+
 *Under which open content licenses are the open access articles
 distributed?*
 
@@ -1034,12 +1049,12 @@ Figure presents a breakdown by Creative Commons license variant used for
 hybrid open access by year. Elsevier provided commercial (cc-by) and a
 less permissive non-commercial license (cc-by-nc) for open access
 publishing in otherwise subscription-based journals. 58 percent of open
-access articles can be re-used for non-commercial purposes. This
-proportion remained the same between 2015-19.
+access articles can be re-used for non-commercial purposes (n = 41,891).
+This proportion remained the same between 2015-19.
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-10-1.png" alt="Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND-NC license." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-9-1.png" alt="Immediate open access articles in hybrid journals by open content license and year. The blue area represent articles permitting commercial adaption under a Creative Commons CC-BY license, while the purple area displays articles under a less permissive Commons CC-BY-ND-NC license." width="70%" />
 
 <p class="caption">
 
@@ -1054,6 +1069,24 @@ displays articles under a less permissive Commons CC-BY-ND-NC license.
 
 *How does hybrid open access compare to full and delayed open access?*
 
+    #> # A tibble: 3 x 3
+    #>   type                           n  prop
+    #>   <chr>                      <dbl> <dbl>
+    #> 1 full_oa                    93315 0.284
+    #> 2 hybrid_delayed_articles   163643 0.498
+    #> 3 hybrid_immediate_articles  71643 0.218
+    #> # A tibble: 7 x 4
+    #> # Groups:   type [3]
+    #>   type                      license_code      n    prop
+    #>   <chr>                     <chr>         <dbl>   <dbl>
+    #> 1 full_oa                   cc-by         17293 0.185  
+    #> 2 full_oa                   cc-by-nc-nd   76022 0.815  
+    #> 3 hybrid_delayed_articles   cc-by          1568 0.00958
+    #> 4 hybrid_delayed_articles   cc-by-nc-nd    7529 0.0460 
+    #> 5 hybrid_delayed_articles   els-user     154546 0.944  
+    #> 6 hybrid_immediate_articles cc-by         29752 0.415  
+    #> 7 hybrid_immediate_articles cc-by-nc-nd   41891 0.585
+
 Next, we present a breakdown of open content licensed articles by open
 access type relative to Elsevier’s journal productivity (ses Figure). In
 total, Elsevier provided open access to 328,601 articles at he time of
@@ -1062,6 +1095,8 @@ access had the lowest proportion ( 22), while over half of open access
 articles were made freely available after an embargo period ( 50%)
 (Figure A). 28% of open access articles appeared in full open access
 journals.
+
+Of those,
 
 <div class="figure" style="text-align: center">
 
@@ -1153,16 +1188,47 @@ Norway can be also explained by a national deal, which started in 2019.
 US-based open access sponsors originated mainly from the Bill & Melinda
 Gates Foundation (n = 1,030).
 
+### wavied
+
+    #> # A tibble: 33 x 3
+    #>    oa_sponsor_name                     n    prop
+    #>    <chr>                           <int>   <dbl>
+    #>  1 <NA>                             2099 0.483  
+    #>  2 Third-Party Sponsor               888 0.204  
+    #>  3 Académie des Sciences             853 0.196  
+    #>  4 Journal Society Affiliation       128 0.0295 
+    #>  5 National Institutes of Health      84 0.0193 
+    #>  6 Bill & Melinda Gates Foundation    74 0.0170 
+    #>  7 Wellcome Trust                     47 0.0108 
+    #>  8 Medical Research Council           36 0.00829
+    #>  9 European Research Council          25 0.00575
+    #> 10 Department of Health UK            17 0.00391
+    #> # … with 23 more rows
+
+    #> # A tibble: 4 x 3
+    #>   fct_source    nn   prop
+    #>   <fct>      <int>  <dbl>
+    #> 1 Author     41725 0.582 
+    #> 2 Agreement  24250 0.338 
+    #> 3 Fee Waived  4345 0.0606
+    #> 4 Other       1323 0.0185
+
 In terms of licensing, the type of invoicing is strongly related to
 whether the open content license permits commercial adaption or not (see
 figure). Although most open access articles published in Elsevier’s
 hybrid journals were billed to authors directly, centrally invoiced
 articles accounted for the largest share of articles under an CC BY
-licenses ( 62%).
+licenses.
+
+    #> # A tibble: 2 x 3
+    #>   cc_norm     nn  prop
+    #>   <chr>    <int> <dbl>
+    #> 1 cc-by    18331 0.756
+    #> 2 cc-by-nc  5919 0.244
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-18-1.png" alt="Invoicing for open access articles in hybrid journals by open content license, 2015-2019." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-20-1.png" alt="Invoicing for open access articles in hybrid journals by open content license, 2015-2019." width="70%" />
 
 <p class="caption">
 
@@ -1194,7 +1260,7 @@ had a CC-BY licensing policy.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vevncakakd .gt_table {
+#nltjxnabpb .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1219,7 +1285,7 @@ had a CC-BY licensing policy.
   border-left-color: #D3D3D3;
 }
 
-#vevncakakd .gt_heading {
+#nltjxnabpb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1231,7 +1297,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#vevncakakd .gt_title {
+#nltjxnabpb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1241,7 +1307,7 @@ had a CC-BY licensing policy.
   border-bottom-width: 0;
 }
 
-#vevncakakd .gt_subtitle {
+#nltjxnabpb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1251,13 +1317,13 @@ had a CC-BY licensing policy.
   border-top-width: 0;
 }
 
-#vevncakakd .gt_bottom_border {
+#nltjxnabpb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vevncakakd .gt_col_headings {
+#nltjxnabpb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -1272,7 +1338,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#vevncakakd .gt_col_heading {
+#nltjxnabpb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1292,7 +1358,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#vevncakakd .gt_column_spanner_outer {
+#nltjxnabpb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1304,15 +1370,15 @@ had a CC-BY licensing policy.
   padding-right: 4px;
 }
 
-#vevncakakd .gt_column_spanner_outer:first-child {
+#nltjxnabpb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vevncakakd .gt_column_spanner_outer:last-child {
+#nltjxnabpb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vevncakakd .gt_column_spanner {
+#nltjxnabpb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -1324,7 +1390,7 @@ had a CC-BY licensing policy.
   width: 100%;
 }
 
-#vevncakakd .gt_group_heading {
+#nltjxnabpb .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1346,7 +1412,7 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#vevncakakd .gt_empty_group_heading {
+#nltjxnabpb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1361,15 +1427,15 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#vevncakakd .gt_from_md > :first-child {
+#nltjxnabpb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vevncakakd .gt_from_md > :last-child {
+#nltjxnabpb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vevncakakd .gt_row {
+#nltjxnabpb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1388,7 +1454,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#vevncakakd .gt_stub {
+#nltjxnabpb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1400,7 +1466,7 @@ had a CC-BY licensing policy.
   padding-left: 12px;
 }
 
-#vevncakakd .gt_summary_row {
+#nltjxnabpb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1410,7 +1476,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#vevncakakd .gt_first_summary_row {
+#nltjxnabpb .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1420,7 +1486,7 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#vevncakakd .gt_grand_summary_row {
+#nltjxnabpb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1430,7 +1496,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#vevncakakd .gt_first_grand_summary_row {
+#nltjxnabpb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1440,11 +1506,11 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#vevncakakd .gt_striped {
+#nltjxnabpb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vevncakakd .gt_table_body {
+#nltjxnabpb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1453,7 +1519,7 @@ had a CC-BY licensing policy.
   border-bottom-color: #D3D3D3;
 }
 
-#vevncakakd .gt_footnotes {
+#nltjxnabpb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1467,13 +1533,13 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#vevncakakd .gt_footnote {
+#nltjxnabpb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#vevncakakd .gt_sourcenotes {
+#nltjxnabpb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1487,47 +1553,47 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#vevncakakd .gt_sourcenote {
+#nltjxnabpb .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#vevncakakd .gt_left {
+#nltjxnabpb .gt_left {
   text-align: left;
 }
 
-#vevncakakd .gt_center {
+#nltjxnabpb .gt_center {
   text-align: center;
 }
 
-#vevncakakd .gt_right {
+#nltjxnabpb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vevncakakd .gt_font_normal {
+#nltjxnabpb .gt_font_normal {
   font-weight: normal;
 }
 
-#vevncakakd .gt_font_bold {
+#nltjxnabpb .gt_font_bold {
   font-weight: bold;
 }
 
-#vevncakakd .gt_font_italic {
+#nltjxnabpb .gt_font_italic {
   font-style: italic;
 }
 
-#vevncakakd .gt_super {
+#nltjxnabpb .gt_super {
   font-size: 65%;
 }
 
-#vevncakakd .gt_footnote_marks {
+#nltjxnabpb .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="vevncakakd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nltjxnabpb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -1553,7 +1619,7 @@ had a CC-BY licensing policy.
 
 <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1" style="color: black; font-weight: bold;">
 
-OA Sponsor
+Hybrid OA Sponsor
 
 </th>
 
@@ -2111,19 +2177,21 @@ Transformative Agreements <br />
 
 <!--/html_preserve-->
 
+<img src="results_files/figure-gfm/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
+
 As another variable, the table highlights the proportion of public
 disclosure of funding through the Open APC initiative. The Open APC
 Initiative disclosed more than one-third of centrally invoiced articles
 ( 36%), but also publication fees that were billed to authors directly
-(n = 2,357). This indicates that authors were able to make use of other
+(n = 2,361). This indicates that authors were able to make use of other
 types of institutional support structures for publication fees such as
 publication funds.
 
 ### Field cultures
 
-<img src="results_files/figure-gfm/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
 
-<img src="results_files/figure-gfm/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
 
 We used the Scopus’ All Sciences Journal Classification (ASJC) to
 examine if and to what extent open access uptake rates varied by
@@ -2141,15 +2209,15 @@ and Physical Sciences show a lower median proportion of open access
 articles, whereas most Life Sciences and Social Sciences fields ranked
 above average.
 
-<img src="results_files/figure-gfm/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
 
-<!--html_preserve-->
+<img src="results_files/figure-gfm/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" /><!--html_preserve-->
 
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ojnvipyebo .gt_table {
+#awbkslfpxy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2174,7 +2242,7 @@ above average.
   border-left-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_heading {
+#awbkslfpxy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2186,7 +2254,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_title {
+#awbkslfpxy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2196,7 +2264,7 @@ above average.
   border-bottom-width: 0;
 }
 
-#ojnvipyebo .gt_subtitle {
+#awbkslfpxy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2206,13 +2274,13 @@ above average.
   border-top-width: 0;
 }
 
-#ojnvipyebo .gt_bottom_border {
+#awbkslfpxy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_col_headings {
+#awbkslfpxy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -2227,7 +2295,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_col_heading {
+#awbkslfpxy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2247,7 +2315,7 @@ above average.
   overflow-x: hidden;
 }
 
-#ojnvipyebo .gt_column_spanner_outer {
+#awbkslfpxy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2259,15 +2327,15 @@ above average.
   padding-right: 4px;
 }
 
-#ojnvipyebo .gt_column_spanner_outer:first-child {
+#awbkslfpxy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ojnvipyebo .gt_column_spanner_outer:last-child {
+#awbkslfpxy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ojnvipyebo .gt_column_spanner {
+#awbkslfpxy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -2279,7 +2347,7 @@ above average.
   width: 100%;
 }
 
-#ojnvipyebo .gt_group_heading {
+#awbkslfpxy .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2301,7 +2369,7 @@ above average.
   vertical-align: middle;
 }
 
-#ojnvipyebo .gt_empty_group_heading {
+#awbkslfpxy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2316,15 +2384,15 @@ above average.
   vertical-align: middle;
 }
 
-#ojnvipyebo .gt_from_md > :first-child {
+#awbkslfpxy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ojnvipyebo .gt_from_md > :last-child {
+#awbkslfpxy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ojnvipyebo .gt_row {
+#awbkslfpxy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2343,7 +2411,7 @@ above average.
   overflow-x: hidden;
 }
 
-#ojnvipyebo .gt_stub {
+#awbkslfpxy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2355,7 +2423,7 @@ above average.
   padding-left: 12px;
 }
 
-#ojnvipyebo .gt_summary_row {
+#awbkslfpxy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2365,7 +2433,7 @@ above average.
   padding-right: 5px;
 }
 
-#ojnvipyebo .gt_first_summary_row {
+#awbkslfpxy .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2375,7 +2443,7 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_grand_summary_row {
+#awbkslfpxy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2385,7 +2453,7 @@ above average.
   padding-right: 5px;
 }
 
-#ojnvipyebo .gt_first_grand_summary_row {
+#awbkslfpxy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2395,11 +2463,11 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_striped {
+#awbkslfpxy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ojnvipyebo .gt_table_body {
+#awbkslfpxy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2408,7 +2476,7 @@ above average.
   border-bottom-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_footnotes {
+#awbkslfpxy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2422,13 +2490,13 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_footnote {
+#awbkslfpxy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ojnvipyebo .gt_sourcenotes {
+#awbkslfpxy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2442,47 +2510,47 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#ojnvipyebo .gt_sourcenote {
+#awbkslfpxy .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ojnvipyebo .gt_left {
+#awbkslfpxy .gt_left {
   text-align: left;
 }
 
-#ojnvipyebo .gt_center {
+#awbkslfpxy .gt_center {
   text-align: center;
 }
 
-#ojnvipyebo .gt_right {
+#awbkslfpxy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ojnvipyebo .gt_font_normal {
+#awbkslfpxy .gt_font_normal {
   font-weight: normal;
 }
 
-#ojnvipyebo .gt_font_bold {
+#awbkslfpxy .gt_font_bold {
   font-weight: bold;
 }
 
-#ojnvipyebo .gt_font_italic {
+#awbkslfpxy .gt_font_italic {
   font-style: italic;
 }
 
-#ojnvipyebo .gt_super {
+#awbkslfpxy .gt_super {
   font-size: 65%;
 }
 
-#ojnvipyebo .gt_footnote_marks {
+#awbkslfpxy .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="ojnvipyebo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="awbkslfpxy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -2512,13 +2580,14 @@ above average.
 
 <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1" style="color: black; font-weight: bold;">
 
-OA Articles
+Hybrid OA Articles
 
 </th>
 
 <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4">
 
-<span class="gt_column_spanner"><strong>OA Sponsor Type</strong></span>
+<span class="gt_column_spanner"><strong>Hybrid OA Sponsor
+Type</strong></span>
 
 </th>
 
@@ -3620,7 +3689,7 @@ spearman
     #>    rho 
     #> 0.1677
 
-<img src="results_files/figure-gfm/unnamed-chunk-30-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" />
 
 <div id="refs" class="references hanging-indent">
 
