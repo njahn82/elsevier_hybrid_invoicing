@@ -208,7 +208,7 @@ p_2
 
 ``` r
 p <- cowplot::plot_grid(
-  p_1, p_2,
+  p_2, p_1,
   labels = "AUTO", ncol = 1
 )
 ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300, width = 6, height = 6)
@@ -236,18 +236,18 @@ SELECT  issued_year,
 ``` r
 els_yearly_mirror
 #> # A tibble: 40 x 3
-#>    issued_year container_title                                      all_articles
-#>          <int> <chr>                                                       <int>
-#>  1        2019 Journal of Hydrology X                                         33
-#>  2        2019 Atmospheric Environment: X                                     50
-#>  3        2019 Contraception: X                                               13
-#>  4        2019 Journal of Structural Biology: X                               10
-#>  5        2019 Optical Materials: X                                           34
-#>  6        2019 Toxicon: X                                                     17
-#>  7        2019 European Journal of Obstetrics & Gynecology and Rep…           80
-#>  8        2019 Journal of Computational Physics: X                            33
-#>  9        2019 Energy Conversion and Management: X                            14
-#> 10        2019 Water Research X                                               20
+#>    issued_year container_title                      all_articles
+#>          <int> <chr>                                       <int>
+#>  1        2018 Water Research X                               12
+#>  2        2019 Diabetes & Metabolism: X                        1
+#>  3        2019 Atmospheric Environment: X                     50
+#>  4        2019 Contraception: X                               13
+#>  5        2019 Journal of Hydrology X                         33
+#>  6        2019 Respiratory Medicine: X                        11
+#>  7        2019 Journal of Structural Biology: X               10
+#>  8        2019 Water Research X                               20
+#>  9        2019 Chemical Engineering Science: X                43
+#> 10        2019 Journal of Biomedical Informatics: X           25
 #> # … with 30 more rows
 ```
 
