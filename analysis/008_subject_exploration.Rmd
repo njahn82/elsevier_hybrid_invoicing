@@ -99,21 +99,21 @@ hybrid_subject %>%
 hybrid_subject_19 <- hybrid_subject %>% 
   mutate(prop = oa /articles) %>%
   filter(issued_year == "2019", !is.na(percentile)
-         #, prop > 0.01 & prop < 0.15) 
-         )%>%
+         , prop != 0) %>%
   distinct(issn, prop, percentile, snip, sjr)
 ```
 
 spearman
 
 ```{r}
-cor.test(hybrid_subject_19$prop, hybrid_subject_19$snip, method = "spearman")
+cor.test(hybrid_subject_19$prop, hybrid_subject_19$percentile, method = "spearman")
 ```
 
 plot
 ```{r}
-ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = .3) + geom_smooth(method = "lm") +
-  coord_cartesian(xlim = c(0., 0.7), ylim = c(0.5, 6)) +
+ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = 0.2) + 
+  geom_smooth(method = "loess", se = TRUE) +
+ # coord_cartesian(xlim = c(0., 0.7), ylim = c(0.5, 6)) +
   labs(x = "OA Uptake Rate", y = "SNIP") +
   theme_cowplot()
 ```
@@ -214,22 +214,22 @@ ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median),
 ```
 
 ```{r}
-hybrid_volume_jn <- hybrid_volume %>%
-  group_by(issn) %>%
-  summarise(n_oa = n_distinct(doi))
-
-share_per_invoicing_type <- hybrid_volume %>%
-  group_by(oa_sponsor_type, issn) %>%
-  summarise(n_oa_type = n_distinct(doi)) %>%
-  left_join(hybrid_volume_jn, by = "issn") %>%
-  mutate(prop = n_oa_type / n_oa) %>%
-  left_join(jn_subjects, by = "issn") %>%
-  ungroup()
-share_per_invoicing_type %>%
-  filter(oa_sponsor_type == c("FundingBody")) %>%
-  ggplot(aes(fct_reorder(top_level, prop, .fun = median, .desc = TRUE), prop)) +
-  geom_boxplot() +
-  coord_flip()
+# hybrid_volume_jn <- hybrid_volume %>%
+#   group_by(issn) %>%
+#   summarise(n_oa = n_distinct(doi))
+# 
+# share_per_invoicing_type <- hybrid_volume %>%
+#   group_by(oa_sponsor_type, issn) %>%
+#   summarise(n_oa_type = n_distinct(doi)) %>%
+#   left_join(hybrid_volume_jn, by = "issn") %>%
+#   mutate(prop = n_oa_type / n_oa) %>%
+#   left_join(jn_subjects, by = "issn") %>%
+#   ungroup()
+# share_per_invoicing_type %>%
+#   filter(oa_sponsor_type == c("FundingBody")) %>%
+#   ggplot(aes(fct_reorder(top_level, prop, .fun = median, .desc = TRUE), prop)) +
+#   geom_boxplot() +
+#   coord_flip()
 ```
 
 
