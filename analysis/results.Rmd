@@ -207,23 +207,23 @@ On 23 May 2020, Elsevier APC pricing list comprised `r els_jns_df %>% filter(oa_
 ```{r}
 table_descriptives_ind <- tribble(
   ~ind_group, ~ind, ~ind_name,
-  "Articles published", "articles_n", "Total",
-  "Articles published", "articles_mean", "Avg.",
-  "Articles published", "articles_sd", "SD",
-  "of which OA", "oa_n", "Total ",
-  "of which OA", "oa_mean", "Avg.",
-  "of which OA", "oa_sd", "SD",
-  "OA Uptake (in%)", "oa_uptake", "Percentage",
-  "OA Uptake (in%)", "oa_uptake_mean", "Avg.",
-  "OA Uptake (in%)", "oa_uptake_sd", "SD",
-  "Elsevier Hybrid Journals with OA article(s)", "n_journals", "Journals"
+    "Elsevier Hybrid Journals with ≥ 1 OA article", "n_journals", "All (n)",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "articles_n", "All (n) ",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "articles_mean", "Avg.",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "articles_sd", "SD",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_n", "OA (n)",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_mean", "Avg.",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_sd", "SD",
+  "OA Uptake in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_uptake", "Total (%)",
+  "OA Uptake in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_uptake_mean", "Avg.",
+  "OA Uptake in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_uptake_sd", "SD"
 )
 gt_1 <- inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
   dplyr::select(-ind) %>%
   gt(rowname_col = "ind_name", groupname_col = "ind_group") %>%
   fmt_number(contains("20"), decimals = 1) %>%
   fmt_number(contains("20"), 
-             rows = c("Total", "Total ", "Journals"),
+             rows = c("All (n)", "All (n) ", "OA (n)"),
              decimals = 0) %>%
   tab_style(
     style = cell_fill(
@@ -238,6 +238,10 @@ gt_1 <- inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "in
       )
     )
   ) %>%
+  tab_style(
+    style = 
+      cell_text(weight = "bold"),
+    locations = cells_stub(c("All (n)", "All (n) ", "OA (n)", "Total (%)"))) %>%
   tab_style(
     style = cell_text(color = "black", weight = "bold"),
     locations = list(
@@ -268,6 +272,8 @@ gt_1 <- inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "in
     stub.border.color = "white"
   )
 gt_1
+gt::gtsave(gt_1, here::here("figure","gt_overview.png"))
+
 ```
 
 
@@ -297,8 +303,8 @@ ggplot(aes(factor(issued_year), prop)) +
   theme_minimal_hgrid() +
   scale_y_continuous(labels = scales::percent_format(accuracy = 5L),
       expand = expansion(mult = c(0, 0.05))) +
-  labs(x = "Publication Years",
-       y = "Open Access Uptake")
+  labs(x = "Publication Year",
+       y = "Hybrid OA Uptake")
 ```
 
 ```{r}
@@ -357,6 +363,12 @@ license_df %>%
   group_by(type, license_code) %>%
   summarise(n = sum(articles)) %>%
   mutate(prop = n / sum(n))
+all_oa <- license_df %>% 
+  group_by(type) %>% 
+  summarise(n = sum(articles)) %>%
+  pull(n) %>%
+  sum()
+all_oa
 ```
 
 ```{r mirror}
@@ -395,6 +407,17 @@ all_articles <- hybrid_volume %>%
   summarise(n = n())
 ```
 
+```{r}
+sponsored_articles %>% 
+  group_by(fct_source) %>% 
+  summarise(nn = sum(n)) %>% 
+  mutate(cumsum = cumsum(nn)) %>% 
+  mutate(prop = nn / sum(nn) * 100) %>%
+  mutate(cumprop = cumsum(prop)) %>%
+  adorn_totals("row") %>%
+  knitr::kable(digits = 1)
+```
+
 To examine the funding structure for open access articles, we text-mined spending metadata from open access full-texts. Figure @ref(fig:invoiceoverview) shows the annual development per invoicing type. Each type is visualised separately as parts of the total. The grey areas show the overall yearly distribution of open access articles in hybrid journals, and the proportion of each invoicing type is highlighted in blue. The figure illustrates a general growth of open access articles in hybrid journals. This development was mainly driven by billing authors individually ("Author"), while central invoicing ("Agreement") stagnated. Also, the number of fee-waived articles ("Fee Waived") somehow constant from 2015 to date. In most cases, Elsevier charged individual authors (`r round(hybrid_volume %>% filter(oa_sponsor_type == "Author") %>% nrow() / nrow(hybrid_volume) * 100, 0)`%. Invoices addressed to funders and research organizations accounted for `r round(hybrid_volume %>% filter(oa_sponsor_type == "FundingBody") %>% nrow() / nrow(hybrid_volume) * 100, 0)`% of articles. The proportion of open access articles with publication fee waivers was `r round(hybrid_volume %>% filter(oa_sponsor_type == "ElsevierWaived") %>% nrow() / nrow(hybrid_volume) * 100, 0)`%.
 
 
@@ -414,9 +437,11 @@ ggplot(sponsored_articles, aes(x = gsub("20", "'", issued_year), y = n), alpha =
                       c(`cc-by` = "#B52141",
                         `cc-by-nc-nd` = "#0093c7"),
                     name = "CC license variant") +
-  labs(x = NULL, y = NULL) + 
-  scale_y_continuous(labels = scales::number_format(big.mark = " "),
-                      expand = expansion(mult = c(0, 0.05))) + theme_minimal_hgrid() +
+  labs(x = "Publication year", y = "Hybrid OA Articles") + 
+  scale_y_continuous( 
+                     labels = scales::number_format(big.mark = " "),
+                      expand = expansion(mult = c(0, 0.05))) +
+  theme_minimal_hgrid() +
   theme(legend.position="top", legend.justification = "right")
 ```
 
@@ -455,8 +480,40 @@ sponsor_country %>%
 ```
 
 
+```{r}
+hybrid_invoice <-hybrid_volume %>%
+  filter(oa_sponsor_type == "FundingBody") %>%
+ # rename(yrl_volume = articles) %>%
+  left_join(tt, by = c("oa_sponsor_name")) %>%
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd"))
+
+sponsor_country_t <- hybrid_invoice %>%
+  # manual changes
+  mutate(Country = ifelse(grepl("European|CERN", oa_sponsor_name), "EU", Country)) %>%
+  mutate(Country = ifelse(Country == "Multinational", "Other", Country)) %>%
+  mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
+  mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
+  mutate(country_factor = fct_infreq(country_factor)) %>%
+  mutate(country_factor = fct_relevel(country_factor, "Other", after = Inf))  
+
+sponsor_country_t %>%
+  count(issued_year, Sector, country_factor, cc_norm) %>%
+  ggplot(aes(issued_year, n, fill = Sector)) + 
+  geom_bar(stat = "identity") +
+  facet_wrap(~country_factor)
+```
+
+
+
 
 Figure presents a breakdown by country, highlighting the dominating role of a few countries. Not surprisingly, mostly British funders paid for hybrid open access in Elsevier hybrid journals (`r round(sponsor_country %>% filter(country_factor == "United Kingdom") %>% pull(prop) * 100, 0)`%), followed by funding bodies from the European Commission (`r round(sponsor_country %>% filter(country_factor == "EU") %>% pull(prop) * 100, 0)`%) and the Netherlands (`r round(sponsor_country %>% filter(country_factor == "The Netherlands") %>% pull(prop) * 100, 0)`%). In the latter case, invoices for individual open access articles were not send to research funders, but to the Dutch VSNU, a consortium  of Universities in the Netherlands that has negotiated agreements with Elsevier since 2016. The prominent role of Norway can be also explained by a national deal, which started in 2019. US-based open access sponsors originated mainly from the Bill & Melinda Gates Foundation (n = `r hybrid_invoice %>% filter(oa_sponsor_name == "Bill & Melinda Gates Foundation") %>% distinct(doi) %>% nrow()`).
+
+```{r}
+sponsor_country %>%
+  group_by(country_factor) %>%
+  summarise(nn = sum(n)) %>%
+  mutate(prop = nn / sum(nn))
+```
 
 ```{r fig.cap  = 'Invoiced sponsors of open access articles in Elsevier hybrid journals by country (2015-19)', eval = FALSE}
 sponsor_country %>%
@@ -746,7 +803,7 @@ p_subject <- ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .f
     expand = expansion(mult = c(0, 0.05))
   ) +
   coord_flip(ylim=c(0,0.2)) +
-  labs(x = NULL, y = "Five-Years OA Uptake Rate per Journal") +
+  labs(x = NULL, y = "Five-Years Hybrid OA Uptake Rate per Journal") +
   theme_minimal_vgrid(font_size = 10) 
 ggsave(here::here("figure", "subject_by_area.png"), p_subject, dpi = 300, width = 8, height = 6)
 p_subject
@@ -958,6 +1015,6 @@ cor.test(hybrid_subject_19$prop, hybrid_subject_19$percentile, method = "spearma
 ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = 0.2) + 
   geom_smooth(method = "loess", se = TRUE) +
   coord_cartesian(xlim = c(0., 0.7), ylim = c(0.5, 6)) +
-  labs(x = "OA Uptake Rate", y = "SNIP") +
+  labs(x = "Hybrid OA Uptake", y = "SNIP") +
   theme_cowplot()
 ```
