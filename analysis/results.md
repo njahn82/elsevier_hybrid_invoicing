@@ -1,6 +1,23 @@
 
 ### Uptake
 
+    #> # A tibble: 12 x 5
+    #> # Groups:   year [6]
+    #>     year oa_model        n  prop oa_model_fct
+    #>    <dbl> <chr>       <int> <dbl> <fct>       
+    #>  1  2015 Hybrid       1727 0.863 Hybrid      
+    #>  2  2015 Open Access   274 0.137 Open Access 
+    #>  3  2016 Hybrid       2146 0.811 Hybrid      
+    #>  4  2016 Open Access   499 0.189 Open Access 
+    #>  5  2017 Hybrid       2102 0.825 Hybrid      
+    #>  6  2017 Open Access   445 0.175 Open Access 
+    #>  7  2018 Hybrid       2016 0.855 Hybrid      
+    #>  8  2018 Open Access   341 0.145 Open Access 
+    #>  9  2019 Hybrid       2040 0.851 Hybrid      
+    #> 10  2019 Open Access   358 0.149 Open Access 
+    #> 11  2020 Hybrid       1982 0.847 Hybrid      
+    #> 12  2020 Open Access   358 0.153 Open Access
+
 #### Elseviers open access journal portfolio
 
 *How many Elsevier journals supported the hybrid model?*
@@ -87,7 +104,7 @@ published also increased during this five-years period.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#uxgfsflgiv .gt_table {
+#jlseytweje .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -112,7 +129,7 @@ published also increased during this five-years period.
   border-left-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_heading {
+#jlseytweje .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -124,7 +141,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_title {
+#jlseytweje .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -134,7 +151,7 @@ published also increased during this five-years period.
   border-bottom-width: 0;
 }
 
-#uxgfsflgiv .gt_subtitle {
+#jlseytweje .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -144,13 +161,13 @@ published also increased during this five-years period.
   border-top-width: 0;
 }
 
-#uxgfsflgiv .gt_bottom_border {
+#jlseytweje .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_col_headings {
+#jlseytweje .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -165,7 +182,7 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_col_heading {
+#jlseytweje .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -185,7 +202,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#uxgfsflgiv .gt_column_spanner_outer {
+#jlseytweje .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -197,15 +214,15 @@ published also increased during this five-years period.
   padding-right: 4px;
 }
 
-#uxgfsflgiv .gt_column_spanner_outer:first-child {
+#jlseytweje .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uxgfsflgiv .gt_column_spanner_outer:last-child {
+#jlseytweje .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uxgfsflgiv .gt_column_spanner {
+#jlseytweje .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -217,7 +234,7 @@ published also increased during this five-years period.
   width: 100%;
 }
 
-#uxgfsflgiv .gt_group_heading {
+#jlseytweje .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -239,7 +256,7 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#uxgfsflgiv .gt_empty_group_heading {
+#jlseytweje .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -254,15 +271,15 @@ published also increased during this five-years period.
   vertical-align: middle;
 }
 
-#uxgfsflgiv .gt_from_md > :first-child {
+#jlseytweje .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uxgfsflgiv .gt_from_md > :last-child {
+#jlseytweje .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uxgfsflgiv .gt_row {
+#jlseytweje .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -281,7 +298,7 @@ published also increased during this five-years period.
   overflow-x: hidden;
 }
 
-#uxgfsflgiv .gt_stub {
+#jlseytweje .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -293,7 +310,7 @@ published also increased during this five-years period.
   padding-left: 12px;
 }
 
-#uxgfsflgiv .gt_summary_row {
+#jlseytweje .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -303,7 +320,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#uxgfsflgiv .gt_first_summary_row {
+#jlseytweje .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -313,7 +330,7 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_grand_summary_row {
+#jlseytweje .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -323,7 +340,7 @@ published also increased during this five-years period.
   padding-right: 5px;
 }
 
-#uxgfsflgiv .gt_first_grand_summary_row {
+#jlseytweje .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -333,11 +350,11 @@ published also increased during this five-years period.
   border-top-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_striped {
+#jlseytweje .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uxgfsflgiv .gt_table_body {
+#jlseytweje .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -346,7 +363,7 @@ published also increased during this five-years period.
   border-bottom-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_footnotes {
+#jlseytweje .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -360,13 +377,13 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_footnote {
+#jlseytweje .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#uxgfsflgiv .gt_sourcenotes {
+#jlseytweje .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -380,47 +397,47 @@ published also increased during this five-years period.
   border-right-color: #D3D3D3;
 }
 
-#uxgfsflgiv .gt_sourcenote {
+#jlseytweje .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#uxgfsflgiv .gt_left {
+#jlseytweje .gt_left {
   text-align: left;
 }
 
-#uxgfsflgiv .gt_center {
+#jlseytweje .gt_center {
   text-align: center;
 }
 
-#uxgfsflgiv .gt_right {
+#jlseytweje .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uxgfsflgiv .gt_font_normal {
+#jlseytweje .gt_font_normal {
   font-weight: normal;
 }
 
-#uxgfsflgiv .gt_font_bold {
+#jlseytweje .gt_font_bold {
   font-weight: bold;
 }
 
-#uxgfsflgiv .gt_font_italic {
+#jlseytweje .gt_font_italic {
   font-style: italic;
 }
 
-#uxgfsflgiv .gt_super {
+#jlseytweje .gt_super {
   font-size: 65%;
 }
 
-#uxgfsflgiv .gt_footnote_marks {
+#jlseytweje .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="uxgfsflgiv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jlseytweje" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;; width: 0px">
 
@@ -1079,6 +1096,7 @@ displays articles under a less permissive Commons CC-BY-ND-NC license.
     #> 6 hybrid_immediate_articles cc-by         29752 0.415  
     #> 7 hybrid_immediate_articles cc-by-nc-nd   41891 0.585
     #> [1] 328601
+    #> [1] 2643474
 
 Next, we present a breakdown of open content licensed articles by open
 access type relative to Elsevier’s journal productivity (ses Figure). In
@@ -1167,22 +1185,24 @@ from 2015 to date.
 
 </div>
 
-| Country/Subject Area | Health Science | Life Sciences | Physical Sciences |  SSH | Broad |   NA | Total |
-| :------------------- | -------------: | ------------: | ----------------: | ---: | ----: | ---: | ----: |
-| United Kingdom       |           0.24 |           0.1 |              0.20 | 0.05 |    NA |   NA |  0.59 |
-| The Netherlands      |             NA |            NA |                NA |   NA |  0.12 |   NA |  0.12 |
-| EU                   |           0.00 |           0.0 |              0.01 |   NA |  0.08 |   NA |  0.09 |
-| United States        |           0.05 |           0.0 |                NA |   NA |  0.01 |   NA |  0.06 |
-| Norway               |             NA |            NA |                NA |   NA |  0.03 |   NA |  0.03 |
-| Other                |           0.01 |           0.0 |              0.01 | 0.00 |  0.07 | 0.02 |  0.11 |
-| Total                |           0.30 |           0.1 |              0.22 | 0.05 |  0.31 | 0.02 |  1.00 |
+<img src="results_files/figure-gfm/license_count-1.png" width="70%" style="display: block; margin: auto;" />
 
-<img src="results_files/figure-gfm/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
+| Country/Subject Area | Health Science | Life Sciences | Physical Sciences |  SSH | Broad | Total |
+| :------------------- | -------------: | ------------: | ----------------: | ---: | ----: | ----: |
+| United Kingdom       |           0.25 |          0.11 |              0.21 | 0.05 |  0.00 |  0.62 |
+| The Netherlands      |           0.00 |          0.00 |              0.00 | 0.00 |  0.12 |  0.12 |
+| EU                   |           0.00 |          0.00 |              0.00 | 0.00 |  0.09 |  0.09 |
+| United States        |           0.06 |          0.00 |              0.00 | 0.00 |  0.01 |  0.07 |
+| Norway               |           0.00 |          0.00 |              0.00 | 0.00 |  0.03 |  0.03 |
+| Other                |           0.01 |          0.00 |              0.01 | 0.00 |  0.05 |  0.07 |
+| Total                |           0.32 |          0.11 |              0.22 | 0.05 |  0.30 |  1.00 |
+
+<img src="results_files/figure-gfm/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
 
 Figure presents a breakdown by country, highlighting the dominating role
 of a few countries. Not surprisingly, mostly British funders paid for
-hybrid open access in Elsevier hybrid journals ( 24 10 20 5%), followed
-by funding bodies from the European Commission ( 800 1%) and the
+hybrid open access in Elsevier hybrid journals ( 25 11 21 5%), followed
+by funding bodies from the European Commission ( 900%) and the
 Netherlands ( 12%). In the latter case, invoices for individual open
 access articles were not send to research funders, but to the Dutch
 VSNU, a consortium of Universities in the Netherlands that has
@@ -1194,12 +1214,12 @@ Gates Foundation (n = 1,030).
     #> # A tibble: 6 x 3
     #>   country_factor     nn   prop
     #>   <fct>           <int>  <dbl>
-    #> 1 United Kingdom  14238 0.587 
-    #> 2 The Netherlands  2835 0.117 
-    #> 3 EU               2364 0.0975
-    #> 4 United States    1433 0.0591
-    #> 5 Norway            694 0.0286
-    #> 6 Other            2686 0.111
+    #> 1 United Kingdom  14344 0.617 
+    #> 2 The Netherlands  2835 0.122 
+    #> 3 EU               2164 0.0931
+    #> 4 United States    1433 0.0616
+    #> 5 Norway            694 0.0299
+    #> 6 Other            1776 0.0764
 
 ### wavied
 
@@ -1241,7 +1261,7 @@ licenses.
 
 <div class="figure" style="text-align: center">
 
-<img src="results_files/figure-gfm/unnamed-chunk-23-1.png" alt="Invoicing for open access articles in hybrid journals by open content license, 2015-2019." width="70%" />
+<img src="results_files/figure-gfm/unnamed-chunk-25-1.png" alt="Invoicing for open access articles in hybrid journals by open content license, 2015-2019." width="70%" />
 
 <p class="caption">
 
@@ -1273,7 +1293,7 @@ had a CC-BY licensing policy.
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jedaxfbzai .gt_table {
+#yyjnacqccm .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1298,7 +1318,7 @@ had a CC-BY licensing policy.
   border-left-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_heading {
+#yyjnacqccm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1310,7 +1330,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_title {
+#yyjnacqccm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1320,7 +1340,7 @@ had a CC-BY licensing policy.
   border-bottom-width: 0;
 }
 
-#jedaxfbzai .gt_subtitle {
+#yyjnacqccm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1330,13 +1350,13 @@ had a CC-BY licensing policy.
   border-top-width: 0;
 }
 
-#jedaxfbzai .gt_bottom_border {
+#yyjnacqccm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_col_headings {
+#yyjnacqccm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -1351,7 +1371,7 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_col_heading {
+#yyjnacqccm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1371,7 +1391,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#jedaxfbzai .gt_column_spanner_outer {
+#yyjnacqccm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1383,15 +1403,15 @@ had a CC-BY licensing policy.
   padding-right: 4px;
 }
 
-#jedaxfbzai .gt_column_spanner_outer:first-child {
+#yyjnacqccm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jedaxfbzai .gt_column_spanner_outer:last-child {
+#yyjnacqccm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jedaxfbzai .gt_column_spanner {
+#yyjnacqccm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -1403,7 +1423,7 @@ had a CC-BY licensing policy.
   width: 100%;
 }
 
-#jedaxfbzai .gt_group_heading {
+#yyjnacqccm .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1425,7 +1445,7 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#jedaxfbzai .gt_empty_group_heading {
+#yyjnacqccm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1440,15 +1460,15 @@ had a CC-BY licensing policy.
   vertical-align: middle;
 }
 
-#jedaxfbzai .gt_from_md > :first-child {
+#yyjnacqccm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jedaxfbzai .gt_from_md > :last-child {
+#yyjnacqccm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jedaxfbzai .gt_row {
+#yyjnacqccm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1467,7 +1487,7 @@ had a CC-BY licensing policy.
   overflow-x: hidden;
 }
 
-#jedaxfbzai .gt_stub {
+#yyjnacqccm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1479,7 +1499,7 @@ had a CC-BY licensing policy.
   padding-left: 12px;
 }
 
-#jedaxfbzai .gt_summary_row {
+#yyjnacqccm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1489,7 +1509,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#jedaxfbzai .gt_first_summary_row {
+#yyjnacqccm .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1499,7 +1519,7 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_grand_summary_row {
+#yyjnacqccm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1509,7 +1529,7 @@ had a CC-BY licensing policy.
   padding-right: 5px;
 }
 
-#jedaxfbzai .gt_first_grand_summary_row {
+#yyjnacqccm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1519,11 +1539,11 @@ had a CC-BY licensing policy.
   border-top-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_striped {
+#yyjnacqccm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jedaxfbzai .gt_table_body {
+#yyjnacqccm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1532,7 +1552,7 @@ had a CC-BY licensing policy.
   border-bottom-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_footnotes {
+#yyjnacqccm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1546,13 +1566,13 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_footnote {
+#yyjnacqccm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#jedaxfbzai .gt_sourcenotes {
+#yyjnacqccm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1566,47 +1586,47 @@ had a CC-BY licensing policy.
   border-right-color: #D3D3D3;
 }
 
-#jedaxfbzai .gt_sourcenote {
+#yyjnacqccm .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#jedaxfbzai .gt_left {
+#yyjnacqccm .gt_left {
   text-align: left;
 }
 
-#jedaxfbzai .gt_center {
+#yyjnacqccm .gt_center {
   text-align: center;
 }
 
-#jedaxfbzai .gt_right {
+#yyjnacqccm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jedaxfbzai .gt_font_normal {
+#yyjnacqccm .gt_font_normal {
   font-weight: normal;
 }
 
-#jedaxfbzai .gt_font_bold {
+#yyjnacqccm .gt_font_bold {
   font-weight: bold;
 }
 
-#jedaxfbzai .gt_font_italic {
+#yyjnacqccm .gt_font_italic {
   font-style: italic;
 }
 
-#jedaxfbzai .gt_super {
+#yyjnacqccm .gt_super {
   font-size: 65%;
 }
 
-#jedaxfbzai .gt_footnote_marks {
+#yyjnacqccm .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="jedaxfbzai" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yyjnacqccm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -2190,7 +2210,7 @@ Transformative Agreements <br />
 
 <!--/html_preserve-->
 
-<img src="results_files/figure-gfm/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
 
 As another variable, the table highlights the proportion of public
 disclosure of funding through the Open APC initiative. The Open APC
@@ -2202,9 +2222,9 @@ publication funds.
 
 ### Field cultures
 
-<img src="results_files/figure-gfm/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-29-1.png" width="70%" style="display: block; margin: auto;" />
 
-<img src="results_files/figure-gfm/unnamed-chunk-28-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-30-1.png" width="70%" style="display: block; margin: auto;" />
 
 We used the Scopus’ All Sciences Journal Classification (ASJC) to
 examine if and to what extent open access uptake rates varied by
@@ -2222,15 +2242,15 @@ and Physical Sciences show a lower median proportion of open access
 articles, whereas most Life Sciences and Social Sciences fields ranked
 above average.
 
-<img src="results_files/figure-gfm/unnamed-chunk-29-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-31-1.png" width="70%" style="display: block; margin: auto;" />
 
-<img src="results_files/figure-gfm/unnamed-chunk-30-1.png" width="70%" style="display: block; margin: auto;" /><!--html_preserve-->
+<img src="results_files/figure-gfm/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" /><!--html_preserve-->
 
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zbwkjgloto .gt_table {
+#ijyydcgtdf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2255,7 +2275,7 @@ above average.
   border-left-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_heading {
+#ijyydcgtdf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2267,7 +2287,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_title {
+#ijyydcgtdf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2277,7 +2297,7 @@ above average.
   border-bottom-width: 0;
 }
 
-#zbwkjgloto .gt_subtitle {
+#ijyydcgtdf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2287,13 +2307,13 @@ above average.
   border-top-width: 0;
 }
 
-#zbwkjgloto .gt_bottom_border {
+#ijyydcgtdf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_col_headings {
+#ijyydcgtdf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: white;
@@ -2308,7 +2328,7 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_col_heading {
+#ijyydcgtdf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2328,7 +2348,7 @@ above average.
   overflow-x: hidden;
 }
 
-#zbwkjgloto .gt_column_spanner_outer {
+#ijyydcgtdf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2340,15 +2360,15 @@ above average.
   padding-right: 4px;
 }
 
-#zbwkjgloto .gt_column_spanner_outer:first-child {
+#ijyydcgtdf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zbwkjgloto .gt_column_spanner_outer:last-child {
+#ijyydcgtdf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zbwkjgloto .gt_column_spanner {
+#ijyydcgtdf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -2360,7 +2380,7 @@ above average.
   width: 100%;
 }
 
-#zbwkjgloto .gt_group_heading {
+#ijyydcgtdf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2382,7 +2402,7 @@ above average.
   vertical-align: middle;
 }
 
-#zbwkjgloto .gt_empty_group_heading {
+#ijyydcgtdf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2397,15 +2417,15 @@ above average.
   vertical-align: middle;
 }
 
-#zbwkjgloto .gt_from_md > :first-child {
+#ijyydcgtdf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zbwkjgloto .gt_from_md > :last-child {
+#ijyydcgtdf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zbwkjgloto .gt_row {
+#ijyydcgtdf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2424,7 +2444,7 @@ above average.
   overflow-x: hidden;
 }
 
-#zbwkjgloto .gt_stub {
+#ijyydcgtdf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2436,7 +2456,7 @@ above average.
   padding-left: 12px;
 }
 
-#zbwkjgloto .gt_summary_row {
+#ijyydcgtdf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2446,7 +2466,7 @@ above average.
   padding-right: 5px;
 }
 
-#zbwkjgloto .gt_first_summary_row {
+#ijyydcgtdf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2456,7 +2476,7 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_grand_summary_row {
+#ijyydcgtdf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2466,7 +2486,7 @@ above average.
   padding-right: 5px;
 }
 
-#zbwkjgloto .gt_first_grand_summary_row {
+#ijyydcgtdf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2476,11 +2496,11 @@ above average.
   border-top-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_striped {
+#ijyydcgtdf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zbwkjgloto .gt_table_body {
+#ijyydcgtdf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2489,7 +2509,7 @@ above average.
   border-bottom-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_footnotes {
+#ijyydcgtdf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2503,13 +2523,13 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_footnote {
+#ijyydcgtdf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#zbwkjgloto .gt_sourcenotes {
+#ijyydcgtdf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2523,47 +2543,47 @@ above average.
   border-right-color: #D3D3D3;
 }
 
-#zbwkjgloto .gt_sourcenote {
+#ijyydcgtdf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#zbwkjgloto .gt_left {
+#ijyydcgtdf .gt_left {
   text-align: left;
 }
 
-#zbwkjgloto .gt_center {
+#ijyydcgtdf .gt_center {
   text-align: center;
 }
 
-#zbwkjgloto .gt_right {
+#ijyydcgtdf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zbwkjgloto .gt_font_normal {
+#ijyydcgtdf .gt_font_normal {
   font-weight: normal;
 }
 
-#zbwkjgloto .gt_font_bold {
+#ijyydcgtdf .gt_font_bold {
   font-weight: bold;
 }
 
-#zbwkjgloto .gt_font_italic {
+#ijyydcgtdf .gt_font_italic {
   font-style: italic;
 }
 
-#zbwkjgloto .gt_super {
+#ijyydcgtdf .gt_super {
   font-size: 65%;
 }
 
-#zbwkjgloto .gt_footnote_marks {
+#ijyydcgtdf .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="zbwkjgloto" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ijyydcgtdf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" style="table-layout: fixed;">
 
@@ -3702,7 +3722,7 @@ spearman
     #>    rho 
     #> 0.1677
 
-<img src="results_files/figure-gfm/unnamed-chunk-35-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="results_files/figure-gfm/unnamed-chunk-37-1.png" width="70%" style="display: block; margin: auto;" />
 
 <div id="refs" class="references hanging-indent">
 

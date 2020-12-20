@@ -43,14 +43,16 @@ library(janitor)
 ### Uptake
 
 ```{r}
-els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
 els_jns <- readr::read_csv(here::here("data", "els_historic_jns.csv")) 
+els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
+
 els_jns_count <- els_jns %>%
   group_by(year, oa_model) %>%
   count(year) %>%
   group_by(year) %>%
   mutate(prop = n / sum(n)) %>%
   mutate(oa_model_fct = fct_rev(as_factor(oa_model))) 
+els_jns_count
 ```
 
 #### Elseviers open access journal portfolio
@@ -369,6 +371,11 @@ all_oa <- license_df %>%
   pull(n) %>%
   sum()
 all_oa
+# all articles
+license_df %>%
+  distinct(all_articles, issued_year) %>%
+  pull(all_articles) %>%
+  sum()
 ```
 
 ```{r mirror}
@@ -448,7 +455,7 @@ ggplot(sponsored_articles, aes(x = gsub("20", "'", issued_year), y = n), alpha =
 ```{r}
 # invoicing analysis
 library(googlesheets4)
-tt <- read_sheet("https://docs.google.com/spreadsheets/d/1AqjCLn6VNGJpQ6zdmFSwuhFsDBIITSxijA0r0WLJZTQ/", sheet = 2)
+tt <- read_sheet("https://docs.google.com/spreadsheets/d/1AqjCLn6VNGJpQ6zdmFSwuhFsDBIITSxijA0r0WLJZTQ/", sheet = 3)
 ```
 
 ```{r}
@@ -457,10 +464,42 @@ hybrid_invoice <- hybrid_volume %>%
  # rename(yrl_volume = articles) %>%
   left_join(tt, by = c("oa_sponsor_name")) %>%
   mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd"))
+```
 
-sponsor_country <- hybrid_invoice %>%
+```{r license_count}
+sponsor_df <- hybrid_invoice %>% 
+  filter(!is.na(Country)) %>% 
   # manual changes
-  mutate(Country = ifelse(grepl("European|CERN", oa_sponsor_name), "EU", Country)) %>%
+  mutate(Country = ifelse(grepl("European", oa_sponsor_name), "EU", Country)) %>%
+  mutate(Country = ifelse(Country == "Multinational", "Other", Country)) %>%
+  mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
+  mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
+  mutate(country_factor = fct_infreq(country_factor)) %>%
+  mutate(country_factor = fct_relevel(country_factor, "Other", after = Inf))
+sponsor_df %>%
+  group_by(country_factor, cc_norm) %>% 
+  summarise(n = n_distinct(doi)) %>%
+  ggplot(aes(fct_rev(country_factor), n, fill = cc_norm)) +
+  geom_bar(stat = "identity", position = position_stack(reverse = TRUE),
+            color = "white", alpha = 0.8, size = 0.25) +
+  coord_flip() +
+  scale_fill_manual(values = 
+                      c(`cc-by` = "#B52141",
+                        `cc-by-nc-nd` = "#0093c7"),
+                    name = "CC license variant") +
+  labs(x = "OA Sponsor by Country", y = "Hybrid OA Articles (Agreement)") +
+  scale_y_continuous(labels = scales::number_format(big.mark = " "),
+                      expand = expansion(mult = c(0, 0.05)),
+                     breaks = seq(0,15000, 2000)) +
+  theme_minimal_vgrid() +
+  theme(legend.position="top", legend.justification = "right")
+```
+
+```{r}
+sponsor_country <- hybrid_invoice %>%
+  filter(!is.na(`Primary research focus`)) %>%
+  # manual changes
+  mutate(Country = ifelse(grepl("European", oa_sponsor_name), "EU", Country)) %>%
   mutate(Country = ifelse(Country == "Multinational", "Other", Country)) %>%
   mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
   mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
@@ -470,10 +509,14 @@ sponsor_country <- hybrid_invoice %>%
   summarise(n = n_distinct(doi)) %>%
   ungroup() %>%
   mutate(prop = round(n / sum(n), 2))
+```
 
-sponsor_country %>% 
+
+```{r}
+sponsor_country %>%
   ungroup() %>%
   pivot_wider(id_cols = c("country_factor"), names_from = `Primary research focus`, values_from = prop) %>%
+  mutate_all(~replace(., is.na(.), 0)) %>%
   janitor::adorn_totals(c("col", "row")) %>%
   rename(`Country/Subject Area` = country_factor) %>%
   knitr::kable()
@@ -489,18 +532,28 @@ hybrid_invoice <-hybrid_volume %>%
 
 sponsor_country_t <- hybrid_invoice %>%
   # manual changes
-  mutate(Country = ifelse(grepl("European|CERN", oa_sponsor_name), "EU", Country)) %>%
+  mutate(Country = ifelse(grepl("European", oa_sponsor_name), "EU", Country)) %>%
   mutate(Country = ifelse(Country == "Multinational", "Other", Country)) %>%
   mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
   mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
   mutate(country_factor = fct_infreq(country_factor)) %>%
   mutate(country_factor = fct_relevel(country_factor, "Other", after = Inf))  
 
-sponsor_country_t %>%
-  count(issued_year, Sector, country_factor, cc_norm) %>%
-  ggplot(aes(issued_year, n, fill = Sector)) + 
-  geom_bar(stat = "identity") +
-  facet_wrap(~country_factor)
+sponsor_df %>%
+  count(issued_year, Sector, country_factor) %>%
+  mutate(sector_level = factor(Sector)) %>%
+  mutate(sector_level = fct_relevel(sector_level, "government", "higher education", "private non-profit", "other")) %>%
+  ggplot(aes(gsub("20", "'", issued_year), n, fill = sector_level)) + 
+  geom_bar(stat = "identity", position = position_stack(reverse = TRUE),
+            color = "white", alpha = 0.8, size = 0.25) +
+  facet_wrap(~country_factor) +
+  scale_fill_manual("Sector", values = c("#65BADA", "#00A757", "#E5BA52", "grey50")) +
+  scale_y_continuous(labels = scales::number_format(big.mark = " "),
+                      expand = expansion(mult = c(0, 0.05))) +
+  theme_minimal_hgrid() +
+  theme(legend.position="top", legend.justification = "right") +
+  guides(fill = guide_legend(nrow = 2)) +
+  labs(x = "Publication year", y = "Hybrid OA Articles (Agreement)")
 ```
 
 
@@ -536,6 +589,7 @@ hybrid_volume %>%
   count(oa_sponsor_name, sort = TRUE) %>%
   mutate(prop = n / sum(n))
 ```
+
 ```{r}
 cc_invoice <- hybrid_volume %>%
   mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc")) %>%
