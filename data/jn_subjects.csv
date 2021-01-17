@@ -546,6 +546,9 @@ issn,subject_area,top_level
 0167-1987,Physical Sciences,Earth and Planetary Sciences
 0168-3659,Life Sciences,"Pharmacology, Toxicology and Pharmaceutics"
 0196-0644,Health Sciences,Medicine
+0300-9440,Physical Sciences,Chemical Engineering
+0300-9440,Physical Sciences,Materials Science
+0300-9440,Physical Sciences,Chemistry
 0888-3270,Physical Sciences,Computer Science
 0888-3270,Physical Sciences,Engineering
 0926-3373,Physical Sciences,Chemical Engineering
@@ -707,6 +710,7 @@ issn,subject_area,top_level
 0165-2478,Health Sciences,Medicine
 0165-2478,Life Sciences,Immunology and Microbiology
 0165-9936,Physical Sciences,Chemistry
+0166-2236,Life Sciences,Neuroscience
 0166-3542,Life Sciences,"Pharmacology, Toxicology and Pharmaceutics"
 0166-3542,Life Sciences,Immunology and Microbiology
 0166-4328,Life Sciences,Neuroscience
@@ -981,6 +985,9 @@ issn,subject_area,top_level
 0040-4020,Physical Sciences,Chemistry
 0040-4020,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 0040-4020,Life Sciences,"Pharmacology, Toxicology and Pharmaceutics"
+0045-7825,Physical Sciences,Engineering
+0045-7825,Physical Sciences,Computer Science
+0045-7825,Physical Sciences,Physics and Astronomy
 0047-2727,Social Sciences,"Economics, Econometrics and Finance"
 0079-6107,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 0079-6611,Life Sciences,Agricultural and Biological Sciences
@@ -1121,6 +1128,9 @@ issn,subject_area,top_level
 1096-4959,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 1290-0729,Physical Sciences,Physics and Astronomy
 1290-0729,Physical Sciences,Engineering
+1359-5113,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
+1359-5113,Life Sciences,Immunology and Microbiology
+1359-5113,Physical Sciences,Chemical Engineering
 1381-5148,Physical Sciences,Chemistry
 1381-5148,Physical Sciences,Environmental Science
 1381-5148,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
@@ -1596,6 +1606,7 @@ issn,subject_area,top_level
 0273-2297,Social Sciences,Social Sciences
 0273-2300,Life Sciences,"Pharmacology, Toxicology and Pharmaceutics"
 0294-1260,Health Sciences,Medicine
+0304-4165,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 0304-422X,Social Sciences,Social Sciences
 0304-422X,Social Sciences,Arts and Humanities
 0305-0483,Social Sciences,Decision Sciences
@@ -1742,6 +1753,8 @@ issn,subject_area,top_level
 0171-9335,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 0171-9335,Health Sciences,Medicine
 0261-2194,Life Sciences,Agricultural and Biological Sciences
+0263-4368,Physical Sciences,Materials Science
+0263-4368,Physical Sciences,Engineering
 0278-2391,Health Sciences,Dentistry
 0278-2391,Health Sciences,Medicine
 0304-405X,Social Sciences,"Economics, Econometrics and Finance"
@@ -1780,6 +1793,7 @@ issn,subject_area,top_level
 1161-0301,Life Sciences,Agricultural and Biological Sciences
 1286-4579,Life Sciences,Immunology and Microbiology
 1286-4579,Health Sciences,Medicine
+1297-319X,Health Sciences,Medicine
 1341-321X,Health Sciences,Medicine
 1353-8292,Social Sciences,Social Sciences
 1359-6446,Life Sciences,"Pharmacology, Toxicology and Pharmaceutics"
@@ -2214,6 +2228,9 @@ issn,subject_area,top_level
 0032-0633,Physical Sciences,Earth and Planetary Sciences
 0037-0738,Physical Sciences,Earth and Planetary Sciences
 0041-008X,Life Sciences,"Pharmacology, Toxicology and Pharmaceutics"
+0094-114X,Physical Sciences,Engineering
+0094-114X,Physical Sciences,Computer Science
+0094-114X,Physical Sciences,Chemical Engineering
 0098-2997,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 0140-9883,Social Sciences,"Economics, Econometrics and Finance"
 0140-9883,Physical Sciences,Energy
@@ -2393,6 +2410,7 @@ issn,subject_area,top_level
 0743-0167,Social Sciences,Social Sciences
 0828-282X,Health Sciences,Medicine
 0955-0674,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
+0968-0004,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 1047-2797,Health Sciences,Medicine
 1062-9769,Social Sciences,"Economics, Econometrics and Finance"
 1293-2558,Physical Sciences,Physics and Astronomy
@@ -2620,6 +2638,7 @@ issn,subject_area,top_level
 0950-4230,Physical Sciences,Chemical Engineering
 0950-4230,Physical Sciences,Energy
 1051-1377,Social Sciences,"Economics, Econometrics and Finance"
+1134-5934,Health Sciences,Medicine
 1164-5563,Life Sciences,Immunology and Microbiology
 1164-5563,Life Sciences,Agricultural and Biological Sciences
 1322-7696,Health Sciences,Nursing
@@ -2699,6 +2718,8 @@ issn,subject_area,top_level
 2405-8300,Physical Sciences,Chemistry
 0022-1910,Life Sciences,"Biochemistry, Genetics and Molecular Biology"
 0022-1910,Life Sciences,Agricultural and Biological Sciences
+0301-0511,Life Sciences,Neuroscience
+0301-0511,Social Sciences,Psychology
 0732-118X,Social Sciences,Psychology
 1357-3039,Health Sciences,Medicine
 1627-4830,Health Sciences,Medicine
