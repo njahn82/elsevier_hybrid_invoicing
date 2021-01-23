@@ -64,9 +64,9 @@ SELECT
 license_by_year <- license_agg %>%
   mutate(license_code =
            case_when(
-             grepl("/by/", license_url) ~ "cc-by",
-             grepl("/by-nc", license_url) ~ "cc-by-nc-nd",
-             grepl("userlicense", license_url) ~ "els-user")
+             grepl("/by/", license_url) ~ "CC-BY",
+             grepl("/by-nc", license_url) ~ "CC-BY-NC-ND",
+             grepl("userlicense", license_url) ~ "Els-User")
   ) %>%
   group_by(license_code, oa_type, issued_year) %>%
   summarise(n = sum(articles))
@@ -78,7 +78,7 @@ just immediate hybrid
 im_hybrid <- hybrid_articles <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
 
 cc_hybrid <- im_hybrid %>%
-  mutate(license_code = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd")) %>%
+  mutate(license_code = ifelse(grepl("/by/", URL), "CC-BY", "CC-BY-NC-ND")) %>%
   group_by(license_code, issued_year) %>%
   summarise(hybrid_immediate_articles = n()) %>%
   mutate(immediate = "immediate",
@@ -89,14 +89,14 @@ cc_hybrid <- im_hybrid %>%
   pivot_longer(c(hybrid_immediate_articles, hybrid_delayed_articles), names_to = "type", values_to = "articles")
 # user only open archive
 els_user <- license_by_year %>%
-  filter(license_code == "els-user") %>%
+  filter(license_code == "Els-User") %>%
   mutate(type = "hybrid_delayed_articles") %>%
   group_by(issued_year, type, license_code) %>%
   summarise(articles = sum(n))
 # full oa 
 full_oa_df <- license_by_year %>%
   ungroup() %>%
-  filter(license_code != "els-user", oa_type == "Open Access") %>%
+  filter(license_code != "Els-User", oa_type == "Open Access") %>%
   mutate(type = "full_oa") %>%
   rename(articles = n) %>%
   select(-oa_type)
@@ -157,10 +157,10 @@ p_1 <- year_per_oa_type_and_license %>%
     breaks = c(0, 0.02, 0.04, 0.06, 0.08)
   ) +
   scale_fill_manual(values = 
-                      c(`cc-by` = "#B52141",
-                        `cc-by-nc-nd` = "#0093c7",
-                        `els-user` = "grey80")) +
-  labs(x = "Publication year", y = "OA Percentage") +
+                      c(`CC-BY` = "#B52141",
+                        `CC-BY-NC-ND` = "#0093c7",
+                        `Els-User` = "grey80")) +
+  labs(x = "Publication Year", y = "OA Percentage") +
   theme_minimal_hgrid() +
   theme(legend.position = "top",
         legend.justification = "right") +
@@ -236,18 +236,18 @@ SELECT  issued_year,
 ``` r
 els_yearly_mirror
 #> # A tibble: 40 x 3
-#>    issued_year container_title                      all_articles
-#>          <int> <chr>                                       <int>
-#>  1        2018 Water Research X                               12
-#>  2        2019 Diabetes & Metabolism: X                        1
-#>  3        2019 Atmospheric Environment: X                     50
-#>  4        2019 Contraception: X                               13
-#>  5        2019 Journal of Hydrology X                         33
-#>  6        2019 Respiratory Medicine: X                        11
-#>  7        2019 Journal of Structural Biology: X               10
-#>  8        2019 Water Research X                               20
-#>  9        2019 Chemical Engineering Science: X                43
-#> 10        2019 Journal of Biomedical Informatics: X           25
+#>    issued_year container_title                                      all_articles
+#>          <int> <chr>                                                       <int>
+#>  1        2018 Journal of Hydrology X                                          5
+#>  2        2018 Water Research X                                               12
+#>  3        2019 Energy Conversion and Management: X                            14
+#>  4        2019 Optical Materials: X                                           34
+#>  5        2019 Journal of Computational Physics: X                            33
+#>  6        2019 Respiratory Medicine: X                                        11
+#>  7        2019 European Journal of Obstetrics & Gynecology and Rep…           80
+#>  8        2019 Atmospheric Environment: X                                     50
+#>  9        2019 Journal of Structural Biology: X                               10
+#> 10        2019 Gene: X                                                        19
 #> # … with 30 more rows
 ```
 
