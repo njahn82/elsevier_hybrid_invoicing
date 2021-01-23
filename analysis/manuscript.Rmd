@@ -1,0 +1,479 @@
+---
+output:
+  pdf_document:
+    fig_caption: yes
+    keep_tex: yes
+    template: apa6.sty
+  html_document:
+    fig_caption: yes
+    force_captions: yes
+    number_sections: no
+    theme: readable
+csl: apa.csl
+bibliography: references.bib
+---
+
+```{r knitr_options, , echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = FALSE,
+  fig.width = 6,
+  fig.asp = 0.618,
+  out.width = "70%",
+  fig.align = "center",
+  dpi = 300,
+  fig.pos = "H", 
+  out.extra = ""
+)
+options(scipen = 999, digits = 4)
+knitr::knit_hooks$set(
+  inline = function(x) {
+    if (is.numeric(x)) {
+      return(formatC(x, big.mark = ",", format = "f", digits = 0))
+    } else{
+      return(x)
+    }
+  }
+)
+```
+
+```{r libraries}
+# libraries
+library(tidyverse)
+library(here)
+library(cowplot)
+library(gt)
+library(janitor)
+library(kableExtra)
+```
+
+# Results{.unnumbered}
+
+This section first presents the results of our analysis of hybrid OA uptake in Elsevier's journal portfolio with a view to licensing, disciplinary differences, and citation impact. Then, we present a descriptive analysis of Elsevier's invoicing data, highlighting licensing and disciplinary differences for different sponsor types, institutional sectors, and individual funders. 
+
+```{r data}
+# journal-level data
+els_jns <- readr::read_csv(here::here("data", "els_historic_jns.csv")) 
+els_jns_df <- readr::read_csv(here::here("data", "elsevier_apc_list.csv"))
+# article-level data
+hybrid_oa_volume <- readr::read_csv(here::here("data", "hybrid_oa_volume.csv"))
+```
+## Open Access Uptake in Hybrid Journals{.unnumbered}
+
+### Journal-level analysis{.unnumbered}
+
+```{r}
+# journals by year and oa model
+els_jns_count <- els_jns %>%
+  group_by(year, oa_model) %>%
+  count(year) %>%
+  group_by(year) %>%
+  mutate(prop = n / sum(n)) %>%
+  mutate(oa_model_fct = fct_rev(as_factor(oa_model)))
+# overall count
+ els_overall <- els_jns %>% 
+  group_by(oa_model) %>% 
+  summarise(n = n_distinct(issn))
+```
+
+Figure \ref{fig:number_of_els_journals} shows that in Elsevier's OA portfolio of fully OA and hybrid OA journals, the latter has outweighed the former consistently throughout the five years, with only little variation overall. In 2015, Elsevier published `r els_jns_count %>% filter(year == 2015, oa_model == "Open Access") %>% pull(n)` fully OA journals and `r els_jns_count %>% filter(year == 2015, oa_model == "Hybrid") %>% pull(n)` hybrid journals (`r els_jns_count %>% filter(year == 2015, oa_model == "Hybrid") %>% pull(prop)*100`%). Since then, Elsevier's hybrid journals increased in number by `r (els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% pull(n)) - (els_jns_count %>% filter(oa_model == "Hybrid", year == 2015) %>% pull(n))` journals (n=`r els_jns_count %>% filter(year == 2020, oa_model == "Hybrid") %>% pull(n)` in 2020) and slightly decreased in proportion to Elsevier's overall OA journal portfolio by 1% (`r round(els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% pull(prop), 2) * 100`%; `r els_jns_count %>% filter(year == 2020, oa_model == "Hybrid") %>% pull(n)` out of `r els_jns_count %>% filter(year == 2020) %>% pull(n) %>% sum()` journals).  
+
+```{r number_of_els_journals, fig.cap = "Longitudinal development of Elsevier's journal portfolio by open access business model. The figure distinguishes between fully open access journals that provide immediate open access to all articles and the hybrid model. Data obtained from Elsevier APC pricing lists (Matthias 2020)."}
+ggplot(els_jns_count,
+       aes(as.character(year), n,  fill = oa_model_fct, group = oa_model_fct)) +
+  geom_area(alpha = 0.8,
+            colour = "white") +
+  scale_fill_manual(
+    values = c("#cccccca0", "#56b4e9"),
+    name = NULL,
+    labels = c("Fully OA", "Hybrid OA")
+  ) +
+  labs(x = "Year", y = "Number of Elsevier Journals") +
+  scale_y_continuous(
+    labels = scales::number_format(big.mark = ","),
+    expand = expansion(mult = c(0, 0.05)),
+    breaks =  scales::extended_breaks()
+  ) +
+  theme_minimal_hgrid() +
+  theme(legend.position = "top",
+        legend.justification = "right") +
+  guides(fill = guide_legend("Business Model"))
+```
+
+
+```{r, rev_flipped}
+flipped_jns <- els_jns %>%
+  distinct(issn, oa_model) %>%
+  group_by(issn) %>%
+  filter(n() > 1)
+flipped_jns_ind <- els_jns %>%
+  filter(issn %in% flipped_jns$issn) %>%
+  group_by(issn) %>%
+  slice(which.max(year)) %>%
+  ungroup() %>%
+  count(oa_model)
+```
+
+We identified `r filter(flipped_jns_ind, oa_model == "Hybrid") %>% pull(n)` OA journals that reverse flipped--transitioned from fully OA to hybrid [@Matthias_2019]. We excluded these journals from the following article-level analysis; if we had not, OA articles published in an OA journal before it reverse-flipped would have been falsely attributed to the hybrid model. Likewise, we identified and excluded journals flipping from hybrid to fully OA in the same timeframe (n=`r filter(flipped_jns_ind, oa_model == "Open Access") %>% pull(n)`). Our final sample for the article-level analysis consisted of `r els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% pull(n) - filter(flipped_jns_ind, oa_model == "Hybrid") %>% pull(n)` unique hybrid journals.
+
+### Article-level analysis{.unnumbered}
+
+```{r hybrid_oa_per_year}
+# journal and article metrics **per year**
+hybrid_oa_per_year <- hybrid_oa_volume %>%
+  group_by(issued_year) %>%
+  # distinct jns with at least one article per year
+  filter(oa > 0) %>%
+  summarise(
+      # distinct jns with at least one article per year
+    n_journals = n(),
+    # article metrics
+    articles_n = sum(articles),
+    articles_mean = mean(articles),
+    articles_sd = sd(articles),
+    # oa articles metrics
+    oa_n = sum(oa),
+    oa_mean = mean(oa),
+    oa_sd = sd(oa)
+    ) %>%
+  mutate(oa_uptake = oa_n / articles_n)
+# oa uptake per year
+oa_uptake_per_year <- hybrid_oa_volume %>% 
+  filter(oa > 0) %>%
+  mutate(prop = oa / articles) %>%
+  group_by(issued_year) %>%
+  summarise(oa_uptake_mean = mean(prop),
+            oa_uptake_sd = sd(prop))
+# merge indicators
+ind_per_year <- inner_join(hybrid_oa_per_year, oa_uptake_per_year, by = "issued_year")
+
+
+# five-years article volume
+all_jn_articles <- hybrid_oa_volume %>%
+  group_by(issn) %>%
+  summarise(
+    # articles
+    articles_p_jn = sum(articles)
+    ) %>%
+  ungroup() %>%
+  summarise(
+    n_journals = n(),
+    articles_n = sum(articles_p_jn),
+    articles_mean = mean(articles_p_jn),
+    articles_sd = sd(articles_p_jn)
+  )
+# five-years OA article volume
+all_oa_articles <- 
+  hybrid_oa_volume %>%
+  group_by(issn) %>%
+  summarise(
+    # articles
+    oa_p_jn = sum(oa)
+    ) %>%
+  ungroup() %>%
+  summarise(
+    oa_n = sum(oa_p_jn),
+    oa_mean = mean(oa_p_jn),
+    oa_sd = sd(oa_p_jn)
+  )
+# five-years OA uptake rate
+oa_uptake <- 
+  hybrid_oa_volume %>%
+  group_by(issn) %>%
+  summarise(
+    # articles
+    articles_p_jn = sum(articles),
+    oa_p_jn = sum(oa)
+    ) %>%
+  mutate(prop = oa_p_jn / articles_p_jn) %>%
+  ungroup() %>%
+  summarise(oa_uptake = sum(oa_p_jn) / sum(articles_p_jn),
+            oa_uptake_mean = mean(prop),
+            oa_uptake_sd = sd(prop)
+  )
+# bringing it all together
+five_years_ind <- bind_cols(issued_year = "2015-19", all_jn_articles, all_oa_articles, oa_uptake)
+
+ind_summary_table <- ind_per_year %>%
+  mutate(issued_year = as.character(issued_year)) %>% 
+  bind_rows(five_years_ind) %>%
+  mutate(across(contains("uptake")) * 100) %>%
+  pivot_longer(n_journals:oa_uptake_sd, names_to = "indicator", values_to = "count") %>%
+  pivot_wider(names_from = issued_year, values_from = count)
+```
+
+Between 2015 and 2019, `r hybrid_oa_volume %>% distinct(issn) %>% nrow()` of `r els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% pull(n) - filter(flipped_jns_ind, oa_model == "Hybrid") %>% pull(n)` (`r  hybrid_oa_volume %>% distinct(issn) %>% nrow() / (els_jns_count %>% filter(oa_model == "Hybrid", year == 2020) %>% pull(n) - filter(flipped_jns_ind, oa_model == "Hybrid") %>% pull(n))*100`%) hybrid journals published at least one OA article. Together these journals published `r five_years_ind %>% pull(oa_n)` OA articles, representing `r five_years_ind %>% pull(oa_uptake)*100`% of their total article volume (n=`r five_years_ind %>% pull(articles_n)`). Table \ref{tab:overview} presents these findings for each year and the aggregated five-year period between 2015-19, illustrating a moderate growth in hybrid OA over time. The number of hybrid journals with at least one OA article increased each year, as did the number of OA articles, which nearly doubled from `r ind_per_year %>% filter(issued_year == 2015) %>% pull(oa_n)` 10,672 in 2015 to `r ind_per_year %>% filter(issued_year == 2019) %>% pull(oa_n)` in 2019. However, since the total number of articles published in these journals also increased over time, the relative share of OA articles in hybrid journals only increased slightly from `r ind_per_year %>% filter(issued_year == 2015) %>% pull(oa_uptake)*100`% to `r ind_per_year %>% filter(issued_year == 2019) %>% pull(oa_uptake)*100`%.
+
+```{r overview}
+table_descriptives_ind <- tribble(
+  ~ind_group, ~ind, ~` `,
+    "Elsevier Hybrid Journals with ≥ 1 OA article", "n_journals", "Total",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "articles_n", "Total ",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "articles_mean", "Avg.",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "articles_sd", "SD",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_n", "Total",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_mean", "Avg.",
+  "Articles in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_sd", "SD",
+  "OA Uptake in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_uptake", "Total (%)",
+  "OA Uptake in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_uptake_mean", "Avg.",
+  "OA Uptake in Elsevier Hybrid Journals with ≥ 1 OA article", "oa_uptake_sd", "SD"
+)
+inner_join(table_descriptives_ind, ind_summary_table, by = c("ind" = "indicator")) %>%
+  dplyr::select(-ind, -ind_group) %>%
+  kableExtra::kbl(booktabs = T, format.args = list(big.mark = ","), digits = 1, escape = TRUE,
+                  caption = "Overview of hybrid open access uptake across Elsevier hybrid journals with at least one OA article 2015-2019.",
+                  position = "H"
+) %>%
+  kable_styling() %>%
+  pack_rows("Elsevier Hybrid Journals with OA article", 1, 1) %>%
+  pack_rows("Articles", 2, 4) %>%
+  pack_rows("OA Articles", 5, 7) %>%
+  pack_rows("OA Uptake", 8, 10)
+```
+
+```{r}
+perc_df <- hybrid_oa_volume %>%
+  mutate(prop = oa / articles) %>%
+  filter(oa > 0) %>%
+  group_by(issued_year) %>% 
+  summarize(median = median(prop),
+            p_10 = quantile(prop, 0.1),
+            p_95 = quantile(prop, 0.95),
+            iqr = quantile(prop, 3/4) - quantile(prop, 1/4)) %>%
+  ungroup()
+```
+
+Figure \ref{fig:boxuptake} presents the hybrid OA uptake by year, showing considerable variation among Elsevier's hybrid journals. The box-and-whiskers plot visualizes the median hybrid OA uptake (horizontal line inside the box), the range of the majority of journals (the box), and individual outliers (dots). Notably, upper quartiles and whiskers stretch farther over the years, indicating that the range of uptake among journals with an above-average proportion of OA articles increased over the years. Nevertheless, the prevalence of hybrid OA is relatively low; in 2019, 95% of Elsevier hybrid journals published ≤`r perc_df %>% filter(issued_year == 2019) %>% pull(p_95) * 100`% of their articles OA.
+
+```{r boxuptake, fig.cap = "Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 20\\%."}
+hybrid_oa_volume %>%
+  mutate(prop = oa / articles) %>%
+  filter(oa > 0) %>%
+ggplot(aes(factor(issued_year), prop)) + 
+  geom_boxplot(outlier.size = 1, outlier.alpha = .5) + 
+  coord_cartesian(ylim=c(0,0.2)) +
+  theme_minimal_hgrid() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L),
+      expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "Publication Year",
+       y = "Hybrid OA Uptake")
+```
+
+
+### Share of the total volume published in OA{.unnumbered}
+
+```{r oa_volume}
+# see analysis/006_license.Rmd how the data was obtained
+
+license_df <- readr::read_csv(here::here("data", "year_per_oa_type_and_license.csv"))
+# all oa
+all_oa <- license_df %>% 
+  group_by(type) %>% 
+  summarise(n = sum(articles)) %>%
+  pull(n) %>%
+  sum()
+# all articles
+all_els <- license_df %>%
+  distinct(all_articles, issued_year) %>%
+  pull(all_articles) %>%
+  sum()
+# summary by type
+summary_oa_type <- 
+  license_df %>% 
+  group_by(type) %>% 
+  summarise(n = sum(articles)) %>%
+  mutate(prop = n / sum(n))
+# mirror journals
+mirror_jn <- readr::read_csv(here::here("data", "x_journals_volume.csv"))
+```
+
+During the same period, Elsevier provided OA to `r all_oa` articles, corresponding to a share of `r all_oa / all_els * 100` of the total article volume (n=`r all_els`). The OA article volume of hybrid journals (n=`r filter(summary_oa_type, type == "hybrid_immediate_articles") %>% pull(n)`, `r filter(summary_oa_type, type == "hybrid_immediate_articles") %>% pull(prop) * 100`%) lagged behind fully OA journals (n=`r filter(summary_oa_type, type == "full_oa") %>% pull(n)`, `r filter(summary_oa_type, type == "full_oa") %>% pull(prop) * 100`%), which included `r length(unique(mirror_jn$container_title))` mirror journals that published `r sum(mirror_jn$all_articles)` articles, and Elsevier's Open Archive program (n=`r filter(summary_oa_type, type == "hybrid_delayed_articles") %>% pull(n)`, `r filter(summary_oa_type, type == "hybrid_delayed_articles") %>% pull(prop) * 100`%) both in number and share of OA articles (see Figure \ref{fig:oa_volume_fig}-A). 
+
+```{r oa_volume_fig, fig.cap="Open Access in Elsevier journals in terms of article volume between 2015-2019. Figure A presents the share of open access (OA) articles relative to Elsevier's overall article output for each OA type from 2015-2019 and by open content license. Figure B presents the aggregated OA article volume of Elsevier journals by OA type."}
+# see analysis/006_license.Rmd how the figure was created
+
+knitr::include_graphics(here::here("figure", "license_portfolio.png"))
+```
+
+### License prevalence{.unnumbered}
+
+```{r cc_by_by_type}
+cc_by_by_type <- license_df %>%
+  group_by(type, license_code) %>%
+  summarise(n = sum(articles)) %>%
+  mutate(prop = n / sum(n)) %>%
+  filter(license_code == "CC-BY")
+```
+
+As far as we observed, Elsevier licensed OA articles in hybrid journals under two possible Creative Commons (CC) licenses—CC-BY or CC-BY-NC-ND. CC-BY allows others to distribute, remix, adapt, and build upon the licensed work, including for commercial purposes, as long as the original author is credited. In contrast, CC-BY-NC-ND is less permissive as it prohibits commercial reuse and derivatives. In the five-year period from 2015-2019, the proportion of hybrid OA articles published under a CC-BY-NC-ND license marginally increased and maintained a greater share than that of CC-BY (see Figure \ref{fig:oa_volume_fig}-B). Interestingly, Figure \ref{fig:oa_volume_fig}-B also reveals that hybrid OA had the highest number and proportion of openly available articles licensed under CC-BY (n=`r filter(cc_by_by_type, type == "hybrid_immediate_articles") %>% pull(n)`, `r filter(cc_by_by_type, type == "hybrid_immediate_articles") %>% pull(prop) *100`%) compared to fully OA journals  (n=`r filter(cc_by_by_type, type == "full_oa") %>% pull(n)`, `r filter(cc_by_by_type, type == "full_oa") %>% pull(prop) *100`%) and Elsevier's delayed OA program, Open Archive (n=`r filter(cc_by_by_type, type == "hybrid_delayed_articles") %>% pull(n)`, `r filter(cc_by_by_type, type == "hybrid_delayed_articles") %>% pull(prop) *100`%) . Most of these delayed OA articles were provided under an Elsevier user license (Els-User), prohibiting reuse for commercial purposes. 
+
+### Hybrid OA uptake across subjects{.unnumbered}
+
+```{r subject_data}
+# Load hybrid article-level dataset and journal classification
+# see
+jn_subjects <- read_csv(here::here("data", "jn_subjects.csv"))
+# article level data set, see data-raw/hybrid_jns_articles.R
+hybrid_df <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
+subject_hybrid <- left_join(hybrid_df, jn_subjects, by = "issn") %>%
+  select(doi, issn, top_level, subject_area)
+
+# Number of Journals (full and fractional counting)
+subject_area_all_jn <- subject_hybrid %>% 
+  group_by(issn, subject_area) %>%
+  summarise(n = n()) %>% 
+  mutate(fractions = n / sum(n)) %>% 
+  ungroup() %>% 
+  group_by(subject_area) %>% 
+  summarise(journals_n = n_distinct(issn),
+            journals_frac = sum(fractions)) %>% 
+  arrange(desc(journals_frac))
+# Number of articles (full and fractional counting)
+subject_area_all_article <- subject_hybrid %>% 
+  group_by(doi, subject_area) %>%
+  summarise(n = n()) %>% 
+  mutate(fractions = n / sum(n)) %>% 
+  ungroup() %>% 
+  group_by(subject_area) %>% 
+  summarise(articles_n = n_distinct(doi),
+            articles_frac = sum(fractions)) %>% 
+  arrange(desc(articles_frac))
+```
+
+Next, we present disciplinary variations in hybrid OA. Table \ref{tab:subject_area_table} presents high-level findings by AJSC subject area. In the five-years period studied, the Physical Science (`r filter(subject_area_all_jn, subject_area == "Physical Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Physical Sciences") %>% pull(articles_n)` OA articles) and Health Sciences (`r filter(subject_area_all_jn, subject_area == "Health Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Health Sciences") %>% pull(articles_n)` OA articles) were the most prevalent in terms of hybrid journals with at least one OA article published.  In terms of article volume, most OA articles were published in hybrid journals belonging to the Life Sciences (`r filter(subject_area_all_jn, subject_area == "Life Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Life Sciences") %>% pull(articles_n)` OA articles), while Social Sciences  (`r filter(subject_area_all_jn, subject_area == "Social Sciences") %>% pull(journals_n)`  hybrid journals, `r filter(subject_area_all_article, subject_area == "Social Sciences") %>% pull(articles_n)` articles) journals published the lowest number of OA articles. However, it must be noted that there is a large overlap between the journals’ subject areas. Therefore, Table also assigns hybrid journals and OA articles fractionally to a subject area in addition to full counting when a journal belongs to more than one field. In the following, we apply full counting, meaning that journals and articles associated with more than one subject in the AJSC classification were counted once for each area or field. 
+
+```{r subject_area_table}
+# join
+inner_join(subject_area_all_jn, subject_area_all_article, by = "subject_area") %>%
+  arrange(subject_area) %>%
+  select(1, journals_n, articles_n, journals_frac, articles_frac) %>%
+  filter(subject_area != "Multidisciplinary", !is.na(subject_area)) %>% 
+  kbl(booktabs = TRUE, col.names = c("Subject area", "Journals", "OA articles", "Journals", "OA articles"),
+      caption = "Subject area overview using full and fractional counting. Table reports the number of Elsevier hybrid journals with at least one OA article, as well as the number of OA articles published in them between 2015-2019. Not shown is one journal coded as Multidisciplinary that published 61 OA articles. Eleven journals with 37 OA articles could not be matched to the Scopus Source Title list used to obtain ASJC codes.") %>%
+  add_header_above(c(" " = 1, "Full counting" = 2, "Fractional counting" = 2)) %>%
+  kable_styling() 
+```
+
+```{r subject_ind}
+# see 008_subject_exploration
+hybrid_subject <- readr::read_csv(here::here("data", "jn_scopus_ind_subjects.csv"))
+```
+
+```{r}
+subject_all_years <- hybrid_subject %>% 
+  ungroup() %>% 
+  group_by(issn, description, subject_area) %>% 
+  summarise(n_oa = sum(oa),
+            n = sum(articles)) %>%
+  ungroup() %>%
+  group_by(description) %>%
+  filter(subject_area != "Multidisciplinary")
+
+median_all <- subject_all_years %>% 
+  ungroup() %>% 
+  distinct(issn, .keep_all = TRUE) %>% 
+  mutate(prop = n_oa /n) %>% 
+  .$prop %>% 
+  median()
+# rank
+oa_per_subject_rank <- hybrid_subject %>% 
+  ungroup() %>% 
+  group_by(issn, description, subject_area) %>% 
+  summarise(n_oa = sum(oa),
+            n = sum(articles)) %>%
+  mutate(prop = n_oa / n) %>%
+  ungroup() %>% 
+  group_by(description) %>%
+  summarise(median_prop = median(prop)) %>%
+  arrange(desc(median_prop))
+```
+
+Figure \ref{fig:oa_sub_uptake} presents the journals' five-year OA uptake grouped by subject area and field and in comparison to the overall average (Mdn= `r median_all * 100`; excluding one journal coded as Multidisciplinary). The box plot reveals some variation between the subject areas. Notably, with the exception of Environmental Science and Earth and Planetary Sciences, journals from the Physical Sciences show a lower median proportion of hybrid OA articles, whereas most Life Sciences and Social Sciences journals ranked above average. Figure X also shows large variations among the 26 subject fields, with the highest OA rates in Immunology and Microbiology (Mdn=`r filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop)*100`), Environmental Science (Mdn=`r filter(oa_per_subject_rank, description == "Environmental Science") %>% pull(median_prop)*100`), and Neuroscience (Mdn=`r filter(oa_per_subject_rank, description == "Neuroscience") %>% pull(median_prop)*100`), and the lowest in Chemistry (Mdn=`r filter(oa_per_subject_rank, description == "Chemistry") %>% pull(median_prop)*100`), Materials Science (Mdn=`r filter(oa_per_subject_rank, description == "Materials Science") %>% pull(median_prop)*100`), and Dentistry (Mdn=`r filter(oa_per_subject_rank, description == "Dentistry") %>% pull(median_prop)*100`). 
+
+```{r oa_sub_uptake, fig.cap='Open access (OA) uptake in Elsevier hybrid journals in percent grouped by subject area and field between 2015-19. Visualized as a box-and-whiskers plot limited to an OA share of 20\\%; the red line represents the overall median (2.5), jittered dots represent individual journals. Subject fields are ordered based on the median OA uptake.', out.width="90%", fig.width=9}
+p_subject <- ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median), n_oa / n)) + 
+  geom_boxplot(aes(color = subject_area)) +
+  geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
+  facet_wrap(~subject_area, scales = "free_y") +
+  geom_hline(yintercept = median_all,  colour = "red", linetype ="dashed", size = 1) +
+  scale_colour_manual(NULL, values = c("#7F3C8D", "#11A579", "#3969AC", "#F2B701"),
+                      guide=FALSE) +
+  scale_y_continuous(
+    labels = scales::percent_format(accuracy = 5L),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  coord_flip(ylim=c(0,0.2)) +
+  labs(x = NULL, y = "Five-Year Hybrid OA Uptake Rate per Journal") +
+  theme_minimal_vgrid() 
+p_subject
+```
+
+### Citation impact{.unnumbered}
+
+```{r}
+hybrid_subject_19 <- hybrid_subject %>% 
+  mutate(prop = oa /articles) %>%
+  filter(issued_year == "2019", !is.na(percentile)
+         , prop != 0) %>%
+  distinct(issn, prop, percentile, snip, sjr)
+
+cor_test_res <- cor.test(hybrid_subject_19$prop, hybrid_subject_19$percentile, method = "spearman") 
+```
+
+Furthermore, we were interested in the relationship between a journal's field-specific impact and its OA uptake. Spearman's rho correlation coefficient was used to assess the relationship between the 2019 Source Normalized Impact per Paper (SNIP) value calculated by Scopus and the journal's OA uptake that year. Considering only journals with at least one OA article, we found a weak positive correlation between journal impact and OA uptake ($r_s$=`r as.character(round(cor_test_res$estimate,4))`, $p<0.001$), suggesting that the relationship is not very strong, based on our data (see Figure \ref{fig:sniptest}).
+
+```{r sniptest, fig.cap="Source Normalized Impact per Paper (SNIP) versus open access (OA) uptake 2019. Each dot represents a hybrid journal with at least one published OA article in 2019. There is only a weak, positive correlation between the two variables ($r_s$=0.1679, $p<0.001$)"}
+ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = 0.2) + 
+  geom_smooth(method = "loess", se = TRUE) +
+  coord_cartesian(xlim = c(0., 0.7), ylim = c(0.5, 6)) +
+  labs(x = "Hybrid OA Uptake", y = "SNIP") +
+  theme_cowplot()
+```
+
+## Invoicing for Hybrid Open Access{.unnumbered}
+
+### Invoice types
+
+```{r}
+# load eligible oa articles
+hybrid_volume <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
+
+# aggregate data
+sponsored_articles <- hybrid_volume %>%
+  mutate(oa_sponsor_type = ifelse(is.na(oa_sponsor_type), "unknown", oa_sponsor_type)) %>%
+  mutate(oa_sponsor_type = recode(oa_sponsor_type, 
+                                  `FundingBody` = "Agreement",
+                                  `ElsevierWaived` = "Fee Waived")) %>%
+  mutate(fct_source = fct_infreq(oa_sponsor_type)) %>%
+  mutate(fct_source = fct_lump(fct_source, prop = 0.05)) %>%
+  mutate(cc_norm = ifelse(grepl("/by/", URL), "cc-by", "cc-by-nc-nd")) %>%
+  count(issued_year, fct_source, cc_norm)
+all_articles <- hybrid_volume %>%
+  group_by(issued_year) %>%
+  summarise(n = n())
+sponsored_art <- sponsored_articles %>% 
+  group_by(fct_source) %>% 
+  summarise(nn = sum(n)) %>% 
+  #mutate(cumsum = cumsum(nn)) %>% 
+  mutate(prop = nn / sum(nn) * 100) %>%
+ # mutate(cumprop = cumsum(prop)) %>%
+  adorn_totals("row")
+```
+
+
+Table \ref{tab:invoicing_overview} shows that authors (`r filter(sponsored_art, fct_source == "Author") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Author") %>% pull(prop)`%) were by far the most frequent invoicing type for hybrid OA, followed by funding bodies/institutional agreements (n=`r filter(sponsored_art, fct_source == "Agreement") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Agreement") %>% pull(prop)`%). Interestingly, we also found a small number of cases where hybrid APCs were waived (`r filter(sponsored_art, fct_source == "Fee Waived") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Fee Waived") %>% pull(prop)`%).
+
+```{r invoicing_overview}
+sponsored_art %>% 
+  kbl(booktabs = TRUE, col.names = c("Invoicing type", "Hybrid OA articles", "Percentage"),
+      caption = "Types of invoicing for hybrid OA in Elsevier journals between 2015-19", digits = 1,
+      format.args = list(big.mark = ",")) %>%
+  kable_styling()
+```
+
+Figure X illustrates that over the years, Elsevier has increasingly and, to a greater extent, invoiced hybrid OA APCs to authors directly rather than to funders or consortia ("Agreement"). The share of fee-waived articles remained relatively stable at around 6%. However, we found different types of waivers. Around 52% of fee waivers were linked to an OA sponsor, indicating a third-party paid the APC, whereas 48% of Elsevier waived articles did not disclose an OA sponsor. For instance, 856 waivers were linked to the French Académie des Sciences, presumably covering OA publication in its society journals for affiliated authors.  In terms of licensing, Figure X reveals that the type of invoicing was strongly related to the open content license variant. When Elsevier invoiced authors directly, most OA articles in hybrid journals were published under a non-commercial license (n=32,086; 77%), whereas most articles with agreed payment were licensed under the more permissive CC BY license (n=18,331; 76%). 
+ 
+

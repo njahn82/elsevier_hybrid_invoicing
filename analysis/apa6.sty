@@ -1,0 +1,35 @@
+\documentclass[a4paper,man,floatsintext,longtable,noextraspace,12pt]{apa6}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}
+
+% bibliography
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par}
+$endif$
+
+\renewcommand{\baselinestretch}{1.5}
+\setlength\parindent{24pt}
+
+
+\title{Your APA6-Style Manuscript}
+\shorttitle{Your APA6-Style Manuscript}
+\author{You}
+\affiliation{Somewhere}
+
+\abstract{Your abstract here.}
+
+\begin{document}
+
+$body$
+
+\end{document}
