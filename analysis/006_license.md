@@ -164,7 +164,7 @@ p_1 <- year_per_oa_type_and_license %>%
   theme_minimal_hgrid() +
   theme(legend.position = "top",
         legend.justification = "right") +
-  guides(fill = guide_legend("Open content license"))
+  guides(fill = guide_legend("Open Content License"))
 p_1
 ```
 
@@ -238,16 +238,16 @@ els_yearly_mirror
 #> # A tibble: 40 x 3
 #>    issued_year container_title                                      all_articles
 #>          <int> <chr>                                                       <int>
-#>  1        2018 Journal of Hydrology X                                          5
-#>  2        2018 Water Research X                                               12
-#>  3        2019 Energy Conversion and Management: X                            14
-#>  4        2019 Optical Materials: X                                           34
-#>  5        2019 Journal of Computational Physics: X                            33
-#>  6        2019 Respiratory Medicine: X                                        11
-#>  7        2019 European Journal of Obstetrics & Gynecology and Rep…           80
-#>  8        2019 Atmospheric Environment: X                                     50
-#>  9        2019 Journal of Structural Biology: X                               10
-#> 10        2019 Gene: X                                                        19
+#>  1        2018 Water Research X                                               12
+#>  2        2019 World Neurosurgery: X                                          40
+#>  3        2019 Atmospheric Environment: X                                     50
+#>  4        2019 Toxicon: X                                                     17
+#>  5        2019 Journal of Structural Biology: X                               10
+#>  6        2019 Journal of Computational Physics: X                            33
+#>  7        2019 Respiratory Medicine: X                                        11
+#>  8        2019 Journal of Hydrology X                                         33
+#>  9        2019 European Journal of Obstetrics & Gynecology and Rep…           80
+#> 10        2019 Contraception: X                                               13
 #> # … with 30 more rows
 ```
 

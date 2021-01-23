@@ -193,7 +193,7 @@ p_1 <- year_per_oa_type_and_license %>%
   theme_minimal_hgrid() +
   theme(legend.position = "top",
         legend.justification = "right") +
-  guides(fill = guide_legend("Open content license"))
+  guides(fill = guide_legend("Open Content License"))
 p_1
 ```
 

@@ -451,6 +451,12 @@ ggplot(sponsored_articles, aes(x = gsub("20", "'", issued_year), y = n), alpha =
   theme_minimal_hgrid() +
   theme(legend.position="top", legend.justification = "right")
 ```
+```{r}
+sponsored_articles %>% 
+  group_by(fct_source, cc_norm) %>%
+  summarise(n = sum(n)) %>%
+  mutate(prop = n / sum(n))
+```
 
 ```{r}
 # invoicing analysis
@@ -493,6 +499,14 @@ sponsor_df %>%
                      breaks = seq(0,15000, 2000)) +
   theme_minimal_vgrid() +
   theme(legend.position="top", legend.justification = "right")
+```
+
+
+```{r}
+sponsor_df %>%
+  group_by(country_factor) %>% 
+  summarise(n = n_distinct(doi)) %>%
+  mutate(prop = n /sum(n))
 ```
 
 ```{r}

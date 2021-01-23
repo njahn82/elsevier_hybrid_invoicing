@@ -1,6 +1,6 @@
 ---
 output: 
-  github_document:
+  word_document:
     df_print: kable
 ---
 
@@ -78,12 +78,13 @@ subject_hybrid %>%
   arrange(desc(articles_frac))
 ```
 
+
 ### Subject area
 
 Number of Journals (full and fractional counting)
 
 ```{r}
-subject_hybrid %>% 
+subject_area_all_jn <- subject_hybrid %>% 
   group_by(issn, subject_area) %>%
   summarise(n = n()) %>% 
   mutate(fractions = n / sum(n)) %>% 
@@ -92,12 +93,13 @@ subject_hybrid %>%
   summarise(journals_n = n_distinct(issn),
             journals_frac = sum(fractions)) %>% 
   arrange(desc(journals_frac))
+subject_area_all_jn
 ```
 
 Articles
 
 ```{r}
-subject_hybrid %>% 
+subject_area_all_article <- subject_hybrid %>% 
   group_by(doi, subject_area) %>%
   summarise(n = n()) %>% 
   mutate(fractions = n / sum(n)) %>% 
@@ -106,6 +108,14 @@ subject_hybrid %>%
   summarise(articles_n = n_distinct(doi),
             articles_frac = sum(fractions)) %>% 
   arrange(desc(articles_frac))
+subject_area_all_article
+```
+
+
+```{r}
+inner_join(subject_area_all_jn, subject_area_all_article, by = "subject_area") %>%
+  arrange(subject_area) %>%
+  select(1, journals_n, articles_n, journals_frac, articles_frac)
 ```
 
 ## Agreement only
@@ -119,7 +129,7 @@ subject_agreement_hybrid <- left_join(hybrid_df, jn_subjects, by = "issn") %>%
 ```
 
 
-## Subject field (top-level)
+### Subject field (top-level)
 
 Number of Journals (full and fractional counting)
 
@@ -177,4 +187,23 @@ subject_agreement_hybrid %>%
   summarise(articles_n = n_distinct(doi),
             articles_frac = sum(fractions)) %>% 
   arrange(desc(articles_frac))
+```
+
+### Overview table
+
+```{r}
+
+```
+
+
+### Overview
+
+- number of overlaps main category
+
+```{r}
+subject_hybrid %>%
+  distinct(top_level, issn) %>%
+  group_by(issn) %>%
+  filter(n() > 1) %>%
+  distinct(issn)
 ```
