@@ -236,7 +236,7 @@ p <- cowplot::plot_grid(
   p_2, p_1,
   labels = "AUTO", ncol = 1
 )
-ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300, width = 6, height = 6)
+ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300, width = 6.5, height = 6)
 ```
 
 
