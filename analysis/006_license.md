@@ -64,8 +64,8 @@ SELECT
 license_by_year <- license_agg %>%
   mutate(license_code =
            case_when(
-             grepl("/by/", license_url) ~ "CC-BY",
-             grepl("/by-nc", license_url) ~ "CC-BY-NC-ND",
+             grepl("/by/", license_url) ~ "CC BY",
+             grepl("/by-nc", license_url) ~ "CC BY-NC-ND",
              grepl("userlicense", license_url) ~ "Els-User")
   ) %>%
   group_by(license_code, oa_type, issued_year) %>%
@@ -78,7 +78,7 @@ just immediate hybrid
 im_hybrid <- hybrid_articles <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
 
 cc_hybrid <- im_hybrid %>%
-  mutate(license_code = ifelse(grepl("/by/", URL), "CC-BY", "CC-BY-NC-ND")) %>%
+  mutate(license_code = ifelse(grepl("/by/", URL), "CC BY", "CC BY-NC-ND")) %>%
   group_by(license_code, issued_year) %>%
   summarise(hybrid_immediate_articles = n()) %>%
   mutate(immediate = "immediate",
@@ -157,8 +157,8 @@ p_1 <- year_per_oa_type_and_license %>%
     breaks = c(0, 0.02, 0.04, 0.06, 0.08)
   ) +
   scale_fill_manual(values = 
-                      c(`CC-BY` = "#B52141",
-                        `CC-BY-NC-ND` = "#0093c7",
+                      c(`CC BY` = "#B52141",
+                        `CC BY-NC-ND` = "#0093c7",
                         `Els-User` = "grey80")) +
   labs(x = "Publication Year", y = "OA Percentage") +
   theme_minimal_hgrid() +
@@ -238,16 +238,16 @@ els_yearly_mirror
 #> # A tibble: 40 x 3
 #>    issued_year container_title                                      all_articles
 #>          <int> <chr>                                                       <int>
-#>  1        2018 Journal of Hydrology X                                          5
-#>  2        2019 Journal of Hydrology X                                         33
-#>  3        2019 Atmospheric Environment: X                                     50
-#>  4        2019 Toxicon: X                                                     17
-#>  5        2019 European Journal of Obstetrics & Gynecology and Rep…           80
-#>  6        2019 Journal of Computational Physics: X                            33
-#>  7        2019 Journal of Structural Biology: X                               10
-#>  8        2019 Respiratory Medicine: X                                        11
-#>  9        2019 Optical Materials: X                                           34
-#> 10        2019 Contraception: X                                               13
+#>  1        2018 Water Research X                                               12
+#>  2        2019 Atmospheric Environment: X                                     50
+#>  3        2019 Toxicon: X                                                     17
+#>  4        2019 Journal of Structural Biology: X                               10
+#>  5        2019 Journal of Computational Physics: X                            33
+#>  6        2019 Optical Materials: X                                           34
+#>  7        2019 European Journal of Obstetrics & Gynecology and Rep…           80
+#>  8        2019 Energy Conversion and Management: X                            14
+#>  9        2019 Gene: X                                                        19
+#> 10        2019 Chemical Engineering Science: X                                43
 #> # … with 30 more rows
 ```
 

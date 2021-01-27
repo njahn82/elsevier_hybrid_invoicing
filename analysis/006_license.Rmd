@@ -95,8 +95,8 @@ SELECT
 license_by_year <- license_agg %>%
   mutate(license_code =
            case_when(
-             grepl("/by/", license_url) ~ "CC-BY",
-             grepl("/by-nc", license_url) ~ "CC-BY-NC-ND",
+             grepl("/by/", license_url) ~ "CC BY",
+             grepl("/by-nc", license_url) ~ "CC BY-NC-ND",
              grepl("userlicense", license_url) ~ "Els-User")
   ) %>%
   group_by(license_code, oa_type, issued_year) %>%
@@ -108,7 +108,7 @@ just immediate hybrid
 im_hybrid <- hybrid_articles <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
 
 cc_hybrid <- im_hybrid %>%
-  mutate(license_code = ifelse(grepl("/by/", URL), "CC-BY", "CC-BY-NC-ND")) %>%
+  mutate(license_code = ifelse(grepl("/by/", URL), "CC BY", "CC BY-NC-ND")) %>%
   group_by(license_code, issued_year) %>%
   summarise(hybrid_immediate_articles = n()) %>%
   mutate(immediate = "immediate",
@@ -186,8 +186,8 @@ p_1 <- year_per_oa_type_and_license %>%
     breaks = c(0, 0.02, 0.04, 0.06, 0.08)
   ) +
   scale_fill_manual(values = 
-                      c(`CC-BY` = "#B52141",
-                        `CC-BY-NC-ND` = "#0093c7",
+                      c(`CC BY` = "#B52141",
+                        `CC BY-NC-ND` = "#0093c7",
                         `Els-User` = "grey80")) +
   labs(x = "Publication Year", y = "OA Percentage") +
   theme_minimal_hgrid() +
