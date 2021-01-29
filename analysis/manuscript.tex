@@ -34,14 +34,20 @@
 \setlength\parindent{24pt}
 
 
-\title{Your APA6-Style Manuscript}
-\shorttitle{}
-\author{You}
-\affiliation{Somewhere}
+\title{Transparency to hybrid open access invoicing through publisher-provided metadata: A longitudinal article-level study of Elsevier}
+\shorttitle{Hybrid OA Elsevier}
+% \author{Najko Jahn}
+% \affiliation{State and University Library Göttingen, University of Göttingen, Germany}
+% \author{Lisa Matthias}
+% \affiliation{tba}
+% \author{Mikael Laakso}
+% \affiliation{tba}
+% 
 
-\abstract{Your abstract here.}
+\abstract{The financial flows in scholarly journal publishing have become increasingly complex with the growth of open access (OA), and the lack of data and transparency into these flows has been persistent. Opaqueness has concerned especially hybrid OA, where subscription-based journals also publish OA content if an optional fee is paid. By leveraging Elsevier’s recently introduced article metadata concerning invoiced recipients, this study provides the first longitudinal publisher-level study of uptake and invoicing of hybrid OA articles. The results show that the share of OA articles in Elseviers hybrid journals has grown slowly, from 2.6\% of all articles on average in 2015 to 3.7\% in 2019. About a third of hybrid OA articles are invoiced directly through an agreement with research funders or other type of organisational sponsor (e.g. national library consortia), with the majority invoiced to authors. 83\% of agreement-invoiced hybrid OA articles are to European organisations, suggesting a strong international skewness. The study discovered a large discrepancy in choice of publication license between author-invoiced articles (dominantly CC BY-NC-ND) and agreement-invoiced articles (dominantly CC BY). The results demonstrate the value of publisher-provided metadata covering invoiced recipients of articles, which would be even more useful through wider adoption among publishers.}
 
 \begin{document}
+\maketitle
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -72,8 +78,8 @@ decade (Björk, 2012), it has gradually gained popularity in recent
 years. This development was driven by the implementation of OA policies
 by research institutions and funders, the allocation of OA funds, and
 formal agreements between publishers and institutions that allow
-affiliated authors to publish OA free-of-charge. However, there have
-been concerns that the hybrid model allows for
+affiliated authors to publish OA free-of-charge (Laakso \& Björk, 2016).
+However, there have been concerns that the hybrid model allows for
 double-dipping---receiving two payments for one article, the APC and
 subscription fees (Prosser, 2015; Shieber, 2009). While publishers
 assure they combine subscription fees and APCs to adjust pricing
@@ -81,38 +87,37 @@ assure they combine subscription fees and APCs to adjust pricing
 and revenue streams, such claims are impossible to evaluate.
 
 With the recent introduction of transformative agreements, an evolving
-term for contracts to shift library spendings for subscriptions to OA
+term for contracts that shift library spendings for subscriptions to OA
 (Borrego et al., 2020; Hinchliffe, 2019), the demand for
 publisher-provided data has even increased. If publishers would enable
 transparency about the OA uptake in hybrid journals and APC invoicing,
 academic libraries could improve their assessments and adjustments of
-contracts with publishers (Antelman, 2017). Likewise, research
-organizations and funders could improve compliance monitoring with OA
-mandates, while ensuring that the different actors were not charged
-multiple times (Larivière \& Sugimoto, 2018). However, as formal
-bibliometrics and financial studies have noted, the lack of publicly
-available and standardized data about hybrid OA publishing is
+contracts with publishers (Antelman, 2017; Schimmer et al., 2015).
+Likewise, research organizations and funders could improve compliance
+monitoring with OA mandates, while ensuring that the different actors
+were not charged multiple times (Larivière \& Sugimoto, 2018). However,
+as formal bibliometrics and financial studies have noted, the lack of
+publicly available and standardized data about hybrid OA publishing is
 considerable (Laakso \& Björk, 2016; Lawson, 2015; Pinfield et al.,
 2016)
 
 This current study investigates the extent to which publisher-provided
-data can be utilized to assess hybrid OA. The study takes Elsevier, the
-largest scholarly journal publisher in terms of article volume
+data can be utilized to research hybrid OA. The study takes Elsevier,
+the largest scholarly journal publisher in terms of article volume
 (Larivière et al., 2015), as the starting point for an empirical
 analysis of hybrid OA uptake and invoicing. Our approach is based on
-openly available data sources and brings together scholarly data from
-Crossref and machine-readable APC invoicing data from Elsevier OA
-full-texts, which enables us to analyze the development of Elsevier's
+openly available data sources and brings together scholarly metadata
+from Crossref, a DOI registration agency for scholarly works, and
+machine-readable APC invoicing data from Elsevier OA full-texts. The
+so-compiled data enable us to analyze the development of Elsevier's
 hybrid journal portfolio from 2015-19, and to compare it with that of
 Elsevier's full and delayed OA program. Further, we investigate whether
-hybrid publishing fees were waived or charged to the authors or academic
-institutions or research funders with Elsevier OA agreements. In
-particular, we identify academic consortia and research funders that
-were directly invoiced by Elsevier, and compare their hybrid OA rates by
-license and subject. As such, our findings have implications for
-research and OA policy and highlight the potential of publisher-provided
-data for large-scale, instantaneous analysis of hybrid OA uptake and
-invoicing.
+hybrid publishing fees were waived or charged. In particular, we
+identify academic consortia and research funders that were directly
+invoiced by Elsevier, and compare their hybrid OA rates by license and
+subject. As such, our findings have implications for research and OA
+policy and highlight the potential of publisher-provided data for
+large-scale, instantaneous analysis of hybrid OA uptake and invoicing.
 
 \hypertarget{background}{%
 \section{Background}\label{background}}
@@ -194,26 +199,26 @@ available and contained 66 million Crossref DOIs at the time, to
 determine how much of the scholarly literature is OA. Based on a random
 sample of 100,000 Crossref DOIs, the authors found 3.6\% of hybrid OA,
 while pointing towards a growing trend in recent years that recorded a
-hybrid OA share of 9.4\% of all articles published in 2015. While
-Piwowar et al.'s (2018) and Martín-Martín et al.'s (2018) methods are
-well-suited for large-scale and repeated analyses of the prevalence of
-hybrid OA, their main limitation is that they lack information about
-publishing costs.
+hybrid OA share of 9.4\% of all articles published in 2015.
 
-Moreover, Unpaywall's hybrid OA detection method has been refined
-several times since its launch in 2017, reflecting growing albeit
-incomprehensive license information in Crossref metadata. To overcome
-these shortcomings, the developers extended previous web-scraping
-approaches to better distinguish between immediate and delayed OA based
-on licenses at the date of observation Piwowar et al. (2019). Relatedly,
-in October 2020, Elsevier's license for delayed OA content was added to
-Unpaywall's list of license patterns (Unpaywall, n.d.-c). Finally, at
-the journal-level, a more fine-grained identification of full OA
-journals using OA article information was developed to better
-distinguish them from subscription journals including hybrid journals
-(Unpaywall, n.d.-b). Because of these ongoing changes due to
-non-standardized data, uptake studies reporting hybrid OA uptake based
-on Unpaywall data cannot easily be compared with each other.
+Since its launch, Unpaywall has become widely used as an OA evidence
+source in bibliometric research and rankings(Huang et al., 2020;
+Robinson-Garcia et al., 2020). However, results cannot easily be
+compared with each other over time because of Unpaywall's ongoing
+changes due to non-standardized data to discover hybrid OA. These
+changes mainly reflect the growing albeit incomprehensive license
+information in Crossref metadata. To overcome these shortcomings, the
+developers extended previous web-scraping approaches to better
+distinguish between immediate and delayed OA based on licenses at the
+date of observation Piwowar et al. (2019). Relatedly, in October 2020,
+Elsevier's license for delayed OA content was added to Unpaywall's list
+of license patterns (Unpaywall, n.d.-c). At the journal-level, a more
+fine-grained identification of full OA journals using OA article
+information was developed to better distinguish them from subscription
+journals including hybrid journals (Unpaywall, n.d.-b). With its servie
+unsub, Unpaywall recently launched a paid service, where libraries can
+compare hybrid OA uptake rates with internal financial and usage data to
+assess the value of journal subscriptions (Chawla, 2020).
 
 \hypertarget{financial-studies}{%
 \subsection{Financial studies}\label{financial-studies}}
@@ -278,49 +283,55 @@ list prices; they are not limited to certain publishers or journals;
 they are provided in a standardized format regardless of the publisher.
 On the other hand, the drawbacks include the limited number of
 participating institutions that are almost exclusively based in Europe
-and the dependency on participating organizations for data integrity.
-Moreover, since Open APC data does not include waivers or free APCs, it
-cannot present a complete picture of all publishing activities and
-expenses. This, however, would pose less of an issue when analyzing just
-hybrid OA.
+and the dependency on participating organizations for data integrity
+(Pieper \& Broschinski, 2018). Moreover, since Open APC data does not
+include waivers or free APCs, it cannot present a complete picture of
+all publishing activities and expenses. This, however, would pose less
+of an issue when analyzing just hybrid OA.
 
-\hypertarget{data-driven-workflows-for-hybrid-oa}{%
-\subsection{Data-driven workflows for hybrid
-OA}\label{data-driven-workflows-for-hybrid-oa}}
+\hypertarget{the-role-of-publisher-provided-data}{%
+\subsection{The role of publisher-provided
+data}\label{the-role-of-publisher-provided-data}}
 
-In September 2018, coalition S presented a set of principles known as
-Plan S and announced. that from 2021 onwards, signatories would no
-longer fund publications in hybrid OA journals. This principle includes
-so-called ``mirror'' and sister journals---hybrid journals with fully OA
+Uptake and financial studies have OA policy implications for hybrid OA.
+Most prominently, the cOAlition S, an international network of research
+funders, released its widely discussed Plan S. In September 2018, the
+cOAlition S announced that from 2021 onwards, signatories would no
+longer fund articles in hybrid OA journals. This principle includes
+so-called ``mirror'' and sister journals--hybrid journals with fully OA
 counterparts or split into their fully OA and subscription parts---that
 have launched since Plan S was announced but makes an exception for
 hybrid journals with transformative agreements (Frantsvåg \& Strømme,
-2019). While the scale and means of these transformative agreements may
-differ, many address the lack of transparency surrounding hybrid OA by
-making publisher-provided metadata a defining element of publishing
-workflows between institutions and publishers (Geschuhn \& Stone, 2017;
-Marques et al., 2019)
+2019). The Plan S refers to the Efficiency and Standards for Article
+Charges (ESAC) guidelines (Geschuhn \& Stone, 2017) as critical
+component of transformative agreements, emphasizing the need for
+publisher-provided metadata to address the lack of transparency
+surrounding hybrid OA. However, studies confirm that publisher with such
+agreements lack essential data about hybrid OA uptake and invoicing, or
+are not able or willing to provide such information publicly and
+instantaneously (Marques et al., 2019; Monaghan et al., 2020), which, in
+turn, not just limit the monitoring of hybrid OA, but also research
+studies on its size and financial implications.
 
-Elsevier, one of the world's largest scholarly publishers, provides
-article-level metadata to Crossref, including license information, which
-can be used to identify OA articles, and links to HTML and XML full-text
-versions for text and data mining purposes. Surprisingly, besides the
-full-text article, the XML files also contain invoicing information and
-the article's OA status. Table \ref{tab:els_xml} summarizes the key
-metadata elements, which comprise the type of entity to which the APC
-was invoiced (\texttt{openaccessSponsorType}) and the name of that
-entity if available (\texttt{openaccessSponsorName}). Moreover, the
-article-level metadata indicates if OA was provided through Elsevier's
-Open Archive program (\texttt{openArchiveArticle}), which enables free
-access to participating subscription journals after an embargo period
-(i.e., delayed OA; Elsevier (n.d.-b)). As we have been unable to
-identify similar efforts by other large publishers (e.g., Springer
-Nature), this increased transparency through openly available
-bibliometric and financial data at the article level seems unique to
-Elsevier.
+Here, we focus on Elsevier. The publisher provides article-level
+metadata to Crossref, including license information, which can be used
+to identify OA articles, and links to HTML and XML full-text versions
+for text and data mining purposes. Surprisingly, besides the full-text
+article, the XML files also contain invoicing information and the
+article's OA status. Table \ref{tab:els_xml} summarizes the key metadata
+elements, which comprise the type of entity to which the APC was
+invoiced (\texttt{openaccessSponsorType}) and the name of that entity if
+available (\texttt{openaccessSponsorName}). Moreover, the article-level
+metadata indicates if OA was provided through Elsevier's Open Archive
+program (\texttt{openArchiveArticle}), which enables free access to
+participating subscription journals after an embargo period (i.e.,
+delayed OA; Elsevier (n.d.-b)). As we have been unable to identify
+similar efforts by other large publishers (e.g., Springer Nature), this
+increased transparency through openly available bibliometric and
+financial data at the article level seems unique to Elsevier.
 
 \begin{table}[H]
-\caption{\label{tab:els_xml}Overview of hybrid open access (OA) uptake across Elsevier hybrid journals with at least one OA article 2015-2019.}
+\caption{\label{tab:els_xml} Overview of hybrid open access (OA) uptake across Elsevier hybrid journals with at least one OA article 2015-2019}
 \centering
 \begin{tabular}[t]{lp{10cm}}
 \toprule
@@ -336,11 +347,6 @@ Elsevier's Open Archive programme.\tabularnewline \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-Table 1: Overview of metadata provided in XML-based Elsevier full-texts
-representing information about open access status and invoicing. A
-sample XML is available here:
-\url{https://api.elsevier.com/content/article/PII:S0169409X18301479?httpAccept=text/xml}
 
 In this study, we utilize Elsevier's publicly available metadata to
 analyze the uptake and invoicing of their hybrid OA publishing option.
@@ -935,6 +941,266 @@ sciences journals.
 \caption{Top 10 Elsevier hybrid OA institutional invoice recipients in terms of articles published by journal subject. EPSRC, Engineering and Physical Sciences Research Council; VSNU, VSNU; Wellcome, Wellcome Trust; ERC, European Research Council; ERC, European Research Council; MRC, Medical Research Council; NERC, Natural Environment Research Council; BBSRC, Biotechnology and Biological Sciences Research Council; Gates, Bill and Melinda Gates Foundation; ESRC, Economic and Social Research Council; NO, Norway Institutes. }\label{fig:field_funder_matrix}
 \end{figure}
 
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+Over the last five years, Elsevier recorded growth in the uptake of
+hybrid OA for each of our three indicators: The number of hybrid OA
+articles published per year doubled, the number of hybrid journals with
+at least one OA article grew by 21\%, and the share of hybrid OA
+articles relative to closed-accessed articles in these journals
+increased from 2.6\% to 3.7\%. As Laakso \& Björk (2016), we found only
+a weak relationship between citation metrics like the SNIP and hybrid OA
+uptake and observed differences in the uptake of hybrid OA among journal
+subject areas. In particular, we found the highest count of hybrid OA
+articles in physical sciences journals (see Table
+\ref{tab:subject_area_table}). This was followed by the life sciences
+and health sciences, whereas the social sciences had the lowest count of
+hybrid articles. This order mostly reflects the disciplines' overall
+publication output. According to the Open Science Monitor by the
+European Commission, the physical sciences and mathematics publish the
+most articles, followed by the health sciences, life sciences, and
+social sciences and humanities.
+
+Such disciplinary differences in hybrid OA prevalence become more
+meaningful when considering the relative share of OA articles to
+closed-access articles. In line with previous research, we found that
+Elsevier journals from the life sciences and social sciences (Jubb et
+al., 2017; Kramer \& Bosman, 2018; Laakso \& Björk, 2016) recorded
+greater than typical hybrid OA uptake, whereas physical sciences
+journals generally had a lower than typical uptake (Kramer \& Bosman,
+2018; Laakso \& Björk, 2016; Martín-Martín et al., 2018). In a
+systematic review of OA publishing patterns, Severin et al. (2020)
+linked such disciplinary differences to socio-cultural and technological
+factors that shape publishing cultures and practices. Among other
+aspects, the authors pointed to the availability of prestigious
+journals, the possibility to provide OA through alternative routes, and
+ease of access to funding sources to cover publishing fees. As such,
+looking at hybrid OA uptake in isolation can only provide limited
+insight, so that placing it within the broader context of disciplinary
+publishing and OA practices is necessary. For instance, since many
+branches of the physical sciences have established self-archiving
+practices and the technical infrastructure to support these (e.g., the
+arXiv; Severin et al. (2020), Björk et al. (2010), Laakso \& Björk
+(2016)), researchers can provide OA through repositories (i.e., green
+OA), and indeed, according to the Open Science Monitor the physical
+sciences provide OA primarily through the green route (31.2\% total OA
+share, 24\% OA if only considering green OA). Hence, the low share of
+hybrid OA in our sample might be because physical scientists perceive
+much less of a need for hybrid OA. Further, Severin et al. (2020) note
+project-based funding structures enable OA publishing in fully OA and
+hybrid journals as they allow for easy integration of publishing costs.
+Since these funding structures are typical for the life sciences
+(ibid.), we would expect higher rates of OA. Data from the Open Science
+Monitor seems to support this notion as the life sciences record
+particularly high shares of full OA articles and comparatively high
+shares of hybrid OA in some fields, such as biology and agricultural
+science. While we expected the observed hybrid OA shares for the life
+sciences and physical sciences, we were surprised by the high share of
+hybrid OA belonging to the AJSC subject area social sciences, which also
+includes the humanities, since articles ``social scientists have
+reported to face significant difficulties in access to grant funding for
+{[}publication charges{]}, as most research in the social sciences is
+not done by means of project-specific funding'' Severin et al. (2020, p.
+15). However, previous research has found comparatively low awareness
+and uptake of green OA among researchers in the field (Björk et al.,
+2010; Creaser et al., 2010), which might encourage hybrid OA uptake.
+Another possible explanation,is that Elsevier has a number of high
+prestigious social science and humanities journals (Larivière et al.,
+2015), which means that our findings are not representative of the
+general population of SSH journals. Likewise, this limitation could be
+extended to our findings in general that whilst not representative of
+the population of hybrid OA publishing, they provide valuable insight
+into a key player of scholarly publishing.
+
+Finally, OA policies in favor of hybrid OA in combination with invoicing
+agreements with Elsevier might be a driver. For instance, we found that
+nearly half of articles in arts and humanities were facilitated through
+agreements, which was above-average. This is in line with previous
+research, suggesting that OA policies and funder mandates have a
+stronger effect on OA uptake than disciplinary publication cultures
+(Huang et al., 2020; Larivière \& Sugimoto, 2018).
+
+Our overall investigation of invoice channels and recipients of hybrid
+OA APCs found that the majority of Elsevier hybrid articles were
+invoiced to the author (n=41,725; 58.2\%). However, it is important to
+note that although Elsevier's metadata classifies the sponsor type as
+``author'', this does not necessarily mean that authors paid for APCs
+out of their own pocket but rather just that the APC was not invoiced
+through an agreement. Hence, it is possible that APCs invoiced to the
+author were covered by institutional funds or as part of research
+grants. For instance, a recent Springer Nature survey found that hybrid
+OA was predominantly supported through institutional and funder sources
+(71\%), followed by OA agreements (34\%), while only 6\% were paid from
+personal funds or savings (Monaghan et al., 2020). We also observed
+notable differences in licensing among invoice types. The majority of
+hybrid OA articles, regardless of the invoice type, were licensed under
+the more restrictive CC BY-NC-ND license. There is a lack of dedicated
+studies on licence selection, but indications so far suggest that when
+given a choice authors tend to select more restrictive variants for
+their published works (Fraser et al., 2020; Noorden, 2013; Rowley et
+al., 2017). On the other hand, when hybrid articles were invoiced
+through agreements, most articles were licensed under the more liberal
+CC BY license. As several funding bodies mandate CC BY licenses,
+including the UK research funders that account for 62\% of our
+``agreement'' subsample, this result is perhaps not surprising but
+suggests the effectiveness of such agreements.
+
+Based on our findings, around a third of the articles were invoiced
+directly through OA agreements (e.g., research funders, national library
+consortia). Strikingly, sponsors based in the UK accounted for more than
+half of these , and a quarter was charged to sponsors from other
+European countries. This finding reiterates reports from previous
+studies that the UK's OA profile differs markedly from other countries
+(cf.~ref, ref) and points to the effects of science policy. To increase
+OA to research publications, the UK implemented centralized APC funding
+and embraced hybrid OA as a transition model. Within five years of the
+publication of the Finch Report in 2012, the UK recorded an 18\%
+increase in immediate OA, coupled with a rise in hybrid OA from 2.7\% in
+2012 to 15.4\% of all articles in 2016 (Jubb et al., 2017), which can be
+attributed to the availability of APC funding from Research Councils UK
+(RCUK). Indeed, RCUK block grants have been the largest single source of
+OA funds in the UK---the Wellcome Trust, and more recently
+transformative agreements (Jubb et al., 2017; Tickel, 2018). However,
+since then publishing expenditures of UK universities have been rising
+rapidly (ref), so that several universities stopped supporting hybrid OA
+in late 2018-2019 (Castro, 2019; University of Birmingham, n.d.;
+University of Oxford, 2019; Walker, 2019). This development might
+explain the slight decrease in hybrid articles invoiced to the UK our
+data showed around that time (see Figure
+\ref{fig:invoice_sponsor_country}).
+
+An essential part in the absence of transparency in scholarly publishing
+and especially in hybrid OA has been the lack of transparency in
+publishers' article management. This has prohibited consumers to get a
+comprehensive and comparative overview of their publishing activities
+and the associated costs and, thus, limited their negotiating power.
+However, certain initiatives in Europe like the ESAC Initiative have
+begun to press for improved and more transparent workflows for
+transformative agreements (Geschuhn \& Stone, 2017). In particular, the
+ESAC Workflow Recommendations seek to increase efficiency and
+transparency in the publication workflow through improved invoicing and
+reporting processes and metadata delivery, including article-based
+machine readable information about the OA sponsor. Through this study we
+demonstrated the utility and benefits of such publisher-provided
+metadata about hybrid OA funding and highlighted the need for extending
+these to include comprehensive information about the licensing and the
+particular OA type.
+
+Usually identifying delayed OA articles and distinguishing them from
+other types of OA is challenging since there is no publicly available
+list of such journals. For instance, Taylor \& Francis' (2021) website
+indicates that some of their journals participate in a delayed or
+promotional OA program but no further information is provided as to
+which journals these are. However, Elsevier provides a list of journals
+enrolled in the ``Open Archive'' programme and further tags delayed OA
+articles in the machine-readable XML version of the article. This
+enables easy identification and more accurate assessments of hybrid OA,
+which allows to take into account the substantial amount of delayed OA
+content in future hybrid OA studies using Elsevier data.
+
+While this study advances our knowledge about hybrid OA uptake and
+invoicing, the limitations leave room for future research. This study
+focused on only one publisher, which limits the generalizability of our
+findings since Elsevier's attributes such as composition of the journal
+portfolio, mix of business models, pricing, and promotion of various
+options cannot be assumed to be representative of scholarly journal
+publishing in general. Though the invoicing data extracted from the XML
+files enables unprecedented accuracy and comprehensiveness in the study
+of hybrid OA, it likely does not disclose the actual OA sponsor in all
+cases. Most articles were invoiced to authors, but it remains unclear
+how often authors themselves pay for APCs or invoices are covered
+through institutional OA funds or research grants. Further research into
+this topic would increase our understanding of OA funding streams
+outside of publishing agreements. Further, our study demonstrates that
+to achieve comprehensive mapping and understanding of the financial
+flows involved in OA funding, complex, in-depth country-specific
+meso-level analyses is needed. Such studies would ideally draw on
+various data sources, such as publicly available bibliometrics and
+metadata, information about significant national research funders and
+their OA policies, information about the national library and possible
+consortia landscape including their publishing agreements, which might
+require Freedom of Information Requests.
+
+This study provides a snapshot of hybrid OA for the largest journal
+publisher prior to the impact of the implementation of Plan S
+requirements. While many Plan S signatories have already had strong OA
+policies, this harmonized approach is likely to affect publishing
+decisions of funded authors,the licencing of their articles, and the
+offerings and pricing of publishers. Since the new requirements are
+applicable to research funded from 2021 onwards, a comparative study
+focused on articles invoiced to Plan S signatories would be a fruitful
+endeavor.
+
+In a similar vein, future studies could combine invoice information with
+research funding information since these contribute different pieces to
+the funding stream puzzle. This could also provide more insight into the
+actual APC funding streams behind the author-invoiced articles.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+The primary aim of this empirical study was to investigate Elsevier's
+hybrid OA publishing from 2015-2019 to better understand the volume and
+invoicing of hybrid OA and present a novel, data-driven approach for
+such analyses. Our results indicate that although the number of hybrid
+OA articles has increased over time, hybrid OA uptake has remained low.
+Notably, hybrid APCs were most often invoiced directly to the authors or
+through institutional agreements, where only a few funding bodies were
+the main driver of hybrid OA. Finally, our findings highlight that
+publisher-provided metadata about the invoicing channels of (hybrid) OA
+can facilitate research into and increase the understanding of the
+financial flows of OA publishing.
+
+Ever since its inception, hybrid OA has been a challenging subject to
+study due to the lack of standardised ways for publishers to flag such
+content and APC funding data being limited to studies based on surveys
+and articles' acknowledgements sections. This study presented a novel
+approach to studying OA APC invoicing that is based on publicly
+available publisher-provided metadata, which can be used on on its own
+or in combination with other public data sources to gain more detailed
+and comprehensive insights into hybrid OA uptake and invoicing than ever
+before. If more publishers reported OA invoicing data on the article
+level and in a machine-readable format, this would increase transparency
+and enable enhanced monitoring of the scholarly journal landscape over
+time. As hybrid OA has increasingly become a central element of OA
+policies of research funders and libraries, customer organisations could
+require that invoicing information is added to the article-level
+metadata. As long as publishers do not provide this data in a structured
+and comprehensive format, they prevent consumers from benchmarking
+prices and therefore hinder price competition as the only alternative to
+gain comparative insight is self-reported APC expenditures that research
+funders and libraries voluntarily report to the Open APC initiative. The
+Open APC initiative is a valuable service but it cannot replace
+publisher-provided data since global participation is limited.
+
+From recent science policy developments in Europe it appears that Big
+Deals have gained support and remain firmly in place in the form of
+transformative agreements. However, in addition to research funders and
+libraries that increasingly make publishing contracts public, it is on
+the publisher to provide metadata as presented here to improve the
+transparency in scholarly publishing by linking invoicing data to
+bibliometrics. From this study we can affirm that hybrid OA is complex
+as the financial flows come from various stakeholders and invoicing
+forms, it is not just libraries or consortia, but authors and funders
+are also directly involved. As of right now, providing machine-readable
+article-level invoicing data is not common amongst publishers, which
+limits the potential for broader studies.
+
+\hypertarget{data-availability}{%
+\section{Data Availability}\label{data-availability}}
+
+All data and code used for this study is openly available on GitHub,
+including version history:
+
+\url{https://github.com/njahn82/elsevier_hybrid_invoicing}
+
+Formal analyis is written in R Markdown and thus replicable.
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
 \hypertarget{refs}{}
 \begin{cslreferences}
 \leavevmode\hypertarget{ref-Akbaritabar_2019}{}%
@@ -960,10 +1226,21 @@ scholarly articles: A failed experiment? \emph{Journal of the American
 Society for Information Science and Technology}, \emph{63}(8),
 1496--1504. \url{https://doi.org/10.1002/asi.22709}
 
+\leavevmode\hypertarget{ref-Bj_rk_2010}{}%
+Björk, B.-C., Welling, P., Laakso, M., Majlender, P., Hedlund, T., \&
+Guðnason, G. (2010). Open access to the scientific journal literature:
+Situation 2009. \emph{PLoS ONE}, \emph{5}(6), e11273.
+\url{https://doi.org/10.1371/journal.pone.0011273}
+
 \leavevmode\hypertarget{ref-Borrego_2020}{}%
 Borrego, Á., Anglada, L., \& Abadal, E. (2020). Transformative
 agreements: Do they pave the way to open access? \emph{Learned
 Publishing}. \url{https://doi.org/10.1002/leap.1347}
+
+\leavevmode\hypertarget{ref-Castro_2019}{}%
+Castro, P. de. (2019). \emph{Running a no-hybrid open access funding
+policy: Some results}. Open Access Strathclyde.
+\url{https://strathoa.tumblr.com/post/185703709380/running-a-no-hybrid-open-access-funding-policy}
 
 \leavevmode\hypertarget{ref-crminer}{}%
 Chamberlain, S. (2020). \emph{crminer: Fetch scholary full text from
@@ -973,6 +1250,18 @@ CrossRef}. \url{https://CRAN.R-project.org/package=crminer}
 Chamberlain, S., Zhu, H., Jahn, N., Boettiger, C., \& Ram, K. (2020).
 \emph{rcrossref: Client for various CrossRef APIs}.
 \url{https://CRAN.R-project.org/package=rcrossref}
+
+\leavevmode\hypertarget{ref-Chawla_2020}{}%
+Chawla, D. (2020). This tool is saving universities millions of dollars
+in journal subscriptions. \emph{Science}.
+\url{https://doi.org/10.1126/science.abd7483}
+
+\leavevmode\hypertarget{ref-Creaser_2010}{}%
+Creaser, C., Fry, J., Greenwood, H., Oppenheim, C., Probets, S., Spezi,
+V., \& White, S. (2010). Authors' awareness and attitudes toward open
+access repositories. \emph{New Review of Academic Librarianship},
+\emph{16}(sup1), 145--161.
+\url{https://doi.org/10.1080/13614533.2010.518851}
 
 \leavevmode\hypertarget{ref-Crossref_2020}{}%
 Crossref. (2020). \emph{March 2020 public data file from crossref}.
@@ -1011,6 +1300,11 @@ Frantsvåg, J. E., \& Strømme, T. E. (2019). Few open access journals are
 compliant with plan s. \emph{Publications}, \emph{7}(2), 26.
 \url{https://doi.org/10.3390/publications7020026}
 
+\leavevmode\hypertarget{ref-Fraser_2020}{}%
+Fraser, N., Brierley, L., Dey, G., Polka, J. K., Pálfy, M., Nanni, F.,
+\& Coates, J. A. (2020). \emph{Preprinting the COVID-19 pandemic}.
+bioRxiv. \url{https://doi.org/10.1101/2020.05.22.111294}
+
 \leavevmode\hypertarget{ref-Frazier_2001}{}%
 Frazier, K. (2001). The librarians' dilemma: Contemplating the costs of
 the "big deal". \emph{D-Lib Magazine}, \emph{7}(3).
@@ -1037,15 +1331,32 @@ Hinchliffe, L. J. (2019). \emph{Transformative agreements: A primer}.
 \url{https://web.archive.org/web/20210128170342/https://scholarlykitchen.sspnet.org/2019/04/23/transformative-agreements/};
 The Scholarly Kitchen.
 
+\leavevmode\hypertarget{ref-Huang_2020}{}%
+Huang, C.-K. (Karl), Neylon, C., Hosking, R., Montgomery, L., Wilson, K.
+S., Ozaygen, A., \& Brookes-Kenworthy, C. (2020). Evaluating the impact
+of open access policies on research institutions. \emph{eLife},
+\emph{9}. \url{https://doi.org/10.7554/elife.57067}
+
 \leavevmode\hypertarget{ref-Jahn_2016}{}%
 Jahn, N., \& Tullney, M. (2016). A study of institutional spending on
 open access publication fees in germany. \emph{PeerJ}, \emph{4}, e2323.
 \url{https://doi.org/10.7717/peerj.2323}
 
+\leavevmode\hypertarget{ref-Jubb_2017}{}%
+Jubb, M., Plume, A., Oeben, S., Brammer, L., Johnson, R., Bütün, C., \&
+Pinfield, S. (2017). \emph{Monitoring the transition to open access:
+December 2017}.
+\url{https://www.universitiesuk.ac.uk/policy-and-analysis/reports/Documents/2017/monitoring-transition-open-access-2017.pdf}
+
 \leavevmode\hypertarget{ref-Kirkman_2018}{}%
 Kirkman, N. S. (2018). \emph{A study of open access publishing by nhmrc
 grant recipients} {[}Curtin University{]}.
 \url{http://hdl.handle.net/20.500.11937/77026}
+
+\leavevmode\hypertarget{ref-Kramer_2018}{}%
+Kramer, B., \& Bosman, J. (2018). \emph{Towards a plan S gap analysis:
+open access potential across disciplines using Web of Science and DOAJ}
+{[}Data set{]}. Zenodo. \url{https://doi.org/10.5281/zenodo.1979937}
 
 \leavevmode\hypertarget{ref-Laakso_2016}{}%
 Laakso, M., \& Björk, B.-C. (2016). Hybrid open access--a longitudinal
@@ -1115,6 +1426,11 @@ Author motivations to publish in chemistry hybrid open access journals.
 Technology}, \emph{68}(10), 2501--2510.
 \url{https://doi.org/10.1002/asi.23897}
 
+\leavevmode\hypertarget{ref-Van_Noorden_2013}{}%
+Noorden, R. V. (2013). Researchers opt to limit uses of open-access
+publications. \emph{Nature}.
+\url{https://doi.org/10.1038/nature.2013.12384}
+
 \leavevmode\hypertarget{ref-Frascati}{}%
 OECD. (2015). \emph{Frascati manual 2015: Guidelines for collecting and
 reporting data on research and experimental development}. OECD
@@ -1124,6 +1440,12 @@ Publishing. \url{https://doi.org/10.1787/24132764}
 Olsson, L. (2018). \emph{Evaluation of offset agreements -- report 4 :
 Springer compact} (p. 20). Kungliga biblioteket.
 \url{http://urn.kb.se/resolve?urn=urn\%3Anbn\%3Ase\%3Ahb\%3Adiva-15501}
+
+\leavevmode\hypertarget{ref-Pieper_2018}{}%
+Pieper, D., \& Broschinski, C. (2018). OpenAPC: A contribution to a
+transparent and reproducible monitoring of fee-based open access
+publishing across institutions and nations. \emph{Insights the UKSG
+Journal}, \emph{31}. \url{https://doi.org/10.1629/uksg.439}
 
 \leavevmode\hypertarget{ref-Pinfield_2016}{}%
 Pinfield, S., Salter, J., \& Bath, P. A. (2016). The "total cost of
@@ -1167,10 +1489,48 @@ R Core Team. (2020). \emph{R: A language and environment for statistical
 computing}. R Foundation for Statistical Computing.
 \url{https://www.R-project.org/}
 
+\leavevmode\hypertarget{ref-Robinson_Garcia_2020}{}%
+Robinson-Garcia, N., Costas, R., \& Leeuwen, T. N. van. (2020). Open
+access uptake by universities worldwide. \emph{PeerJ}, \emph{8}, e9410.
+\url{https://doi.org/10.7717/peerj.9410}
+
+\leavevmode\hypertarget{ref-Rowley_2017}{}%
+Rowley, J., Johnson, F., Sbaffi, L., Frass, W., \& Devine, E. (2017).
+Academics\\
+textquotesingle behaviors and attitudes towards open access publishing
+in scholarly journals. \emph{Journal of the Association for Information
+Science and Technology}, \emph{68}(5), 1201--1211.
+\url{https://doi.org/10.1002/asi.23710}
+
+\leavevmode\hypertarget{ref-Schimmer_2015}{}%
+Schimmer, R., Geschuhn, K., \& Vogler, A. (2015). \emph{Disrupting the
+subscription journals'business model for the necessary large-scale
+transformation to open access}. Max Planck Digital Library.
+\url{https://doi.org/10.17617/1.3}
+
+\leavevmode\hypertarget{ref-Severin_2020}{}%
+Severin, A., Egger, M., Eve, M. P., \& Hürlimann, D. (2020).
+Discipline-specific open access publishing practices and barriers to
+change: An evidence-based review. \emph{F1000Research}, \emph{7}.
+\url{https://doi.org/10.12688/f1000research.17328.2}
+
 \leavevmode\hypertarget{ref-Shieber_2009}{}%
 Shieber, S. M. (2009). Equity for open-access journal publishing.
 \emph{PLoS Biology}, \emph{7}(8), e1000165.
 \url{https://doi.org/10.1371/journal.pbio.1000165}
+
+\leavevmode\hypertarget{ref-Tickel_2018}{}%
+Tickel, A. (2018). \emph{Open access to research publications -- 2018}.
+\url{https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/774956/Open-access-to-research-publications-2018.pdf}
+
+\leavevmode\hypertarget{ref-birmingham}{}%
+University of Birmingham. (n.d.). \emph{UKRI open access block grant}.
+\url{https://intranet.birmingham.ac.uk/as/libraryservices/library/research/open-access/funding/ukri-open-access-block-grant.aspx}
+
+\leavevmode\hypertarget{ref-oxford_2019}{}%
+University of Oxford. (2019). \emph{Change to oxford's policy for rcuk
+oa block grant 2nd december 2019}.
+\url{http://openaccess.ox.ac.uk/2019/12/02/change-to-oxfords-policy-for-rcuk-oa-block-grant-2nd-december-2019/}
 
 \leavevmode\hypertarget{ref-Unpaywall_para}{}%
 Unpaywall. (n.d.-a). \emph{What does is\_paratext mean in the API?}
@@ -1184,6 +1544,12 @@ hybrid, and bronze) mean?}
 \leavevmode\hypertarget{ref-Unpaywall_oa_license}{}%
 Unpaywall. (n.d.-c). \emph{What is an OA license?}
 \url{http://web.archive.org/web/20210127192625/https://support.unpaywall.org/support/solutions/articles/44002063718-what-is-an-oa-license-}.
+
+\leavevmode\hypertarget{ref-walker_2019}{}%
+Walker, D. (2019). \emph{Research councils uk open access funding
+2019-2020}. Library \& Archives Service at The London School of Hygiene
+\& Tropical Medicine.
+\url{https://blogs.lshtm.ac.uk/library/2019/03/05/research-councils-uk-open-access-funding-2019-2020/}
 
 \leavevmode\hypertarget{ref-tidyverse}{}%
 Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D.,
