@@ -1,0 +1,87 @@
+---
+title: "011_scpopus_subject_all.Rmd"
+output: 
+  github_document: 
+    df_print: kable
+---
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = TRUE,
+  fig.width = 6,
+  fig.asp = 0.618,
+  out.width = "70%",
+  fig.align = "center",
+  dpi = 300
+)
+options(scipen = 999, digits = 4)
+knitr::knit_hooks$set(
+  inline = function(x) {
+    if (is.numeric(x)) {
+      return(prettyNum(x, big.mark = ","))
+    } else{
+      return(x)
+    }
+  }
+)
+```
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+
+
+read in scopus journal indicators
+
+```{r}
+scopus_19 <- readxl::read_excel(here::here("data", "scopus_jn.xlsx"), sheet = 2,
+                                .name_repair = make_clean_names)
+ajsc_mapped <- read_csv(here::here("data", "asjc_mapped.csv")) %>%
+  mutate(top_level_code = as.character(top_level_code))
+```
+
+normalize scopus jn indicators
+
+```{r}
+scopus_norm <- scopus_19 %>%
+  mutate(top_level_code = substr(as.character(scopus_asjc_code_sub_subject_area), 1, 2)) %>%
+  inner_join(ajsc_mapped, by = "top_level_code")
+```
+
+## All
+
+```{r}  
+scopus_norm %>%
+  distinct(subject_area, scopus_source_id, scholarly_output) %>%
+  group_by(subject_area) %>% 
+  summarise(n = sum(scholarly_output)) %>%
+  mutate(prop = n / sum(n)) %>%
+  arrange(desc(n))
+```
+
+
+## Elsevier 
+
+```{r}  
+scopus_norm %>%
+  filter(publisher == "Elsevier") %>%
+  distinct(subject_area, scopus_source_id, scholarly_output) %>%
+  group_by(subject_area) %>% 
+  summarise(n = sum(scholarly_output)) %>%
+  mutate(prop = n / sum(n))
+```
+
+By oa
+
+```{r}  
+scopus_norm %>%
+  filter(publisher == "Elsevier") %>%
+  distinct(subject_area, scopus_source_id, scholarly_output, open_access) %>%
+  group_by(subject_area, open_access) %>% 
+  summarise(n = sum(scholarly_output))
+```
