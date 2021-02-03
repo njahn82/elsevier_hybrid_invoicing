@@ -1,5 +1,8 @@
 ## Source code supplement &mdash; Transparency to hybrid open access invoicing through publisher-provided metadata: An article-level study of Elsevier
 
+RStudio: [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/njahn82/elsevier_hybrid_invoicing/master?urlpath=rstudio)
+
+
 ### Overview
 
 This repository provides data and code used for the submitted manuscript Transparency to hybrid open access invoicing through publisher-provided metadata: An article-level study of Elsevier on arXiv. 
@@ -55,7 +58,7 @@ Lisa Matthias. (2020). Publisher OA Portfolios 2.0 (Version 2.0) [Data set]. Zen
 
 #### Aggregated data
 
-- [`data/year_per_oa_type_and_license.csv`](data/year_per_oa_type_and_license.csv) Publication volume per license and OA type. See also [`analysis/006_license.Rmd`](data/year_per_oa_type_and_license.csv)
+- [`data/year_per_oa_type_and_license.csv`](data/year_per_oa_type_and_license.csv) Publication volume per license and OA type. See also [`analysis/006_license.Rmd](data/year_per_oa_type_and_license.csv)
 
 - [`data/hybrid_oa_volume.csv`](data/hybrid_oa_volume.csv) (OA )Article volume per journal. See also [`data-raw/hybrid_oa_volume.R`](data-raw/hybrid_oa_volume.R).
 
