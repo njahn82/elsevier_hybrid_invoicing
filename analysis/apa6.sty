@@ -21,34 +21,62 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+% make captions italic
 
+            
 % bibliography
-$if(csl-refs)$
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newenvironment{cslreferences}%
-  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
   {\par}
-$endif$
 
 \renewcommand{\baselinestretch}{1.5}
 \setlength\parindent{24pt}
 
 
-\title{Transparency to hybrid open access invoicing through publisher-provided metadata: A longitudinal article-level study of Elsevier}
+\title{\textbf{Transparency to hybrid open access  through publisher-provided metadata: An article-level study of Elsevier}}
 \shorttitle{Hybrid OA Elsevier}
-\author{Najko Jahn}
-\affiliation{State and University Library Göttingen, University of Göttingen, Germany}
-\author{Lisa Matthias}
-\affiliation{}
-\author{Mikael Laakso}
-
-\abstract{The financial flows in scholarly journal publishing have become increasingly complex with the growth of open access (OA), and the lack of data and transparency into these flows has been persistent. Opaqueness has concerned especially hybrid OA, where subscription-based journals also publish OA content if an optional fee is paid. By leveraging Elsevier’s recently introduced article metadata concerning invoiced recipients, this study provides the first longitudinal publisher-level study of uptake and invoicing of hybrid OA articles. The results show that the share of OA articles in Elseviers hybrid journals has grown slowly, from 2.6\% of all articles on average in 2015 to 3.7\% in 2019. About a third of hybrid OA articles are invoiced directly through an agreement with research funders or other type of organisational sponsor (e.g. national library consortia), with the majority invoiced to authors. 83\% of agreement-invoiced hybrid OA articles are to European organisations, suggesting a strong international skewness. The study discovered a large discrepancy in choice of publication license between author-invoiced articles (dominantly CC BY-NC-ND) and agreement-invoiced articles (dominantly CC BY). The results demonstrate the value of publisher-provided metadata covering invoiced recipients of articles, which would be even more useful through wider adoption among publishers.
+\threeauthors{Najko Jahn}{Lisa Matthias}{Mikael Laakso}
+\threeaffiliations{Göttingen State and University Library, University of Göttingen\\
+Platz der Göttinger Sieben 1, 37073 Göttingen, Germany\\
+najko.jahn@sub.uni-goettingen.de
+}{Department of Political Science, John F. Kennedy Institute, Freie Universität Berlin \\
+Lansstraße 7-9, 14195 Berlin, Germany \\
+l.a.matthia@gmail.com
+}{Information Systems Science, Hanken School of Economics \\
+Arkadiankatu 22, 00100 Helsinki, Finland \\
+mikael.laakso@hanken.fi
 }
 
-\begin{document}
+\authornote{Correspondence concerning this article should be addressed to Najko Jahn}
+% \affiliation{State and University Library Göttingen, University of Göttingen, Germany}
+% \author{Lisa Matthias}
+% \affiliation{tba}
+% \author{Mikael Laakso}
+% \affiliation{tba}
+% 
 
+\abstract{With the growth of open access (OA), the financial flows in scholarly journal
+publishing have become increasingly complex, but comprehensive data and
+transparency into these flows are still lacking. The opaqueness is especially
+concerning for hybrid OA, where subscription-based journals publish individual
+articles as OA if an optional fee is paid. This study addresses the lack of
+transparency by leveraging Elsevier article metadata and provides the first
+longitudinal publisher-level study of hybrid OA uptake and invoicing. Our
+results show that Elsevier's hybrid OA uptake has grown steadily but slowly from
+2015-2019, doubling the number of hybrid OA articles published per year and
+increasing the share of OA articles in Elsevier's hybrid journals from 2.6\% to
+3.7\% of all articles. Further, we find that most hybrid OA articles were
+invoiced directly to authors, followed by articles invoiced through agreements
+with research funders, institutions, or consortia, with only a few funding
+bodies driving hybrid OA uptake. As such, our findings point to the role of
+publishing agreements and OA policies in hybrid OA publishing. Our results
+further demonstrate the value of publisher-provided metadata improve the
+transparency in scholarly publishing by linking invoicing data to bibliometrics.}
+
+\begin{document}
 \maketitle
 
 $body$
