@@ -7,7 +7,7 @@
 
 This repository provides data and code used for the submitted manuscript
 
-Najko Jahn, Lisa Matthias, Mikael Laakso, 2021, *Transparency to hybrid open access through publisher-provided metadata: An article-level study of Elsevier*. arXiv.
+Najko Jahn, Lisa Matthias, Mikael Laakso, 2021, *Transparency to hybrid open access through publisher-provided metadata: An article-level study of Elsevier*. arXiv. https://arxiv.org/abs/2102.04789
 
 This repository is organized as a [research compendium](https://doi.org/10.7287/peerj.preprints.3192v2). A research compendium contains data, code, and text associated with it. 
 
