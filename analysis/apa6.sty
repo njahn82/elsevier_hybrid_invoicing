@@ -25,15 +25,14 @@
 
             
 % bibliography
+$if(csl-refs)$
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
-\newenvironment{cslreferences}%
-  {\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+\newenvironment{CSLReferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
   {\par}
-
-\renewcommand{\baselinestretch}{1.5}
-\setlength\parindent{24pt}
+$endif$
 
 
 \title{\textbf{Transparency to hybrid open access  through publisher-provided metadata: An article-level study of Elsevier}}
