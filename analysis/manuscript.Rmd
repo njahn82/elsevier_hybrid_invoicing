@@ -191,6 +191,7 @@ flipped_jns_ind <- els_jns %>%
   ungroup() %>%
   count(oa_model)
 ```
+
 ```{r hybrid_oa_per_year}
 # journal and article metrics **per year**
 hybrid_oa_per_year <- hybrid_oa_volume %>%
