@@ -744,7 +744,7 @@ sponsor_country %>%
   mutate_if(is.numeric, ~paste0(., "%")) %>%
   rename(`Country/Subject area` = country_factor) %>%
   kableExtra::kbl(booktabs = TRUE,
-                  caption = " Relative subject profile of centrally invoiced OA funding bodies.", align = c("l|rrrrr|r")) %>%
+                  caption = " Relative subject profile of centrally invoiced OA funding bodies.", align = c("lrrrrrr")) %>%
     row_spec(6:7, hline_after = TRUE) %>%
    kable_styling(latex_options = c("scale_down"))
 ```
