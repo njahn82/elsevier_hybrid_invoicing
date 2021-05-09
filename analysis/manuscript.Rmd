@@ -466,6 +466,11 @@ oa_per_subject_rank <- hybrid_subject %>%
 Figure \ref{fig:oa_sub_uptake} presents the journals' five-year OA uptake grouped by subject area and field and in comparison to the overall median (Mdn= `r median_all * 100`; excluding one journal coded as multidisciplinary). The box plot reveals some variation between the subject areas. Notably, with the exception of environmental science and earth and planetary sciences, journals from the physical sciences show a lower median proportion of hybrid OA articles, whereas most life sciences and social sciences journals ranked above average. Figure X also shows large variations among the 26 subject fields, with the highest OA rates in immunology and microbiology (Mdn=`r filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop)*100`), environmental science (Mdn=`r filter(oa_per_subject_rank, description == "Environmental Science") %>% pull(median_prop)*100`), and neuroscience (Mdn=`r filter(oa_per_subject_rank, description == "Neuroscience") %>% pull(median_prop)*100`), whilst  chemistry (Mdn=`r filter(oa_per_subject_rank, description == "Chemistry") %>% pull(median_prop)*100`), materials science (Mdn=`r filter(oa_per_subject_rank, description == "Materials Science") %>% pull(median_prop)*100`), and dentistry (Mdn=`r filter(oa_per_subject_rank, description == "Dentistry") %>% pull(median_prop)*100`) recorded the lowest OA rate. 
 
 ```{r oa_sub_uptake, fig.cap='Open access (OA) uptake in Elsevier hybrid journals in percent grouped by subject area and field between 2015-19. Visualized as a box-and-whiskers plot limited to an OA share of 20\\%; the red line represents the overall median (2.5), jittered dots represent individual journals. Subject fields are ordered based on the median OA uptake.', fig.asp=1.3, out.width="90%"}
+# with labels
+subject_all_years <- 
+  inner_join(subject_all_years, subject_area_all_jn, by = "subject_area") %>%
+  mutate(subject_area = glue::glue("{subject_area} ({journals_n} Journals)"))
+
 p_subject <- ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median), n_oa / n)) + 
   geom_boxplot(aes(color = subject_area)) +
   geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
@@ -479,7 +484,8 @@ p_subject <- ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .f
   ) +
   coord_flip(ylim=c(0,0.2)) +
   labs(x = NULL, y = "Five-Year Hybrid OA Uptake Rate\nper Journal") +
-  theme_minimal_vgrid(font_size = 10) 
+  theme_minimal_vgrid(font_size = 10) +
+  theme(strip.text = element_text(face="bold"))
 p_subject
 ```
 
