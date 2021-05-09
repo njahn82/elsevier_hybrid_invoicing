@@ -672,8 +672,8 @@ subject_table %>%
   # manual, puh, not good 
   pack_rows("Health Sciences", 1, 5) %>%
   pack_rows("Life Sciences", 6, 10) %>%
-  pack_rows("Health Sciences", 11, 20) %>%
-  pack_rows("Health Sciences", 21, 26) %>%
+  pack_rows("Physical Sciences", 11, 20) %>%
+  pack_rows("Social Sciences", 21, 26) %>%
   kable_styling(latex_options = c("scale_down"))
 ```
 
