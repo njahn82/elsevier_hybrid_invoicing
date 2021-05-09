@@ -657,10 +657,11 @@ subject_table <- jn_subjects %>%
     cell_spec(x, background = make_pal(x))})
   
 
-subject_table %>%
+subject_table_ <- subject_table %>%
   group_by(subject_area) %>%
   arrange(top_level, .by_group = TRUE) %>% 
-  ungroup() %>%
+  ungroup() 
+subject_table_ %>%
   select(-subject_area) %>%
             kbl(booktabs = TRUE, "latex", format.args = list(big.mark = ","), digits = 1, escape = FALSE,
                   caption = "Invoice channels by discipline 2015-2019.",
@@ -669,11 +670,7 @@ subject_table %>%
        linesep = "",
       align = "lrrrrr") %>%
   add_header_above(c(" " = 2, "Invoice channel (in %)" = 4)) %>%
-  # manual, puh, not good 
-  pack_rows("Health Sciences", 1, 5) %>%
-  pack_rows("Life Sciences", 6, 10) %>%
-  pack_rows("Physical Sciences", 11, 20) %>%
-  pack_rows("Social Sciences", 21, 26) %>%
+  pack_rows(index = table(subject_table_$subject_area)) %>%
   kable_styling(latex_options = c("scale_down"))
 ```
 
