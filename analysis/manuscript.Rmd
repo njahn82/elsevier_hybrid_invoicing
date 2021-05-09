@@ -636,6 +636,7 @@ funder_overview_subject <- left_join(funder_shares, subject_all, by = "top_level
   relocate(Agreement, .after = Author) %>%
   arrange(desc(Author)) 
 
+# define heat-colors
 make_pal <- scales::col_numeric(
   palette  = c("white", "#fcde9c","#faa476","#f0746e","#e34f6f","#dc3977"),
   na.color = "#808080",
@@ -643,20 +644,36 @@ make_pal <- scales::col_numeric(
   alpha = FALSE,
   reverse = FALSE
 )
-
-funder_overview_subject %>%
-  mutate_at(3:6, function(x){
+# prepare row-wise grouping per subject area
+subject_table <- jn_subjects %>% 
+  distinct(subject_area, top_level) %>%
+  inner_join(funder_overview_subject, by = "top_level") %>%
+  mutate_at(4:7, function(x){
     round(x*100,0)
   }) %>%
-  mutate_at(3:6, function(x){
+  mutate_at(4:7, function(x){
     cell_spec(x, background = make_pal(x))}) %>%
-  kbl(booktabs = TRUE, "latex", format.args = list(big.mark = ","), digits = 1, escape = FALSE,
+  mutate_at(3, function(x){
+    cell_spec(x, background = make_pal(x))})
+  
+
+subject_table %>%
+  group_by(subject_area) %>%
+  arrange(top_level, .by_group = TRUE) %>% 
+  ungroup() %>%
+  select(-subject_area) %>%
+            kbl(booktabs = TRUE, "latex", format.args = list(big.mark = ","), digits = 1, escape = FALSE,
                   caption = "Invoice channels by discipline 2015-2019.",
                   position = "H",
       col.names = c("Subject", "OA articles", "Author", "Agreement", "Fee waived", "Other"),
        linesep = "",
       align = "lrrrrr") %>%
   add_header_above(c(" " = 2, "Invoice channel (in %)" = 4)) %>%
+  # manual, puh, not good 
+  pack_rows("Health Sciences", 1, 5) %>%
+  pack_rows("Life Sciences", 6, 10) %>%
+  pack_rows("Health Sciences", 11, 20) %>%
+  pack_rows("Health Sciences", 21, 26) %>%
   kable_styling(latex_options = c("scale_down"))
 ```
 
