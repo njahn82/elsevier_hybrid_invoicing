@@ -443,6 +443,11 @@ subject_all_years <- hybrid_subject %>%
   ungroup() %>%
   group_by(description) %>%
   filter(subject_area != "Multidisciplinary")
+# distinct journals per subject
+journals_per_subject <- subject_all_years %>%
+  summarise(n_journals = n_distinct(issn)) %>%
+  mutate(field_label = glue::glue("{description} (n={n_journals})"))
+  
 
 median_all <- subject_all_years %>% 
   ungroup() %>% 
@@ -467,11 +472,10 @@ Figure \ref{fig:oa_sub_uptake} presents the journals' five-year OA uptake groupe
 
 ```{r oa_sub_uptake, fig.cap='Open access (OA) uptake in Elsevier hybrid journals in percent grouped by subject area and field between 2015-19. Visualized as a box-and-whiskers plot limited to an OA share of 20\\%; the red line represents the overall median (2.5), jittered dots represent individual journals. Subject fields are ordered based on the median OA uptake.', fig.asp=1.3, out.width="90%"}
 # with labels
-subject_all_years <- 
-  inner_join(subject_all_years, subject_area_all_jn, by = "subject_area") %>%
-  mutate(subject_area = glue::glue("{subject_area} ({journals_n} Journals)"))
+subject_all_years_ <- 
+  inner_join(subject_all_years, journals_per_subject, by = "description") 
 
-p_subject <- ggplot(subject_all_years, aes(fct_reorder(description, n_oa / n, .fun = median), n_oa / n)) + 
+p_subject <- ggplot(subject_all_years_, aes(fct_reorder(field_label, n_oa / n, .fun = median), n_oa / n)) + 
   geom_boxplot(aes(color = subject_area)) +
   geom_jitter(alpha = .05, aes(color = subject_area), size = 1) +
   facet_wrap(~subject_area, scales = "free_y", nrow = 4) +
@@ -773,6 +777,19 @@ sponsor_country %>%
    kable_styling(latex_options = c("scale_down"))
 ```
 
+
+```{r}
+# sector/discipline
+hybrid_invoice %>%
+  filter(!is.na(`Primary research focus`)) %>%
+  count(Sector, `Primary research focus`) %>%
+  mutate(prop = n / sum(n) * 100) %>% 
+  pivot_wider(id_cols = c("Primary research focus"), names_from = Sector, values_from = n) %>%
+  kableExtra::kbl(booktabs = TRUE) %>%
+  kable_styling(latex_options = c("scale_down"))
+
+```
+
 ### Institutional ranking{.unnumbered} 
 
 ```{r open_apc_check}
@@ -842,6 +859,16 @@ ind_sponsor_df %>%
 ```
 
 The table also highlights the proportion of APC funding publicly disclosed through the Open APC initiative, showing higher disclosure rates for  funders with a large CC BY share. On the other hand, APCs that were invoiced as part of transformative agreements were not publicly shared.
+
+```{r ccby_vs_openapc}
+ggplot(ind_sponsor_df, aes(in_open_apc, cc_by, size = articles)) +
+  geom_point(alpha = 0.5) +
+  theme_minimal_grid() +
+  scale_x_continuous(limits = c(0,1), labels = scales::percent_format()) +
+  scale_y_continuous(limits = c(0,1), labels = scales::percent_format()) +
+  labs(y = "CC BY Share", x = "Spending info in Open APC", size = "Invoiced\nOA Articles") +
+  theme(legend.position="right", legend.justification = "right")
+```
 
 Figure \ref{fig:field_funder_matrix} shows the subject profile of OA sponsors based on to the journals’ subject fields of centrally invoiced articles. As expected, the figure shows that subject-specific funders, such as the British Engineering and Physical Sciences Research Council (EPSRC), tended to focus on a limited set of subject fields. In contrast, national consortia, such as VSNU and Norwegian Institutes (NO), financed OA articles  for a broader range of fields. However, within these consortia, the subject distribution also varied. VSNU OA spending, for example, had a strong focus on articles relating to medicine, environmental science, and energy, presumably reflecting disciplines with a generally strong publication output at Dutch universities. Norwegian universities mostly published hybrid OA in engineering, environmental science and agricultural and biological sciences journals.  
 
