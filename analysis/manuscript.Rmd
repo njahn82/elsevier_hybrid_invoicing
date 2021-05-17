@@ -521,8 +521,10 @@ ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = 0.2) +
 
 ```{r}
 # load eligible oa articles
-hybrid_volume <- readr::read_csv(here::here("data", "hybrid_articles.csv"))
-
+hybrid_volume <- readr::read_csv(here::here("data", "hybrid_articles.csv")) 
+# add open apc info
+hybrid_volume <- hybrid_volume %>%
+      mutate(in_open_apc = tolower(doi) %in% tolower(o_apc$doi))
 # aggregate data
 sponsored_articles <- hybrid_volume %>%
   mutate(oa_sponsor_type = ifelse(is.na(oa_sponsor_type), "unknown", oa_sponsor_type)) %>%
@@ -540,7 +542,7 @@ sponsored_art <- sponsored_articles %>%
   group_by(fct_source) %>% 
   summarise(nn = sum(n)) %>% 
   #mutate(cumsum = cumsum(nn)) %>% 
-  mutate(prop = nn / sum(nn) * 100) %>%
+  mutate(prop = nn / sum(nn) * 100)  %>%
  # mutate(cumprop = cumsum(prop)) %>%
   adorn_totals("row")
 ```
@@ -691,7 +693,7 @@ hybrid_invoice <- hybrid_volume %>%
 sponsor_df <- hybrid_invoice %>% 
 #  filter(!is.na(Country)) %>% 
   # manual changes
-  mutate(Country = ifelse(grepl("European", oa_sponsor_name), "European Union", Country)) %>%
+  mutate(Country = ifelse(grepl("EU", Country), "European Union", Country)) %>%
   mutate(Country = ifelse(Country == "Multinational", "Other", Country)) %>%
   mutate(Country = ifelse(is.na(Country), "Other", Country)) %>%
   mutate(country_factor = fct_lump(Country, prop = 0.025)) %>%
