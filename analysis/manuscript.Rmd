@@ -251,8 +251,7 @@ OA using the XML node \texttt{openArchiveArticle}, which indicates if an article
 uptake of hybrid OA. Moreover, we obtained the invoice channels and recipients of hybrid OA APCs. Using the \texttt{openaccessSponsorType} node, we distinguished between four invoice channels, including
 invoices billed to authors, as part of publishing
 agreements with funding bodies (cf. @Els_Agreements), exempted through fee waivers (e.g., in ``cases of genuine need'' or due to
-society or university sponsorships, cf.~Elsevier,
-n.d.-c), and other types not
+society or university sponsorships, cf. @Els_Pricing), and other types not
 specified by Elsevier. Finally, when hybrid APCs were invoiced as part
 of agreements, we identified invoice recipients through the
 \texttt{openaccessSponsorName} node. It is worth noting that while this article focuses on OA articles published in hybrid journals, the same data is also available for articles published in full OA journals. Elsevier does not provide the invoiced APC in either case.
@@ -479,9 +478,13 @@ perc_df <- hybrid_oa_volume %>%
   ungroup()
 ```
 
-Figure \ref{fig:boxuptake} presents the hybrid OA uptake by year, showing considerable variation among Elsevier's hybrid journals. The box-and-whiskers plot visualizes the median hybrid OA uptake (horizontal line inside the box), the range of the majority of journals (the box), and individual outliers (dots). Notably, the upper quartiles and whiskers stretch farther over the years, which indicates that the range of uptake among journals with an above-average proportion of OA articles increased over the years. Nevertheless, the prevalence of hybrid OA remained relatively low; in 2019, 95% of Elsevier hybrid journals published ≤`r perc_df %>% filter(issued_year == 2019) %>% pull(p_95) * 100`% of their articles OA.
+Table \ref{tab:overview} also shows that the average OA share per journal was higher than the overall percentage. To consider these variations across journals, Figure \ref{fig:boxuptake} illustrates the range of OA uptake rates as a box-and-whiskers plot by year. The bold line shows the median OA prevalence across journals, which slightly rose from `r filter(perc_df, issued_year == 2015) %>% pull(median) * 100`% in 2015 to `r filter(perc_df, issued_year == 2019) %>% pull(median) * 100`% in 2019}. Notably, the upper quartiles and
+whiskers stretch farther over the years, which indicates that the range
+of uptake among journals with an above-average proportion of OA articles
+increased over the years. Nevertheless, the prevalence of hybrid OA
+remained relatively low; in 2019, 95% of Elsevier hybrid journals published ≤`r perc_df %>% filter(issued_year == 2019) %>% pull(p_95) * 100`% of their articles OA.
 
-```{r boxuptake, fig.cap = "Open access uptake per Elsevier hybrid journal in percent by year, visualized as box-and-whiskers plot. The Y-axis is limited to an open access share of 20\\%."}
+```{r boxuptake, fig.cap = "Open Access Uptake per Elsevier Hybrid Journal (Per Year)."}
 hybrid_oa_volume %>%
   mutate(prop = oa / articles) %>%
   filter(oa > 0) %>%
@@ -495,7 +498,6 @@ ggplot(aes(factor(issued_year), prop)) +
        y = "Hybrid OA Uptake")
 ```
 
-### Share of the Total Volume published in OA{.unnumbered}
 
 ```{r oa_volume}
 # see analysis/006_license.Rmd how the data was obtained
@@ -522,9 +524,9 @@ summary_oa_type <-
 mirror_jn <- readr::read_csv(here::here("data", "x_journals_volume.csv"))
 ```
 
-During the same period, Elsevier published `r all_oa` OA articles in total (i.e., in hybrid and full OA journals), representing `r all_oa / all_els * 100`% of the total article volume (n=`r all_els`). Looking at Figure \ref{fig:oa_volume_fig}, it is apparent that the OA article volume of hybrid journals (n=`r filter(summary_oa_type, type == "hybrid_immediate_articles") %>% pull(n)`; `r filter(summary_oa_type, type == "hybrid_immediate_articles") %>% pull(prop) * 100`%) lagged behind that of Elsevier's Open Archive program (n=`r filter(summary_oa_type, type == "hybrid_delayed_articles") %>% pull(n)`; `r filter(summary_oa_type, type == "hybrid_delayed_articles") %>% pull(prop) * 100`%) and full OA journals (n=`r filter(summary_oa_type, type == "full_oa") %>% pull(n)`; `r filter(summary_oa_type, type == "full_oa") %>% pull(prop) * 100`%), which included `r sum(mirror_jn$all_articles)` articles published in `r length(unique(mirror_jn$container_title))` mirror journals. 
+During the same period, Elsevier published OA to `r all_oa` articles in total (i.e., full, hybrid, and delayed OA combined), representing `r all_oa / all_els * 100`% of the total article volume (n=`r all_els`). Looking at Figure \ref{fig:oa_volume_fig}, it is apparent that the OA article volume of hybrid journals (n=`r filter(summary_oa_type, type == "hybrid_immediate_articles") %>% pull(n)`; `r filter(summary_oa_type, type == "hybrid_immediate_articles") %>% pull(prop) * 100`%) lagged delayed OA (n=`r filter(summary_oa_type, type == "hybrid_delayed_articles") %>% pull(n)`; `r filter(summary_oa_type, type == "hybrid_delayed_articles") %>% pull(prop) * 100`%) and full OA journals (n=`r filter(summary_oa_type, type == "full_oa") %>% pull(n)`; `r filter(summary_oa_type, type == "full_oa") %>% pull(prop) * 100`%), which included `r sum(mirror_jn$all_articles)` articles published in `r length(unique(mirror_jn$container_title))` mirror journals. 
 
-```{r oa_volume_fig, fig.cap="Open Access (OA) in Elsevier journals in terms of article volume between 2015-2019. Figure A presents the aggregated OA article volume of Elsevier journals from 2015-2019 by OA type. Figure B presents the share of OA articles relative to Elsevier's overall article output by OA type and open content license from 2015-2019."}
+```{r oa_volume_fig, fig.cap="Elsevier OA Article Volume 2015-2019 by (A) OA Type and (B) Open Content License."}
 # see analysis/006_license.Rmd how the figure was created
 
 knitr::include_graphics(here::here("figure", "license_portfolio.png"))
@@ -540,7 +542,7 @@ cc_by_by_type <- license_df %>%
   filter(license_code == "CC BY")
 ```
 
-As far as we observed, OA articles in Elsevier hybrid journals were published under two possible CC licenses--CC BY or CC BY-NC-ND. CC BY allows others to distribute, remix, adapt, and build upon the licensed work, including for commercial purposes, as long as the original author is credited. In contrast, CC BY-NC-ND is less permissive as it prohibits commercial reuse and derivatives. In the five-year period from 2015-2019, the proportion of hybrid OA articles published under a CC BY-NC-ND license marginally increased and maintained a greater share than that of CC BY (see Figure \ref{fig:oa_volume_fig}-B). Interestingly, Figure \ref{fig:oa_volume_fig}-B also reveals that hybrid journals had the highest number and proportion of openly available articles licensed under CC BY (n=`r filter(cc_by_by_type, type == "hybrid_immediate_articles") %>% pull(n)`; `r filter(cc_by_by_type, type == "hybrid_immediate_articles") %>% pull(prop) *100`%) compared to full OA journals  (n=`r filter(cc_by_by_type, type == "full_oa") %>% pull(n)`; `r filter(cc_by_by_type, type == "full_oa") %>% pull(prop) *100`%) and Elsevier's delayed OA program (n=`r filter(cc_by_by_type, type == "hybrid_delayed_articles") %>% pull(n)`; `r filter(cc_by_by_type, type == "hybrid_delayed_articles") %>% pull(prop) *100`%) . Most  delayed OA articles were provided under an Elsevier user license (Els-User), which prohibits reuse for commercial purposes. 
+As far as we observed, OA articles in Elsevier hybrid journals were published under two possible CC licenses--CC BY or CC BY-NC-ND. CC BY allows others to distribute, remix, adapt, and build upon the licensed work, including for commercial purposes, as long as the original author is credited. In contrast, CC BY-NC-ND is less permissive as it prohibits commercial reuse and derivatives. In the five-year period from 2015-2019, the proportion of hybrid OA articles published under a CC BY-NC-ND license marginally increased and maintained a greater share than that of CC BY (see Figure \ref{fig:oa_volume_fig}-B). Interestingly, Figure \ref{fig:oa_volume_fig}-B also reveals that hybrid journals had the highest number and proportion of openly available articles licensed under CC BY (n=`r filter(cc_by_by_type, type == "hybrid_immediate_articles") %>% pull(n)`; `r filter(cc_by_by_type, type == "hybrid_immediate_articles") %>% pull(prop) *100`%) compared to full OA journals  (n=`r filter(cc_by_by_type, type == "full_oa") %>% pull(n)`; `r filter(cc_by_by_type, type == "full_oa") %>% pull(prop) *100`%) and Elsevier's delayed OA program (n=`r filter(cc_by_by_type, type == "hybrid_delayed_articles") %>% pull(n)`; `r filter(cc_by_by_type, type == "hybrid_delayed_articles") %>% pull(prop) *100`%) . Most  delayed OA articles were provided under an Elsevier user license (Els-User), which prohibits reuse for commercial purposes and redistribution. 
 
 ### Subject Area and Field{.unnumbered}
 
@@ -575,7 +577,14 @@ subject_area_all_article <- subject_hybrid %>%
   arrange(desc(articles_frac))
 ```
 
-Next, we present disciplinary variations in hybrid OA. Table \ref{tab:subject_area_table} presents the high-level findings by AJSC subject area. In the five-year period we studied, the physical sciences (`r filter(subject_area_all_jn, subject_area == "Physical Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Physical Sciences") %>% pull(articles_n)` OA articles) and health sciences (`r filter(subject_area_all_jn, subject_area == "Health Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Health Sciences") %>% pull(articles_n)` OA articles) were the most prevalent in terms of hybrid journals with at least one OA article.  In terms of article volume, most OA articles were published in hybrid journals belonging to the life sciences (`r filter(subject_area_all_jn, subject_area == "Life Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Life Sciences") %>% pull(articles_n)` OA articles), while social sciences  (`r filter(subject_area_all_jn, subject_area == "Social Sciences") %>% pull(journals_n)`  hybrid journals, `r filter(subject_area_all_article, subject_area == "Social Sciences") %>% pull(articles_n)` articles) journals published the lowest number of OA articles. However, it is important to note that there is a large overlap between the journals’ subject areas. Therefore, Table  \ref{tab:subject_area_table} also assigns hybrid journals and OA articles fractionally to a subject area and compares it to the full counting, where journals assigned more than one subject in the AJSC classification were counted once for each field. For the remaining results, we only present the full counting.
+Next, we present the hybrid OA uptake of different disciplines. Table
+\ref{tab:subject_area_table} presents the high-level findings by ASJC
+subject area. Between 2015 and 2019, the physical sciences
+(`r filter(subject_area_all_jn, subject_area == "Physical Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Physical Sciences") %>% pull(articles_n)` OA articles) and health sciences  (`r filter(subject_area_all_jn, subject_area == "Health Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Health Sciences") %>% pull(articles_n)` OA articles) recorded the most
+hybrid journals with at least one OA article. However,
+the life sciences ((`r filter(subject_area_all_jn, subject_area == "Life Sciences") %>% pull(journals_n)` hybrid journals, `r filter(subject_area_all_article, subject_area == "Life Sciences") %>% pull(articles_n)` OA articles) published the most hybrid OA articles, while the
+social sciences published the least (`r filter(subject_area_all_jn, subject_area == "Social Sciences") %>% pull(journals_n)`  hybrid journals, `r filter(subject_area_all_article, subject_area == "Social Sciences") %>% pull(articles_n)` articles). It is important to
+note, though, that there is a large overlap between the journals' subject areas. Therefore, Table \ref{tab:subject_area_table} also presents fractional counts for hybrid journals and OA articles, which equally weights counting with respect to the total number of ASJC subject areas a journal belongs to. Journals with multiple ASJC codes that are members of the same subject area were counted once. For the remaining results, we only present the full counting.
 
 ```{r subject_area_table}
 # join
@@ -585,7 +594,7 @@ inner_join(subject_area_all_jn, subject_area_all_article, by = "subject_area") %
   filter(subject_area != "Multidisciplinary", !is.na(subject_area)) %>% 
   mutate(subject_area = stringr::str_to_sentence(subject_area)) %>%
   kbl(booktabs = TRUE, col.names = c("Subject area", "Journals", "OA articles", "Journals", "OA articles"),
-      caption = "Subject area overview using full and fractional counting. Table reports the number of Elsevier hybrid journals with at least one open access (OA) article, and OA articles published from 2015-2019. One multidisciplinary with 61 OA articles and 11 journals with 37 OA articles that  could not be matched to the Scopus Source Title list used to obtain ASJC codes are not included.",
+      caption = "Full and Fractional Counting of Subject Areas (2015-2019).",
       format.args = list(big.mark = ",")) %>%
   add_header_above(c(" " = 1, "Full counting" = 2, "Fractional counting" = 2)) %>%
   kable_styling() 
@@ -630,9 +639,9 @@ oa_per_subject_rank <- hybrid_subject %>%
   arrange(desc(median_prop))
 ```
 
-Figure \ref{fig:oa_sub_uptake} presents the journals' five-year OA uptake grouped by subject area and field and in comparison to the overall median (Mdn= `r median_all * 100`; excluding one journal coded as multidisciplinary). The box plot reveals some variation between the subject areas. Notably, with the exception of environmental science and earth and planetary sciences, journals from the physical sciences show a lower median proportion of hybrid OA articles, whereas most life sciences and social sciences journals ranked above average. Figure X also shows large variations among the 26 subject fields, with the highest OA rates in immunology and microbiology (Mdn=`r filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop)*100`), environmental science (Mdn=`r filter(oa_per_subject_rank, description == "Environmental Science") %>% pull(median_prop)*100`), and neuroscience (Mdn=`r filter(oa_per_subject_rank, description == "Neuroscience") %>% pull(median_prop)*100`), whilst  chemistry (Mdn=`r filter(oa_per_subject_rank, description == "Chemistry") %>% pull(median_prop)*100`), materials science (Mdn=`r filter(oa_per_subject_rank, description == "Materials Science") %>% pull(median_prop)*100`), and dentistry (Mdn=`r filter(oa_per_subject_rank, description == "Dentistry") %>% pull(median_prop)*100`) recorded the lowest OA rate. 
+Figure \ref{fig:oa_sub_uptake} presents the journals' five-year OA uptake grouped by subject area and field and in comparison to the overall median (Mdn= `r median_all * 100`; excluding one journal coded as multidisciplinary). The box plot reveals some variation between the subject areas. Notably, with the exception of environmental science and earth and planetary sciences, journals from the physical sciences show a lower median proportion of hybrid OA articles, whereas most life sciences and social sciences journals ranked above average. Figure \ref{fig:oa_sub_uptake}  also shows large variations among the 26 subject fields, with the highest OA rates in immunology and microbiology (Mdn=`r filter(oa_per_subject_rank, description == "Immunology and Microbiology") %>% pull(median_prop)*100`), environmental science (Mdn=`r filter(oa_per_subject_rank, description == "Environmental Science") %>% pull(median_prop)*100`), and neuroscience (Mdn=`r filter(oa_per_subject_rank, description == "Neuroscience") %>% pull(median_prop)*100`), whilst  chemistry (Mdn=`r filter(oa_per_subject_rank, description == "Chemistry") %>% pull(median_prop)*100`), materials science (Mdn=`r filter(oa_per_subject_rank, description == "Materials Science") %>% pull(median_prop)*100`), and dentistry (Mdn=`r filter(oa_per_subject_rank, description == "Dentistry") %>% pull(median_prop)*100`) recorded the lowest OA rate. 
 
-```{r oa_sub_uptake, fig.cap='Open access (OA) uptake in Elsevier hybrid journals in percent grouped by subject area and field between 2015-19. Visualized as a box-and-whiskers plot limited to an OA share of 20\\%; the red line represents the overall median (2.5), jittered dots represent individual journals. Subject fields are ordered based on the median OA uptake.', fig.asp=1.3, out.width="90%"}
+```{r oa_sub_uptake, fig.cap='OA Uptake in Elsevier Hybrid Journals by Subject Area and Field (2015-2019).', fig.asp=1.3, out.width="90%"}
 # with labels
 subject_all_years_ <- 
   inner_join(subject_all_years, journals_per_subject, by = "description") 
@@ -655,27 +664,7 @@ p_subject <- ggplot(subject_all_years_, aes(fct_reorder(field_label, n_oa / n, .
 p_subject
 ```
 
-### Citation Impact{.unnumbered}
 
-```{r}
-hybrid_subject_19 <- hybrid_subject %>% 
-  mutate(prop = oa /articles) %>%
-  filter(issued_year == "2019", !is.na(percentile)
-         , prop != 0) %>%
-  distinct(issn, prop, percentile, snip, sjr)
-
-cor_test_res <- cor.test(hybrid_subject_19$prop, hybrid_subject_19$percentile, method = "spearman") 
-```
-
-Furthermore, we were interested in the relationship between the journals' field-specific impact and their OA uptake. Spearman's rho correlation coefficient was used to assess the relationship between the 2019 Source Normalized Impact per Paper (SNIP) value calculated by Scopus and the journals' OA uptake that year. Considering only journals with at least one OA article, we found a weak but positive correlation between journal impact and OA uptake ($r_s$=`r as.character(round(cor_test_res$estimate,4))`, $p<0.001$), suggesting that the relationship is not very strong, based on our data (see Figure \ref{fig:sniptest}).
-
-```{r sniptest, fig.cap="Source Normalized Impact per Paper (SNIP) versus open access (OA) uptake 2019. Each dot represents a hybrid journal with at least one published OA article in 2019. There is only a weak, positive correlation between the two variables ($r_s$=0.1679, $p<0.001$)"}
-ggplot(hybrid_subject_19, aes(prop, snip)) + geom_point(alpha = 0.2) + 
-  geom_smooth(method = "loess", se = TRUE) +
-  coord_cartesian(xlim = c(0., 0.7), ylim = c(0.5, 6)) +
-  labs(x = "Hybrid OA Uptake", y = "SNIP") +
-  theme_cowplot()
-```
 
 ## Invoicing for Hybrid Open Access{.unnumbered}
 
@@ -709,12 +698,12 @@ sponsored_art <- sponsored_articles %>%
   adorn_totals("row")
 ```
 
-As can be seen from Table \ref{tab:invoicing_overview}, hybrid OA APC were most often invoiced to authors (n=`r filter(sponsored_art, fct_source == "Author") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Author") %>% pull(prop)`%) and to a lesser extent as part of agreements (n=`r filter(sponsored_art, fct_source == "Agreement") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Agreement") %>% pull(prop)`%). Interestingly, we also found a small number of cases where hybrid APCs were waived (n=`r filter(sponsored_art, fct_source == "Fee waived") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Fee waived") %>% pull(prop)`%).
+As can be seen from Table \ref{tab:invoicing_overview}, hybrid OA APCs were most often invoiced to authors (n=`r filter(sponsored_art, fct_source == "Author") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Author") %>% pull(prop)`%) and to a lesser extent as part of agreements (n=`r filter(sponsored_art, fct_source == "Agreement") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Agreement") %>% pull(prop)`%). Interestingly, we also found a small number of cases where hybrid APCs were waived (n=`r filter(sponsored_art, fct_source == "Fee waived") %>% pull(nn)`; `r filter(sponsored_art, fct_source == "Fee waived") %>% pull(prop)`%). A brief note of caution regarding APCs invoiced to the authors is due here: Although author invoicing was indicated in the \texttt{openaccessSponsorType} article metadata field used for this study, this does not necessarily mean that authors paid the APC out of their own pocket. Rather, this implies that the authors' institution or funder did not have a central invoicing agreement in place at the time of publication.
 
 ```{r invoicing_overview}
 sponsored_art %>% 
   kbl(booktabs = TRUE, col.names = c("Invoicing channel", "Hybrid OA articles (n)", "Percentage"),
-      caption = "Invoice channels for hybrid OA in Elsevier journals between 2015-19.", digits = 1,
+      caption = "Invoice Channels for Elsevier Hybrid OA Articles (2015-2019).", digits = 1,
       format.args = list(big.mark = ",")) %>%
   kable_styling() %>%
   row_spec(4, hline_after = TRUE)
@@ -730,10 +719,11 @@ sponsored_articles_prop <- sponsored_articles %>%
 ```
 
 
-Figure \ref{fig:invoiceoverview} illustrates that over the years, Elsevier has constantly invoiced hybrid OA APCs directly to authors compared to research funders or academic consortia ("Agreement"). Between 2015 and 2019, the proportion of author-invoicing increased from `r filter(sponsored_articles_prop, issued_year == 2015, fct_source == "Author") %>% pull(perc)`% to `r filter(sponsored_articles_prop, issued_year == 2019, fct_source == "Author") %>% pull(perc)`%, while the share of invoicing through agreements slightly changed from `r filter(sponsored_articles_prop, issued_year == 2015, fct_source == "Agreement") %>% pull(perc)`% to `r filter(sponsored_articles_prop, issued_year == 2019, fct_source == "Agreement") %>% pull(perc)`%. Also, the share of fee-waived articles remained relatively stable, but we found different types of waivers. Around `r filter(els_waived_df, !is.na(oa_sponsor_name)) %>% distinct(doi) %>% nrow() / nrow(els_waived_df)* 100`% of fee waivers were linked to an OA sponsor, which indicates that a third party paid the APC. For instance, `r filter(els_waived_df, oa_sponsor_name == "Académie des Sciences") %>% distinct(doi) %>% nrow()` waivers were linked to the French Académie des Sciences, presumably covering OA publication in its society journals for affiliated authors. The remaining `r filter(els_waived_df, is.na(oa_sponsor_name)) %>% distinct(doi) %>% nrow() / nrow(els_waived_df)*100`% of waived articles did not disclose any OA sponsor. Moreover, Figure \ref{fig:invoiceoverview} compares the invoicing channels based on open content license variants. When Elsevier invoiced authors directly, most OA articles in hybrid journals were published under a non-commercial license (n=`r filter(sponsored_articles, fct_source == "Author", cc_norm == "CC BY-NC-ND") %>% pull(n) %>% sum()`; `r filter(sponsored_articles, fct_source == "Author", cc_norm == "CC BY-NC-ND") %>% pull(n) %>% sum() / filter(sponsored_articles, fct_source == "Author") %>% pull(n) %>% sum()* 100`%), whereas most articles billed as part of agreements were licensed under the more permissive CC BY license (n=`r filter(sponsored_articles, fct_source == "Agreement", cc_norm == "CC BY") %>% pull(n) %>% sum()`; `r filter(sponsored_articles, fct_source == "Agreement", cc_norm == "CC BY") %>% pull(n) %>% sum() / filter(sponsored_articles, fct_source == "Agreement") %>% pull(n) %>% sum() * 100`%).
+Figure \ref{fig:invoiceoverview} illustrates that over the years, Elsevier has consistently invoiced more authors than funders or academic consortia ("Agreement"), although both shares increased. In particular, the proportion of author-invoicing increased from `r filter(sponsored_articles_prop, issued_year == 2015, fct_source == "Author") %>% pull(perc)`% to `r filter(sponsored_articles_prop, issued_year == 2019, fct_source == "Author") %>% pull(perc)`%, whereas the share of invoicing through agreements slightly
+increased from `r filter(sponsored_articles_prop, issued_year == 2015, fct_source == "Agreement") %>% pull(perc)`% to `r filter(sponsored_articles_prop, issued_year == 2019, fct_source == "Agreement") %>% pull(perc)`%, respectively. The share of fee-waived articles also remained relatively stable, but we found different types of waivers. Around `r filter(els_waived_df, !is.na(oa_sponsor_name)) %>% distinct(doi) %>% nrow() / nrow(els_waived_df)* 100`% of fee waivers were linked to an OA sponsor, which indicates that a third party paid the APC. For instance, `r filter(els_waived_df, oa_sponsor_name == "Académie des Sciences") %>% distinct(doi) %>% nrow()` waivers were linked to the French Académie des Sciences, presumably covering OA publication in its society journals for affiliated authors. The remaining `r filter(els_waived_df, is.na(oa_sponsor_name)) %>% distinct(doi) %>% nrow() / nrow(els_waived_df)*100`% of waived articles did not disclose any OA sponsor. Moreover, Figure \ref{fig:invoiceoverview} compares the invoicing channels based on open content license variants. When Elsevier invoiced authors directly, most OA articles in hybrid journals were published under a non-commercial license (n=`r filter(sponsored_articles, fct_source == "Author", cc_norm == "CC BY-NC-ND") %>% pull(n) %>% sum()`; `r filter(sponsored_articles, fct_source == "Author", cc_norm == "CC BY-NC-ND") %>% pull(n) %>% sum() / filter(sponsored_articles, fct_source == "Author") %>% pull(n) %>% sum()* 100`%), whereas most articles billed as part of agreements were licensed under the more permissive CC BY license (n=`r filter(sponsored_articles, fct_source == "Agreement", cc_norm == "CC BY") %>% pull(n) %>% sum()`; `r filter(sponsored_articles, fct_source == "Agreement", cc_norm == "CC BY") %>% pull(n) %>% sum() / filter(sponsored_articles, fct_source == "Agreement") %>% pull(n) %>% sum() * 100`%).
 
 
-```{r invoiceoverview, fig.cap="Development of fee-based open access (OA) publishing in Elsevier hybrid journals by invoice channel Colored bars represent the share of OA articles invoiced to authors, agreements, or waived, grouped by Creative Commons license variant. Grey bars show the total number of hybrid OA articles published in Elsevier journals from 2015-2019."}
+```{r invoiceoverview, fig.cap="Elsevier Hybrid OA Articles by Invoice Channel and CC License (Per Year)."}
 # plot
 sponsored_articles %>%
   mutate(fct_source = stringr::str_to_title(fct_source)) %>%
@@ -761,7 +751,17 @@ sponsored_articles %>%
 ```
 
 
-We also observed large differences in OA invoicing among subject fields. Table \ref{tab:invocing_by_subject} shows the number of OA articles by subject field and invoice channel. For articles in nursing, decision dciences, and pharmacology, toxicology and pharmaceutics, Elsevier predominantly invoiced authors, whereas most energy and chemical engineering articles were invoiced through agreements. Likewise, the majority of articles in materials science, chemistry and physics and astronomy were not invoiced to authors but facilitated through agreements or waived. The large share of waived APCs in physics and astronomy can be attributed to a single 2015 issue of Nuclear and Particle Physics Proceedings, which offered sponsored OA. 
+We also observed large differences in OA invoicing among subject fields.
+Table \ref{tab:invocing_by_subject} shows the number of OA articles by
+subject field and invoice channel. For articles in nursing, decision
+sciences, and pharmacology, toxicology and pharmaceutics, Elsevier
+predominantly invoiced authors, whereas most energy and chemical
+engineering articles were invoiced through agreements. Likewise, the
+majority of articles in materials science, chemistry and physics and
+astronomy were not invoiced to authors but facilitated through
+agreements or waived. The large share of waived APCs in physics and
+astronomy can be attributed to a single 2015 issue of Nuclear and
+Particle Physics Proceedings. 
 
 ```{r invocing_by_subject, results='asis'}
 hybrid_jn_volume <- hybrid_oa_volume %>%
@@ -863,9 +863,15 @@ sponsor_df <- hybrid_invoice %>%
   mutate(country_factor = fct_relevel(country_factor, "Other", after = Inf))
 ```
 
-Elsevier’s data offer more insight into invoicing. Overall, we identified 62 sponsoring institutions and organizations that received invoices for hybrid publishing fees as part of an agreement with Elsevier. We found that, by a large margin, most invoices were issued to UK-based research funders and institutions (n=`r filter(sponsor_df, country_factor == "United Kingdom") %>% distinct(doi) %>% nrow()`; `r filter(sponsor_df, country_factor == "United Kingdom") %>% distinct(doi) %>% nrow() / sponsor_df %>% distinct(doi) %>% nrow()* 100`%), followed by the Netherlands (n=`r filter(sponsor_df, country_factor == "The Netherlands") %>% distinct(doi) %>% nrow()`; `r filter(sponsor_df, country_factor == "The Netherlands") %>% distinct(doi) %>% nrow() / sponsor_df %>% distinct(doi) %>% nrow()* 100`%) and the European Union (n=`r filter(sponsor_df, country_factor == "European Union") %>% distinct(doi) %>% nrow()`; `r filter(sponsor_df, country_factor == "European Union") %>% distinct(doi) %>% nrow() / sponsor_df %>% distinct(doi) %>% nrow()* 100`%; EU). Figure \ref{fig:invoice_sponsor_country} provides a closer look at the geographical distribution by license prevalence, highlighting the dominance of CC -BY licensed articles invoiced to sponsoring institutions in the UK, the United States, and, to a much lesser extent, the Netherlands. In contrast, the majority of articles invoiced to sponsoring institutions from Norway or representing the EU were published under a non-commercial license.
+Elsevier’s data offer more insight into invoicing. Overall, we identified `r filter(sponsor_df, !is.na(oa_sponsor_cleaned)) %>% distinct(oa_sponsor_cleaned) %>% nrow()` academic institutions and funders that received
+invoices as part of publishing agreements. By a large margin, most invoices were issued to
+UK-based research funders and institutions (n=`r filter(sponsor_df, country_factor == "United Kingdom") %>% distinct(doi) %>% nrow()`; `r filter(sponsor_df, country_factor == "United Kingdom") %>% distinct(doi) %>% nrow() / sponsor_df %>% distinct(doi) %>% nrow()* 100`%), followed by the Netherlands (n=`r filter(sponsor_df, country_factor == "The Netherlands") %>% distinct(doi) %>% nrow()`; `r filter(sponsor_df, country_factor == "The Netherlands") %>% distinct(doi) %>% nrow() / sponsor_df %>% distinct(doi) %>% nrow()* 100`%) and the European Union (n=`r filter(sponsor_df, country_factor == "European Union") %>% distinct(doi) %>% nrow()`; `r filter(sponsor_df, country_factor == "European Union") %>% distinct(doi) %>% nrow() / sponsor_df %>% distinct(doi) %>% nrow()* 100`%; EU), which in the context of this paper refers to institutions established by the European Commission, and not the  individual member states. Invoicing data comprises two EU institutions, the research funder European Research Council and the health agency European Center for Disease Prevention and Control (ECDS). Figure \ref{fig:invoice_sponsor_country} presents the geographical distribution by license prevalence,
+highlighting the dominance of CC BY licensed articles invoiced to institutions in the UK, the United States (US), and, to a much
+lesser extent, the Netherlands. In contrast, most articles
+invoiced to institutions from Norway or representing the EU
+were published under a non-commercial license.
 
-```{r invoice_sponsor_country, fig.cap="Number of centrally invoiced OA articles in Elsevier hybrid journals by country of recipient. Colored bars represent the Creative Commons (CC) license variant under which the article was published between 2015 and 2019."}
+```{r invoice_sponsor_country, fig.cap="Centrally Invoiced Elsevier Hybrid OA Articles by Country and CC License (2015-2019)."}
 sponsor_df %>%
   group_by(country_factor, cc_norm) %>% 
   summarise(n = n_distinct(doi)) %>%
@@ -885,10 +891,19 @@ sponsor_df %>%
   theme(legend.position="top", legend.justification = "right")
 ```
 
-Figure \ref{fig:sponsor_sector} shows the yearly distribution of central invoiced articles by year and institutional sector. While UK-based OA invoices were mainly addressed to discipline-specific governmental and non-profit research funders, invoices to the Netherlands and Norway were issued to national academic consortia representing the higher education sector. In 2019, Elsevier also launched similar agreements in countries with lower publication output including Hungary and Poland. Besides, we found that invoiced funding bodies from the UK and the US mainly represented discipline-specific funders, while the invoiced funding bodies from other countries were focused on a broad variety of disciplines (see Table \ref{tab:subject_profile}).
+Figure \ref{fig:sponsor_sector} shows the yearly distribution of centrally
+invoiced articles by year and institutional sector. While UK-based OA
+invoices were mainly addressed to discipline-specific governmental and
+non-profit research funders, invoices to the Netherlands and Norway were
+issued to national academic consortia representing the higher education
+sector. In 2019, Elsevier also launched similar agreements in countries
+with lower publication output including Hungary and Poland. We
+found that invoice recipients from the UK and the US mainly
+represented discipline-specific funders, while invoice recipients from other countries focused on a broad variety of
+disciplines.
 
 
-```{r sponsor_sector, fig.cap=' Development of centrally invoiced OA articles in hybrid journals by country. Colored bars represent the institutional sector OA funding bodies belong to.'}
+```{r sponsor_sector, fig.cap='Centrally Invoiced Elsevier Hybrid OA Articles by Country and Sector (Per Year).'}
 sponsor_df %>%
   filter(!is.na(Sector)) %>%
   count(issued_year, Sector, country_factor) %>%
@@ -927,41 +942,18 @@ sponsor_country <- hybrid_invoice %>%
 ```
 
 
-```{r subject_profile}
-sponsor_country %>%
-  ungroup() %>%
-  pivot_wider(id_cols = c("country_factor"), names_from = `Primary research focus`, values_from = prop) %>%
-  mutate_all(~replace(., is.na(.), 0)) %>%
-  janitor::adorn_totals(c("col", "row")) %>%
-  mutate_if(is.numeric, ~paste0(., "%")) %>%
-  rename(`Country/Subject area` = country_factor) %>%
-  kableExtra::kbl(booktabs = TRUE,
-                  caption = " Relative subject profile of centrally invoiced OA funding bodies.", align = c("lrrrrrr")) %>%
-    row_spec(6:7, hline_after = TRUE) %>%
-   kable_styling(latex_options = c("scale_down"))
-```
-
-
-```{r}
-# sector/discipline
-hybrid_invoice %>%
-  filter(!is.na(`Primary research focus`)) %>%
-  count(Sector, `Primary research focus`) %>%
-  mutate(prop = n / sum(n) * 100) %>% 
-  pivot_wider(id_cols = c("Primary research focus"), names_from = Sector, values_from = n) %>%
-  kableExtra::kbl(booktabs = TRUE) %>%
-  kable_styling(latex_options = c("scale_down"))
-
-```
-
-### Institutional ranking{.unnumbered} 
-
 ```{r open_apc_check}
 hybrid_invoice <- hybrid_invoice %>%
   mutate(in_open_apc = tolower(doi) %in% tolower(o_apc$doi))
 ```
 
-Table \ref{tab:sponsor_top_10} presents the top ten of `r hybrid_invoice %>% filter(!is.na(oa_sponsor_cleaned)) %>% distinct(oa_sponsor_cleaned) %>% nrow()` sponsoring bodies in our sample. Together, they accounted for around 80% of centrally invoiced APCs. The table also highlights the number of distinct journals and the share of CC BY licensed articles. Notably, UK-based research funders and the US-based Bill and Melinda Gates Foundation mainly sponsored articles published under a CC BY license. In contrast, articles funded by VSNU, the European Research Council, and Norway Institutes had a much lower proportion of CC BY. 
+Table \ref{tab:sponsor_top_10} presents the top ten of `r hybrid_invoice %>% filter(!is.na(oa_sponsor_cleaned)) %>% distinct(oa_sponsor_cleaned) %>% nrow()` sponsoring bodies in our sample. Together, they accounted for around 80\% of
+centrally invoiced APCs. The table also highlights the number of
+distinct journals and the share of CC BY licensed articles. Notably,
+UK-based research funders and the US-based Bill and Melinda Gates
+Foundation mainly received invoices for CC BY licensed articles. In
+contrast, articles invoiced to VSNU, the European Research Council, and
+Norway Institutes had a much lower proportion of CC BY.
 
 ```{r, sponsor_top_10}
 hybrid_invoice_tt <- hybrid_invoice %>%
@@ -1016,7 +1008,7 @@ ind_sponsor_df %>%
       col.names = c("Hybrid OA sponsors", "Journals", "Articles", "\\%", "CC BY", "OAPC"),
       align = c("lrrrrr"),
       linesep = "",
-      caption = " Top 10 Elsevier hybrid OA sponsors by centrally invoiced articles 2015-2019.  The table furthermore presents the number of Elsevier hybrid journals with at least one invoiced article and two indicators of compliance: proportion of  CC BY licensed articles  and disclosed spending through the Open APC Initiative (OAPC.") %>%
+      caption = "Elsevier Hybrid OA Invoice Recipients  (2015-2019).") %>%
   row_spec(11:12, hline_after = TRUE) %>%
   add_header_above(c(" " = 4, "Compliance (in %)" = 2)) %>%
    kable_styling(latex_options = c("scale_down"))
@@ -1024,129 +1016,158 @@ ind_sponsor_df %>%
 
 The table also highlights the proportion of APC funding publicly disclosed through the Open APC initiative, showing higher disclosure rates for  funders with a large CC BY share. On the other hand, APCs that were invoiced as part of transformative agreements were not publicly shared.
 
-```{r ccby_vs_openapc}
-ggplot(ind_sponsor_df, aes(in_open_apc, cc_by, size = articles)) +
-  geom_point(alpha = 0.5) +
-  theme_minimal_grid() +
-  scale_x_continuous(limits = c(0,1), labels = scales::percent_format()) +
-  scale_y_continuous(limits = c(0,1), labels = scales::percent_format()) +
-  labs(y = "CC BY Share", x = "Spending info in Open APC", size = "Invoiced\nOA Articles") +
-  theme(legend.position="right", legend.justification = "right")
-```
-
-Figure \ref{fig:field_funder_matrix} shows the subject profile of OA sponsors based on to the journals’ subject fields of centrally invoiced articles. As expected, the figure shows that subject-specific funders, such as the British Engineering and Physical Sciences Research Council (EPSRC), tended to focus on a limited set of subject fields. In contrast, national consortia, such as VSNU and Norwegian Institutes (NO), financed OA articles  for a broader range of fields. However, within these consortia, the subject distribution also varied. VSNU OA spending, for example, had a strong focus on articles relating to medicine, environmental science, and energy, presumably reflecting disciplines with a generally strong publication output at Dutch universities. Norwegian universities mostly published hybrid OA in engineering, environmental science and agricultural and biological sciences journals.  
-
-```{r}
-#short funder labels
-funder_codes <- tribble(
-  ~oa_sponsor, ~oa_sponsor_short,
-  "Engineering and Physical Sciences Research Council", "EPSRC",
-  "VSNU", "VSNU",
-  "Wellcome Trust", "Wellcome",
-  "European Research Council", "ERC",
-  "Medical Research Council", "MRC",
-  "Natural Environment Research Council", "NERC",
-  "Biotechnology and Biological Sciences Research Council", "BBSRC",
-  "Bill & Melinda Gates Foundation", "Gates",
-  "Economic and Social Research Council", "ESRC",
-  "Norway Institutes", "NO",
-  "Other", "Other")
-```
-
-```{r field_funder_matrix, out.width="90%", fig.width=8, fig.height=12}
-field_funder <- hybrid_df %>%
-  filter(oa_sponsor_type == "FundingBody") %>%
-  left_join(funder_codes, by = c("oa_sponsor_name" = "oa_sponsor")) %>%
-  mutate(oa_sponsor = ifelse(is.na(oa_sponsor_short), "Other", oa_sponsor_short)) %>%
-  mutate(oa_sponsor = fct_infreq(oa_sponsor)) %>%
-  mutate(oa_sponsor = fct_lump_n(oa_sponsor, 10)) %>%
-  left_join(jn_subjects, by = "issn") %>%
-  filter(!is.na(top_level), top_level != "Multidisciplinary") %>%
-  group_by(oa_sponsor, top_level) %>%
-  summarise(n_oa_type = n_distinct(doi)) %>%
-  mutate(prop = n_oa_type / sum(n_oa_type)) %>%
-  mutate(oa_sponsor = fct_relevel(oa_sponsor, "Other", after = Inf))
-# plot
-pp <- ggplot(field_funder,
-       aes(
-         x = factor(oa_sponsor),
-         y = reorder(top_level, desc(top_level)),
-         colour = prop,
-         size = n_oa_type
-       )) +
-  geom_point() +
-  scale_color_viridis_c(
-    labels = scales::percent_format(accuracy = 5L),
-    option = "magma",
-    name = "Percentage per Funder",
-    breaks =  scales::extended_breaks(),
-    begin = 0.15,
-    end = 0.85
-  ) +
-  scale_size("OA Articles") +
-  scale_x_discrete(position = "top") +
-  labs(x = NULL, y = NULL) +
-  theme_minimal_grid(font_size = 12) +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    panel.background = element_blank()
-  ) +
-  theme(legend.position = "top", legend.justification = "right") +
-  theme(legend.direction = "horizontal", 
-        legend.box = "horizontal")
-ggsave(here::here("figure", "funder_subject.png"), pp, dpi = 300, width = 9.5, height = 9)
-```
-
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.95\textwidth]{../figure/funder_subject.png}
-
-}
-
-\caption{Top 10 Elsevier hybrid OA institutional invoice recipients in terms of articles published by journal subject. EPSRC, Engineering and Physical Sciences Research Council; VSNU, VSNU; Wellcome, Wellcome Trust; ERC, European Research Council; ERC, European Research Council; MRC, Medical Research Council; NERC, Natural Environment Research Council; BBSRC, Biotechnology and Biological Sciences Research Council; Gates, Bill and Melinda Gates Foundation; ESRC, Economic and Social Research Council; NO, Norway Institutes. }\label{fig:field_funder_matrix}
-\end{figure}
-
 # Discussion
 
-Over the last five years, Elsevier recorded growth in the uptake of hybrid OA for each of our three indicators: The number of hybrid OA articles published per year doubled, the number of hybrid journals with at least one OA article grew by 21%, and the share of hybrid OA articles relative to closed-accessed articles in these journals increased from 2.6% to 3.7%. As @Laakso_2016, we found only a weak relationship between citation metrics like the SNIP and hybrid OA uptake and observed differences in the uptake of hybrid OA among journal subject areas. In particular, we found the highest count of hybrid OA articles in physical sciences journals (see Table \ref{tab:subject_area_table}). This was followed by the life sciences and health sciences, whereas the social sciences had the lowest count of hybrid articles. This order mostly reflects the disciplines' overall publication output. According to the Open Science Monitor by the European Commission [@OS_Monitor], the physical sciences and mathematics publish the most articles, followed by the health sciences, life sciences, and social sciences and humanities. 
+From 2015-2019, Elsevier recorded growth in the uptake of
+hybrid OA: The number of hybrid OA
+articles published per year doubled, the number of hybrid journals with
+at least one OA article grew by 21\%, and the share of hybrid OA
+articles relative to closed-accessed articles in these journals
+increased from 2.6\% to 3.7\%. As  @Laakso_2016, we observed disciplinary differences. In particular, we found the highest count of hybrid OA
+articles in physical sciences journals (see Table
+\ref{tab:subject_area_table}). This was followed by the life sciences
+and health sciences, whereas the social sciences had the lowest count. This order mostly reflects the disciplines' overall
+publication output. According to the Open Science Monitor [@OS_Monitor], the physical sciences publish the
+most articles, followed by the health sciences, life sciences, and
+social sciences. 
 
-Such disciplinary differences in hybrid OA prevalence become more meaningful when considering the relative share of OA articles to closed-access articles. In line with previous research, we found that Elsevier journals from the life sciences and social sciences [@Jubb_2017; @Kramer_2018; @Laakso_2016] recorded greater than typical hybrid OA uptake, whereas physical sciences journals generally had a lower than typical uptake [@Kramer_2018; @Mart_n_Mart_n_2018; @Laakso_2016]. In a systematic review of OA publishing patterns, @Severin_2020 linked such disciplinary differences to socio-cultural and technological factors that shape publishing cultures and practices. Among other aspects, the authors pointed to the availability of prestigious journals, the possibility to provide OA through alternative routes, and ease of access to funding sources to cover publishing fees. As such, looking at hybrid OA uptake in isolation can only provide limited insight, so that placing it within the broader context of disciplinary publishing and OA practices is necessary. For instance, since many branches of the physical sciences have established self-archiving practices and the technical infrastructure to support these (e.g., the arXiv; @Severin_2020, @Bj_rk_2010, @Laakso_2016), researchers can provide OA through repositories (i.e., green OA), and indeed, according to the Open Science Monitor the physical sciences provide OA primarily through the green route (31.2% total OA share, 24% OA if only considering green OA). Hence, the low share of hybrid OA in our sample might be because physical scientists perceive much less of a need for hybrid OA. Further, @Severin_2020 note project-based funding structures enable OA publishing in fully OA and hybrid journals as they allow for easy integration of publishing costs. Since these funding structures are typical for the life sciences (ibid.), we would expect higher rates of OA. Data from the Open Science Monitor seems to support this notion as the life sciences record particularly high shares of full OA articles and comparatively high  shares of hybrid OA in some fields, such as biology and agricultural science. While we expected the observed hybrid OA shares for the life sciences and physical sciences, we were surprised by the high share of hybrid OA belonging to the AJSC subject area social sciences, which also includes the humanities, since articles "social scientists have reported to face significant difficulties in access to grant funding for [publication charges], as most research in the social sciences is not done by means of project-specific funding" @Severin_2020 [p. 15]. However, previous research has found comparatively low awareness and uptake of green OA among researchers in the  field [@Bj_rk_2010; @Creaser_2010], which might encourage hybrid OA uptake. Another possible explanation,is that Elsevier has a number of high prestigious social science and humanities journals [@Larivi_re_2015], which means that our findings are not representative of the general population of SSH journals. Likewise, this limitation could be extended to our findings in general that whilst not representative of the population of hybrid OA publishing, they provide valuable insight into a key player of scholarly publishing.
+Disciplinary differences in hybrid OA prevalence become more
+meaningful when considering the relative share of OA articles to
+closed-access articles. In line with previous research, we found that
+Elsevier journals from the life sciences and social sciences  [@Jubb_2017; @Kramer_2018; @Laakso_2016] recorded
+greater than typical hybrid OA uptake, whereas physical sciences
+journals generally had a lower than typical uptake [@Kramer_2018; @Mart_n_Mart_n_2018; @Laakso_2016]. In a
+systematic review of disciplinary OA publishing patterns, @Severin_2020
+highlighted the importance of socio-cultural and technological
+factors in shaping publishing cultures and practices.  For instance, since many
+branches of the physical sciences have established self-archiving
+practices [@Severin_2020, @Bj_rk_2010, @Laakso_2016], researchers can provide OA through repositories and might perceive
+much less of a need for hybrid OA. In contrast, hybrid OA in the life sciences could be enabled through project-based funding structures as they allow for easy integration of publishing costs @Severin_2020.
+On the other hand, the high hybrid OA uptake that we observed among the social sciences could point to the influential role of OA policies and invoicing agreements [@Huang_2020; @Larivi_re_2018]. While these aspects
+are important drivers of both full and hybrid OA, faculty members
+generally prioritize journal prestige and the journal impact factor
+ [@Niles_2020] in publishing decisions, which, in combination with
+the availability of OA funding, might encourage publishing hybrid OA
+[@van_der_graaf_maurits_2017]. 
 
-Finally, OA policies in favor of hybrid OA in combination with invoicing agreements with Elsevier might be a driver. For instance, we found that nearly half of articles in arts and humanities were facilitated through agreements, which was above-average. This is in line with previous research, suggesting that OA policies and funder mandates have a stronger effect on OA uptake than disciplinary publication cultures [@Huang_2020; @Larivi_re_2018].  While these aspects are important drivers of both full and hybrid OA, faculty members generally prioritize journal prestige and the journal impact factor [@Niles_2020] in publishing decisions, which, in combination with the availability of OA funding, might encourage publishing hybrid OA [@van_der_graaf_maurits_2017]. 
+Our invoicing data analysis found that most APCs were
+invoiced to the author (n=41,725; 58.2\%). However, it is important to
+emphasize although Elsevier's metadata classifies the sponsor type as
+``author'', this does not necessarily mean that authors paid for APCs themselves but rather that APCs were not invoiced
+through publishing agreements. It is possible that these APCs were covered through institutional funds or  research
+grants. This would align with a recent Springer Nature survey that found hybrid
+OA was predominantly supported through institutional and funder sources
+(71\%), followed by OA agreements (34\%), while only 6\% were paid from
+personal funds or savings [@Monaghan_2020]. 
+
+Further, we observed
+notable differences in licensing. Most
+hybrid OA articles invoiced to author were licensed under
+the more restrictive CC BY-NC-ND license. Previous research, while lacking dedicated
+studies on license selection,  suggests that authors tend to select more restrictive license variants when
+given a choice [@Fraser_2020; @Rowley_2017; @Van_Noorden_2013]. On the other hand, we found when hybrid OA was invoiced
+through agreements, most articles were licensed under the more liberal
+CC BY license. As several funding bodies mandate CC BY licenses,
+including the UK research funders that account for 62\% of our
+"agreement" subsample, this result is perhaps not surprising but
+suggests the effectiveness of such agreements.
+
+Based on our findings, around a third of the articles were invoiced
+ through OA agreements (e.g., research funders, national library
+consortia). The predominance of UK funding bodies in this subsample reiterates reports from previous
+studies that the UK's OA profile differs markedly from other countries
+(cf. @Jubb_2015; @Jubb_2017), pointing to the impact of science policy. To promote 
+OA, the UK implemented centralized APC funding
+and embraced hybrid OA as a transition model. Within five years of the
+publication of the Finch Report in 2012, the UK recorded an 18\%
+increase in immediate OA, coupled with a rise in hybrid OA from 2.7\% in
+2012 to 15.4\% of all articles in 2016 [@Jubb_2017], which can be
+attributed to the availability of funding from 
+RCUK. Indeed, RCUK block grants have been the largest single source of
+APC funds in the UK---the Wellcome Trust, and more recently
+transformative agreements [@Tickel_2018; @Jubb_2017]. However,
+since then publishing expenditures of UK universities have been rising
+rapidly (Jubb et al., 2017), so that several universities stopped supporting hybrid OA
+in late 2018-2019 [@walker_2019; @birmingham]. This development might
+explain the slight decrease in hybrid articles invoiced to the UK our
+data showed around that time (see Figure
+\ref{fig:sponsor_sector}).
 
 
-Our overall investigation of invoice channels and recipients of hybrid OA APCs found that the majority of Elsevier hybrid articles were invoiced to the author (n=41,725; 58.2%). However, it is important to note that although Elsevier's metadata classifies the sponsor type as "author", this does not necessarily mean that authors paid for APCs out of their own pocket but rather just that the APC was not invoiced through an agreement. Hence, it is possible that APCs invoiced to the author were covered by institutional funds or as part of research grants. For instance, a recent Springer Nature survey found that hybrid OA was predominantly supported through institutional and funder sources (71%), followed by OA agreements (34%), while only 6% were paid from personal funds or savings [@Monaghan_2020]. We also observed notable differences in licensing among invoice types. The majority of hybrid OA articles, regardless of the invoice type, were licensed under the more restrictive CC BY-NC-ND license. There is a lack of dedicated studies on licence selection, but indications so far suggest that when given a choice authors tend to select more restrictive variants for their published works [@Fraser_2020; @Rowley_2017; @Van_Noorden_2013]. On the other hand, when hybrid articles were invoiced through agreements, most articles were licensed under the more liberal CC BY license. As several funding bodies mandate CC BY licenses, including the UK research funders that account for 62% of our "agreement" subsample, this result is perhaps not surprising but suggests the effectiveness of such agreements. 
+Through this study we
+demonstrated the utility and benefits of publisher-provided
+metadata about hybrid OA invoicing and highlighted the need for extending
+these to include comprehensive information about licensing and APC waivers. Metadata guidance should also consider the substantial amount of delayed OA content, which needs to be distinguished from hybrid OA.
+Hence, our study substantiates the recommendations from the ESAC Initiative that seek to increase efficiency and
+transparency through improved invoicing and
+reporting processes and metadata about OA funding [@Geschuhn_2017; @Marques_2019].
 
+While this study advances our knowledge about hybrid OA uptake and
+invoicing, the limitations leave room for future research. We
+focused on only one publisher, which limits the generalizability of our
+findings because Elsevier's journal
+portfolio, mix of business models, pricing, and promotion of various
+options cannot be assumed to be representative of scholarly journal
+publishing in general. Relatedly, our study is limited to articles published in hybrid OA journals and, hence, is not representative of invoices for articles in full OA journals. To develop a full picture of OA invoicing, the methodology presented in this paper can be used for future studies in this direction. Further, although Elsevier's invoicing data improves transparency, it seems likely that not all actual OA funding bodies are disclosed. For instance, most articles were invoiced to authors, but it remains unclear
+if the APCs were paid by the authors themselves or
+through institutional OA funds or research grants. Research into
+this topic would improve our understanding of OA funding 
+outside of publishing agreements. Moreover, our study demonstrates that
+comprehensive mapping of the financial
+flows of OA publishing requires complex, in-depth country-specific
+analyses. Such studies would ideally draw on
+various data sources to consider  research funders, the 
+consortia landscape, OA policies, and  publishing agreements Future research could analyze funder policies in combination with institutional agreements (including which journals are covered by the agreements) and hybrid OA invoicing metadata to provide more insight into publishing patterns and CC licence choice. A further avenue of research would be dedicated studies on the strengths and weaknesses of data provided by publishers and the Open APC initiative, and consider an integrative approach that combines both datastreams to reap the benefits of each while mitigating their individual drawbacks.
 
-Based on our findings, around a third of the articles were invoiced directly through OA agreements (e.g., research funders, national library consortia). Strikingly, sponsors based in the UK accounted for more than half of these , and a quarter was charged to sponsors from other European countries. This finding reiterates reports from previous studies that the UK's OA profile differs markedly from other countries (cf. @Jubb_2015; @Jubb_2017) and points to the effects of science policy. To increase OA to research publications, the UK implemented centralized APC funding and embraced hybrid OA as a transition model. Within five years of the publication of the Finch Report in 2012, the UK recorded an 18% increase in immediate OA, coupled with a rise in hybrid OA from 2.7% in 2012 to 15.4% of all articles in 2016 [@Jubb_2017], which can be attributed to the availability of APC funding from Research Councils UK (RCUK). Indeed, RCUK block grants have been the largest single source of OA funds in the UK—the Wellcome Trust, and more recently transformative agreements [@Tickel_2018; @Jubb_2017]. However, since then publishing expenditures of UK universities have been rising rapidly (ref), so that several universities stopped supporting hybrid OA in late 2018-2019 [@oxford_2019; @walker_2019; @Castro_2019; @birmingham]. This development might explain the slight decrease in hybrid articles invoiced to the UK our data showed around that time (see Figure \ref{fig:invoice_sponsor_country}).
-
-
-An essential part in the absence of transparency in scholarly publishing and especially in hybrid OA has been the lack of transparency in publishers’ article management. This has prohibited consumers to get a comprehensive and comparative overview of their publishing activities and the associated costs and, thus, limited their negotiating power. However, certain initiatives in Europe like the ESAC Initiative have begun to press for improved and more transparent workflows for transformative agreements [@Geschuhn_2017]. In particular, the ESAC Workflow Recommendations seek to increase efficiency and transparency in the publication workflow through improved invoicing and reporting processes and metadata delivery, including article-based machine readable information about the OA sponsor. Through this study we demonstrated the utility and benefits of such  publisher-provided metadata about hybrid OA funding and highlighted the need for extending these to include comprehensive information about the licensing and the particular OA type.
-
-Usually identifying delayed OA articles and distinguishing them from other types of OA is challenging since there is no publicly available list of such journals. For instance, Taylor & Francis’ (2021) website indicates that some of their journals participate in a delayed or promotional OA program but no further information is provided as to which journals these are. However, Elsevier provides a list of journals enrolled in the "Open Archive" programme and further tags delayed OA articles in the machine-readable XML version of the article. This enables easy identification and more accurate assessments of hybrid OA, which allows to take into account the substantial amount of delayed OA content in future hybrid OA studies using Elsevier data.  
-
-While this study advances our knowledge about hybrid OA uptake and invoicing, the limitations leave room for future research. This study focused on only one publisher, which limits the generalizability of our findings since Elsevier’s attributes such as composition of the journal portfolio, mix of business models, pricing, and promotion of various options cannot be assumed to be representative of scholarly journal publishing in general. Though the invoicing data extracted from the XML files enables unprecedented accuracy and comprehensiveness in the study of hybrid OA, it likely does not disclose the actual OA sponsor in all cases. Most articles were invoiced to authors, but it remains unclear how often authors themselves pay for APCs or invoices are covered through institutional OA funds or research grants. Further research into this topic would increase our understanding of OA funding streams outside of publishing agreements. Further, our study demonstrates that to achieve comprehensive mapping and understanding of the financial flows involved in OA funding, complex, in-depth country-specific meso-level analyses is needed. Such studies would ideally draw on various data sources, such as publicly available bibliometrics and metadata, information about significant national research funders and their OA policies, information about the national library and possible consortia landscape including their publishing agreements, which might require Freedom of Information Requests.
-
-This study provides a snapshot of hybrid OA for the largest journal publisher prior to the impact of the implementation of Plan S requirements. While many Plan S signatories have already had strong OA policies, this harmonized approach is likely to affect publishing decisions of funded authors,the licencing of their articles, and the offerings and pricing of publishers. Since the new requirements are applicable to research funded from 2021 onwards, a comparative study focused on articles  invoiced to Plan S signatories would be a fruitful endeavor.
-
-In a similar vein, future studies could  combine invoice information with research funding information since these contribute different pieces to the funding stream puzzle. This could also provide more insight into the actual APC funding streams behind the author-invoiced articles. 
+The policy implications and the underlying data of this study present opportunities for actors in the scholarly publishing landscape to rely less on assumptions and secondary data, and instead establish a direct connection between the publication output and the related financial information. This could increase accountability in spending public and charitable funds, and improve OA cost monitoring through enhanced transparency, precision, and timeliness. Analyses like we have presented here can inform library consortia in negotiations through better understanding their publisher-specific OA output, determining the amount of delayed OA content, and facilitating comparative analyses across different consortia. The study could also inform research funders and research institutions about license selection implications if there is not any strict policy in place. This study provides a snapshot of hybrid OA for Elsevier, the largest journal
+publisher, prior to the impact of the implementation of Plan S, an initiative to accelerate the transition to OA that will no longer support hybrid OA [@Plan_s]. While many Plan S signatories have already had strong OA
+policies, this harmonized approach is likely to affect publishing
+decisions of funded authors, the licencing of their articles, and the
+offerings and pricing of publishers at a larger scale than before. Because the new requirements apply to research funded from 2021 onward, a comparative study
+on articles invoiced to Plan S signatories would be a fruitful
+endeavor. Plan S does not fund hybrid OA publication unless the host journal is explicitly committed to convert to full OA, however, with the growth of national and institutional agreements that enable affiliated authors to publish hybrid OA, such restrictions will influence researchers differently. Invoicing data as used for this study can be useful in exploring later on, by looking at research funding statements and invoicing channels in relation to each other.
 
 # Conclusion
 
-The primary aim of this empirical study was to investigate Elsevier’s hybrid OA publishing from 2015-2019 to better understand the volume and invoicing of hybrid OA and present a novel, data-driven approach for such analyses. Our results indicate that although the number of hybrid OA articles has increased over time, hybrid OA uptake has remained low. Notably, hybrid APCs were most often invoiced directly to the authors or through institutional agreements, where only a few funding bodies were the main driver of hybrid OA. Finally, our findings highlight that publisher-provided metadata about the invoicing channels  of (hybrid) OA can facilitate research into and increase the understanding of the financial flows of OA publishing.
+The primary aim of this empirical study was to investigate Elsevier's
+hybrid OA publishing from 2015-2019 to better understand the volume and
+invoicing of hybrid OA and to present a novel, data-driven approach for
+such analyses. Our results indicate that although the number of hybrid
+OA articles has increased over time, its uptake has remained low.
+Notably, hybrid APCs were most often invoiced directly to the authors, followed by agreements, where only a few funding bodies were
+the primary drivers of hybrid OA. Finally, our findings highlight that
+publisher-provided metadata about the invoicing channels of (hybrid) OA
+can facilitate research into and increase the understanding of the
+financial flows of OA publishing.
 
-Ever since its inception, hybrid OA has been a challenging subject to study due to the lack of standardised ways for publishers to flag such content and APC funding data being limited to studies based on surveys and articles’ acknowledgements sections. This study presented a novel approach to studying OA APC invoicing  that is based on publicly available publisher-provided metadata, which can be used on on its own or in combination with other public data sources to gain more detailed and comprehensive insights into hybrid OA uptake and invoicing than ever before. If more publishers reported OA invoicing data on the article level and in a machine-readable format, this would increase transparency and enable  enhanced monitoring of the scholarly journal landscape over time. As hybrid OA has increasingly become a central element of OA policies of research funders and libraries,  customer organisations could require that invoicing information is added to the article-level metadata. As long as publishers do not provide this data in a structured and comprehensive format, they prevent consumers from benchmarking prices and therefore hinder price competition as the only alternative to gain comparative insight is self-reported APC expenditures that research funders and libraries voluntarily report to the Open APC initiative. The Open APC initiative is a valuable service but it cannot replace publisher-provided data since global participation is limited.
+Since the beginning, hybrid OA has been a challenging subject to
+study due to the lack of standardized ways publishers flag such
+content and APC funding data being limited self-reported data, surveys,
+and other secondary sources. This study presented a novel
+approach to studying APC invoicing that is based on publicly
+available publisher-provided metadata, which can be used on on its own
+or in combination with other public data sources to gain more detailed
+and comprehensive insights into hybrid OA uptake and invoicing. If more publishers reported OA invoicing on the article
+level and in a machine-readable format, this would increase transparency
+and improve monitoring of the scholarly journal landscape over
+time. As hybrid OA has  become a central element of OA
+policies of research funders and libraries, consumer organizations could
+require that invoicing information is added to the article-level
+metadata. As long as publishers do not provide this data in a structured
+and comprehensive format, they prevent benchmarking prices and therefore hinder competition. 
 
-From recent science policy developments in Europe it appears that Big Deals have gained support and remain firmly in place in the form of transformative agreements. However, in addition to research funders and libraries that increasingly make publishing contracts public, it is on the publisher to provide  metadata as presented here to improve the transparency in scholarly publishing by linking invoicing data to bibliometrics. From this study we can affirm that hybrid OA is complex as the financial flows come from various stakeholders and invoicing forms, it is not just libraries or consortia, but authors and funders are also directly involved. As of right now, providing  machine-readable article-level invoicing data is not common amongst publishers, which limits the potential for broader studies.
+From recent science policy developments in Europe it appears that Big
+Deals have gained support and remain firmly in place in the form of
+transformative agreements. Moreover, such agreements seem to become an increasingly dominant feature of scholarly publishing as indicated by the number of contracts that Elsevier and other publishers have successfully negotiated and secured since we conducted the analyses presented here.[^1] Through this study we can affirm that hybrid OA is complex
+as the financial flows involve research funders, libraries, consortia, and authors. However, it is on
+ publishers to increase the transparency of OA publishing, including hybrid OA and transformative agreements, by providing instantaneous open data about OA uptake and invoicing.
 
 # Data Availability
 
-All data and code used for this study is openly available on GitHub, including version history:
+The source code data analysis is available on GitHub:
 
 <https://github.com/njahn82/elsevier_hybrid_invoicing>
 
-Formal analyis is written in R Markdown and thus replicable.
-
 # References
 
+[^1]: See, for instance, the announcements from the University of California: <https://www.universityofcalifornia.edu/news/uc-s-deal-elsevier-what-it-took-what-it-means-why-it-matters> and the Danish National Licensing Consortium: <https://www.kb.dk/en/about-us/licensing/national-licensing-consortium/elsevier-agreement-2021-24>
