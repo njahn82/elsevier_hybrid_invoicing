@@ -181,10 +181,10 @@ p_1 <- year_per_oa_type_and_license %>%
             position = position_stack(reverse = T)) +
   facet_grid(~type_plot) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.0005)),
-    labels = scales::percent_format(accuracy = 1L),
-    breaks = c(0, 0.02, 0.04, 0.06, 0.08)
-  ) +
+  expand = expansion(mult = c(0, 0.0005)),
+   labels = scales::percent_format(accuracy = 1),
+   limits=c(0,.1),
+   breaks = c(0, 0.03, 0.06, 0.09)) +
   scale_fill_manual(values = 
                       c(`CC BY` = "#B52141",
                         `CC BY-NC-ND` = "#0093c7",
@@ -236,7 +236,7 @@ p <- cowplot::plot_grid(
   p_2, p_1,
   labels = "AUTO", ncol = 1
 )
-ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300, width = 6.5, height = 6)
+ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 600, width = 6.5, height = 6)
 ```
 
 

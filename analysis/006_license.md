@@ -152,10 +152,10 @@ p_1 <- year_per_oa_type_and_license %>%
             position = position_stack(reverse = T)) +
   facet_grid(~type_plot) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.0005)),
-    labels = scales::percent_format(accuracy = 1L),
-    breaks = c(0, 0.02, 0.04, 0.06, 0.08)
-  ) +
+  expand = expansion(mult = c(0, 0.0005)),
+   labels = scales::percent_format(accuracy = 1),
+   limits=c(0,.1),
+   breaks = c(0, 0.03, 0.06, 0.09)) +
   scale_fill_manual(values = 
                       c(`CC BY` = "#B52141",
                         `CC BY-NC-ND` = "#0093c7",
@@ -211,7 +211,7 @@ p <- cowplot::plot_grid(
   p_2, p_1,
   labels = "AUTO", ncol = 1
 )
-ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 300, width = 6.5, height = 6)
+ggsave(here::here("figure", "license_portfolio.png"), p, dpi = 600, width = 6.5, height = 6)
 ```
 
 ### License for Mirror journals
@@ -236,18 +236,18 @@ SELECT  issued_year,
 ``` r
 els_yearly_mirror
 #> # A tibble: 40 x 3
-#>    issued_year container_title                                      all_articles
-#>          <int> <chr>                                                       <int>
-#>  1        2018 Water Research X                                               12
-#>  2        2019 Atmospheric Environment: X                                     50
-#>  3        2019 Toxicon: X                                                     17
-#>  4        2019 Journal of Structural Biology: X                               10
-#>  5        2019 Journal of Computational Physics: X                            33
-#>  6        2019 Optical Materials: X                                           34
-#>  7        2019 European Journal of Obstetrics & Gynecology and Rep…           80
-#>  8        2019 Energy Conversion and Management: X                            14
-#>  9        2019 Gene: X                                                        19
-#> 10        2019 Chemical Engineering Science: X                                43
+#>    issued_year container_title                     all_articles
+#>          <int> <chr>                                      <int>
+#>  1        2018 Water Research X                              12
+#>  2        2019 Journal of Hydrology X                        33
+#>  3        2019 Journal of Computational Physics: X           33
+#>  4        2019 Atmospheric Environment: X                    50
+#>  5        2019 Chemical Physics Letters: X                   24
+#>  6        2019 Respiratory Medicine: X                       11
+#>  7        2019 Journal of Structural Biology: X              10
+#>  8        2019 Optical Materials: X                          34
+#>  9        2019 The Journal of Pediatrics: X                   9
+#> 10        2019 Gene: X                                       19
 #> # … with 30 more rows
 ```
 
