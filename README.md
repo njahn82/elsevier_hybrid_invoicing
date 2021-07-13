@@ -1,13 +1,13 @@
-## Source code supplement &mdash; Towards transparency of hybrid open access through publisher-provided metadata: An article-level study of Elsevier
+## Source code supplement &mdash; Toward transparency of hybrid open access through publisher-provided metadata: An article-level study of Elsevier
 
 [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/njahn82/elsevier_hybrid_invoicing/master?urlpath=rstudio)
 
 
 ### Overview
 
-This repository provides data and code used for the submitted manuscript
+This repository provides data and code used for the accepted manuscript
 
-Najko Jahn, Lisa Matthias, Mikael Laakso, 2021, *Towards transparency of hybrid open access through publisher-provided metadata: An article-level study of Elsevier*. arXiv. https://arxiv.org/abs/2102.04789
+Najko Jahn, Lisa Matthias, Mikael Laakso, 2021, Towards transparency of hybrid open access through publisher-provided metadata: An article-level study of Elsevier. *Journal of the Association for Information Science and Technology*. <https://doi.org/10.1002/asi.24549> | arXiv: <https://arxiv.org/abs/2102.04789>
 
 This repository is organized as a [research compendium](https://doi.org/10.7287/peerj.preprints.3192v2). A research compendium contains data, code, and text associated with it. 
 
